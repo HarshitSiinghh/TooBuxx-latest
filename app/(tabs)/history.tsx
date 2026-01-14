@@ -1,10 +1,10 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import HomeScreen from "@/features/home/HomeScreen";
+import HistoryScreen from "@/features/history/HistoryScreen";
 
-export default function HomeTab() {
+export default function HistoryTab() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#1a003d" }}>
-      <HomeScreen />
+      <HistoryScreen />
     </SafeAreaView>
   );
 }
