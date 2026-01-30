@@ -202,13 +202,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#1a003d",
-    paddingBottom: 40,
+    paddingBottom: 0,
   },
 
   header: {
     flexDirection: "row",
     alignItems: "center",
     padding: 20,
+    paddingVertical:40,
     borderBottomWidth: 1,
     borderColor: "#ffffff10",
   },

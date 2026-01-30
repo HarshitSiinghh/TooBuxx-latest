@@ -4,8 +4,9 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  SafeAreaView,
+  
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const AMOUNTS = [10, 30, 40, 100,200];
 
@@ -14,7 +15,7 @@ export default function DailyGoldSavings() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
+      {/* Header*/}
       <Text style={styles.header}>Daily Gold Savings</Text>
 
       {/* Banner */}

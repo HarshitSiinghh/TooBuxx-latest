@@ -6,12 +6,13 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  SafeAreaView,
+  // SafeAreaView,
   Dimensions,
   StatusBar,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+ import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   ChevronDown,
   Upload,
@@ -236,6 +237,7 @@ const styles = StyleSheet.create({
   },
   headerTitleContainer: {
     marginLeft: 15,
+    paddingVertical:30,
   },
   headerTitleText: {
     color: '#fff',

@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  SafeAreaView,
+  // SafeAreaView,
   StatusBar,
   Dimensions,
 } from 'react-native';
+ import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Ticket,
   Zap,

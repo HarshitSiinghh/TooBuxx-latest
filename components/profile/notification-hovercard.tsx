@@ -21,18 +21,6 @@ export default function NotificationPage() {
 
       </View>
 
-      {/* Tabs */}
-      {/* <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.tabs}
-      >
-        {TABS.map((tab) => (
-          <View key={tab} style={styles.tab}>
-            <Text style={styles.tabText}>{tab}</Text>
-          </View>
-        ))}
-      </ScrollView> */}
 
       {/* Notifications */}
       <ScrollView contentContainerStyle={styles.list}>

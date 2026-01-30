@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";

@@ -4,7 +4,7 @@ import { Feather, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icon
 import { Navigation } from "@/store/store";
   import { useRouter } from "expo-router";
 export const HeroSection = () => {
-  const { setOpen } = Navigation();
+  // const { setOpen } = Navigation();
   const router = useRouter();
 
   return (

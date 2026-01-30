@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  SafeAreaView,
+  // SafeAreaView,
   Dimensions,
   StatusBar,
 } from 'react-native';
+ import { SafeAreaView } from 'react-native-safe-area-context';
 import { 
   ArrowLeft, 
   TrendingUp, 

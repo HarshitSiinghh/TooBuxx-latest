@@ -12,6 +12,7 @@ export const Plan = () => {
       </Text>
 
       {/* ===== Plan 1 ===== */}
+      <Pressable onPress={()=>router.push('/savings/daily-savings')}> 
       <LinearGradient
         colors={["#5f37cb", "#9b59b6"]}
         start={{ x: 0, y: 0 }}
@@ -26,7 +27,6 @@ export const Plan = () => {
             />
           </View>
 
-         <Pressable onPress={()=>router.push('/savings/daily-savings')}> 
 
            <View>
             <Text style={styles.title}>Save Daily</Text>
@@ -37,15 +37,17 @@ export const Plan = () => {
               <Text style={styles.subText}>500/day</Text>
             </View>
           </View>
-         </Pressable>
         </View>
 
         <View style={styles.rightIcon}>
           <Feather name="chevron-right" size={18} color="white" />
         </View>
       </LinearGradient>
+         </Pressable>
 
       {/* ===== Plan 2 ===== */}
+
+       <Pressable onPress={()=>router.push('/savings/monthly')}>
       <LinearGradient
         colors={["#d4a017", "#ffdf6b"]}
         start={{ x: 0, y: 0 }}
@@ -60,7 +62,7 @@ export const Plan = () => {
             />
           </View>
 
-       <Pressable onPress={()=>router.push('/savings/monthly')}>
+
 
            <View>
             <Text style={styles.title}>Save Monthly</Text>
@@ -71,15 +73,21 @@ export const Plan = () => {
               <Text style={styles.subText}>5000/month</Text>
             </View>
           </View>
-       </Pressable>
+     
         </View>
 
         <View style={styles.rightIcon}>
           <Feather name="chevron-right" size={18} color="white" />
         </View>
       </LinearGradient>
+  </Pressable>
+
 
       {/* ===== Plan 3 ===== */}
+
+
+
+      <Pressable onPress={()=>router.push('/savings/instant-saving')}>
       <LinearGradient
         colors={["#11998e", "#38ef7d"]}
         start={{ x: 0, y: 0 }}
@@ -93,7 +101,6 @@ export const Plan = () => {
               style={styles.planImg}
             />
           </View>
-<Pressable onPress={()=>router.push('/savings/instant-saving')}>
 
 
   
@@ -106,18 +113,17 @@ export const Plan = () => {
               <Text style={styles.subText}>Any amount</Text>
             </View>
           </View>
-</Pressable>
         </View>
 
         <View style={styles.rightIcon}>
           <Feather name="chevron-right" size={18} color="white" />
         </View>
       </LinearGradient>
+</Pressable>
     </View>
   );
 };
 
-/* ================= STYLES ================= */
 
 const styles = StyleSheet.create({
   container: {
@@ -195,8 +201,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-
-
-
-

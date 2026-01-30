@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  SafeAreaView,
+  // SafeAreaView,
   StatusBar,
   Dimensions,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Gift,
   Coins,
@@ -30,8 +31,7 @@ const rewards = [
   {
     title: "₹50 Gold Bonus",
     desc: "On completing your first saving",
-    img: require('../../images/gold-coin.png'), // Use local assets
-    // img: require('./assets/gold-coin.png'), // Use local assets
+    img: require('../../images/gold-coin.png'), 
     points: 500,
     route :"/savings/daily-savings",
     accent: "#eab308",
@@ -62,7 +62,7 @@ const rewards = [
   },
 ];
 
-export default function RewardsHub({ navigation }: any) {
+export default function RewardsHub() {
 
   return (
     <SafeAreaView style={styles.container}>

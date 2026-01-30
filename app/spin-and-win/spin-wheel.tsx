@@ -7,8 +7,9 @@ import {
   StyleSheet,
   Animated,
   Easing,
-  SafeAreaView,
+  // SafeAreaView,
 } from 'react-native';
+ import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Path, G, ForeignObject, Defs, Filter, FeGaussianBlur, FeOffset, FeMerge, FeMergeNode, Circle } from 'react-native-svg';
 import {
   Coffee, Star, Gift, User2, Award, Zap, Heart, Moon, MoveLeft,
@@ -36,7 +37,7 @@ const prizes: Prize[] = [
   { label: "Jackpot", icon: User2, color: "rgba(249, 115, 22, 0.4)" },
 ];
 
-export default function SpinWheel({ navigation }: any) {
+export default function SpinWheel() {
   const [spinning, setSpinning] = useState(false);
   const [selectedPrize, setSelectedPrize] = useState<string | null>(null);
   const spinAnim = useRef(new Animated.Value(0)).current;

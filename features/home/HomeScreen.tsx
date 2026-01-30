@@ -1,9 +1,8 @@
-
 import React from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-import Header from "../home/header";
 import AutoInvestCard from "../home/auto-invest";
+import Header from "./header";
 
 import { About } from "./home/about";
 import { HeroSection } from "./home/hero-section";
@@ -12,7 +11,6 @@ import { Plan } from "./home/plan";
 import { Referral } from "./home/referal";
 import { EarnReward } from "./home/reward";
 import { StartSaving } from "./home/saving";
-import SavingsSteps from "./how-to-use";
 
 export default function Home() {
   return (

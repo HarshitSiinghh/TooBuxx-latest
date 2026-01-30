@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  SafeAreaView,
+  // SafeAreaView,
   Dimensions,
   StatusBar,
 } from 'react-native';
+ import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Wallet,
   ArrowUpRight,
@@ -19,8 +20,7 @@ import {
   AlertCircle,
   ArrowLeft,
 } from 'lucide-react-native';
-// import { useReducer } from 'react';
-// import { useRouter } from '@/.expo/types/router';
+
 
 import { useRouter } from 'expo-router';
 

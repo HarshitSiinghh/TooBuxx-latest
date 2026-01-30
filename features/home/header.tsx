@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Sidebar } from "@/store/store"; // only UI state, not navigation
+// import { Sidebar } from "@/store/store"; // only UI state, not navigation
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const { toggleSidebar } = Sidebar();
+  // const { toggleSidebar } = Sidebar();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -48,12 +48,6 @@ const Header = () => {
 
       {/* Right */}
       <View style={styles.right}>
-        {/* <Pressable
-          onPress={() => router.push("/profile")}
-          style={styles.avatarBtn}
-        >
-          <Feather name="user" size={18} color="white" />
-        </Pressable> */}
 
         <Pressable
           onPress={() => {

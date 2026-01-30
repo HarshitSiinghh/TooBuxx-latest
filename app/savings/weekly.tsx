@@ -6,11 +6,12 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  SafeAreaView,
+  // SafeAreaView,
   StatusBar,
   Dimensions,
   Platform,
 } from 'react-native';
+ import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle } from 'react-native-svg';
 import {
   TrendingUp,
@@ -24,7 +25,7 @@ import {
  import { useRouter } from 'expo-router';
 const { width } = Dimensions.get('window');
 
-export default function WeeklySaving({ navigation }: any) {
+export default function WeeklySaving(){
   const [localPrice, setLocalPrice] = useState<string>("");
   const progress = 40;
   const radius = 35;
@@ -204,6 +205,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
+    paddingVertical:35,
     backgroundColor: 'rgba(26, 0, 61, 0.8)',
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255, 255, 255, 0.05)',

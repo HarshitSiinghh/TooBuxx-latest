@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  SafeAreaView,
+  // SafeAreaView,
   StatusBar,
   Dimensions,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   ArrowDownCircle,
   ArrowUpCircle,
@@ -69,7 +70,7 @@ export default function History() {
                 source={require('../../images/box.webp')} 
                 style={styles.promoImage} 
               />
-            </View>
+            </View> //nj
             <View style={styles.promoTextContainer}>
               <Text style={styles.promoLabel}>ACTIVE PORTFOLIO</Text>
               <Text style={styles.promoTitle}>
@@ -144,7 +145,7 @@ export default function History() {
         </View>
 
         <Text style={styles.footerText}>
-          END OF HISTORY • POWERED BY XYZ GOLD
+          END OF HISTORY • POWERED BY TooBux
         </Text>
       </ScrollView>
     </SafeAreaView>

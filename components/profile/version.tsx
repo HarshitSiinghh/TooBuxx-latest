@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: "#9ca3af", // gray-400
+    color: "#9ca3af", 
     fontSize: 11,
     textAlign: "center",
   },
