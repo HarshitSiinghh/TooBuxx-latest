@@ -43,7 +43,7 @@ export  function PromoCode() {
   const [promoCode, setPromoCode] = useState("");
 
   const handleApply = () => {
-    console.log("Applying code:", promoCode);
+ 
   };
 
   return (

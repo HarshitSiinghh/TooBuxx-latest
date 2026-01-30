@@ -1,345 +1,471 @@
-import React, { useState, useRef } from 'react';
+
+
+
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
-  Dimensions,
   StyleSheet,
+  TouchableOpacity,
+  Modal,
   Animated,
   Easing,
-  // SafeAreaView,
-} from 'react-native';
- import { SafeAreaView } from 'react-native-safe-area-context';
-import Svg, { Path, G, ForeignObject, Defs, Filter, FeGaussianBlur, FeOffset, FeMerge, FeMergeNode, Circle } from 'react-native-svg';
-import {
-  Coffee, Star, Gift, User2, Award, Zap, Heart, Moon, MoveLeft,
-} from 'lucide-react-native';
-
+  ActivityIndicator,
+  Dimensions,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Trophy, X, Lock } from "lucide-react-native";
+import Svg, { G, Path, Image as SvgImage, Circle } from "react-native-svg";
+import { ArrowLeft } from "lucide-react-native";
 import { useRouter } from "expo-router";
+import { fetchSpinRewardsApi, claimSpinRewardApi, Reward } from "@/services/spin";
+import { useAuthGuard } from "@/hooks/useAuthGaurd";
+import { BASE_URL } from "@/constants/api";
 
-const { width } = Dimensions.get('window');
-const WHEEL_SIZE = width * 0.85;
-
-interface Prize {
-  label: string;
-  icon: any;
-  color: string;
-}
-
-const prizes: Prize[] = [
-  { label: "₹50", icon: Coffee, color: "rgba(248, 113, 113, 0.4)" },
-  { label: "₹100", icon: Star, color: "rgba(96, 165, 250, 0.4)" },
-  { label: "₹200", icon: Gift, color: "rgba(52, 211, 153, 0.4)" },
-  { label: "Free Spin", icon: Award, color: "rgba(244, 114, 182, 0.4)" },
-  { label: "₹500", icon: Zap, color: "rgba(251, 191, 36, 0.4)" },
-  { label: "Extra Points", icon: Heart, color: "rgba(251, 113, 133, 0.4)" },
-  { label: "₹1000", icon: Moon, color: "rgba(129, 140, 248, 0.4)" },
-  { label: "Jackpot", icon: User2, color: "rgba(249, 115, 22, 0.4)" },
-];
+const { width } = Dimensions.get("window");
+const WHEEL_SIZE = width * 0.78;
 
 export default function SpinWheel() {
+  const canRender = useAuthGuard();
+
+  const [prizes, setPrizes] = useState<Reward[]>([]);
+  const [loading, setLoading] = useState(true);
   const [spinning, setSpinning] = useState(false);
-  const [selectedPrize, setSelectedPrize] = useState<string | null>(null);
+  const [winner, setWinner] = useState<Reward | null>(null);
+  const [limitPopup, setLimitPopup] = useState(false);
+
   const spinAnim = useRef(new Animated.Value(0)).current;
-  const lastRotation = useRef(0);
+  const currentRotation = useRef(0);
+
+  useEffect(() => {
+    loadRewards();
+  }, []);
+
+  const loadRewards = async () => {
+    try {
+      const data = await fetchSpinRewardsApi();
+      setPrizes(data);
+    } catch (e) {
+      console.log("❌ SPIN LOAD ERROR:", e);
+    } finally {
+      setLoading(false);
+    }
+  };
   const router = useRouter();
 
-  const spin = () => {
-    if (spinning) return;
+  // ✅ SAME LOGIC AS WEB
+  const spin = async () => {
+    if (spinning || prizes.length === 0) return;
 
-    setSpinning(true);
-    setSelectedPrize(null);
+    try {
+      const res = await claimSpinRewardApi();
+      const winningReward = res.data.reward;
 
-    const prizeIndex = Math.floor(Math.random() * prizes.length);
-    const degreePerPrize = 360 / prizes.length;
-    
-    // Logic: Current rotation + 8 full turns + index offset
-    const totalRotation = lastRotation.current + (360 * 8) + (prizeIndex * degreePerPrize);
+      const prizeIndex = prizes.findIndex(p => p.id === winningReward.id);
+      if (prizeIndex === -1) throw new Error("Reward mismatch");
 
-    Animated.timing(spinAnim, {
-      toValue: totalRotation,
-      duration: 5200,
-      easing: Easing.bezier(0.15, 0, 0.15, 1),
-      useNativeDriver: true,
-    }).start(() => {
+      setSpinning(true);
+      setWinner(null);
+
+      const degreePerPrize = 360 / prizes.length;
+      const totalSpins = 10;
+
+      const sectorCenter = prizeIndex * degreePerPrize + degreePerPrize / 2;
+      const finalRotation =
+        currentRotation.current +
+        totalSpins * 360 +
+        (270 - sectorCenter);
+
+      Animated.timing(spinAnim, {
+        toValue: finalRotation,
+        duration: 5200,
+        easing: Easing.bezier(0.15, 0, 0.15, 1),
+        useNativeDriver: true,
+      }).start(() => {
+        currentRotation.current = finalRotation;
+        setSpinning(false);
+        setWinner(winningReward);
+      });
+
+    } catch (e) {
+      setLimitPopup(true);
       setSpinning(false);
-      lastRotation.current = totalRotation;
-
-      // Prize calculation logic preserved from original
-      const actualIndex = prizes.length - 1 - (prizeIndex % prizes.length);
-      const prize = prizes[actualIndex].label;
-      setSelectedPrize(prize);
-
-      // Navigation logic
-      setTimeout(() => {
-        if (["Extra Points", "Free Spin", "Jackpot"].includes(prize)) {
-          // navigation.navigate('Rewards'); 
-          console.log("Navigating to Rewards");
-        } else {
-          // navigation.navigate('Dashboard');
-          console.log("Navigating to Dashboard");
-        }
-      }, 2500);
-    });
+    }
   };
 
-  const rotationInterpolate = spinAnim.interpolate({
-    inputRange: [0, 360 * 100], // Handle high rotation values
-    outputRange: ['0deg', `${360 * 100}deg`],
+  if (!canRender) return null;
+
+  if (loading) {
+    // return (
+    //   <View style={styles.loader}>
+    //     <ActivityIndicator size="large" color="#fbbf24" />
+    //     <Text style={styles.loaderText}>LOADING GOLDEN REWARDS...</Text>
+    //   </View>
+    // );
+
+
+      return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "#1a003d",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <ActivityIndicator size="large" color="#a855f7" />
+      <Text style={{ marginTop: 10, color: "#fff", fontWeight: "bold" }}>
+        Loading...
+      </Text>
+    </SafeAreaView>
+  );
+  }
+
+  const rotate = spinAnim.interpolate({
+    inputRange: [0, 360],
+    outputRange: ["0deg", "360deg"],
   });
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}  onPress={()=>router.back()}>
-          <MoveLeft color="#d1d5db" size={20} />
-        </TouchableOpacity>
-        <View>
-          <Text style={styles.headerTitle}>Daily Rewards</Text>
-          <Text style={styles.headerSub}>LUCK WHEEL</Text>
-        </View>
-      </View>
+  <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
+    <ArrowLeft size={22} color="#fbbf24" />
+  </TouchableOpacity>
 
-      {/* Main Glass Card */}
-      <View style={styles.glassCard}>
-        {/* Simple Glow Effects (Replaced blur filters with opacity/radial layouts) */}
-        <View style={[styles.glow, { top: -50, left: -50, backgroundColor: 'rgba(147, 51, 234, 0.15)' }]} />
+  <Text style={styles.title}>GOLDEN SPIN</Text>
+</View>
 
-        <View style={styles.wheelWrapper}>
-          <Animated.View style={{ transform: [{ rotate: rotationInterpolate }] }}>
-            <Svg viewBox="0 0 200 200" width={WHEEL_SIZE} height={WHEEL_SIZE}>
+      {/* 🌟 WHEEL */}
+      <View style={styles.wheelOuterGlow}>
+        <View style={styles.outerRing}>
+
+          {/* 🔺 POINTER */}
+          <View style={styles.pointer} />
+
+          <Animated.View style={{ transform: [{ rotate }] }}>
+            <Svg width={WHEEL_SIZE} height={WHEEL_SIZE} viewBox="0 0 200 200">
+
               {prizes.map((prize, i) => {
-                const startAngle = (360 / prizes.length) * i;
-                const endAngle = startAngle + 360 / prizes.length;
-                const radius = 98;
-                
-                // SVG Path Math
-                const x1 = 100 + radius * Math.cos((Math.PI * startAngle) / 180);
-                const y1 = 100 + radius * Math.sin((Math.PI * startAngle) / 180);
-                const x2 = 100 + radius * Math.cos((Math.PI * endAngle) / 180);
-                const y2 = 100 + radius * Math.sin((Math.PI * endAngle) / 180);
+                const degree = 360 / prizes.length;
+                const startAngle = degree * i;
+                const endAngle = startAngle + degree;
+                const radius = 100;
 
-                const midAngle = (startAngle + endAngle) / 2;
-                const iconRadius = 70;
-                const iconX = 100 + iconRadius * Math.cos((Math.PI * midAngle) / 180);
-                const iconY = 100 + iconRadius * Math.sin((Math.PI * midAngle) / 180);
+                const x1 = 100 + radius * Math.cos(Math.PI * startAngle / 180);
+                const y1 = 100 + radius * Math.sin(Math.PI * startAngle / 180);
+                const x2 = 100 + radius * Math.cos(Math.PI * endAngle / 180);
+                const y2 = 100 + radius * Math.sin(Math.PI * endAngle / 180);
 
-                const Icon = prize.icon;
+                const mid = (startAngle + endAngle) / 2;
+                const imgR = 62;
+                const imgX = 100 + imgR * Math.cos(Math.PI * mid / 180);
+                const imgY = 100 + imgR * Math.sin(Math.PI * mid / 180);
+
+                const fixedImage = prize.image.startsWith("http")
+                  ? prize.image
+                  : `${BASE_URL.replace("/api/v1","")}${prize.image}`;
 
                 return (
-                  <G key={i}>
+                  <G key={prize.id}>
                     <Path
-                      d={`M100,100 L${x1},${y1} A${radius},${radius} 0 0 1 ${x2},${y2} Z`}
-                      fill={prize.color}
-                      stroke="rgba(255,255,255,0.1)"
-                      strokeWidth="0.5"
+                      d={`M100 100 L${x1} ${y1} A100 100 0 0 1 ${x2} ${y2} Z`}
+                      fill={i % 2 === 0 ? "#1a003d" : "#240056"}
                     />
-                    {/* React Native SVG doesn't support ForeignObject well, so we place icons manually */}
-                    <G transform={`translate(${iconX}, ${iconY}) rotate(${midAngle + 90})`}>
-                       <Icon color="rgba(255,255,255,0.8)" size={14} style={{ marginLeft: -7, marginTop: -7 }} />
-                    </G>
+
+                    {/* ✅ BACKEND ICON */}
+                    <SvgImage
+                      href={fixedImage}   // IMPORTANT: string, not {uri:}
+                      x={imgX - 16}
+                      y={imgY - 16}
+                      width={32}
+                      height={32}
+                    />
                   </G>
                 );
               })}
+
+              {/* CENTER */}
+              <Circle cx="100" cy="100" r="14" fill="#fbbf24" />
+              <Circle cx="100" cy="100" r="7" fill="#0f0028" />
             </Svg>
           </Animated.View>
+        </View>
+      </View>
 
-          {/* Pointer */}
-          <View style={styles.pointerContainer}>
-            <View style={styles.pointer} />
-          </View>
+      {/* 🔘 BUTTON */}
+      <TouchableOpacity
+        disabled={spinning}
+        onPress={spin}
+        style={[styles.spinBtn, spinning && { opacity: 0.5 }]}
+      >
+        <Text style={styles.spinText}>
+          {spinning ? "SPINNING..." : "SPIN TO WIN"}
+        </Text>
+      </TouchableOpacity>
 
-          {/* Center Cap */}
-          <View style={styles.centerCap}>
-            <View style={styles.centerInner}>
-               <View style={styles.centerDot} />
-            </View>
+      <Text style={styles.note}>1 SPIN EVERY 24 HOURS</Text>
+
+
+
+
+
+      {/* 💜 DAILY SAVINGS BOX */}
+<View style={styles.dailyBox}>
+  <Text style={styles.dailyTitle}>💰 Start Daily Savings</Text>
+  <Text style={styles.dailyDesc}>
+    Roz thoda-thoda invest karke apna gold badhao.
+  </Text>
+
+  <TouchableOpacity
+    onPress={() => router.push("/savings/daily-saving")} // 🔴 apna actual route yahan daalna
+    style={styles.dailyBtn}
+  >
+    <Text style={styles.dailyBtnText}>GO TO DAILY SAVINGS</Text>
+  </TouchableOpacity>
+</View>
+
+      {/* 🏆 WIN MODAL */}
+      <Modal visible={!!winner} transparent animationType="fade">
+        <View style={styles.modalBg}>
+          <View style={styles.modalBox}>
+            <TouchableOpacity onPress={() => setWinner(null)} style={styles.close}>
+              <X size={20} color="#9ca3af" />
+            </TouchableOpacity>
+
+            <Trophy size={52} color="#fbbf24" />
+            <Text style={styles.modalSmall}>YOU WON</Text>
+            <Text style={styles.modalTitle}>{winner?.label}</Text>
+
+            <TouchableOpacity onPress={() => setWinner(null)} style={styles.modalBtn}>
+              <Text style={styles.modalBtnText}>COLLECT</Text>
+            </TouchableOpacity>
           </View>
         </View>
+      </Modal>
 
-        {/* Action Button */}
-        <TouchableOpacity
-          onPress={spin}
-          disabled={spinning}
-          activeOpacity={0.8}
-          style={[styles.spinButton, spinning && styles.spinButtonDisabled]}
-        >
-          <Text style={[styles.spinButtonText, spinning && { color: '#6b7280' }]}>
-            {spinning ? "GOOD LUCK..." : "SPIN NOW"}
-          </Text>
-        </TouchableOpacity>
+      {/* ⛔ LIMIT MODAL */}
+      <Modal visible={limitPopup} transparent animationType="fade">
+        <View style={styles.modalBg}>
+          <View style={styles.modalBox}>
+            <TouchableOpacity onPress={() => setLimitPopup(false)} style={styles.close}>
+              <X size={20} color="#9ca3af" />
+            </TouchableOpacity>
 
-        {selectedPrize && (
-          <View style={styles.resultContainer}>
-            <Text style={styles.congratsText}>CONGRATULATIONS!</Text>
-            <View style={styles.prizeBox}>
-              <Text style={styles.prizeText}>{selectedPrize}</Text>
-            </View>
+            <Lock size={48} color="#ef4444" />
+            <Text style={[styles.modalSmall, { color: "#ef4444" }]}>LIMIT REACHED</Text>
+            <Text style={styles.modalDesc}>
+              Come back tomorrow for another spin.
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => setLimitPopup(false)}
+              style={[styles.modalBtn, { backgroundColor: "#2d3748" }]}
+            >
+              <Text style={[styles.modalBtnText, { color: "white" }]}>OK</Text>
+            </TouchableOpacity>
           </View>
-        )}
-      </View>
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>
-          You have <Text style={{ color: '#fff', fontWeight: 'bold' }}>1 free spin</Text> left today
-        </Text>
-      </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
 
+/* ================= STYLES ================= */
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a003d',
-    padding: 20,
+    backgroundColor: "#0f0028",
+    alignItems: "center",
+    paddingTop: 20,
+  },
+
+  loader: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#0f0028",
+  },
+  loaderText: {
+    color: "#fbbf24",
+    marginTop: 12,
+    fontWeight: "700",
+  },
+
+  title: {
+    color: "white",
+    fontSize: 26,
+    fontWeight: "900",
+    marginBottom: 18,
+  },
+
+  wheelOuterGlow: {
+    shadowColor: "#fbbf24",
+    shadowOpacity: 0.5,
+    shadowRadius: 30,
+    elevation: 20,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 40,
-    marginTop: 20,
+  width: "100%",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  paddingHorizontal: 16,
+  marginBottom: 18,
+},
+
+/* ===== DAILY SAVINGS PROMO BOX ===== */
+
+dailyBox: {
+  marginTop: 26,
+  width: "86%",
+  backgroundColor: "#1a003d",
+  borderRadius: 20,
+  padding: 18,
+  alignItems: "center",
+  borderWidth: 1,
+  borderColor: "rgba(124,58,237,0.6)",
+},
+
+dailyTitle: {
+  color: "white",
+  fontSize: 16,
+  fontWeight: "900",
+  marginBottom: 6,
+},
+
+dailyDesc: {
+  color: "#c4b5fd",
+  fontSize: 12,
+  textAlign: "center",
+  marginBottom: 14,
+},
+
+dailyBtn: {
+  backgroundColor: "#7c3aed",
+  paddingHorizontal: 22,
+  paddingVertical: 12,
+  borderRadius: 14,
+},
+
+dailyBtnText: {
+  color: "white",
+  fontWeight: "900",
+  fontSize: 11,
+  letterSpacing: 1.5,
+},
+backBtn: {
+  position: "absolute",
+  left: 16,
+  width: 42,
+  height: 42,
+  borderRadius: 14,
+  borderWidth: 1,
+  borderColor: "rgba(251,191,36,0.3)",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "rgba(251,191,36,0.08)",
+},
+
+// title: {
+//   color: "white",
+//   fontSize: 26,
+//   fontWeight: "900",
+//   letterSpacing: 1,
+// },
+
+  outerRing: {
+    width: WHEEL_SIZE + 26,
+    height: WHEEL_SIZE + 26,
+    borderRadius: 999,
+    borderWidth: 6,
+    borderColor: "#fbbf24",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#12002e",
   },
-  backButton: {
-    padding: 10,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-    marginRight: 15,
-  },
-  headerTitle: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '900',
-  },
-  headerSub: {
-    color: '#a855f7',
-    fontSize: 10,
-    fontWeight: 'bold',
-    letterSpacing: 2,
-  },
-  glassCard: {
-    backgroundColor: 'rgba(255,255,255,0.03)',
-    borderRadius: 48,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-    padding: 30,
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  glow: {
-    position: 'absolute',
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-  },
-  wheelWrapper: {
-    width: WHEEL_SIZE,
-    height: WHEEL_SIZE,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  pointerContainer: {
-    position: 'absolute',
-    top: -10,
-    left: '50%',
-    marginLeft: -15,
-    zIndex: 40,
-  },
+
   pointer: {
-    width: 30,
-    height: 35,
-    backgroundColor: '#fff',
-    shadowColor: '#fff',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    // Triangle shape
-    borderLeftWidth: 15,
-    borderRightWidth: 15,
-    borderBottomWidth: 35,
-    borderStyle: 'solid',
-    // backgroundColor: 'transparent',
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomColor: 'white',
-    transform: [{ rotate: '180deg' }]
+    position: "absolute",
+    top: -14,
+    width: 0,
+    height: 0,
+    borderLeftWidth: 14,
+    borderRightWidth: 14,
+    borderBottomWidth: 26,
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+    borderBottomColor: "#fbbf24",
+    zIndex: 50,
   },
-  centerCap: {
-    position: 'absolute',
-    width: 56,
-    height: 56,
-    backgroundColor: '#1a003d',
-    borderRadius: 28,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 20,
+
+  spinBtn: {
+    marginTop: 30,
+    backgroundColor: "#facc15",
+    paddingHorizontal: 54,
+    paddingVertical: 16,
+    borderRadius: 40,
   },
-  centerInner: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    justifyContent: 'center',
-    alignItems: 'center',
+  spinText: {
+    fontWeight: "900",
+    letterSpacing: 2,
+    color: "#1a003d",
   },
-  centerDot: {
-    width: 8,
-    height: 8,
-    backgroundColor: '#a855f7',
-    borderRadius: 4,
+
+  note: {
+    color: "#9ca3af",
+    fontSize: 11,
+    marginTop: 10,
+    letterSpacing: 1,
   },
-  spinButton: {
-    width: '100%',
-    paddingVertical: 18,
-    borderRadius: 16,
-    backgroundColor: '#6366f1', // Fallback for gradient
-    alignItems: 'center',
-    justifyContent: 'center',
+
+  modalBg: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.85)",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  spinButtonDisabled: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
+  modalBox: {
+    backgroundColor: "#1a003d",
+    padding: 28,
+    borderRadius: 22,
+    alignItems: "center",
+    width: "80%",
   },
-  spinButtonText: {
-    color: '#fff',
-    fontWeight: '900',
+  close: {
+    position: "absolute",
+    right: 14,
+    top: 14,
+  },
+  modalSmall: {
+    marginTop: 10,
+    color: "#fbbf24",
+    fontWeight: "800",
     letterSpacing: 2,
   },
-  resultContainer: {
-    marginTop: 30,
-    alignItems: 'center',
+  modalTitle: {
+    color: "white",
+    fontSize: 22,
+    fontWeight: "900",
+    marginVertical: 10,
+    textAlign: "center",
   },
-  congratsText: {
-    fontSize: 10,
-    fontWeight: '900',
-    color: '#9ca3af',
-    letterSpacing: 3,
-    marginBottom: 8,
+  modalDesc: {
+    color: "#9ca3af",
+    textAlign: "center",
+    marginVertical: 10,
   },
-  prizeBox: {
-    paddingHorizontal: 30,
+  modalBtn: {
+    marginTop: 14,
+    backgroundColor: "#facc15",
+    paddingHorizontal: 26,
     paddingVertical: 12,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(168, 85, 247, 0.2)',
+    borderRadius: 14,
   },
-  prizeText: {
-    fontSize: 24,
-    fontWeight: '900',
-    color: '#fbbf24',
-  },
-  footer: {
-    marginTop: 30,
-    alignItems: 'center',
-  },
-  footerText: {
-    color: '#6b7280',
-    fontSize: 12,
+  modalBtnText: {
+    fontWeight: "900",
+    color: "#1a003d",
+    letterSpacing: 1,
   },
 });

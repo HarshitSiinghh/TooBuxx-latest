@@ -9,7 +9,8 @@ import { HeroSection } from "./home/hero-section";
 import { Learn } from "./home/learn";
 import { Plan } from "./home/plan";
 import { Referral } from "./home/referal";
-import { EarnReward } from "./home/reward";
+// import { EarnReward } from "./home/reward";
+ import EarnReward from "./home/reward";
 import { StartSaving } from "./home/saving";
 
 export default function Home() {

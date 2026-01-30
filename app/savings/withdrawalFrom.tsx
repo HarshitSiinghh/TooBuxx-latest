@@ -1,484 +1,587 @@
-import React, { useState } from 'react';
+
+
+
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  ScrollView,
+  TextInput,
+  ActivityIndicator,
   StyleSheet,
-  // SafeAreaView,
-  Dimensions,
+  Alert,
+  ScrollView,
+  SafeAreaView,
+  Platform,
   StatusBar,
-} from 'react-native';
- import { SafeAreaView } from 'react-native-safe-area-context';
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import {
-  Wallet,
-  ArrowUpRight,
-  Landmark,
-  Info,
-  ShieldCheck,
-  AlertCircle,
-  ArrowLeft,
-} from 'lucide-react-native';
+  getProfile,
+  getLiveGoldPrice,
+  processWithdrawal,
+  getPayoutMethods,
+} from "@/services/withdrawal";
+import { ArrowLeft } from "lucide-react-native";
+import { useRouter } from "expo-router";
 
+/* ================= TYPES ================= */
+type Bucket = "instant" | "daily" | "weekly" | "monthly";
+type Method = "bank" | "upi";
 
-import { useRouter } from 'expo-router';
+/* ================= CONSTANTS ================= */
+const TABS: { key: Bucket; label: string }[] = [
+  { key: "instant", label: "Instant" },
+  { key: "daily", label: "Daily" },
+  { key: "weekly", label: "Weekly" },
+  { key: "monthly", label: "Monthly" },
+];
 
-const { width, height } = Dimensions.get('window');
+export default function WithdrawScreen() {
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState<Bucket>("instant");
+  const [profile, setProfile] = useState<any>(null);
+  const [sellPrice, setSellPrice] = useState<number>(0);
+  const [payouts, setPayouts] = useState<any>(null);
+  const [method, setMethod] = useState<Method | null>(null);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [rupees, setRupees] = useState("");
+  const [showBankAlert, setShowBankAlert] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
-export default function WithdrawalForm() {
-  const [amount, setAmount] = useState("");
-  const availableBalance = 12450.75;
- const router = useRouter();
-  const handleWithdraw = () => {
-    console.log("Withdrawal Requested:", amount);
+  // 🔥 new states
+  const [showZeroGoldAlert, setShowZeroGoldAlert] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  /* ========== LOAD DATA (Same Logic) ========== */
+  useEffect(() => {
+    (async () => {
+      try {
+        const profileRes = await getProfile();
+        const priceRes = await getLiveGoldPrice();
+        const payoutRes = await getPayoutMethods();
+
+        setProfile(profileRes.data);
+        setSellPrice(Number(priceRes.data.market_sell_price || 0));
+        setPayouts(payoutRes.data);
+
+        const payoutData = payoutRes.data;
+        const hasBank =
+          payoutData?.bank ||
+          (Array.isArray(payoutData?.banks) && payoutData.banks.length > 0);
+        const hasUpi = !!payoutData?.upi;
+
+        if (!hasBank && !hasUpi) {
+          setShowBankAlert(true);
+        }
+      } catch (e: any) {
+        Alert.alert("Error", e.message);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
+  /* ========== HELPERS ========== */
+  const hasBank =
+    payouts?.bank ||
+    (Array.isArray(payouts?.banks) && payouts.banks.length > 0);
+  const hasUpi = !!payouts?.upi;
+  const hasAnyPayoutMethod = hasBank || hasUpi;
+
+  /* ========== CALCULATIONS ========== */
+  const availableGrams: number =
+    activeTab === "instant"
+      ? Number(profile?.wallet?.instant_gold_grams || 0)
+      : activeTab === "daily"
+      ? Number(profile?.wallet?.daily_gold_grams || 0)
+      : activeTab === "weekly"
+      ? Number(profile?.wallet?.weekly_gold_grams || 0)
+      : Number(profile?.wallet?.monthly_gold_grams || 0);
+
+  const availableValue = availableGrams * sellPrice;
+  const withdrawGrams =
+    sellPrice > 0 ? (Number(rupees) || 0) / sellPrice : 0;
+
+  /* ========== ACTION ========== */
+  const handleWithdraw = async () => {
+    // ❌ amount empty
+    if (!rupees || Number(rupees) <= 0) {
+      Alert.alert("Alert", "Please enter the amount before withdrawal");
+      return;
+    }
+
+    // ❌ gold zero
+    if (availableGrams <= 0) {
+      setShowZeroGoldAlert(true);
+      return;
+    }
+
+    // ❌ no payout method
+    if (!hasAnyPayoutMethod) {
+      setShowBankAlert(true);
+      return;
+    }
+
+    if (!method || !selectedId) {
+      Alert.alert("Select payout method");
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      await processWithdrawal(activeTab, withdrawGrams, method, selectedId);
+      setRupees("");
+      setShowSuccessPopup(true); // ✅ success popup
+    } catch (e: any) {
+      Alert.alert("Failed", e.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const calculateFees = () => (Number(amount) * 0.005).toFixed(2);
-  const calculatePayout = () => (Number(amount) * 0.995).toFixed(2);
+  if (loading) {
+    return (
+      <View style={styles.loaderWrap}>
+        <ActivityIndicator size="large" color="#a78bfa" />
+        <Text style={styles.loaderText}>Loading</Text>
+      </View>
+    );
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" />
-      
-      <View style={[styles.bgOrb, styles.topOrb]} />
-      <View style={[styles.bgOrb, styles.bottomOrb]} />
-
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <TouchableOpacity 
-            onPress={() =>router.back()}
-            style={styles.backButton}
-          >
-            <ArrowLeft color="#9ca3af" size={20} />
-          </TouchableOpacity>
-          <View style={styles.headerText}>
-            <Text style={styles.headerTitle}>WITHDRAW FUNDS</Text>
-            <Text style={styles.headerSub}>INSTANT PAYOUT HUB</Text>
-          </View>
-        </View>
-        <Info color="#4b5563" size={20} />
-      </View>
-
-      <ScrollView 
+      <ScrollView
+        style={styles.container}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* --- BALANCE OVERVIEW CARD --- */}
-        <View style={styles.balanceCard}>
-          <View>
-            <Text style={styles.balanceLabel}>AVAILABLE FOR WITHDRAWAL</Text>
-            <Text style={styles.balanceValue}>₹{availableBalance.toLocaleString()}</Text>
-          </View>
-          <View style={styles.walletIconBox}>
-            <Wallet color="#a855f7" size={32} />
-          </View>
+        {/* HEADER */}
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
+            <ArrowLeft size={22} color="#fbbf24" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Withdraw</Text>
+          <View style={{ width: 42 }} />
         </View>
 
-        {/* --- WITHDRAWAL FORM --- */}
-        <View style={styles.formCard}>
-          <View style={styles.formHeader}>
-            <View style={styles.transactionIconBox}>
-              <ArrowUpRight color="#818cf8" size={24} />
-            </View>
-            <View>
-              <Text style={styles.formTitle}>TRANSACTION DETAILS</Text>
-              <Text style={styles.formSubTitle}>Funds will be credited to your bank</Text>
-            </View>
-          </View>
+        {/* LIVE PRICE */}
+        <View style={styles.priceChip}>
+          <Text style={styles.priceText}>LIVE SELL PRICE</Text>
+          <Text style={styles.priceValue}>₹ {sellPrice} / g</Text>
+        </View>
 
-          <View style={styles.inputSection}>
-            <View style={styles.inputHeader}>
-              <Text style={styles.inputLabel}>ENTER AMOUNT</Text>
-              <View style={styles.currencyBadge}>
-                <Text style={styles.currencyText}>INR</Text>
-              </View>
-            </View>
-            
-            <TextInput
-              style={styles.amountInput}
-              value={amount}
-              onChangeText={setAmount}
-              placeholder="0.00"
-              placeholderTextColor="#374151"
-              keyboardType="numeric"
-            />
-
-            <View style={styles.percentageContainer}>
-              {[0.25, 0.5, 1].map((percent) => (
-                <TouchableOpacity
-                  key={percent}
-                  onPress={() => setAmount((availableBalance * percent).toFixed(2))}
-                  style={styles.percentButton}
+        {/* TABS */}
+        <View style={styles.tabsRow}>
+          {TABS.map((tab) => {
+            const active = tab.key === activeTab;
+            return (
+              <TouchableOpacity
+                key={tab.key}
+                onPress={() => {
+                  setActiveTab(tab.key);
+                  setRupees("");
+                }}
+                style={[styles.tabBtn, active && styles.activeTab]}
+              >
+                <Text
+                  style={[styles.tabText, active && styles.activeTabText]}
                 >
-                  <Text style={styles.percentButtonText}>
-                    {percent === 1 ? 'MAX' : `${percent * 100}%`}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+                  {tab.label}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        {/* AVAILABLE CARD */}
+        <View style={styles.infoCard}>
+          <Text style={styles.infoLabel}>AVAILABLE GOLD</Text>
+          <Text style={styles.infoValue}>
+            {availableGrams.toFixed(6)} g
+          </Text>
+          <Text style={styles.infoLabelSmall}>TOTAL VALUE</Text>
+          <Text style={styles.infoValueSmall}>
+            ₹ {availableValue.toLocaleString()}
+          </Text>
+        </View>
+
+        {/* ₹ INPUT */}
+        <View style={styles.inputBox}>
+          <Text style={styles.inputLabel}>ENTER AMOUNT (₹)</Text>
+          <TextInput
+            value={rupees}
+            keyboardType="numeric"
+            placeholder="0"
+            placeholderTextColor="#6b7280"
+            onChangeText={(t) => {
+              const v = Number(t);
+              if (v > availableValue)
+                setRupees(String(Math.floor(availableValue)));
+              else setRupees(t);
+            }}
+            style={styles.input}
+          />
+        </View>
+
+        {/* PAYOUT PREVIEW */}
+        <View style={styles.estimateBox}>
+          <View>
+            <Text style={styles.estimateLabel}>YOU WILL SELL</Text>
+            <Text style={styles.estimateValueSmall}>
+              {withdrawGrams.toFixed(6)} g
+            </Text>
           </View>
-
-          {/* Bank Info */}
-          <View style={styles.bankInfoCard}>
-            <View style={styles.bankInfoLeft}>
-              <View style={styles.bankIconBox}>
-                <Landmark color="#818cf8" size={20} />
-              </View>
-              <View>
-                <Text style={styles.bankLabel}>DESTINATION BANK</Text>
-                <Text style={styles.bankName}>HDFC Bank •••• 9901</Text>
-              </View>
-            </View>
-            <TouchableOpacity>
-              <Text style={styles.changeText}>CHANGE</Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Fees Breakdown */}
-          <View style={styles.breakdown}>
-            <View style={styles.breakdownRow}>
-              <Text style={styles.breakdownLabel}>Withdrawal Fee (0.5%)</Text>
-              <Text style={styles.breakdownValue}>- ₹{calculateFees()}</Text>
-            </View>
-            <View style={styles.divider} />
-            <View style={styles.breakdownRow}>
-              <Text style={styles.netPayoutLabel}>NET PAYOUT AMOUNT</Text>
-              <Text style={styles.netPayoutValue}>₹{calculatePayout()}</Text>
-            </View>
-          </View>
-
-          {/* Action Area */}
-          <View style={styles.footerAction}>
-            <View style={styles.alertBox}>
-              <AlertCircle color="#818cf8" size={18} />
-              <Text style={styles.alertText}>
-                TRANSFERS ARE PROCESSED WITHIN 2-4 HOURS. BANK HOLIDAYS MAY AFFECT PROCESSING TIMES.
-              </Text>
-            </View>
-
-            <TouchableOpacity 
-              onPress={handleWithdraw}
-              style={styles.confirmButton}
-            >
-              <Text style={styles.confirmButtonText}>CONFIRM WITHDRAWAL</Text>
-            </TouchableOpacity>
-
-            <View style={styles.secureBadge}>
-              <ShieldCheck color="rgba(34, 197, 94, 0.5)" size={14} />
-              <Text style={styles.secureText}>VERIFIED SECURE TRANSACTION</Text>
-            </View>
+          <View style={{ alignItems: "flex-end" }}>
+            <Text style={styles.estimateLabel}>PAYOUT</Text>
+            <Text style={styles.estimateValue}>
+              ₹ {Number(rupees || 0).toLocaleString()}
+            </Text>
           </View>
         </View>
 
-        <View style={styles.footer}>
-          <Text style={styles.copyrightText}>© 2026 XYZ GOLD FINTECH SOLUTIONS</Text>
-        </View>
+        {/* PAYOUT METHOD */}
+        <Text style={styles.inputLabel}>WHERE SHOULD WE SEND MONEY?</Text>
+
+        {payouts?.banks?.map((b: any) => (
+          <TouchableOpacity
+            key={b.id}
+            onPress={() => {
+              setMethod("bank");
+              setSelectedId(b.id);
+            }}
+            style={[
+              styles.payoutCard,
+              method === "bank" &&
+                selectedId === b.id &&
+                styles.payoutActive,
+            ]}
+          >
+            <Text style={styles.payoutTitle}>🏦 {b.bank_name}</Text>
+            <Text style={styles.payoutSub}>**** {b.last4}</Text>
+          </TouchableOpacity>
+        ))}
+
+        {payouts?.bank && (
+          <TouchableOpacity
+            onPress={() => {
+              setMethod("bank");
+              setSelectedId(1);
+            }}
+            style={[
+              styles.payoutCard,
+              method === "bank" && styles.payoutActive,
+            ]}
+          >
+            <Text style={styles.payoutTitle}>
+              🏦 {payouts.bank.bank_name}
+            </Text>
+            <Text style={styles.payoutSub}>
+              **** {payouts.bank.account_number.slice(-4)}
+            </Text>
+          </TouchableOpacity>
+        )}
+
+        {payouts?.upi && (
+          <TouchableOpacity
+            onPress={() => {
+              setMethod("upi");
+              setSelectedId(1);
+            }}
+            style={[
+              styles.payoutCard,
+              method === "upi" && styles.payoutActive,
+            ]}
+          >
+            <Text style={styles.payoutTitle}>💸 {payouts.upi.upi_id}</Text>
+            <Text style={styles.payoutSub}>UPI</Text>
+          </TouchableOpacity>
+        )}
+
+        {/* BUTTON */}
+        <TouchableOpacity
+          disabled={!rupees || !method || !selectedId || submitting}
+          onPress={handleWithdraw}
+          activeOpacity={0.8}
+          style={[
+            styles.mainBtnWrapper,
+            (!rupees || !method || !selectedId || submitting) && {
+              opacity: 0.4,
+            },
+          ]}
+        >
+          <LinearGradient
+            colors={["#7c3aed", "#4f46e5"]}
+            style={styles.withdrawBtn}
+          >
+            <Text style={styles.withdrawText}>
+              {submitting ? "PROCESSING..." : "AUTHORIZE WITHDRAWAL"}
+            </Text>
+          </LinearGradient>
+        </TouchableOpacity>
       </ScrollView>
+
+      {/* BANK ALERT */}
+      {showBankAlert && (
+        <View style={styles.alertOverlay}>
+          <View style={styles.alertBox}>
+            <Text style={styles.alertIcon}>🏦</Text>
+            <Text style={styles.alertTitle}>Bank details required</Text>
+            <Text style={styles.alertMsg}>
+              Withdrawal se pehle apni bank ya UPI details add karna zaroori hai.
+            </Text>
+            <View style={styles.alertBtnRow}>
+              <TouchableOpacity
+                onPress={() => setShowBankAlert(false)}
+                style={styles.alertCancelBtn}
+              >
+                <Text style={styles.alertCancelText}>Later</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  setShowBankAlert(false);
+                  router.push("/profile/paymentdetails");
+                }}
+                style={styles.alertAddBtn}
+              >
+                <Text style={styles.alertAddText}>Add Now</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      )}
+
+      {/* ZERO GOLD ALERT */}
+      {showZeroGoldAlert && (
+        <View style={styles.alertOverlay}>
+          <View style={styles.alertBox}>
+            <Text style={styles.alertIcon}>⚠️</Text>
+            <Text style={styles.alertTitle}>No Gold Available</Text>
+            <Text style={styles.alertMsg}>
+              Please invest in gold before withdrawal.
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => setShowZeroGoldAlert(false)}
+              style={styles.alertAddBtn}
+            >
+              <Text style={styles.alertAddText}>Okay</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
+      {/* SUCCESS POPUP */}
+      {showSuccessPopup && (
+        <View style={styles.alertOverlay}>
+          <View style={styles.alertBox}>
+            <Text style={styles.alertIcon}>🎉</Text>
+            <Text style={styles.alertTitle}>Withdrawal Successful</Text>
+            <Text style={styles.alertMsg}>
+              Your withdrawal request has been submitted successfully.
+
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                setShowSuccessPopup(false);
+                router.back();
+              }}
+              style={styles.alertAddBtn}
+            >
+              <Text style={styles.alertAddText}>Done</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
 
+/* ================= STYLES ================= */
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1a003d',
-  },
-  bgOrb: {
-    position: 'absolute',
-    borderRadius: 1000,
-    opacity: 0.1,
-  },
-  topOrb: {
-    top: -50,
-    right: -50,
-    width: width * 0.8,
-    height: width * 0.7,
-    backgroundColor: '#9333ea',
-  },
-  bottomOrb: {
-    bottom: -100,
-    left: -50,
-    width: width * 0.6,
-    height: width * 0.6,
-    backgroundColor: '#4f46e5',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: 'rgba(26, 0, 61, 0.8)',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  backButton: {
-    padding: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  headerText: {
-    marginLeft: 15,
-  },
-  headerTitle: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '900',
-    fontStyle: 'italic',
-  },
-  headerSub: {
-    color: '#a855f7',
-    fontSize: 9,
-    fontWeight: 'bold',
-    letterSpacing: 1,
-    marginTop: 2,
-  },
+  safeArea: { flex: 1, backgroundColor: "#0f0225" },
+  container: { flex: 1 },
+  // scrollContent: {
+  //   paddingHorizontal: 20,
+  //   paddingTop: Platform.OS === "android" ? 10 : 0,
+  //   paddingBottom: 60,
+  // },
+
+
   scrollContent: {
-    padding: 20,
-    paddingBottom: 40,
+  paddingHorizontal: 20,
+  paddingTop: 140, // 🔥 header height ke barabar / thoda zyada
+  paddingBottom: 60,
+},
+  loaderWrap: {
+    flex: 1,
+    backgroundColor: "#0f0225",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  balanceCard: {
-    backgroundColor: '#240056',
-    borderRadius: 32,
-    padding: 24,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  balanceLabel: {
-    color: '#d8b4fe',
-    fontSize: 9,
-    fontWeight: '900',
-    letterSpacing: 2,
-    marginBottom: 8,
-  },
-  balanceValue: {
-    color: '#fff',
-    fontSize: 32,
-    fontWeight: '900',
-    fontStyle: 'italic',
-  },
-  walletIconBox: {
-    padding: 12,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 20,
-  },
-  formCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 40,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    padding: 24,
-  },
-  formHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 30,
-    gap: 12,
-  },
-  transactionIconBox: {
-    padding: 10,
-    backgroundColor: 'rgba(129, 140, 248, 0.1)',
+  loaderText: { marginTop: 10, color: "#a78bfa", fontWeight: "700" },
+  // header: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "space-between",
+  //   marginVertical: 20,
+  //   paddingVertical: 43,
+  // },
+
+
+
+  header: {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 100,
+  elevation: 10, // android shadow layer
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingHorizontal: 20,
+  paddingTop: Platform.OS === "android" ? 65 : 55,
+  paddingBottom: 15,
+  backgroundColor: "#0f0225", // solid so scroll ke time transparent na ho
+  borderBottomWidth: 1,
+  borderBottomColor: "rgba(255,255,255,0.06)",
+},
+  backBtn: {
+    width: 42,
+    height: 42,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: 'rgba(129, 140, 248, 0.2)',
+    borderColor: "rgba(251,191,36,0.3)",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(251,191,36,0.08)",
   },
-  formTitle: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '900',
-    fontStyle: 'italic',
+  title: {
+    color: "white",
+    fontSize: 22,
+    fontWeight: "900",
+    textTransform: "uppercase",
   },
-  formSubTitle: {
-    color: '#6b7280',
-    fontSize: 9,
-    fontWeight: 'bold',
-  },
-  inputSection: {
-    marginBottom: 30,
-  },
-  inputHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  inputLabel: {
-    color: '#6b7280',
-    fontSize: 9,
-    fontWeight: '900',
-    letterSpacing: 2,
-  },
-  currencyBadge: {
-    backgroundColor: 'rgba(168, 85, 247, 0.1)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 4,
-  },
-  currencyText: {
-    color: '#a855f7',
-    fontSize: 9,
-    fontWeight: '900',
-  },
-  amountInput: {
-    width: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 20,
-    color: '#fff',
-    fontSize: 28,
-    fontWeight: '900',
-  },
-  percentageContainer: {
-    flexDirection: 'row',
-    gap: 10,
-    marginTop: 15,
-  },
-  percentButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 12,
-  },
-  percentButtonText: {
-    color: '#fff',
-    fontSize: 9,
-    fontWeight: '900',
-    letterSpacing: 1,
-  },
-  bankInfoCard: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+  priceChip: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.06)",
     padding: 16,
-    borderRadius: 16,
-    marginBottom: 30,
+    borderRadius: 14,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.1)",
   },
-  bankInfoLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  bankIconBox: {
-    padding: 10,
-    backgroundColor: 'rgba(129, 140, 248, 0.1)',
+  priceText: { color: "#a78bfa", fontSize: 10, fontWeight: "800" },
+  priceValue: { color: "#22c55e", fontSize: 14, fontWeight: "900" },
+  tabsRow: { flexDirection: "row", gap: 8, marginBottom: 20 },
+  tabBtn: {
+    flex: 1,
+    paddingVertical: 12,
     borderRadius: 12,
+    backgroundColor: "rgba(255,255,255,0.05)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+    alignItems: "center",
   },
-  bankLabel: {
-    color: '#6b7280',
-    fontSize: 8,
-    fontWeight: '900',
-    letterSpacing: 1,
+  activeTab: { backgroundColor: "rgba(124,58,237,0.25)", borderColor: "#7c3aed" },
+  tabText: { color: "#9ca3af", fontWeight: "800", fontSize: 10 },
+  activeTabText: { color: "white" },
+  infoCard: {
+    backgroundColor: "rgba(255,255,255,0.06)",
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
   },
-  bankName: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: 'bold',
+  infoLabel: { fontSize: 10, color: "#9ca3af", fontWeight: "800" },
+  infoValue: { color: "white", fontSize: 26, fontWeight: "900", marginTop: 4 },
+  infoLabelSmall: { marginTop: 15, fontSize: 10, color: "#9ca3af", fontWeight: "800" },
+  infoValueSmall: { marginTop: 4, fontSize: 18, color: "#22c55e", fontWeight: "900" },
+  inputBox: { marginBottom: 20 },
+  inputLabel: { color: "#9ca3af", fontSize: 10, fontWeight: "800", marginBottom: 8 },
+  input: {
+    backgroundColor: "#14052d",
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.1)",
+    paddingHorizontal: 18,
+    paddingVertical: 14,
+    fontSize: 24,
+    color: "white",
+    fontWeight: "900",
   },
-  changeText: {
-    color: '#a855f7',
-    fontSize: 9,
-    fontWeight: '900',
+  estimateBox: {
+    backgroundColor: "rgba(255,255,255,0.06)",
+    borderRadius: 16,
+    padding: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 25,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
   },
-  breakdown: {
-    gap: 12,
-    paddingHorizontal: 8,
+  estimateLabel: { fontSize: 9, color: "#9ca3af", fontWeight: "800" },
+  estimateValue: { color: "#22c55e", fontSize: 18, fontWeight: "900" },
+  estimateValueSmall: { marginTop: 4, color: "#e9d5ff", fontSize: 16, fontWeight: "900" },
+  payoutCard: {
+    backgroundColor: "rgba(255,255,255,0.05)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+    borderRadius: 16,
+    padding: 16,
+    marginTop: 10,
   },
-  breakdownRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  breakdownLabel: {
-    color: '#6b7280',
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-  breakdownValue: {
-    color: '#fff',
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-  divider: {
-    height: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    width: '100%',
-  },
-  netPayoutLabel: {
-    color: '#a855f7',
-    fontSize: 12,
-    fontWeight: '900',
-    fontStyle: 'italic',
-  },
-  netPayoutValue: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: '900',
-  },
-  footerAction: {
-    marginTop: 40,
-    gap: 20,
+  payoutActive: { borderColor: "#7c3aed", backgroundColor: "rgba(124,58,237,0.25)" },
+  payoutTitle: { color: "white", fontWeight: "800", fontSize: 14 },
+  payoutSub: { color: "#9ca3af", marginTop: 4, fontSize: 11, fontWeight: "600" },
+  mainBtnWrapper: { marginTop: 30 },
+  withdrawBtn: { paddingVertical: 18, borderRadius: 18, alignItems: "center" },
+  withdrawText: { color: "white", fontWeight: "900", fontSize: 12, letterSpacing: 2 },
+
+  alertOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(5,0,15,0.9)",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999,
   },
   alertBox: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(129, 140, 248, 0.05)',
-    borderWidth: 1,
-    borderColor: 'rgba(129, 140, 248, 0.1)',
-    padding: 16,
-    borderRadius: 16,
-    gap: 12,
+    width: "85%",
+    backgroundColor: "#0f0225",
+    borderRadius: 24,
+    padding: 25,
+    alignItems: "center",
+    borderWidth: 1.5,
+    borderColor: "rgba(124,58,237,0.5)",
   },
-  alertText: {
+  alertIcon: { fontSize: 44, marginBottom: 10 },
+  alertTitle: { fontSize: 18, fontWeight: "900", color: "white", marginBottom: 8 },
+  alertMsg: { fontSize: 13, color: "#c4b5fd", textAlign: "center", marginBottom: 25 },
+  alertBtnRow: { flexDirection: "row", gap: 12 },
+  alertCancelBtn: {
     flex: 1,
-    color: '#c7d2fe',
-    fontSize: 9,
-    fontWeight: 'bold',
-    lineHeight: 14,
+    paddingVertical: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.1)",
+    alignItems: "center",
   },
-  confirmButton: {
-    backgroundColor: '#7c3aed',
-    paddingVertical: 20,
-    borderRadius: 32,
-    alignItems: 'center',
+  alertCancelText: { color: "#9ca3af", fontSize: 12, fontWeight: "800" },
+  alertAddBtn: {
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 12,
+    backgroundColor: "#7c3aed",
+    alignItems: "center",
   },
-  confirmButtonText: {
-    color: '#fff',
-    fontSize: 11,
-    fontWeight: '900',
-    letterSpacing: 2,
-  },
-  secureBadge: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 6,
-  },
-  secureText: {
-    color: '#374151',
-    fontSize: 8,
-    fontWeight: '900',
-    letterSpacing: 1,
-  },
-  footer: {
-    marginTop: 40,
-    alignItems: 'center',
-  },
-  copyrightText: {
-    color: '#374151',
-    fontSize: 9,
-    fontWeight: '900',
-    letterSpacing: 3,
-  },
+  alertAddText: { color: "white", fontSize: 12, fontWeight: "900" },
 });

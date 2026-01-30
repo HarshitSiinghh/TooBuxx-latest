@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     alignItems: "center",
     marginTop: 12,
-    marginBottom: 30, // 👈 little margin from bottom
+    marginBottom: 60, // 👈 little margin from bottom
   },
 
   saveText: {

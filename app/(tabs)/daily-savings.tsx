@@ -1,6 +1,6 @@
 
 import { SafeAreaView } from "react-native-safe-area-context";
-import DailySaving from "../savings/daily-savings";
+import DailySaving from "../savings/daily-saving";
 
 export default function HistoryTab() {
   return (

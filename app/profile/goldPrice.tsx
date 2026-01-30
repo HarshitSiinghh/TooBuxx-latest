@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useEffect ,useCallback, useMemo } from 'react';
 import {
     Dimensions,
 
@@ -11,6 +11,7 @@ import {
     View,
 } from 'react-native';
  import { SafeAreaView } from 'react-native-safe-area-context';
+ import { getGoldPriceApi } from '@/services/goldprice';
 import { Stack, useRouter } from 'expo-router';
 import {
     Bell,
@@ -57,16 +58,33 @@ export default function GoldPricePage() {
     const router = useRouter();
     const [activeTimeframe, setActiveTimeframe] = useState("1W");
     const [isRefreshing, setIsRefreshing] = useState(false);
+    const [goldPrice, setGoldPrice] = useState<number | null>(null);
+useEffect(() => {
+  loadGoldPrice();
+}, []);
 
+const loadGoldPrice = async () => {
+  try {
+    const res = await getGoldPriceApi();
+
+    if (res?.success) {
+      // adjust key if your backend uses a different one
+      setGoldPrice(res.data.market_sell_price || res.data.price_per_gram);
+    }
+  } catch (err) {
+    console.log("❌ GOLD PRICE API ERROR:", err);
+  }
+};
     // useMemo helps performance during chart re-renders
     const currentData = useMemo(() => 
         CHART_DATA_MAP[activeTimeframe] || CHART_DATA_MAP["1W"], 
     [activeTimeframe]);
 
-    const handleRefresh = useCallback(() => {
-        setIsRefreshing(true);
-        setTimeout(() => setIsRefreshing(false), 1000);
-    }, []);
+    const handleRefresh = useCallback(async () => {
+  setIsRefreshing(true);
+  await loadGoldPrice();
+  setIsRefreshing(false);
+}, []);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -96,7 +114,9 @@ export default function GoldPricePage() {
                     <View style={styles.priceRow}>
                         <View>
                             <Text style={styles.labelText}>LIVE GOLD PRICE</Text>
-                            <Text style={styles.priceText}>₹14,048.2/g</Text>
+                      <Text style={styles.priceText}>
+  {goldPrice ? `₹ ${goldPrice} /g` : "Loading..."}
+</Text>
                             <View style={styles.changeRow}>
                                 <TrendingUp color="#4ade80" size={16} />
                                 <Text style={styles.changeText}>{activeTimeframe} Change 1.8%</Text>
@@ -288,3 +308,5 @@ const styles = StyleSheet.create({
     },
     badgeText: { color: '#9ca3af', fontSize: 10, fontWeight: 'bold', marginLeft: 12 }
 });
+
+

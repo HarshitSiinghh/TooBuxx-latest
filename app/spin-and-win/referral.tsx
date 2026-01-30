@@ -1,13 +1,16 @@
-import React from 'react';
+import { Share } from "react-native";
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  // SafeAreaView,
   Platform,
   Alert,
+  Modal,
+  Pressable,
+  Clipboard,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
@@ -21,36 +24,77 @@ import {
   Gift,
 } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-export default function ReferralPage( ) {
-  const referralCode = "XYZ123";
+
+import { useProfileStore } from '@/store/profileStore';
+import { getReferralApi } from '@/services/profile';
+
+export default function ReferralPage() {
   const router = useRouter();
-  const referralLink = `https://yourapp.com/ref/${referralCode}`;
+
+  const referral = useProfileStore((s) => s.referral);
+  const setReferral = useProfileStore((s) => s.setReferral);
+
+  const referralCode = referral?.referral_code;
+  const referralLink = referral?.referral_url;
+
+  const [showModal, setShowModal] = useState(false);
+
+  // 🔥 LOAD REFERRAL FROM BACKEND
+  useEffect(() => {
+    const loadReferral = async () => {
+      try {
+        const res = await getReferralApi();
+
+        if (res.success) {
+          setReferral(res.data);   // ✅ STORE UPDATED
+        } else {
+          console.log("Referral API failed", res);
+        }
+      } catch (e) {
+        console.log("Referral load error", e);
+      }
+    };
+
+    loadReferral();
+  }, []);
+  const copyAndShareLink = async () => {
+  if (!referralLink) return;
+
+  try {
+    // ✅ clipboard me copy
+    Clipboard.setString(referralLink);
+
+    // ✅ system share sheet open (image jaisa)
+    await Share.share({
+      message: `Join using my referral link 🚀\n${referralLink}`,
+      url: referralLink,
+      title: "Share referral link",
+    });
+
+  } catch (e) {
+    console.log("Share error:", e);
+  }
+};
+
+  console.log("REFERRAL FROM STORE 👉", referral);
+
   const totalReferred = 8;
   const totalEarned = 1200;
-
-  // ✅ Clipboard-free handler
-  const handleCopyPress = (text: string) => {
-    Alert.alert("Copy", "Long press the text to copy 📋");
-  };
 
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity 
-          onPress={()=>router.back()}
-          style={styles.backButton}
-        >
+        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <MoveLeft color="#9ca3af" size={20} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Refer & Earn</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Main Hero Card */}
         <View style={styles.heroCardContainer}>
           <View style={styles.cardGradientBorder} />
-          
+
           <View style={styles.heroCard}>
             <View style={styles.heroGlow} />
 
@@ -61,94 +105,88 @@ export default function ReferralPage( ) {
 
             <Text style={styles.heroTitle}>Invite Friends,</Text>
             <Text style={styles.heroTitleHighlight}>Earn Gold Together</Text>
-            
+
             <Text style={styles.heroSubtext}>
               Share the wealth! When your friends start saving, both of you unlock premium bonuses.
             </Text>
 
-            {/* Referral Code Box */}
+            {/* Referral Code */}
             <View style={styles.codeContainer}>
               <View style={styles.codeDashedBox}>
                 <Text style={styles.codeLabel}>YOUR REFERRAL CODE</Text>
                 <View style={styles.codeValueBox}>
-                  <Text selectable style={styles.codeText}>{referralCode}</Text>
-                  <TouchableOpacity onPress={() => handleCopyPress(referralCode)}>
+                  <Text selectable style={styles.codeText}>
+                    {referralCode || "Loading..."}
+                  </Text>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      Clipboard.setString(referralCode || "");
+                      Alert.alert("Copied", "Referral code copied");
+                    }}
+                  >
                     <Copy color="#a855f7" size={20} />
                   </TouchableOpacity>
                 </View>
               </View>
 
-              {/* Link Box */}
+              {/* Referral Link */}
               <View style={styles.linkBox}>
-                <Text selectable numberOfLines={1} style={styles.linkText}>
-                  {referralLink}
+                <Text numberOfLines={1} style={styles.linkText}>
+                  {referralLink || "Loading..."}
                 </Text>
-                <TouchableOpacity 
-                  onPress={() => handleCopyPress(referralLink)}
+
+                {/* <TouchableOpacity
+                  onPress={() => setShowModal(true)}
+                  // onPress={copyAndShareLink}}
                   style={styles.copyLinkButton}
                 >
                   <LinkIcon color="#fff" size={16} />
                   <Text style={styles.copyLinkButtonText}>Copy Link</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+
+
+                <TouchableOpacity
+  onPress={copyAndShareLink}
+  style={styles.copyLinkButton}
+>
+  <LinkIcon color="#fff" size={16} />
+  <Text style={styles.copyLinkButtonText}>Share Link</Text>
+</TouchableOpacity>
               </View>
-            </View>
-          </View>
-        </View>
-
-        {/* Stats Grid */}
-        <View style={styles.statsGrid}>
-          <View style={styles.statCard}>
-            <View style={styles.statIconLeft}>
-               <UserPlus color="#fff" size={40} opacity={0.2} />
-            </View>
-            <View>
-              <Text style={styles.statValue}>{totalReferred}</Text>
-              <Text style={styles.statLabel}>SUCCESSFUL REFERRALS</Text>
-            </View>
-          </View>
-
-          <View style={styles.statCard}>
-            <View style={styles.statIconLeft}>
-               <Wallet color="#fff" size={40} opacity={0.2} />
-            </View>
-            <View>
-              <Text style={[styles.statValue, { color: '#4ade80' }]}>₹{totalEarned}</Text>
-              <Text style={styles.statLabel}>BONUS WITHDRAWN</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* How it Works */}
-        <View style={styles.howItWorks}>
-          <Text style={styles.sectionTitle}>How it works</Text>
-          
-          <View style={styles.stepsContainer}>
-            <View style={styles.stepItem}>
-              <View style={[styles.stepIconBox, { borderColor: 'rgba(168, 85, 247, 0.4)', backgroundColor: 'rgba(168, 85, 247, 0.1)' }]}>
-                <Share2 color="#a855f7" size={24} />
-              </View>
-              <Text style={styles.stepTitle}>1. Share Code</Text>
-              <Text style={styles.stepDesc}>Send your link or code to your friends.</Text>
-            </View>
-
-            <View style={styles.stepItem}>
-              <View style={[styles.stepIconBox, { borderColor: 'rgba(37, 99, 235, 0.4)', backgroundColor: 'rgba(37, 99, 235, 0.1)' }]}>
-                <UserPlus color="#3b82f6" size={24} />
-              </View>
-              <Text style={styles.stepTitle}>2. Friend Joins</Text>
-              <Text style={styles.stepDesc}>They sign up and start their first saving goal.</Text>
-            </View>
-
-            <View style={styles.stepItem}>
-              <View style={[styles.stepIconBox, { borderColor: 'rgba(234, 179, 8, 0.4)', backgroundColor: 'rgba(234, 179, 8, 0.1)' }]}>
-                <Gift color="#eab308" size={24} />
-              </View>
-              <Text style={styles.stepTitle}>3. Get Rewards</Text>
-              <Text style={styles.stepDesc}>Both of you receive ₹150 Gold bonus instantly!</Text>
             </View>
           </View>
         </View>
       </ScrollView>
+
+      {/* MODAL */}
+      <Modal transparent animationType="slide" visible={showModal}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <Text style={styles.modalTitle}>Your Referral Link</Text>
+
+            <View style={styles.modalLinkBox}>
+              <Text selectable style={styles.modalLinkText}>
+                {referralLink}
+              </Text>
+            </View>
+
+            <Pressable
+              style={styles.modalCopyBtn}
+              onPress={() => {
+                Clipboard.setString(referralLink || "");
+                Alert.alert("Copied", "Referral link copied");
+              }}
+            >
+              <Text style={styles.modalCopyText}>Copy Link</Text>
+            </Pressable>
+
+            <Pressable onPress={() => setShowModal(false)}>
+              <Text style={styles.modalCloseText}>Close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -278,9 +316,9 @@ const styles = StyleSheet.create({
   },
   codeText: {
     color: '#fff',
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
-    letterSpacing: 4,
+    letterSpacing: 1,
     fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
   },
   linkBox: {
@@ -380,4 +418,70 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  modalOverlay: {
+  flex: 1,
+  backgroundColor: "rgba(0,0,0,0.6)",
+  justifyContent: "flex-end",
+},
+
+modalCard: {
+  backgroundColor: "#0f172a",
+  padding: 20,
+  borderTopLeftRadius: 24,
+  borderTopRightRadius: 24,
+},
+
+modalTitle: {
+  color: "#fff",
+  fontSize: 18,
+  fontWeight: "700",
+  marginBottom: 12,
+},
+
+modalLinkBox: {
+  borderWidth: 1,
+  borderColor: "#7c3aed",
+  borderRadius: 12,
+  padding: 12,
+  marginBottom: 16,
+},
+
+modalLinkText: {
+  color: "#e5e7eb",
+  fontSize: 14,
+},
+
+modalCopyBtn: {
+  backgroundColor: "#7c3aed",
+  paddingVertical: 12,
+  borderRadius: 12,
+  alignItems: "center",
+},
+
+modalCopyText: {
+  color: "#fff",
+  fontWeight: "700",
+},
+
+modalCloseText: {
+  color: "#9ca3af",
+  textAlign: "center",
+  marginTop: 12,
+},
+
 });

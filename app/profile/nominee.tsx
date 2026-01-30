@@ -1,6 +1,7 @@
 
-import  {NomineeSection}  from "@/components/profile/NomineeSection";
+ import NomineeIndex from "@/components/profile/nominee/index";
 
+ 
 export default function NomineeRoute() {
-  return <NomineeSection />;
+  return <NomineeIndex />;
 }

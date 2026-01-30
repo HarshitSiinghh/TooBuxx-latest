@@ -4,21 +4,43 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 export const ForYouSection = () => {
   const router = useRouter();
   const items = [
-    { img: require("../../images/box.webp"), title: "Daily Savings" ,  route :"/savings/daily-savings" },
-    { img: require("../../images/instant-saving.png"), title: "Instant Savings",   route :"/savings/instant-saving" },
-    { img: require("../../images/spins.png"), title: "Spins" ,  route :"/spin-and-win/spin-wheel" },
-    { img: require("../../images/box.webp"), title: "Rewards" ,  route :"/savings/daily-savings" },
+    {
+      img: require("../../images/box.webp"),
+      title: "Daily Savings",
+      route: "/savings/daily-saving",
+    },
+    {
+      img: require("../../images/instant-saving.png"),
+      title: "Instant Savings",
+      route: "/savings/instant-saving",
+    },
+    {
+      img: require("../../images/spins.png"),
+      title: "Spins",
+      route: "/spin-and-win/spin-wheel",
+    },
+    {
+      img: require("../../images/box.webp"),
+      title: "Rewards",
+      route: "/profile/reward",
+    },
   ];
 
   return (
     <View style={styles.container}>
       {items.map((item, index) => (
-        <Pressable key={index} style={styles.item}  onPress={()=>{ router.push(item.route as any) }}>
+        <Pressable
+          key={index}
+          style={styles.item}
+          onPress={() => {
+            router.push(item.route as any);
+          }}
+        >
           <Image source={item.img} style={styles.image} />
           <Text style={styles.title}>{item.title}</Text>
         </Pressable>
-      ))}  
-    </View> 
+      ))}
+    </View>
   );
 };
 

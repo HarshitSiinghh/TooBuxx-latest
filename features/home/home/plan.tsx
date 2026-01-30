@@ -12,7 +12,7 @@ export const Plan = () => {
       </Text>
 
       {/* ===== Plan 1 ===== */}
-      <Pressable onPress={()=>router.push('/savings/daily-savings')}> 
+      <Pressable onPress={()=>router.push("/savings/daily-saving",)}> 
       <LinearGradient
         colors={["#5f37cb", "#9b59b6"]}
         start={{ x: 0, y: 0 }}
@@ -33,8 +33,8 @@ export const Plan = () => {
 
             <View style={styles.row}>
               <Text style={styles.subText}>Start from</Text>
-              <Feather name="dollar-sign" size={14} color="white" />
-              <Text style={styles.subText}>500/day</Text>
+              <Feather  size={14} color="white" />
+              <Text style={styles.subText}>₹10/day</Text>
             </View>
           </View>
         </View>
@@ -47,7 +47,7 @@ export const Plan = () => {
 
       {/* ===== Plan 2 ===== */}
 
-       <Pressable onPress={()=>router.push('/savings/monthly')}>
+       <Pressable onPress={()=>router.push('/savings/monthly-saving')}>
       <LinearGradient
         colors={["#d4a017", "#ffdf6b"]}
         start={{ x: 0, y: 0 }}
@@ -69,8 +69,8 @@ export const Plan = () => {
 
             <View style={styles.row}>
               <Text style={styles.subText}>Start from</Text>
-              <Feather name="dollar-sign" size={14} color="white" />
-              <Text style={styles.subText}>5000/month</Text>
+              {/* <Feather name="dollar-sign" size={14} color="white" /> */}
+              <Text style={styles.subText}>₹100/month</Text>
             </View>
           </View>
      
@@ -87,7 +87,7 @@ export const Plan = () => {
 
 
 
-      <Pressable onPress={()=>router.push('/savings/instant-saving')}>
+      <Pressable onPress={()=>router.push('/savings/weekly-saving')}>
       <LinearGradient
         colors={["#11998e", "#38ef7d"]}
         start={{ x: 0, y: 0 }}
@@ -105,12 +105,12 @@ export const Plan = () => {
 
   
           <View>
-            <Text style={styles.title}>Flexible Saving</Text>
+            <Text style={styles.title}>Weekly Saving</Text>
 
             <View style={styles.row}>
               <Text style={styles.subText}>Start from</Text>
-              <Feather name="dollar-sign" size={14} color="white" />
-              <Text style={styles.subText}>Any amount</Text>
+              {/* <Feather name="dollar-sign" size={14} color="white" /> */}
+              <Text style={styles.subText}> ₹ Any amount</Text>
             </View>
           </View>
         </View>
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     color: "#facc15",
     fontWeight: "700",
     marginBottom: 12,
-    fontSize: 15,
+    fontSize: 15
   },
 
   white: {

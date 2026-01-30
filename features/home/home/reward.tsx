@@ -1,127 +1,201 @@
-import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState,useCallback } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
-  Dimensions,
-} from 'react-native';
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from "react-native";
+import { useRouter,useFocusEffect } from "expo-router";
 
-const { width } = Dimensions.get('window');
+// import { Sparkles } from "lucide-react-native"; // ❌ not used, can cause warnings
 
-export  function EarnReward() {
+import { getMyPointsApi } from "@/services/rewards";
+
+export default function EarnReward() {
   const router = useRouter();
+
+  // ❌ useState<number>(0) breaks if file is .js
+  const [points, setPoints] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  /* ================= LOAD POINTS ================= */
+
+  // useEffect(() => {
+  //   loadPoints();
+  // }, []);
+
+
+  useFocusEffect(
+  useCallback(() => {
+    loadPoints();
+  }, [])
+);
+  const loadPoints = async () => {
+    try {
+      const res = await getMyPointsApi();
+
+      if (res?.success) {
+        setPoints(Number(res?.data?.total_points || 0));
+      }
+    } catch (e) {
+      console.log("❌ FETCH POINTS ERROR:", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= UI ================= */
+
   return (
-    <View style={styles.container}>
-      {/* HEADER */}
-      <View style={styles.header}>
-        <Text style={styles.title}>Earn Rewards</Text>
-        <Text style={styles.remainingText}>Spinning Remaining 5</Text>
-      </View>
-
-      {/* CONTENT CARD */}
+    <View style={styles.wrapper}>
       <View style={styles.card}>
-        <View style={styles.mainInfo}>
-          <Text style={styles.highlightText}>
-            You played all your Spin
-          </Text>
-          <Text style={styles.subText}>Today spins: 0/5</Text>
-        </View>
+        {/* Glow */}
+        <View style={styles.glow} />
 
-        {/* ACTION AREA */}
-        <View style={styles.actionArea}>
-          <TouchableOpacity 
-            activeOpacity={0.8}
-    onPress={()=>router.push('/spin-and-win/spin-wheel')}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>Play & Win More Rewards</Text>
-          </TouchableOpacity>
-          
-          <Text style={styles.yellowHint}>
-            Unlock your financial freedom
-          </Text>
+        <View style={styles.inner}>
+          {/* LEFT */}
+          <View style={{ flex: 1 }}>
+            <Text style={styles.title}>Earn Rewards</Text>
+            <Text style={styles.subTitle}>Spin to Win Gold</Text>
+
+            <View style={{ marginTop: 14 }}>
+              <Text style={styles.bigText}>Your Reward Points</Text>
+
+              {loading ? (
+                <ActivityIndicator color="#facc15" style={{ marginTop: 6 }} />
+              ) : (
+                <Text style={styles.pointsText}>
+                  {Number(points).toLocaleString()}
+                </Text>
+              )}
+
+              <Text style={styles.tagLine}>Spin • Win • Celebrate</Text>
+            </View>
+
+            <View style={{ marginTop: 18 }}>
+              <Text style={styles.note}>
+                Unlock your financial freedom with every spin
+              </Text>
+
+              <TouchableOpacity
+                onPress={() => router.push("/spin-and-win/spin-wheel")}
+                style={styles.btn}
+              >
+                <Text style={styles.btnText}>PLAY & WIN MORE</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* RIGHT IMAGE */}
+          <Image
+            // source={require("../assets/wheel.png")}
+            source={require("../../../images/wheel.png")}
+            style={styles.image}
+            resizeMode="contain"
+          />
         </View>
       </View>
     </View>
   );
 }
+/* ================= STYLES ================= */
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#1a003d',
-    padding: 12,
-    width: '100%',
-    marginTop: 8,
+  wrapper: {
+    padding: 14,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-    paddingHorizontal: 4,
-  },
-  title: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '900', // Equivalent to font-extrabold
-  },
-remainingText: {
-  color: '#d1d5db',
-  fontSize: 12,
-
-  backgroundColor: 'rgba(209, 213, 219, 0.15)', // transparent gray
-  paddingHorizontal: 12,
-  paddingVertical: 6,
-  borderRadius: 12,
-  overflow: 'hidden', // important for Android to clip corners
-},
 
   card: {
-    // In React Native, we apply the card styles directly if it's the main 
-    backgroundColor: '#2f2360',
-    borderRadius: 16,
-    padding: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 6,
+    backgroundColor: "#2f2360",
+    borderRadius: 32,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.06)",
+    padding: 22,
+    overflow: "hidden",
   },
-  mainInfo: {
-    marginBottom: 16,
+
+  glow: {
+    position: "absolute",
+    top: -40,
+    right: -40,
+    width: 140,
+    height: 140,
+    borderRadius: 100,
+    backgroundColor: "rgba(168,85,247,0.15)",
   },
-  highlightText: {
-    color: '#d8b4fe', // purple-300
-    fontSize: 18,
-    fontWeight: 'bold',
-    lineHeight: 24,
+
+  inner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
   },
-  subText: {
-    color: '#a855f7', // purple-400
-    fontSize: 14,
+
+  title: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "900",
+  },
+
+  subTitle: {
+    marginTop: 2,
+    color: "#c084fc",
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 2,
+  },
+
+  bigText: {
+    marginTop: 12,
+    color: "#e9d5ff",
+    fontSize: 16,
+    fontWeight: "900",
+  },
+
+  pointsText: {
+    color: "#facc15",
+    fontSize: 34,
+    fontWeight: "900",
+    marginTop: 2,
+  },
+
+  tagLine: {
     marginTop: 4,
+    color: "rgba(192,132,252,0.7)",
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 2,
+    textTransform: "uppercase",
   },
-  actionArea: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+
+  note: {
+    color: "rgba(250,204,21,0.85)",
+    fontSize: 10,
+    fontWeight: "900",
+    letterSpacing: 1.5,
+    textTransform: "uppercase",
+    marginBottom: 10,
   },
-  button: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginBottom: 8,
+
+  btn: {
+    backgroundColor: "white",
+    alignSelf: "flex-start",
+    paddingVertical: 12,
+    paddingHorizontal: 22,
+    borderRadius: 16,
   },
-  buttonText: {
-    color: '#2e2059',
-    fontWeight: '700',
-    fontSize: 14,
+
+  btnText: {
+    color: "#1a003d",
+    fontSize: 10,
+    fontWeight: "900",
+    letterSpacing: 2,
   },
-  yellowHint: {
-    color: '#facc15', // yellow-400
-    fontWeight: '600',
-    fontSize: 12,
+
+  image: {
+    width: 90,
+    height: 90,
+    opacity: 0.9,
   },
 });

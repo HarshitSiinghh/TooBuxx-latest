@@ -1,5 +1,5 @@
+import NotificationPage from "@/components/profile/notifications";
 import { SafeAreaView } from "react-native-safe-area-context";
-import NotificationPage from "@/components/profile/notification-hovercard";
 
 export default function ProfileTab() {
   return (
