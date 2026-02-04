@@ -96,30 +96,23 @@ export default function SpinWheel() {
   if (!canRender) return null;
 
   if (loading) {
-    // return (
-    //   <View style={styles.loader}>
-    //     <ActivityIndicator size="large" color="#fbbf24" />
-    //     <Text style={styles.loaderText}>LOADING GOLDEN REWARDS...</Text>
-    //   </View>
-    // );
-
-
-      return (
+  return (
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#1a003d",
+        backgroundColor: "#062530",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
       <ActivityIndicator size="large" color="#a855f7" />
-      <Text style={{ marginTop: 10, color: "#fff", fontWeight: "bold" }}>
+      <Text style={{ marginTop: 10, color: "#ffffff", fontWeight: "bold" }}>
         Loading...
       </Text>
     </SafeAreaView>
   );
-  }
+}
+
 
   const rotate = spinAnim.interpolate({
     inputRange: [0, 360],
@@ -170,7 +163,8 @@ export default function SpinWheel() {
                   <G key={prize.id}>
                     <Path
                       d={`M100 100 L${x1} ${y1} A100 100 0 0 1 ${x2} ${y2} Z`}
-                      fill={i % 2 === 0 ? "#1a003d" : "#240056"}
+                    fill={i % 2 === 0 ? "#0b3442" : "#062530"}
+
                     />
 
                     {/* ✅ BACKEND ICON */}
@@ -273,199 +267,227 @@ export default function SpinWheel() {
 
 /* ================= STYLES ================= */
 
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f0028",
+    backgroundColor: "#062530",
     alignItems: "center",
-    paddingTop: 20,
+    paddingTop: 16,
   },
 
+  /* HEADER */
+  header: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    marginBottom: 18,
+  },
+
+  backBtn: {
+    position: "absolute",
+    left: 16,
+    width: 42,
+    height: 42,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "rgba(250,204,21,0.35)",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(250,204,21,0.12)",
+  },
+
+  title: {
+    color: "#ffffff",
+    fontSize: 26,
+    fontWeight: "900",
+    letterSpacing: 1,
+  },
+
+  /* LOADER */
   loader: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0f0028",
+    backgroundColor: "#062530",
   },
+
   loaderText: {
-    color: "#fbbf24",
+    color: "#facc15",
     marginTop: 12,
-    fontWeight: "700",
+    fontWeight: "800",
+    letterSpacing: 1,
   },
 
-  title: {
-    color: "white",
-    fontSize: 26,
-    fontWeight: "900",
-    marginBottom: 18,
-  },
-
+  /* WHEEL */
   wheelOuterGlow: {
-    shadowColor: "#fbbf24",
-    shadowOpacity: 0.5,
-    shadowRadius: 30,
-    elevation: 20,
+    shadowColor: "#facc15",
+    shadowOpacity: 0.55,
+    shadowRadius: 36,
+    elevation: 22,
+    marginBottom: 6,
   },
-  header: {
-  width: "100%",
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-  paddingHorizontal: 16,
-  marginBottom: 18,
-},
-
-/* ===== DAILY SAVINGS PROMO BOX ===== */
-
-dailyBox: {
-  marginTop: 26,
-  width: "86%",
-  backgroundColor: "#1a003d",
-  borderRadius: 20,
-  padding: 18,
-  alignItems: "center",
-  borderWidth: 1,
-  borderColor: "rgba(124,58,237,0.6)",
-},
-
-dailyTitle: {
-  color: "white",
-  fontSize: 16,
-  fontWeight: "900",
-  marginBottom: 6,
-},
-
-dailyDesc: {
-  color: "#c4b5fd",
-  fontSize: 12,
-  textAlign: "center",
-  marginBottom: 14,
-},
-
-dailyBtn: {
-  backgroundColor: "#7c3aed",
-  paddingHorizontal: 22,
-  paddingVertical: 12,
-  borderRadius: 14,
-},
-
-dailyBtnText: {
-  color: "white",
-  fontWeight: "900",
-  fontSize: 11,
-  letterSpacing: 1.5,
-},
-backBtn: {
-  position: "absolute",
-  left: 16,
-  width: 42,
-  height: 42,
-  borderRadius: 14,
-  borderWidth: 1,
-  borderColor: "rgba(251,191,36,0.3)",
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundColor: "rgba(251,191,36,0.08)",
-},
-
-// title: {
-//   color: "white",
-//   fontSize: 26,
-//   fontWeight: "900",
-//   letterSpacing: 1,
-// },
 
   outerRing: {
-    width: WHEEL_SIZE + 26,
-    height: WHEEL_SIZE + 26,
+    width: WHEEL_SIZE + 28,
+    height: WHEEL_SIZE + 28,
     borderRadius: 999,
     borderWidth: 6,
-    borderColor: "#fbbf24",
+    borderColor: "#facc15",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#12002e",
+    backgroundColor: "#041d26",
   },
 
   pointer: {
     position: "absolute",
-    top: -14,
+    top: -16,
     width: 0,
     height: 0,
     borderLeftWidth: 14,
     borderRightWidth: 14,
-    borderBottomWidth: 26,
+    borderBottomWidth: 28,
     borderLeftColor: "transparent",
     borderRightColor: "transparent",
-    borderBottomColor: "#fbbf24",
+    borderBottomColor: "#facc15",
     zIndex: 50,
   },
 
+  /* SPIN BUTTON */
   spinBtn: {
-    marginTop: 30,
+    marginTop: 28,
     backgroundColor: "#facc15",
-    paddingHorizontal: 54,
+    paddingHorizontal: 56,
     paddingVertical: 16,
     borderRadius: 40,
+    shadowColor: "#facc15",
+    shadowOpacity: 0.4,
+    shadowRadius: 20,
+    elevation: 10,
   },
+
   spinText: {
     fontWeight: "900",
     letterSpacing: 2,
-    color: "#1a003d",
+    color: "#062530",
+    fontSize: 13,
   },
 
   note: {
-    color: "#9ca3af",
+    color: "#8fbac4",
     fontSize: 11,
     marginTop: 10,
-    letterSpacing: 1,
+    letterSpacing: 1.2,
   },
 
+  /* DAILY SAVINGS PROMO */
+  dailyBox: {
+    marginTop: 28,
+    width: "86%",
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderRadius: 22,
+    padding: 18,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  dailyTitle: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "900",
+    marginBottom: 6,
+  },
+
+  dailyDesc: {
+    color: "#8fbac4",
+    fontSize: 12,
+    textAlign: "center",
+    marginBottom: 14,
+  },
+
+  dailyBtn: {
+    backgroundColor: "#facc15",
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 16,
+    shadowColor: "#facc15",
+    shadowOpacity: 0.4,
+    shadowRadius: 14,
+    elevation: 6,
+  },
+
+  dailyBtnText: {
+    color: "#062530",
+    fontWeight: "900",
+    fontSize: 11,
+    letterSpacing: 1.6,
+  },
+
+  /* MODALS */
   modalBg: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.85)",
+    backgroundColor: "rgba(6,37,48,0.92)",
     justifyContent: "center",
     alignItems: "center",
   },
+
   modalBox: {
-    backgroundColor: "#1a003d",
+    backgroundColor: "#0b3442",
     padding: 28,
-    borderRadius: 22,
+    borderRadius: 26,
     alignItems: "center",
-    width: "80%",
+    width: "82%",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
+
   close: {
     position: "absolute",
     right: 14,
     top: 14,
+    padding: 6,
   },
+
   modalSmall: {
-    marginTop: 10,
-    color: "#fbbf24",
-    fontWeight: "800",
+    marginTop: 12,
+    color: "#facc15",
+    fontWeight: "900",
     letterSpacing: 2,
+    fontSize: 11,
   },
+
   modalTitle: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 22,
     fontWeight: "900",
-    marginVertical: 10,
+    marginVertical: 12,
     textAlign: "center",
   },
+
   modalDesc: {
-    color: "#9ca3af",
+    color: "#8fbac4",
     textAlign: "center",
     marginVertical: 10,
+    fontSize: 13,
   },
+
   modalBtn: {
-    marginTop: 14,
+    marginTop: 16,
     backgroundColor: "#facc15",
-    paddingHorizontal: 26,
+    paddingHorizontal: 28,
     paddingVertical: 12,
-    borderRadius: 14,
+    borderRadius: 16,
   },
+
   modalBtnText: {
     fontWeight: "900",
-    color: "#1a003d",
-    letterSpacing: 1,
+    color: "#062530",
+    letterSpacing: 1.2,
+    fontSize: 12,
   },
 });

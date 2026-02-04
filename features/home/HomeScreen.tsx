@@ -12,7 +12,8 @@ import { Referral } from "./home/referal";
 // import { EarnReward } from "./home/reward";
  import EarnReward from "./home/reward";
 import { StartSaving } from "./home/saving";
-
+import LivePriceCards from "./home/PriceCard";
+ import PortfolioSummary from "./home/PortfolioSummary";
 export default function Home() {
   return (
     <View style={styles.container}>
@@ -29,7 +30,9 @@ export default function Home() {
           <Learn />
         </View>
 
-        <Plan />
+        {/* <Plan /> */}
+        <LivePriceCards/>
+        <PortfolioSummary/>
         <About />
         {/* <SavingsSteps /> */}
 
@@ -47,7 +50,10 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a003d",
+    // backgroundColor: "#1a003d",
+
+
+    backgroundColor: "#062530",
   },
 
   scroll: {

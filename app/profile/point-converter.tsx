@@ -241,19 +241,25 @@ export default function PointConverter() {
 
 /* ================= STYLES ================= */
 
+
+
+
+
+
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#1a003d" },
+  container: { flex: 1, backgroundColor: "#062530" },
 
   center: {
     flex: 1,
-    backgroundColor: "#1a003d",
+    backgroundColor: "#062530",
     alignItems: "center",
     justifyContent: "center",
   },
 
   loadingText: {
     marginTop: 10,
-    color: "rgba(255,255,255,0.4)",
+    color: "rgba(255,255,255,0.5)",
     fontSize: 10,
     fontWeight: "800",
     letterSpacing: 2,
@@ -264,12 +270,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 18,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomColor: "rgba(255,255,255,0.08)",
   },
 
   backBtn: {
     padding: 10,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.4)",
     borderRadius: 12,
   },
 
@@ -281,16 +287,16 @@ const styles = StyleSheet.create({
   pointsCard: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 26,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "rgba(255,255,255,0.1)",
     padding: 22,
     marginBottom: 20,
   },
 
   cardLabel: {
-    color: "rgba(255,255,255,0.4)",
+    color: "rgba(255,255,255,0.6)",
     fontSize: 10,
     fontWeight: "900",
     letterSpacing: 2,
@@ -303,18 +309,18 @@ const styles = StyleSheet.create({
   },
 
   coinBox: {
-    padding: 14,
+    padding: 15,
     borderRadius: 18,
-    backgroundColor: "rgba(250,204,21,0.1)",
+    backgroundColor: "rgba(250,204,21,0.15)",
     borderWidth: 1,
-    borderColor: "rgba(250,204,21,0.2)",
+    borderColor: "rgba(250,204,21,0.3)",
   },
 
   formCard: {
-    backgroundColor: "rgba(255,255,255,0.03)",
+    backgroundColor: "rgba(16,78,100,0.25)",
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "rgba(255,255,255,0.1)",
     padding: 22,
   },
 
@@ -325,23 +331,23 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    color: "rgba(255,255,255,0.4)",
+    color: "rgba(255,255,255,0.6)",
     fontSize: 10,
     fontWeight: "900",
     letterSpacing: 2,
   },
 
   maxBtn: {
-    color: "#c084fc",
+    color: "#facc15",
     fontSize: 10,
     fontWeight: "900",
   },
 
   inputWrap: {
-    backgroundColor: "#0f0225",
+    backgroundColor: "rgba(6,37,48,0.9)",
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "rgba(255,255,255,0.12)",
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 18,
@@ -356,7 +362,7 @@ const styles = StyleSheet.create({
   },
 
   inputSuffix: {
-    color: "rgba(255,255,255,0.3)",
+    color: "rgba(255,255,255,0.4)",
     fontSize: 10,
     fontWeight: "900",
   },
@@ -367,10 +373,10 @@ const styles = StyleSheet.create({
   },
 
   walletBox: {
-    backgroundColor: "#0f0225",
+    backgroundColor: "rgba(6,37,48,0.9)",
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
+    borderColor: "rgba(255,255,255,0.08)",
     padding: 18,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -378,14 +384,14 @@ const styles = StyleSheet.create({
   },
 
   walletLabel: {
-    color: "rgba(255,255,255,0.4)",
+    color: "rgba(255,255,255,0.6)",
     fontSize: 10,
     fontWeight: "900",
     letterSpacing: 2,
   },
 
   walletValue: {
-    color: "#4ade80",
+    color: "#22c55e",
     fontSize: 26,
     fontWeight: "900",
     marginTop: 2,
@@ -396,20 +402,20 @@ const styles = StyleSheet.create({
     gap: 6,
     marginTop: 12,
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     padding: 10,
     borderRadius: 12,
   },
 
   rateText: {
-    color: "rgba(255,255,255,0.4)",
+    color: "rgba(255,255,255,0.6)",
     fontSize: 10,
     fontWeight: "800",
   },
 
   submitBtn: {
     marginTop: 16,
-    backgroundColor: "#7c3aed",
+    backgroundColor: "#facc15",
     borderRadius: 22,
     paddingVertical: 18,
     alignItems: "center",
@@ -432,10 +438,10 @@ const styles = StyleSheet.create({
 
   popupBox: {
     width: "100%",
-    backgroundColor: "#1a0b2e",
+    backgroundColor: "#062530",
     borderRadius: 28,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "rgba(255,255,255,0.15)",
     padding: 28,
     alignItems: "center",
   },
@@ -448,7 +454,7 @@ const styles = StyleSheet.create({
   },
 
   popupMsg: {
-    color: "#9ca3af",
+    color: "#cbd5e1",
     fontSize: 12,
     marginTop: 6,
     textAlign: "center",
@@ -456,7 +462,7 @@ const styles = StyleSheet.create({
 
   popupBtn: {
     marginTop: 18,
-    backgroundColor: "#7c3aed",
+    backgroundColor: "#104e64",
     paddingVertical: 14,
     borderRadius: 18,
     width: "100%",

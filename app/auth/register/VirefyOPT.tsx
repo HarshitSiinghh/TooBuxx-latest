@@ -210,87 +210,101 @@ const OTPVerifyPage = () => {
 };
 
 export default OTPVerifyPage;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a003d",
+    backgroundColor: "#062530",
     alignItems: "center",
     justifyContent: "center",
   },
+
   glow: {
     position: "absolute",
-    top: -100,
-    left: -100,
-    width: width * 1.5,
-    height: width * 1.5,
-    backgroundColor: "rgba(147, 51, 234, 0.1)",
+    top: -120,
+    left: -120,
+    width: width * 1.6,
+    height: width * 1.6,
+    backgroundColor: "rgba(250, 204, 21, 0.08)", // gold glow
     borderRadius: 999,
   },
+
   innerContainer: {
     width: "100%",
     paddingHorizontal: 20,
     alignItems: "center",
   },
+
+  /* ================= CARD ================= */
   card: {
     width: "100%",
     maxWidth: 400,
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: "#0b3442",
     borderRadius: 40,
     padding: 30,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: "#104e64",
     alignItems: "center",
   },
+
+  /* ================= HEADER ================= */
   header: {
     alignItems: "center",
     marginBottom: 30,
   },
+
   iconCircle: {
     padding: 16,
-    backgroundColor: "rgba(168, 85, 247, 0.1)",
+    backgroundColor: "rgba(16, 78, 100, 0.4)",
     borderRadius: 100,
     borderWidth: 1,
-    borderColor: "rgba(168, 85, 247, 0.2)",
+    borderColor: "#104e64",
     marginBottom: 16,
   },
+
   title: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 22,
     fontWeight: "900",
     fontStyle: "italic",
     letterSpacing: -0.5,
   },
+
   subtitle: {
-    color: "#6b7280",
+    color: "#8fbac4",
     fontSize: 10,
     fontWeight: "700",
     letterSpacing: 2,
     marginTop: 8,
     textAlign: "center",
   },
+
+  /* ================= OTP ================= */
   otpContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
     marginBottom: 40,
   },
+
   input: {
     width: (width - 120) / 6,
     aspectRatio: 0.8,
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: "rgba(16, 78, 100, 0.35)",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-    color: "white",
+    borderColor: "#104e64",
+    color: "#ffffff",
     fontSize: 24,
     fontWeight: "900",
     textAlign: "center",
   },
+
   inputActive: {
-    borderColor: "#8b5cf6",
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: "#facc15",
+    backgroundColor: "rgba(250, 204, 21, 0.12)",
   },
+
+  /* ================= BUTTON ================= */
   button: {
     width: width - 100,
     flexDirection: "row",
@@ -300,71 +314,84 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     gap: 10,
   },
+
   buttonText: {
-    color: "white",
+    color: "#062530",
     fontWeight: "900",
     fontSize: 12,
     letterSpacing: 2,
   },
+
+  /* ================= FOOTER ================= */
   footer: {
     marginTop: 30,
   },
+
   timerText: {
     fontSize: 9,
     fontWeight: "900",
-    color: "#4b5563",
+    color: "#6b9aa6",
     letterSpacing: 1.5,
   },
+
   resendBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
   },
+
   resendText: {
     fontSize: 9,
     fontWeight: "900",
-    color: "#a78bfa",
+    color: "#facc15",
     letterSpacing: 1.5,
   },
+
+  /* ================= MODAL ================= */
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: "rgba(6, 37, 48, 0.9)",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
   },
+
   modalContent: {
     width: "100%",
     maxWidth: 340,
-    backgroundColor: "rgba(30, 30, 30, 0.95)",
+    backgroundColor: "#0b3442",
     borderRadius: 40,
     padding: 30,
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.2)",
+    borderColor: "#104e64",
   },
+
   closeBtn: {
     position: "absolute",
     top: 20,
     right: 20,
   },
+
   successIconCircle: {
     padding: 16,
     backgroundColor: "rgba(34, 197, 94, 0.15)",
     borderRadius: 100,
     borderWidth: 1,
-    borderColor: "rgba(34, 197, 94, 0.3)",
+    borderColor: "rgba(34, 197, 94, 0.35)",
     marginBottom: 20,
   },
+
   successTitle: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 18,
     fontWeight: "900",
     fontStyle: "italic",
     letterSpacing: 1,
   },
+
   successSubtitle: {
-    color: "#9ca3af",
+    color: "#8fbac4",
     fontSize: 10,
     fontWeight: "700",
     letterSpacing: 2,
@@ -373,9 +400,10 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     lineHeight: 16,
   },
+
   loginBtn: {
     width: "100%",
-    backgroundColor: "#16a34a",
+    backgroundColor: "#22c55e",
     paddingVertical: 16,
     borderRadius: 16,
     flexDirection: "row",
@@ -383,8 +411,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 8,
   },
+
   loginBtnText: {
-    color: "white",
+    color: "#062530",
     fontWeight: "900",
     fontSize: 10,
     letterSpacing: 2,

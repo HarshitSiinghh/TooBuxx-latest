@@ -76,14 +76,83 @@ export default function ChangeLanguage() {
 
 /* ================= STYLES ================= */
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#1a003d",
+//     paddingHorizontal: 16,
+//     paddingTop: 50,
+//   },
+
+//   header: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     justifyContent: "space-between",
+//     marginBottom: 14,
+//   },
+
+//   title: {
+//     color: "white",
+//     fontSize: 18,
+//     fontWeight: "700",
+//   },
+
+//   subtitle: {
+//     color: "#c4b5fd",
+//     fontSize: 13,
+//     marginBottom: 14,
+//     textAlign: "center",
+//   },
+
+//   card: {
+//     backgroundColor: "#2f2360",
+//     borderRadius: 14,
+//     padding: 16,
+//     marginBottom: 10,
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//   },
+
+//   activeCard: {
+//     borderWidth: 1,
+//     borderColor: "#4ade80",
+//   },
+
+//   languageText: {
+//     color: "white",
+//     fontSize: 15,
+//     fontWeight: "600",
+//   },
+
+//   saveBtn: {
+//     backgroundColor: "#6d3cff",
+//     paddingVertical: 14,
+//     borderRadius: 14,
+//     alignItems: "center",
+//     marginTop: 12,
+//     marginBottom: 60, // 👈 little margin from bottom
+//   },
+
+//   saveText: {
+//     color: "white",
+//     fontSize: 15,
+//     fontWeight: "700",
+//   },
+// });
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a003d",
+    backgroundColor: "#062530",
     paddingHorizontal: 16,
     paddingTop: 50,
   },
 
+  /* ================= HEADER ================= */
   header: {
     flexDirection: "row",
     alignItems: "center",
@@ -92,51 +161,62 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: "900",
+    letterSpacing: 0.5,
   },
 
   subtitle: {
-    color: "#c4b5fd",
+    color: "#8fbac4",
     fontSize: 13,
-    marginBottom: 14,
+    marginBottom: 18,
     textAlign: "center",
-  },
-
-  card: {
-    backgroundColor: "#2f2360",
-    borderRadius: 14,
-    padding: 16,
-    marginBottom: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  activeCard: {
-    borderWidth: 1,
-    borderColor: "#4ade80",
-  },
-
-  languageText: {
-    color: "white",
-    fontSize: 15,
     fontWeight: "600",
   },
 
-  saveBtn: {
-    backgroundColor: "#6d3cff",
-    paddingVertical: 14,
-    borderRadius: 14,
+  /* ================= LANGUAGE CARD ================= */
+  card: {
+    backgroundColor: "#0b3442",
+    borderRadius: 18,
+    padding: 18,
+    marginBottom: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 12,
-    marginBottom: 60, // 👈 little margin from bottom
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  activeCard: {
+    borderColor: "#4ade80",
+    backgroundColor: "rgba(74,222,128,0.08)",
+  },
+
+  languageText: {
+    color: "#ffffff",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+
+  /* ================= SAVE BUTTON ================= */
+  saveBtn: {
+    backgroundColor: "#facc15",
+    paddingVertical: 16,
+    borderRadius: 18,
+    alignItems: "center",
+    marginTop: 16,
+    marginBottom: 60,
+    shadowColor: "#facc15",
+    shadowOpacity: 0.35,
+    shadowRadius: 20,
+    elevation: 8,
   },
 
   saveText: {
-    color: "white",
+    color: "#062530",
     fontSize: 15,
-    fontWeight: "700",
+    fontWeight: "900",
+    letterSpacing: 1,
   },
 });

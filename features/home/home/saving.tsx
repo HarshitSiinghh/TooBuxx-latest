@@ -38,20 +38,110 @@ export const StartSaving = () => {
 
 /* ================= STYLES ================= */
 
+// const styles = StyleSheet.create({
+//   wrapper: {
+//     marginTop: 20,
+//     marginBottom: 24,
+//   },
+
+//   card: {
+//     backgroundColor: "#2f2360",
+//     marginHorizontal: 16,
+//     padding: 16,
+//     borderRadius: 14,
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//   },
+
+//   left: {
+//     maxWidth: "60%",
+//     gap: 8,
+//   },
+
+//   title: {
+//     color: "white",
+//     fontWeight: "700",
+//     fontSize: 16,
+//     lineHeight: 22,
+//   },
+
+//   yellow: {
+//     color: "#facc15",
+//   },
+
+//   desc: {
+//     color: "#9ca3af",
+//     fontSize: 12,
+//   },
+
+//   button: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     gap: 6,
+//     backgroundColor: "#fffbeb",
+//     paddingHorizontal: 14,
+//     paddingVertical: 6,
+//     borderRadius: 6,
+//     alignSelf: "flex-start",
+//   },
+
+//   buttonText: {
+//     color: "#000",
+//     fontWeight: "600",
+//     fontSize: 13,
+//   },
+
+//   right: {
+//     width: "40%",
+//     alignItems: "flex-end",
+//   },
+
+//   image: {
+//     width: 100,
+//     height: 100,
+//     resizeMode: "contain",
+//   },
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
   wrapper: {
     marginTop: 20,
     marginBottom: 24,
+    backgroundColor: "#062530",
   },
 
   card: {
-    backgroundColor: "#2f2360",
+    backgroundColor: "#104e64",
     marginHorizontal: 16,
     padding: 16,
     borderRadius: 14,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+
+    // subtle depth
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    elevation: 6,
   },
 
   left: {
@@ -60,35 +150,36 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: "white",
-    fontWeight: "700",
+    color: "#ffffff",
+    fontWeight: "800",
     fontSize: 16,
     lineHeight: 22,
   },
 
   yellow: {
-    color: "#facc15",
+    color: "#facc15", // gold
   },
 
   desc: {
-    color: "#9ca3af",
+    color: "#c7e4ec", // muted teal
     fontSize: 12,
+    lineHeight: 16,
   },
 
   button: {
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#fffbeb",
+    backgroundColor: "#facc15", // gold CTA
     paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 6,
+    paddingVertical: 8,
+    borderRadius: 8,
     alignSelf: "flex-start",
   },
 
   buttonText: {
-    color: "#000",
-    fontWeight: "600",
+    color: "#062530", // dark teal text
+    fontWeight: "800",
     fontSize: 13,
   },
 
@@ -101,5 +192,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     resizeMode: "contain",
+    opacity: 0.95,
   },
 });

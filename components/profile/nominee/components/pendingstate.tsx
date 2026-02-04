@@ -90,123 +90,265 @@ const router = useRouter()
   );
 };
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#1a003d',
+    
+//     paddingVertical: 30,
+//   },
+//   header: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     paddingHorizontal: 24,
+//     paddingVertical: 20,
+//     borderBottomWidth: 1,
+//     borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+//   },
+//   headerTitle: {
+//     color: 'white',
+//     fontSize: 14,
+//     fontWeight: 'bold',
+//     marginLeft: 16,
+//     letterSpacing: 1.5,
+//     textTransform: 'uppercase',
+//   },
+//   content: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     padding: 20,
+//   },
+//   card: {
+//     backgroundColor: '#2f2360',
+//     borderRadius: 40,
+//     padding: 40,
+//     alignItems: 'center',
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.05)',
+//     shadowColor: '#a855f7',
+//     shadowOffset: { width: 0, height: 20 },
+//     shadowOpacity: 0.2,
+//     shadowRadius: 30,
+//     elevation: 10,
+//   },
+//   iconContainer: {
+//     position: 'relative',
+//     marginBottom: 30,
+//   },
+//   iconCircle: {
+//     height: 120,
+//     width: 120,
+//     borderRadius: 60,
+//     backgroundColor: '#1a003d',
+//     borderWidth: 2,
+//     borderColor: 'rgba(168, 85, 247, 0.3)',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   statusBadge: {
+//     position: 'absolute',
+//     bottom: 5,
+//     right: 5,
+//     backgroundColor: '#eab308', // Amber color for "pending/warning"
+//     padding: 8,
+//     borderRadius: 20,
+//     borderWidth: 3,
+//     borderColor: '#2f2360',
+//   },
+//   textWrapper: {
+//     alignItems: 'center',
+//     marginBottom: 30,
+//   },
+//   mainTitle: {
+//     color: 'white',
+//     fontSize: 22,
+//     fontWeight: 'bold',
+//     marginBottom: 16,
+//     textAlign: 'center',
+//   },
+//   messageBox: {
+//     paddingHorizontal: 10,
+//   },
+//   description: {
+//     color: 'rgba(216, 180, 254, 0.7)',
+//     fontSize: 16,
+//     lineHeight: 24,
+//     textAlign: 'center',
+//   },
+//   highlight: {
+//     color: '#c084fc',
+//     fontWeight: 'bold',
+//   },
+//   infoBox: {
+//     backgroundColor: 'rgba(26, 0, 61, 0.5)',
+//     paddingVertical: 10,
+//     paddingHorizontal: 20,
+//     borderRadius: 12,
+//     marginBottom: 40,
+//   },
+//   infoText: {
+//     color: '#9ca3af',
+//     fontSize: 12,
+//     fontWeight: '500',
+//     letterSpacing: 0.5,
+//   },
+//   backButton: {
+//     width: '100%',
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     paddingVertical: 18,
+//     borderRadius: 20,
+//     alignItems: 'center',
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//   },
+//   backButtonText: {
+//     color: 'white',
+//     fontWeight: '900',
+//     letterSpacing: 2,
+//     fontSize: 12,
+//   },
+// });
+
+export default PendingKYC;
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a003d',
-    
+    backgroundColor: "#062530",
     paddingVertical: 30,
   },
+
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 24,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    borderBottomColor: "#104e64",
   },
+
   headerTitle: {
-    color: 'white',
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginLeft: 16,
     letterSpacing: 1.5,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
+
   content: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 20,
   },
+
   card: {
-    backgroundColor: '#2f2360',
+    backgroundColor: "#0b3442",
     borderRadius: 40,
     padding: 40,
-    alignItems: 'center',
+    alignItems: "center",
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
-    shadowColor: '#a855f7',
+    borderColor: "#104e64",
+    shadowColor: "#041d26",
     shadowOffset: { width: 0, height: 20 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.45,
     shadowRadius: 30,
     elevation: 10,
   },
+
   iconContainer: {
-    position: 'relative',
+    position: "relative",
     marginBottom: 30,
   },
+
   iconCircle: {
     height: 120,
     width: 120,
     borderRadius: 60,
-    backgroundColor: '#1a003d',
+    backgroundColor: "#062530",
     borderWidth: 2,
-    borderColor: 'rgba(168, 85, 247, 0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderColor: "rgba(250,204,21,0.45)",
+    alignItems: "center",
+    justifyContent: "center",
   },
+
   statusBadge: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 5,
     right: 5,
-    backgroundColor: '#eab308', // Amber color for "pending/warning"
+    backgroundColor: "#facc15",
     padding: 8,
     borderRadius: 20,
     borderWidth: 3,
-    borderColor: '#2f2360',
+    borderColor: "#0b3442",
   },
+
   textWrapper: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 30,
   },
+
   mainTitle: {
-    color: 'white',
+    color: "#ffffff",
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
+
   messageBox: {
     paddingHorizontal: 10,
   },
+
   description: {
-    color: 'rgba(216, 180, 254, 0.7)',
+    color: "#8fbac4",
     fontSize: 16,
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center",
   },
+
   highlight: {
-    color: '#c084fc',
-    fontWeight: 'bold',
+    color: "#facc15",
+    fontWeight: "bold",
   },
+
   infoBox: {
-    backgroundColor: 'rgba(26, 0, 61, 0.5)',
+    backgroundColor: "rgba(16,78,100,0.35)",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 12,
     marginBottom: 40,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
+
   infoText: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: "500",
     letterSpacing: 0.5,
   },
+
   backButton: {
-    width: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    width: "100%",
+    backgroundColor: "rgba(16,78,100,0.35)",
     paddingVertical: 18,
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: "center",
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
   },
+
   backButtonText: {
-    color: 'white',
-    fontWeight: '900',
+    color: "#ffffff",
+    fontWeight: "900",
     letterSpacing: 2,
     fontSize: 12,
   },
 });
-
-export default PendingKYC;

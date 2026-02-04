@@ -3,7 +3,7 @@ import PaymentDetailsPage from "@/components/profile/payments";
 
 export default function PaymentTab() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#1a003d" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#062530" }}>
       <PaymentDetailsPage />
     </SafeAreaView>
   );

@@ -8,6 +8,8 @@ import { useProfileStore } from "@/store/profileStore";
 import { View, ActivityIndicator } from "react-native";
 import { useWalletStore } from "@/store/walletStore";
 import { getReferralApi } from "@/services/profile";
+import { StatusBar } from "expo-status-bar";
+
 
 export default function RootLayout() {
   const { user, setUser, clearUser, loading, setLoading } = useAuthStore();
@@ -51,13 +53,24 @@ export default function RootLayout() {
     checkLogin();
   }, []);
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#7c3aed" />
-      </View>
-    );
-  }
+
+
+
+if (loading) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#062530", // app primary bg
+      }}
+    >
+      <ActivityIndicator size="large" color="#facc15" />
+    </View>
+  );
+}
+
 
   return (
     <SafeAreaProvider>

@@ -40,19 +40,116 @@ export const Referral = () => {
 
 /* ================= STYLES ================= */
 
+// const styles = StyleSheet.create({
+//   wrapper: {
+//     marginTop: 12,
+//   },
+
+//   card: {
+//     backgroundColor: "#2f2360",
+//     marginHorizontal: 16,
+//     padding: 16,
+//     borderRadius: 14,
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//   },
+
+//   left: {
+//     flex: 1,
+//     gap: 10,
+//   },
+
+//   heading: {
+//     color: "#fcd535",
+//     fontWeight: "700",
+//     borderBottomWidth: 2,
+//     borderBottomColor: "#fcd535",
+//     alignSelf: "flex-start",
+//     paddingBottom: 2,
+//     fontSize: 13,
+//   },
+
+//   white: {
+//     color: "white",
+//   },
+
+//   title: {
+//     color: "white",
+//     fontSize: 14,
+//     fontWeight: "700",
+//   },
+
+//   yellow: {
+//     color: "#fcd535",
+//   },
+
+//   referBtn: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     gap: 8,
+//     backgroundColor: "#3a1b7a",
+//     paddingHorizontal: 12,
+//     paddingVertical: 8,
+//     borderRadius: 8,
+//     alignSelf: "flex-start",
+//   },
+
+//   whatsapp: {
+//     width: 22,
+//     height: 22,
+//     resizeMode: "contain",
+//   },
+
+//   referText: {
+//     color: "white",
+//     fontWeight: "600",
+//     fontSize: 12,
+//   },
+
+//   right: {
+//     marginLeft: 10,
+//   },
+
+//   image: {
+//     width: 110,
+//     height: 90,
+//     resizeMode: "contain",
+//   },
+// });
+
+
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
   wrapper: {
     marginTop: 12,
+    backgroundColor: "#062530",
   },
 
   card: {
-    backgroundColor: "#2f2360",
+    backgroundColor: "#104e64",
     marginHorizontal: 16,
     padding: 16,
     borderRadius: 14,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+
+    // subtle depth
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    elevation: 6,
   },
 
   left: {
@@ -61,34 +158,34 @@ const styles = StyleSheet.create({
   },
 
   heading: {
-    color: "#fcd535",
-    fontWeight: "700",
+    color: "#facc15", // gold
+    fontWeight: "800",
     borderBottomWidth: 2,
-    borderBottomColor: "#fcd535",
+    borderBottomColor: "#facc15",
     alignSelf: "flex-start",
     paddingBottom: 2,
     fontSize: 13,
   },
 
   white: {
-    color: "white",
+    color: "#ffffff",
   },
 
   title: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: "800",
   },
 
   yellow: {
-    color: "#fcd535",
+    color: "#facc15",
   },
 
   referBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3a1b7a",
+    backgroundColor: "#facc15", // gold CTA
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
@@ -102,8 +199,8 @@ const styles = StyleSheet.create({
   },
 
   referText: {
-    color: "white",
-    fontWeight: "600",
+    color: "#062530", // dark teal text
+    fontWeight: "800",
     fontSize: 12,
   },
 
@@ -115,5 +212,6 @@ const styles = StyleSheet.create({
     width: 110,
     height: 90,
     resizeMode: "contain",
+    opacity: 0.95,
   },
 });

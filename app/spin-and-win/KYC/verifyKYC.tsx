@@ -336,42 +336,373 @@ export default function KYCVerify() {
 
 
 
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#0a001a', // ✅ global app bg
+//   },
+
+//   /* BACKGROUND GLOW (DISABLED) */
+//   bgGlow: {
+//     display: 'none',
+//   },
+
+//   /* HEADER */
+//   header: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'space-between',
+//     paddingHorizontal: 20,
+//     paddingVertical: 12,
+//     backgroundColor: '#0a001a',
+//     borderBottomWidth: 1,
+//     borderBottomColor: 'rgba(255,255,255,0.06)',
+//   },
+
+//   headerLeft: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+
+//   backButton: {
+//     padding: 10,
+//     backgroundColor: 'rgba(255,255,255,0.06)',
+//     borderRadius: 14,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255,255,255,0.12)',
+//   },
+
+//   headerTitleContainer: {
+//     marginLeft: 12,
+//   },
+
+//   headerTitleText: {
+//     color: 'white',
+//     fontSize: 18,
+//     fontWeight: '900',
+//     letterSpacing: 0.5,
+//   },
+
+//   headerSubText: {
+//     color: '#818cf8',
+//     fontSize: 10,
+//     fontWeight: '800',
+//     marginTop: 2,
+//     letterSpacing: 1.5,
+//   },
+
+//   sslBadge: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: 'rgba(74,222,128,0.12)',
+//     paddingHorizontal: 10,
+//     paddingVertical: 6,
+//     borderRadius: 20,
+//     borderWidth: 1,
+//     borderColor: 'rgba(74,222,128,0.25)',
+//   },
+
+//   sslText: {
+//     color: '#4ade80',
+//     fontSize: 8,
+//     fontWeight: '900',
+//     marginLeft: 4,
+//     letterSpacing: 1,
+//   },
+
+//   /* SCROLL */
+//   scrollContent: {
+//     padding: 20,
+//     paddingBottom: 40,
+//   },
+
+//   /* MAIN CARD */
+//   mainCard: {
+//     backgroundColor: 'rgba(255,255,255,0.04)', // ✅ glass card
+//     borderRadius: 32,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255,255,255,0.08)',
+//     padding: 22,
+//     shadowColor: '#000',
+//     shadowOffset: { width: 0, height: 20 },
+//     shadowOpacity: 0.45,
+//     shadowRadius: 30,
+//     elevation: 10,
+//   },
+
+//   cardHeader: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     marginBottom: 26,
+//     gap: 14,
+//   },
+
+//   fingerprintBox: {
+//     padding: 12,
+//     backgroundColor: 'rgba(129,140,248,0.12)',
+//     borderRadius: 14,
+//     borderWidth: 1,
+//     borderColor: 'rgba(129,140,248,0.35)',
+//   },
+
+//   cardTitle: {
+//     color: 'white',
+//     fontSize: 22,
+//     fontWeight: '900',
+//   },
+
+//   cardSubtitle: {
+//     color: '#9ca3af',
+//     fontSize: 9,
+//     fontWeight: '800',
+//     marginTop: 2,
+//     letterSpacing: 1,
+//   },
+
+//   /* FORM */
+//   formStack: {
+//     gap: 18,
+//   },
+
+//   inputGroup: {
+//     width: '100%',
+//   },
+
+//   row: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//   },
+
+//   label: {
+//     color: '#9ca3af',
+//     fontSize: 9,
+//     fontWeight: '900',
+//     letterSpacing: 1.2,
+//     marginBottom: 8,
+//     marginLeft: 4,
+//   },
+
+//   inputWrapper: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: 'rgba(255,255,255,0.05)',
+//     borderRadius: 14,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255,255,255,0.12)',
+//     paddingHorizontal: 18,
+//   },
+
+//   input: {
+//     flex: 1,
+//     color: 'white',
+//     paddingVertical: 14,
+//     fontSize: 14,
+//     fontWeight: '700',
+//   },
+
+//   divider: {
+//     height: 1,
+//     backgroundColor: 'rgba(255,255,255,0.08)',
+//     marginVertical: 10,
+//   },
+
+//   /* DOCUMENT TYPE */
+//   pickerTrigger: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     backgroundColor: 'rgba(255,255,255,0.05)',
+//     borderRadius: 14,
+//     paddingHorizontal: 16,
+//     paddingVertical: 14,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255,255,255,0.12)',
+//   },
+
+//   pickerValue: {
+//     color: 'white',
+//     fontSize: 14,
+//     fontWeight: '700',
+//   },
+
+//   /* UPLOAD */
+//   uploadBox: {
+//     borderRadius: 14,
+//     borderWidth: 1.5,
+//     borderStyle: 'dashed',
+//     justifyContent: 'center',
+//     minHeight: 48,
+//   },
+
+//   uploadBoxInactive: {
+//     backgroundColor: 'rgba(255,255,255,0.04)',
+//     borderColor: 'rgba(255,255,255,0.25)',
+//   },
+
+//   uploadBoxActive: {
+//     backgroundColor: 'rgba(129,140,248,0.15)',
+//     borderColor: '#818cf8',
+//   },
+
+//   uploadPlaceholder: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     gap: 8,
+//   },
+
+//   uploadText: {
+//     color: '#9ca3af',
+//     fontSize: 13,
+//     fontWeight: '700',
+//   },
+
+//   fileRow: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     paddingHorizontal: 10,
+//   },
+
+//   fileInfo: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     flex: 1,
+//     gap: 8,
+//   },
+
+//   fileName: {
+//     color: '#818cf8',
+//     fontSize: 11,
+//     fontWeight: '900',
+//     flex: 1,
+//   },
+
+//   /* SUBMISSION */
+//   submissionArea: {
+//     marginTop: 36,
+//     gap: 18,
+//   },
+
+//   isoBadge: {
+//     flexDirection: 'row',
+//     backgroundColor: 'rgba(129,140,248,0.12)',
+//     borderRadius: 14,
+//     padding: 12,
+//     borderWidth: 1,
+//     borderColor: 'rgba(129,140,248,0.3)',
+//     gap: 10,
+//   },
+
+//   isoText: {
+//     flex: 1,
+//     color: '#c7d2fe',
+//     fontSize: 9,
+//     fontWeight: '700',
+//     lineHeight: 14,
+//     opacity: 0.85,
+//   },
+
+//   verifyButton: {
+//     backgroundColor: '#4f46e5',
+//     paddingVertical: 18,
+//     borderRadius: 40,
+//     alignItems: 'center',
+//     shadowColor: '#4f46e5',
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.4,
+//     shadowRadius: 20,
+//     elevation: 8,
+//   },
+
+//   verifyButtonText: {
+//     color: 'white',
+//     fontSize: 14,
+//     fontWeight: '900',
+//     letterSpacing: 2,
+//   },
+
+//   /* FOOTER */
+//   footer: {
+//     marginTop: 28,
+//     alignItems: 'center',
+//   },
+
+//   footerText: {
+//     color: '#4b5563',
+//     fontSize: 10,
+//     fontWeight: '900',
+//     letterSpacing: 4,
+//   },
+
+//   /* DROPDOWN */
+//   dropdown: {
+//     position: 'absolute',
+//     top: 70,
+//     width: '100%',
+//     backgroundColor: '#0a001a',
+//     borderRadius: 14,
+//     borderWidth: 1,
+//     borderColor: 'rgba(129,140,248,0.35)',
+//     zIndex: 999,
+//     overflow: 'hidden',
+//   },
+
+//   dropItem: {
+//     paddingVertical: 12,
+//     paddingHorizontal: 14,
+//     borderBottomWidth: 1,
+//     borderBottomColor: 'rgba(255,255,255,0.08)',
+//   },
+
+//   dropText: {
+//     color: '#e5e7eb',
+//     fontSize: 13,
+//     fontWeight: '700',
+//     letterSpacing: 0.6,
+//   },
+// });
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a003d',
+    backgroundColor: "#062530",
   },
 
-  // ❌ Glow removed
+  /* BACKGROUND GLOW (DISABLED) */
   bgGlow: {
     display: "none",
   },
 
-  topGlow: {},
-  bottomGlow: {},
-
+  /* HEADER */
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: '#1a003d',
+    paddingVertical: 12,
+    backgroundColor: "#062530",
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.08)',
+    borderBottomColor: "#104e64",
   },
 
   headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
 
   backButton: {
     padding: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    borderRadius: 10,
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.15)',
+    borderColor: "#104e64",
   },
 
   headerTitleContainer: {
@@ -379,251 +710,273 @@ const styles = StyleSheet.create({
   },
 
   headerTitleText: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: '900',
+    fontWeight: "900",
+    letterSpacing: 0.5,
   },
 
   headerSubText: {
-    color: '#818cf8',
+    color: "#8fbac4",
     fontSize: 10,
-    fontWeight: 'bold',
+    fontWeight: "800",
     marginTop: 2,
+    letterSpacing: 1.5,
   },
 
   sslBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(74, 222, 128, 0.12)',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(74,222,128,0.14)",
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: 'rgba(74, 222, 128, 0.25)',
+    borderColor: "rgba(74,222,128,0.35)",
   },
 
   sslText: {
-    color: '#4ade80',
+    color: "#4ade80",
     fontSize: 8,
-    fontWeight: '900',
+    fontWeight: "900",
     marginLeft: 4,
+    letterSpacing: 1,
   },
 
+  /* SCROLL */
   scrollContent: {
     padding: 20,
     paddingBottom: 40,
   },
 
+  /* MAIN CARD */
   mainCard: {
-    backgroundColor: '#22004f', // solid instead of glass
+    backgroundColor: "#0b3442",
     borderRadius: 32,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.12)',
+    borderColor: "#104e64",
     padding: 22,
+    shadowColor: "#041d26",
+    shadowOffset: { width: 0, height: 20 },
+    shadowOpacity: 0.55,
+    shadowRadius: 30,
+    elevation: 10,
   },
 
   cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 26,
     gap: 14,
   },
 
   fingerprintBox: {
     padding: 12,
-    backgroundColor: '#2d0066',
+    backgroundColor: "rgba(250,204,21,0.15)",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: 'rgba(129, 140, 248, 0.4)',
+    borderColor: "rgba(250,204,21,0.35)",
   },
 
   cardTitle: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 22,
-    fontWeight: '900',
+    fontWeight: "900",
   },
 
   cardSubtitle: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 9,
-    fontWeight: 'bold',
+    fontWeight: "800",
     marginTop: 2,
+    letterSpacing: 1,
   },
 
+  /* FORM */
   formStack: {
     gap: 18,
   },
 
   inputGroup: {
-    width: '100%',
+    width: "100%",
   },
 
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 
   label: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 9,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 1.2,
     marginBottom: 8,
     marginLeft: 4,
   },
 
   inputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#2a0061',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.12)',
+    borderColor: "#104e64",
     paddingHorizontal: 18,
   },
 
   input: {
     flex: 1,
-    color: '#fff',
+    color: "#ffffff",
     paddingVertical: 14,
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "700",
   },
 
   divider: {
     height: 1,
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    backgroundColor: "rgba(16,78,100,0.5)",
     marginVertical: 10,
   },
 
+  /* DOCUMENT TYPE */
   pickerTrigger: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#2a0061',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 14,
     paddingHorizontal: 16,
     paddingVertical: 14,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.12)',
+    borderColor: "#104e64",
   },
 
   pickerValue: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "700",
   },
 
+  /* UPLOAD */
   uploadBox: {
     borderRadius: 14,
     borderWidth: 1.5,
-    borderStyle: 'dashed',
-    justifyContent: 'center',
+    borderStyle: "dashed",
+    justifyContent: "center",
     minHeight: 48,
   },
 
   uploadBoxInactive: {
-    backgroundColor: '#240054',
-    borderColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: "rgba(16,78,100,0.25)",
+    borderColor: "#104e64",
   },
 
   uploadBoxActive: {
-    backgroundColor: '#2d0066',
-    borderColor: '#818cf8',
+    backgroundColor: "rgba(250,204,21,0.18)",
+    borderColor: "#facc15",
   },
 
   uploadPlaceholder: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 8,
   },
 
   uploadText: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 13,
-    fontWeight: 'bold',
+    fontWeight: "700",
   },
 
   fileRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 10,
   },
 
   fileInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     flex: 1,
     gap: 8,
   },
 
   fileName: {
-    color: '#818cf8',
+    color: "#facc15",
     fontSize: 11,
-    fontWeight: '900',
+    fontWeight: "900",
     flex: 1,
   },
 
+  /* SUBMISSION */
   submissionArea: {
     marginTop: 36,
     gap: 18,
   },
 
   isoBadge: {
-    flexDirection: 'row',
-    backgroundColor: '#240054',
+    flexDirection: "row",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 14,
     padding: 12,
     borderWidth: 1,
-    borderColor: 'rgba(129,140,248,0.25)',
+    borderColor: "#104e64",
     gap: 10,
   },
 
   isoText: {
     flex: 1,
-    color: '#a5b4fc',
+    color: "#8fbac4",
     fontSize: 9,
-    fontWeight: 'bold',
+    fontWeight: "700",
     lineHeight: 14,
-    opacity: 0.7,
+    opacity: 0.9,
   },
 
   verifyButton: {
-    backgroundColor: '#4f46e5',
+    backgroundColor: "#facc15",
     paddingVertical: 18,
     borderRadius: 40,
-    alignItems: 'center',
+    alignItems: "center",
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.4,
+    shadowRadius: 20,
+    elevation: 8,
   },
 
   verifyButtonText: {
-    color: '#fff',
+    color: "#062530",
     fontSize: 14,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2,
   },
 
+  /* FOOTER */
   footer: {
     marginTop: 28,
-    alignItems: 'center',
+    alignItems: "center",
   },
 
   footerText: {
-    color: '#374151',
+    color: "#8fbac4",
     fontSize: 10,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 4,
   },
 
+  /* DROPDOWN */
   dropdown: {
     position: "absolute",
     top: 70,
     width: "100%",
-    backgroundColor: '#2a0061',
-    borderRadius: 12,
+    backgroundColor: "#062530",
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: 'rgba(129,140,248,0.35)',
+    borderColor: "#104e64",
     zIndex: 999,
     overflow: "hidden",
   },
@@ -632,13 +985,13 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 14,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.08)',
+    borderBottomColor: "rgba(16,78,100,0.4)",
   },
 
   dropText: {
-    color: "#e5e7eb",
+    color: "#ffffff",
     fontSize: 13,
-    fontWeight: "600",
+    fontWeight: "700",
     letterSpacing: 0.6,
   },
 });

@@ -25,7 +25,7 @@ import {
   ArrowRight 
 } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-
+// import { colors } from '@/constants/theme';
 import { registerApi } from "@/services/auth";
 
 const { width } = Dimensions.get('window');
@@ -221,68 +221,225 @@ export default function SignUpPage() {
   );
 }
 
+// const styles = StyleSheet.create({
+//   container: { flex: 1, backgroundColor: '#0a0118' },
+//   scrollContent: {
+//     paddingHorizontal: 20,
+//     paddingVertical: 30,
+//     flexGrow: 1,
+//     justifyContent: 'center',
+//   },
+//   card: {
+//     backgroundColor: '#15052d',
+//     borderRadius: 32, // More balanced rounding
+//     padding: 24,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.05)',
+//   },
+//   header: { alignItems: 'center', marginBottom: 25 },
+//   iconCircle: {
+//     width: 56, height: 56,
+//     backgroundColor: 'rgba(168, 85, 247, 0.1)',
+//     borderRadius: 18,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     marginBottom: 12,
+//     borderWidth: 1,
+//     borderColor: 'rgba(168, 85, 247, 0.2)',
+//   },
+//   title: {
+//     color: '#fff', fontSize: 24, fontWeight: '900',
+//     fontStyle: 'italic', letterSpacing: -0.5,
+//   },
+//   subtitle: {
+//     color: '#9ca3af', fontSize: 10, fontWeight: '700',
+//     letterSpacing: 1.5, marginTop: 4, textAlign: 'center',
+//   },
+//   grid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
+//   inputGroup: { width: '48%', marginBottom: 16 },
+//   inputGroupFull: { width: '100%', marginBottom: 16 },
+//   label: {
+//     color: '#6B7280', fontSize: 10, fontWeight: '800',
+//     letterSpacing: 1, marginBottom: 6, marginLeft: 4,
+//   },
+//   inputWrapper: {
+//     flexDirection: 'row', alignItems: 'center',
+//     backgroundColor: '#0a0118', borderRadius: 14,
+//     paddingHorizontal: 12, height: 52,
+//     borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.08)',
+//   },
+//   inputIcon: { marginRight: 10 },
+//   input: { flex: 1, color: '#fff', fontSize: 14, fontWeight: '600' },
+//   button: {
+//     flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+//     backgroundColor: '#7c3aed', height: 58, borderRadius: 16,
+//     marginTop: 10, gap: 10,
+//     shadowColor: '#7c3aed', shadowOffset: { width: 0, height: 4 },
+//     shadowOpacity: 0.3, shadowRadius: 8, elevation: 6,
+//   },
+//   buttonText: { color: '#fff', fontSize: 14, fontWeight: '900', letterSpacing: 1 },
+//   footerLink: { marginTop: 24, alignItems: 'center' },
+//   footerText: { color: '#9ca3af', fontSize: 13 },
+//   linkText: { color: '#a855f7', fontWeight: '900' },
+//   copyright: {
+//     textAlign: 'center', color: '#4b5563', fontSize: 10,
+//     fontWeight: '700', letterSpacing: 2, marginTop: 30,
+//   },
+// });
+
+
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0a0118' },
+  container: {
+    flex: 1,
+    backgroundColor: "#062530",
+  },
+
   scrollContent: {
     paddingHorizontal: 20,
     paddingVertical: 30,
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
+
+  /* ================= CARD ================= */
   card: {
-    backgroundColor: '#15052d',
-    borderRadius: 32, // More balanced rounding
+    backgroundColor: "#0b3442",
+    borderRadius: 32,
     padding: 24,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderColor: "#104e64",
   },
-  header: { alignItems: 'center', marginBottom: 25 },
+
+  /* ================= HEADER ================= */
+  header: {
+    alignItems: "center",
+    marginBottom: 25,
+  },
+
   iconCircle: {
-    width: 56, height: 56,
-    backgroundColor: 'rgba(168, 85, 247, 0.1)',
+    width: 56,
+    height: 56,
+    backgroundColor: "rgba(16, 78, 100, 0.4)",
     borderRadius: 18,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: 'rgba(168, 85, 247, 0.2)',
+    borderColor: "#104e64",
   },
+
   title: {
-    color: '#fff', fontSize: 24, fontWeight: '900',
-    fontStyle: 'italic', letterSpacing: -0.5,
+    color: "#ffffff",
+    fontSize: 24,
+    fontWeight: "900",
+    fontStyle: "italic",
+    letterSpacing: -0.5,
   },
+
   subtitle: {
-    color: '#9ca3af', fontSize: 10, fontWeight: '700',
-    letterSpacing: 1.5, marginTop: 4, textAlign: 'center',
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.5,
+    marginTop: 4,
+    textAlign: "center",
   },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
-  inputGroup: { width: '48%', marginBottom: 16 },
-  inputGroupFull: { width: '100%', marginBottom: 16 },
+
+  /* ================= FORM ================= */
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+
+  inputGroup: {
+    width: "48%",
+    marginBottom: 16,
+  },
+
+  inputGroupFull: {
+    width: "100%",
+    marginBottom: 16,
+  },
+
   label: {
-    color: '#6B7280', fontSize: 10, fontWeight: '800',
-    letterSpacing: 1, marginBottom: 6, marginLeft: 4,
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 1,
+    marginBottom: 6,
+    marginLeft: 4,
   },
+
   inputWrapper: {
-    flexDirection: 'row', alignItems: 'center',
-    backgroundColor: '#0a0118', borderRadius: 14,
-    paddingHorizontal: 12, height: 52,
-    borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.08)',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(16, 78, 100, 0.35)",
+    borderRadius: 14,
+    paddingHorizontal: 12,
+    height: 52,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
-  inputIcon: { marginRight: 10 },
-  input: { flex: 1, color: '#fff', fontSize: 14, fontWeight: '600' },
+
+  inputIcon: {
+    marginRight: 10,
+  },
+
+  input: {
+    flex: 1,
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+
+  /* ================= BUTTON ================= */
   button: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-    backgroundColor: '#7c3aed', height: 58, borderRadius: 16,
-    marginTop: 10, gap: 10,
-    shadowColor: '#7c3aed', shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3, shadowRadius: 8, elevation: 6,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#facc15",
+    height: 58,
+    borderRadius: 16,
+    marginTop: 10,
+    gap: 10,
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
+    shadowRadius: 10,
+    elevation: 6,
   },
-  buttonText: { color: '#fff', fontSize: 14, fontWeight: '900', letterSpacing: 1 },
-  footerLink: { marginTop: 24, alignItems: 'center' },
-  footerText: { color: '#9ca3af', fontSize: 13 },
-  linkText: { color: '#a855f7', fontWeight: '900' },
+
+  buttonText: {
+    color: "#062530",
+    fontSize: 14,
+    fontWeight: "900",
+    letterSpacing: 1,
+  },
+
+  /* ================= FOOTER ================= */
+  footerLink: {
+    marginTop: 24,
+    alignItems: "center",
+  },
+
+  footerText: {
+    color: "#8fbac4",
+    fontSize: 13,
+  },
+
+  linkText: {
+    color: "#facc15",
+    fontWeight: "900",
+  },
+
   copyright: {
-    textAlign: 'center', color: '#4b5563', fontSize: 10,
-    fontWeight: '700', letterSpacing: 2, marginTop: 30,
+    textAlign: "center",
+    color: "#6b9aa6",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 2,
+    marginTop: 30,
   },
 });

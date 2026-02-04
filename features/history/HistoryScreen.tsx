@@ -259,103 +259,339 @@ useFocusEffect(
 
 /* ================= STYLES ================= */
 
+// const styles = StyleSheet.create({
+//   container: { flex: 1, backgroundColor: "#1a003d" },
+//   // scrollContent: { padding: 20, paddingBottom: 0},
+// scrollContent: {
+//   padding: 20,
+//   paddingBottom: 0,
+//   flexGrow: 1,   // 🔥 MOST IMPORTANT
+// },
+//   header: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     padding: 20,
+//     marginTop:-34,
+//     borderBottomWidth: 1,
+//     borderBottomColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   backButton: {
+//     padding: 10,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 12,
+//   },
+
+//   headerTextContainer: { marginLeft: 15 },
+//   headerTitle: { color: "#fff", fontSize: 20, fontWeight: "900" },
+//   headerSub: {
+//     color: "#a855f7",
+//     fontSize: 10,
+//     fontWeight: "bold",
+//     letterSpacing: 1,
+//     marginTop: 2,
+//   },
+
+//   promoCard: {
+//     backgroundColor: "rgba(255,255,255,0.03)",
+//     borderRadius: 32,
+//     padding: 24,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//     marginBottom: 24,
+//   },
+
+//   promoContent: { flexDirection: "row", alignItems: "center" },
+//   imageContainer: {
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 16,
+//     padding: 4,
+//   },
+//   promoImage: { width: 70, height: 70, borderRadius: 12 },
+//   promoTextContainer: { marginLeft: 16, flex: 1 },
+
+//   promoLabel: {
+//     color: "#a855f7",
+//     fontSize: 10,
+//     fontWeight: "900",
+//     letterSpacing: 2,
+//   },
+//   promoTitle: { color: "#fff", fontSize: 18, fontWeight: "bold" },
+//   promoDesc: { color: "#9ca3af", fontSize: 12 },
+
+//   saveButton: {
+//     marginTop: 16,
+//     backgroundColor: "#7c3aed",
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     paddingVertical: 14,
+//     borderRadius: 16,
+//     gap: 8,
+//   },
+//   saveButtonText: { color: "#fff", fontWeight: "900", fontSize: 14 },
+
+//   filterRow: {
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     marginBottom: 12,
+//   },
+
+//   filterBtn: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     gap: 6,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     paddingHorizontal: 14,
+//     paddingVertical: 10,
+//     borderRadius: 14,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//   },
+
+//   filterText: { color: "white", fontWeight: "800", fontSize: 11 },
+
+//   transactionList: {
+//     backgroundColor: "rgba(255,255,255,0.02)",
+//     borderRadius: 32,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.05)",
+//     overflow: "hidden",
+//   },
+
+//   transactionItem: {
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     padding: 20,
+//     borderBottomWidth: 1,
+//     borderBottomColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   txLeft: { flexDirection: "row", alignItems: "center", gap: 15 },
+
+//   txIconBox: {
+//     padding: 10,
+//     borderRadius: 16,
+//     borderWidth: 1,
+//   },
+
+//   txCreditIcon: {
+//     backgroundColor: "rgba(74,222,128,0.1)",
+//     borderColor: "rgba(74,222,128,0.2)",
+//   },
+
+//   txDebitIcon: {
+//     backgroundColor: "rgba(248,113,113,0.1)",
+//     borderColor: "rgba(248,113,113,0.2)",
+//   },
+
+//   txName: { color: "#fff", fontWeight: "900", fontSize: 15 },
+
+//   txDateContainer: { flexDirection: "row", alignItems: "center", gap: 5 },
+//   txDate: { color: "#6b7280", fontSize: 10, fontWeight: "bold" },
+
+//   txRight: { alignItems: "flex-end" },
+//   txAmount: { fontSize: 16, fontWeight: "900" },
+//   txStatus: {
+//     color: "#9ca3af",
+//     fontSize: 9,
+//     fontWeight: "900",
+//     marginTop: 4,
+//   },
+
+//   footerText: {
+//     textAlign: "center",
+//     color: "#374151",
+//     fontSize: 10,
+//     fontWeight: "900",
+//     letterSpacing: 3,
+//     marginTop: 40,
+//   },
+
+//   modalOverlay: {
+//     flex: 1,
+//     backgroundColor: "rgba(0,0,0,0.6)",
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+
+//   modalBox: {
+//     width: "75%",
+//     backgroundColor: "#14002f",
+//     borderRadius: 20,
+//     padding: 16,
+//     gap: 10,
+//   },
+
+//   modalItem: {
+//     paddingVertical: 12,
+//     alignItems: "center",
+//     borderRadius: 12,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   modalText: { color: "white", fontWeight: "800" },
+// });
+
+
+
+
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#1a003d" },
-  // scrollContent: { padding: 20, paddingBottom: 0},
-scrollContent: {
-  padding: 20,
-  paddingBottom: 0,
-  flexGrow: 1,   // 🔥 MOST IMPORTANT
-},
+  container: {
+    flex: 1,
+    backgroundColor: "#062530",
+  },
+
+  scrollContent: {
+    padding: 20,
+    paddingBottom: 0,
+    flexGrow: 1,
+  },
+
+  /* ================= HEADER ================= */
   header: {
     flexDirection: "row",
     alignItems: "center",
     padding: 20,
-    marginTop:-34,
+    marginTop: -34,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomColor: "#104e64",
+    backgroundColor: "#062530",
   },
 
   backButton: {
     padding: 10,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.4)",
     borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   headerTextContainer: { marginLeft: 15 },
-  headerTitle: { color: "#fff", fontSize: 20, fontWeight: "900" },
+
+  headerTitle: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "900",
+  },
+
   headerSub: {
-    color: "#a855f7",
+    color: "#facc15",
     fontSize: 10,
     fontWeight: "bold",
     letterSpacing: 1,
     marginTop: 2,
   },
 
+  /* ================= PROMO CARD ================= */
   promoCard: {
-    backgroundColor: "rgba(255,255,255,0.03)",
+    backgroundColor: "#0b3442",
     borderRadius: 32,
     padding: 24,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
     marginBottom: 24,
   },
 
-  promoContent: { flexDirection: "row", alignItems: "center" },
+  promoContent: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
   imageContainer: {
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 16,
     padding: 4,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
-  promoImage: { width: 70, height: 70, borderRadius: 12 },
-  promoTextContainer: { marginLeft: 16, flex: 1 },
+
+  promoImage: {
+    width: 70,
+    height: 70,
+    borderRadius: 12,
+  },
+
+  promoTextContainer: {
+    marginLeft: 16,
+    flex: 1,
+  },
 
   promoLabel: {
-    color: "#a855f7",
+    color: "#facc15",
     fontSize: 10,
     fontWeight: "900",
     letterSpacing: 2,
   },
-  promoTitle: { color: "#fff", fontSize: 18, fontWeight: "bold" },
-  promoDesc: { color: "#9ca3af", fontSize: 12 },
+
+  promoTitle: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+
+  promoDesc: {
+    color: "#8fbac4",
+    fontSize: 12,
+  },
 
   saveButton: {
     marginTop: 16,
-    backgroundColor: "#7c3aed",
+    backgroundColor: "#facc15",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 14,
     borderRadius: 16,
     gap: 8,
-  },
-  saveButtonText: { color: "#fff", fontWeight: "900", fontSize: 14 },
-
-  filterRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 12,
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.35,
+    shadowRadius: 18,
+    elevation: 6,
   },
 
+  saveButtonText: {
+    color: "#062530",
+    fontWeight: "900",
+    fontSize: 14,
+    fontStyle: "italic",
+  },
+
+  /* ================= FILTER ================= */
   filterBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
+     marginBottom:15,
     paddingHorizontal: 14,
     paddingVertical: 10,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
   },
 
-  filterText: { color: "white", fontWeight: "800", fontSize: 11 },
+  filterText: {
+    color: "#ffffff",
+    fontWeight: "800",
+    fontSize: 11,
+  },
 
+  /* ================= TRANSACTIONS ================= */
   transactionList: {
-    backgroundColor: "rgba(255,255,255,0.02)",
+    backgroundColor: "#0b3442",
     borderRadius: 32,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.05)",
+    borderColor: "#104e64",
     overflow: "hidden",
   },
 
@@ -365,10 +601,14 @@ scrollContent: {
     alignItems: "center",
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomColor: "#104e64",
   },
 
-  txLeft: { flexDirection: "row", alignItems: "center", gap: 15 },
+  txLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 15,
+  },
 
   txIconBox: {
     padding: 10,
@@ -377,59 +617,89 @@ scrollContent: {
   },
 
   txCreditIcon: {
-    backgroundColor: "rgba(74,222,128,0.1)",
-    borderColor: "rgba(74,222,128,0.2)",
+    backgroundColor: "rgba(34,197,94,0.15)",
+    borderColor: "rgba(34,197,94,0.4)",
   },
 
   txDebitIcon: {
-    backgroundColor: "rgba(248,113,113,0.1)",
-    borderColor: "rgba(248,113,113,0.2)",
+    backgroundColor: "rgba(239,68,68,0.15)",
+    borderColor: "rgba(239,68,68,0.4)",
   },
 
-  txName: { color: "#fff", fontWeight: "900", fontSize: 15 },
+  txName: {
+    color: "#ffffff",
+    fontWeight: "900",
+    fontSize: 15,
+  },
 
-  txDateContainer: { flexDirection: "row", alignItems: "center", gap: 5 },
-  txDate: { color: "#6b7280", fontSize: 10, fontWeight: "bold" },
+  txDateContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+  },
 
-  txRight: { alignItems: "flex-end" },
-  txAmount: { fontSize: 16, fontWeight: "900" },
+  txDate: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "bold",
+  },
+
+  txRight: {
+    alignItems: "flex-end",
+  },
+
+  txAmount: {
+    fontSize: 16,
+    fontWeight: "900",
+  },
+
   txStatus: {
-    color: "#9ca3af",
+    color: "#8fbac4",
     fontSize: 9,
     fontWeight: "900",
     marginTop: 4,
   },
 
+  /* ================= FOOTER ================= */
   footerText: {
     textAlign: "center",
-    color: "#374151",
+    color: "#104e64",
     fontSize: 10,
     fontWeight: "900",
     letterSpacing: 3,
     marginTop: 40,
   },
 
+  /* ================= MODAL ================= */
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: "rgba(6,37,48,0.9)",
     justifyContent: "center",
     alignItems: "center",
   },
 
   modalBox: {
     width: "75%",
-    backgroundColor: "#14002f",
+    backgroundColor: "#0b3442",
     borderRadius: 20,
     padding: 16,
     gap: 10,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   modalItem: {
     paddingVertical: 12,
     alignItems: "center",
     borderRadius: 12,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
-  modalText: { color: "white", fontWeight: "800" },
+  modalText: {
+    color: "#ffffff",
+    fontWeight: "800",
+    letterSpacing: 1,
+  },
 });

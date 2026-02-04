@@ -3,7 +3,8 @@ import ProfileHome from "@/features/profile/ProfileHome";
 
 export default function ProfileTab() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#1a003d" }}>
+ <SafeAreaView style={{ flex: 1, backgroundColor: "#062530" }}>
+
       <ProfileHome />
     </SafeAreaView>
   );

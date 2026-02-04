@@ -54,54 +54,121 @@ export const EditMenu = () => {
 
 /* ================= STYLES ================= */
 
+// const styles = StyleSheet.create({
+//   overlay: {
+//     position: "absolute",
+//     left: 0,
+//     right: 0,
+//     bottom: 0,
+//   },
+
+//   container: {
+//     backgroundColor: "#2f2360",
+//     borderTopLeftRadius: 24,
+//     borderTopRightRadius: 24,
+//     padding: 16,
+//     shadowColor: "#000",
+//     shadowOpacity: 0.3,
+//     shadowRadius: 10,
+//     elevation: 20,
+//   },
+
+//   header: {
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     marginBottom: 10,
+//   },
+
+//   title: {
+//     color: "white",
+//     fontSize: 14,
+//     fontWeight: "600",
+//   },
+
+//   list: {
+//     gap: 6,
+//   },
+
+//   item: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     gap: 10,
+//     paddingVertical: 10,
+//     paddingHorizontal: 8,
+//     borderRadius: 12,
+//   },
+
+//   label: {
+//     color: "#D1D5DB",
+//     fontSize: 13,
+//     fontWeight: "500",
+//   },
+// });
+
+
+
+
 const styles = StyleSheet.create({
+  /* ================= OVERLAY ================= */
   overlay: {
     position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
+    backgroundColor: "rgba(6,37,48,0.6)", // dim backdrop
   },
 
+  /* ================= CONTAINER ================= */
   container: {
-    backgroundColor: "#2f2360",
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    padding: 16,
-    shadowColor: "#000",
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 20,
+    backgroundColor: "#0b3442",
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    padding: 18,
+    borderWidth: 1,
+    borderColor: "#104e64",
+    shadowColor: "#041d26",
+    shadowOpacity: 0.6,
+    shadowRadius: 20,
+    elevation: 18,
   },
 
+  /* ================= HEADER ================= */
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 14,
   },
 
   title: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: "900",
+    letterSpacing: 1,
   },
 
+  /* ================= LIST ================= */
   list: {
-    gap: 6,
+    gap: 8,
   },
 
   item: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 8,
-    borderRadius: 12,
+    gap: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
+    borderRadius: 16,
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   label: {
-    color: "#D1D5DB",
+    color: "#8fbac4",
     fontSize: 13,
-    fontWeight: "500",
+    fontWeight: "700",
+    letterSpacing: 0.4,
   },
 });

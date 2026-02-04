@@ -106,49 +106,108 @@ export const UpiDetailForm = ({ data, setData }: { data: any, setData: any }) =>
   </MotiView>
 );
 
+// const styles = StyleSheet.create({
+//   formSpacing: {
+//     gap: 16,
+//   },
+//   inputContainer: {
+//     gap: 8,
+//   },
+//   label: {
+//     fontSize: 10,
+//     fontWeight: "900",
+//     color: "#c084fc", // purple-400
+//     letterSpacing: 2,
+//     marginLeft: 4,
+//     textTransform: "uppercase",
+//   },
+//   inputWrapper: {
+//     position: "relative",
+//     flexDirection: "row",
+//     alignItems: "center",
+//   },
+//   iconContainer: {
+//     position: "absolute",
+//     left: 16,
+//     zIndex: 10,
+//   },
+//   input: {
+//     flex: 1,
+//     backgroundColor: "rgba(255, 255, 255, 0.05)",
+//     borderWidth: 1,
+//     borderColor: "rgba(255, 255, 255, 0.1)",
+//     borderRadius: 16,
+//     paddingVertical: 14,
+//     paddingLeft: 48,
+//     paddingRight: 16,
+//     fontSize: 14,
+//     fontWeight: "700",
+//     color: "white",
+//   },
+//   row: {
+//     flexDirection: "row",
+//     gap: 16,
+//   },
+//   flex1: {
+//     flex: 1,
+//   }
+// });
+
+
 const styles = StyleSheet.create({
+  /* ================= FORM ================= */
   formSpacing: {
     gap: 16,
   },
+
   inputContainer: {
     gap: 8,
   },
+
+  /* ================= LABEL ================= */
   label: {
     fontSize: 10,
     fontWeight: "900",
-    color: "#c084fc", // purple-400
+    color: "#8fbac4",
     letterSpacing: 2,
     marginLeft: 4,
     textTransform: "uppercase",
   },
+
+  /* ================= INPUT ================= */
   inputWrapper: {
     position: "relative",
     flexDirection: "row",
     alignItems: "center",
   },
+
   iconContainer: {
     position: "absolute",
     left: 16,
     zIndex: 10,
   },
+
   input: {
     flex: 1,
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: "#0b3442",
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: "#104e64",
     borderRadius: 16,
     paddingVertical: 14,
     paddingLeft: 48,
     paddingRight: 16,
     fontSize: 14,
     fontWeight: "700",
-    color: "white",
+    color: "#ffffff",
   },
+
+  /* ================= LAYOUT ================= */
   row: {
     flexDirection: "row",
     gap: 16,
   },
+
   flex1: {
     flex: 1,
-  }
+  },
 });

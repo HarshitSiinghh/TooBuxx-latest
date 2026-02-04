@@ -109,149 +109,174 @@ interface ActiveProps {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
   },
+
   statusHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 20,
     gap: 12,
   },
+
   statusBadge: {
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 99,
     borderWidth: 1,
   },
+
   badgeLive: {
-    backgroundColor: 'rgba(34, 197, 94, 0.15)',
-    borderColor: 'rgba(34, 197, 94, 0.2)',
+    backgroundColor: "rgba(34,197,94,0.15)",
+    borderColor: "rgba(34,197,94,0.35)",
   },
+
   badgePaused: {
-    backgroundColor: 'rgba(107, 114, 128, 0.15)',
-    borderColor: 'rgba(107, 114, 128, 0.2)',
+    backgroundColor: "rgba(143,186,196,0.15)",
+    borderColor: "rgba(143,186,196,0.35)",
   },
+
   statusText: {
     fontSize: 10,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 0.5,
   },
-  textGreen: { color: '#4ade80' },
-  textGray: { color: '#9ca3af' },
+
+  textGreen: { color: "#4ade80" },
+  textGray: { color: "#8fbac4" },
+
   engineIdText: {
-    color: '#6b7280',
-    fontWeight: '800',
+    color: "#8fbac4",
+    fontWeight: "800",
     fontSize: 10,
     letterSpacing: 1.5,
-    fontStyle: 'italic',
+    fontStyle: "italic",
   },
+
   mainCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    backgroundColor: "#0b3442",
     borderRadius: 32,
     padding: 24,
     borderWidth: 1,
   },
+
   cardActive: {
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
   },
+
   cardPaused: {
-    borderColor: 'rgba(255, 255, 255, 0.05)',
-    opacity: 0.7,
+    borderColor: "rgba(16,78,100,0.5)",
+    opacity: 0.75,
   },
+
   cardContent: {
     gap: 32,
   },
+
   infoSection: {
     flex: 1,
   },
+
   label: {
-    color: '#818cf8',
+    color: "#facc15",
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 3,
-    fontStyle: 'italic',
+    fontStyle: "italic",
     marginBottom: 12,
   },
+
   amountText: {
     fontSize: 48,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    fontStyle: "italic",
     letterSpacing: -1,
     marginBottom: 28,
   },
-  amountActive: { color: 'white' },
-  amountPaused: { color: '#6b7280' },
+
+  amountActive: { color: "#ffffff" },
+  amountPaused: { color: "#8fbac4" },
+
   buttonGroup: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
   },
+
   pauseButton: {
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: "#facc15",
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderRadius: 16,
     gap: 8,
   },
+
   pauseButtonText: {
-    color: '#1a003d',
-    fontWeight: '900',
+    color: "#062530",
+    fontWeight: "900",
     fontSize: 13,
   },
+
   resumeButton: {
-    backgroundColor: '#4f46e5',
-    flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: "#22c55e",
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderRadius: 16,
     gap: 8,
   },
+
   resumeButtonText: {
-    color: 'white',
-    fontWeight: '900',
+    color: "#ffffff",
+    fontWeight: "900",
     fontSize: 13,
   },
+
   stopButton: {
-    backgroundColor: 'rgba(239, 68, 68, 0.08)',
-    borderColor: 'rgba(239, 68, 68, 0.2)',
+    backgroundColor: "rgba(239,68,68,0.12)",
+    borderColor: "rgba(239,68,68,0.35)",
     borderWidth: 1,
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderRadius: 16,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
+
   stopButtonText: {
-    color: '#ef4444',
-    fontWeight: '900',
+    color: "#ef4444",
+    fontWeight: "900",
     fontSize: 13,
   },
+
   streakSection: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
+
   streakLabel: {
-    color: '#6b7280',
+    color: "#8fbac4",
     fontSize: 10,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    fontStyle: "italic",
     marginBottom: 6,
   },
+
   streakRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 12,
   },
+
   streakValue: {
     fontSize: 45,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    fontStyle: "italic",
   },
-  streakActive: { color: '#f97316' },
-  streakPaused: { color: '#4b5563' },
-});
 
- export default MonthlyActiveView
+  streakActive: { color: "#facc15" },
+  streakPaused: { color: "#8fbac4" },
+});
+export default MonthlyActiveView

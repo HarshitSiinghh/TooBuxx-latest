@@ -200,18 +200,40 @@ export default function MonthlySaving() {
   };
 
   if (!canRender) return null;
-  if (pageLoading) {
+//   if (pageLoading) {
+//   return (
+//     <SafeAreaView
+//       style={{
+//         flex: 1,
+//         backgroundColor: "#1a003d",
+//         justifyContent: "center",
+//         alignItems: "center",
+//       }}
+//     >
+//       <ActivityIndicator size="large" color="#a855f7" />
+//       <Text style={{ marginTop: 10, color: "#fff", fontWeight: "bold" }}>
+//         Loading...
+//       </Text>
+//     </SafeAreaView>
+//   );
+// }
+
+
+
+
+
+if (pageLoading) {
   return (
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#1a003d",
+        backgroundColor: "#062530",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <ActivityIndicator size="large" color="#a855f7" />
-      <Text style={{ marginTop: 10, color: "#fff", fontWeight: "bold" }}>
+      <ActivityIndicator size="large" color="#facc15" />
+      <Text style={{ marginTop: 10, color: "#ffffff", fontWeight: "900" }}>
         Loading...
       </Text>
     </SafeAreaView>
@@ -372,8 +394,117 @@ export default function MonthlySaving() {
 }
 /* ================= STYLES (UNCHANGED) ================= */
 
+// const styles = StyleSheet.create({
+//   safe: { flex: 1, backgroundColor: "#0a001a" },
+
+//   fixedHeader: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     paddingHorizontal: 20,
+//     paddingTop: 70,
+//     paddingBottom: 15,
+//     backgroundColor: "#0a001a",
+//     borderBottomWidth: 1,
+//     borderBottomColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   scrollContent: { paddingHorizontal: 20, paddingBottom: 40 },
+
+//   backBtn: {
+//     padding: 12,
+//     backgroundColor: "rgba(255,255,255,0.06)",
+//     borderRadius: 16,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//   },
+
+//   headerTitleContainer: { marginLeft: 16 },
+//   title: { color: "white", fontSize: 22, fontWeight: "900" },
+//   subtitle: { color: "#818cf8", fontSize: 10, fontWeight: "800", letterSpacing: 1.5, marginTop: 2 },
+
+//   liveBadge: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     alignSelf: "flex-start",
+//     paddingHorizontal: 12,
+//     paddingVertical: 8,
+//     borderRadius: 12,
+//     backgroundColor: "rgba(234,179,8,0.08)",
+//     borderWidth: 1,
+//     borderColor: "rgba(234,179,8,0.2)",
+//     marginBottom: 24,
+//   },
+
+//   pulseDot: { width: 6, height: 6, borderRadius: 6, backgroundColor: "#eab308", marginRight: 8 },
+//   liveText: { color: "#eab308", fontSize: 11, fontWeight: "900", letterSpacing: 0.5 },
+
+//   statsContainer: { gap: 12, marginBottom: 24 },
+//   statsRow: { flexDirection: "row", gap: 12 },
+
+//   statCard: {
+//     flex: 1,
+//     backgroundColor: "rgba(255,255,255,0.04)",
+//     borderRadius: 20,
+//     padding: 16,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   statLabel: { color: "#6b7280", fontSize: 10, fontWeight: "800", marginBottom: 4 },
+//   statValue: { color: "white", fontSize: 18, fontWeight: "900" },
+
+//   goldCard: { backgroundColor: "rgba(99,102,241,0.05)", borderColor: "rgba(99,102,241,0.2)" },
+//   goldLabel: { color: "#818cf8", fontSize: 10, fontWeight: "900", marginBottom: 4 },
+//   goldValue: { color: "#818cf8", fontSize: 18, fontWeight: "900" },
+
+//   portfolioCard: {
+//     backgroundColor: "#130030",
+//     borderRadius: 24,
+//     padding: 24,
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//   },
+
+//   portfolioLabel: { color: "#9ca3af", fontSize: 11, fontWeight: "800", marginBottom: 4 },
+//   portfolioValue: { color: "white", fontSize: 32, fontWeight: "900" },
+
+//   mainViewContainer: { marginBottom: 10 },
+
+//   engineBox: {
+//     backgroundColor: "rgba(255,255,255,0.02)",
+//     borderRadius: 30,
+//     padding: 24,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   engineRow: { flexDirection: "row", gap: 16, marginBottom: 20, alignItems: "center" },
+//   engineIconContainer: {
+//     width: 44,
+//     height: 44,
+//     borderRadius: 14,
+//     backgroundColor: "rgba(129,140,248,0.1)",
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+
+//   engineTextContainer: { flex: 1 },
+//   engineTitle: { color: "white", fontWeight: "900", fontSize: 12, textTransform: "uppercase" },
+//   engineDesc: { color: "#9ca3af", fontSize: 12, lineHeight: 18 },
+// });
+
+
+
+
+
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#0a001a" },
+  safe: {
+    flex: 1,
+    backgroundColor: "#062530",
+  },
 
   fixedHeader: {
     flexDirection: "row",
@@ -381,95 +512,182 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 70,
     paddingBottom: 15,
-    backgroundColor: "#0a001a",
+    backgroundColor: "#062530",
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomColor: "#104e64",
   },
 
-  scrollContent: { paddingHorizontal: 20, paddingBottom: 40 },
+  scrollContent: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+  },
 
   backBtn: {
     padding: 12,
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "rgba(16,78,100,0.4)",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
   },
 
   headerTitleContainer: { marginLeft: 16 },
-  title: { color: "white", fontSize: 22, fontWeight: "900" },
-  subtitle: { color: "#818cf8", fontSize: 10, fontWeight: "800", letterSpacing: 1.5, marginTop: 2 },
 
+  title: {
+    color: "#ffffff",
+    fontSize: 22,
+    fontWeight: "900",
+    fontStyle: "italic",
+  },
+
+  subtitle: {
+    color: "#facc15",
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 1.5,
+    marginTop: 2,
+  },
+
+  /* LIVE RATE */
   liveBadge: {
+     marginTop:15,
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "flex-start",
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 12,
-    backgroundColor: "rgba(234,179,8,0.08)",
+    backgroundColor: "rgba(250,204,21,0.12)",
     borderWidth: 1,
-    borderColor: "rgba(234,179,8,0.2)",
+    borderColor: "rgba(250,204,21,0.35)",
     marginBottom: 24,
   },
 
-  pulseDot: { width: 6, height: 6, borderRadius: 6, backgroundColor: "#eab308", marginRight: 8 },
-  liveText: { color: "#eab308", fontSize: 11, fontWeight: "900", letterSpacing: 0.5 },
+  pulseDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: "#facc15",
+    marginRight: 8,
+  },
 
+  liveText: {
+    color: "#facc15",
+    fontSize: 11,
+    fontWeight: "900",
+    letterSpacing: 0.5,
+  },
+
+  /* STATS */
   statsContainer: { gap: 12, marginBottom: 24 },
   statsRow: { flexDirection: "row", gap: 12 },
 
   statCard: {
     flex: 1,
-    backgroundColor: "rgba(255,255,255,0.04)",
+    backgroundColor: "#0b3442",
     borderRadius: 20,
     padding: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.05)",
+    borderColor: "#104e64",
   },
 
-  statLabel: { color: "#6b7280", fontSize: 10, fontWeight: "800", marginBottom: 4 },
-  statValue: { color: "white", fontSize: 18, fontWeight: "900" },
+  statLabel: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "800",
+    marginBottom: 4,
+  },
 
-  goldCard: { backgroundColor: "rgba(99,102,241,0.05)", borderColor: "rgba(99,102,241,0.2)" },
-  goldLabel: { color: "#818cf8", fontSize: 10, fontWeight: "900", marginBottom: 4 },
-  goldValue: { color: "#818cf8", fontSize: 18, fontWeight: "900" },
+  statValue: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "900",
+  },
+
+  goldCard: {
+    backgroundColor: "rgba(250,204,21,0.08)",
+    borderColor: "rgba(250,204,21,0.35)",
+  },
+
+  goldLabel: {
+    color: "#facc15",
+    fontSize: 10,
+    fontWeight: "900",
+    marginBottom: 4,
+  },
+
+  goldValue: {
+    color: "#facc15",
+    fontSize: 18,
+    fontWeight: "900",
+  },
 
   portfolioCard: {
-    backgroundColor: "#130030",
+    backgroundColor: "#0b3442",
     borderRadius: 24,
     padding: 24,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
   },
 
-  portfolioLabel: { color: "#9ca3af", fontSize: 11, fontWeight: "800", marginBottom: 4 },
-  portfolioValue: { color: "white", fontSize: 32, fontWeight: "900" },
+  portfolioLabel: {
+    color: "#8fbac4",
+    fontSize: 11,
+    fontWeight: "800",
+    marginBottom: 4,
+  },
 
-  mainViewContainer: { marginBottom: 10 },
+  portfolioValue: {
+    color: "#ffffff",
+    fontSize: 32,
+    fontWeight: "900",
+  },
 
+  mainViewContainer: {
+    marginBottom: 10,
+  },
+
+  /* INFO / ENGINE BOX */
   engineBox: {
-    backgroundColor: "rgba(255,255,255,0.02)",
+    backgroundColor: "#0b3442",
     borderRadius: 30,
     padding: 24,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.05)",
+    borderColor: "#104e64",
   },
 
-  engineRow: { flexDirection: "row", gap: 16, marginBottom: 20, alignItems: "center" },
+  engineRow: {
+    flexDirection: "row",
+    gap: 16,
+    marginBottom: 20,
+    alignItems: "center",
+  },
+
   engineIconContainer: {
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: "rgba(129,140,248,0.1)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   engineTextContainer: { flex: 1 },
-  engineTitle: { color: "white", fontWeight: "900", fontSize: 12, textTransform: "uppercase" },
-  engineDesc: { color: "#9ca3af", fontSize: 12, lineHeight: 18 },
+
+  engineTitle: {
+    color: "#ffffff",
+    fontWeight: "900",
+    fontSize: 12,
+    textTransform: "uppercase",
+  },
+
+  engineDesc: {
+    color: "#8fbac4",
+    fontSize: 12,
+    lineHeight: 18,
+  },
 });

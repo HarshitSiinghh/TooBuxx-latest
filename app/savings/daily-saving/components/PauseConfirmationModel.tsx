@@ -80,93 +80,203 @@ interface PauseModalProps {
   );
 };
 
+// const styles = StyleSheet.create({
+//   backdrop: {
+//     flex: 1,
+//     backgroundColor: 'rgba(10, 0, 26, 0.8)', // Matches #0a001a/80
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     padding: 24,
+//   },
+//   centeredView: {
+//     width: '100%',
+//     maxWidth: 400,
+//   },
+//   modalView: {
+//     backgroundColor: '#1a003d',
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     borderRadius: 40,
+//     padding: 32,
+//     shadowColor: '#000',
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.5,
+//     shadowRadius: 20,
+//     elevation: 10,
+//   },
+//   closeButton: {
+//     position: 'absolute',
+//     right: 24,
+//     top: 24,
+//     padding: 8,
+//     borderRadius: 99,
+//   },
+//   content: {
+//     alignItems: 'center',
+//   },
+//   iconContainer: {
+//     width: 64,
+//     height: 64,
+//     backgroundColor: 'rgba(234, 179, 8, 0.1)',
+//     borderRadius: 16,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     borderWidth: 1,
+//     borderColor: 'rgba(234, 179, 8, 0.2)',
+//     marginBottom: 24,
+//   },
+//   title: {
+//     fontSize: 24,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     color: '#ffffff',
+//     textTransform: 'uppercase',
+//     marginBottom: 12,
+//   },
+//   subtitle: {
+//     fontSize: 14,
+//     color: '#9ca3af',
+//     textAlign: 'center',
+//     marginBottom: 32,
+//   },
+//   buttonRow: {
+//     flexDirection: 'row',
+//     gap: 12,
+//     width: '100%',
+//   },
+//   button: {
+//     flex: 1,
+//     paddingVertical: 16,
+//     borderRadius: 16,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   cancelButton: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//   },
+//   confirmButton: {
+//     backgroundColor: '#eab308',
+//   },
+//   cancelButtonText: {
+//     color: '#ffffff',
+//     fontSize: 12,
+//     fontWeight: '900',
+//   },
+//   confirmButtonText: {
+//     color: '#000000',
+//     fontSize: 12,
+//     fontWeight: '900',
+//   },
+// });
+
+
+
+
 const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
-    backgroundColor: 'rgba(10, 0, 26, 0.8)', // Matches #0a001a/80
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "rgba(6,37,48,0.9)", // #062530 overlay
+    justifyContent: "center",
+    alignItems: "center",
     padding: 24,
   },
+
   centeredView: {
-    width: '100%',
+    width: "100%",
     maxWidth: 400,
   },
+
   modalView: {
-    backgroundColor: '#1a003d',
+    backgroundColor: "#0b3442", // glass card
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     borderRadius: 40,
     padding: 32,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.45,
     shadowRadius: 20,
     elevation: 10,
   },
+
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 24,
     top: 24,
     padding: 8,
     borderRadius: 99,
   },
+
   content: {
-    alignItems: 'center',
+    alignItems: "center",
   },
+
   iconContainer: {
     width: 64,
     height: 64,
-    backgroundColor: 'rgba(234, 179, 8, 0.1)',
+    backgroundColor: "rgba(250,204,21,0.15)", // gold tint
     borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
-    borderColor: 'rgba(234, 179, 8, 0.2)',
+    borderColor: "rgba(250,204,21,0.35)",
     marginBottom: 24,
   },
+
   title: {
     fontSize: 24,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    color: '#ffffff',
-    textTransform: 'uppercase',
+    fontWeight: "900",
+    fontStyle: "italic",
+    color: "#ffffff",
+    textTransform: "uppercase",
     marginBottom: 12,
   },
+
   subtitle: {
     fontSize: 14,
-    color: '#9ca3af',
-    textAlign: 'center',
+    color: "#8fbac4",
+    textAlign: "center",
     marginBottom: 32,
   },
+
   buttonRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
-    width: '100%',
+    width: "100%",
   },
+
   button: {
     flex: 1,
     paddingVertical: 16,
     borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
+
   cancelButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
+
   confirmButton: {
-    backgroundColor: '#eab308',
+    backgroundColor: "#facc15",
   },
+
   cancelButtonText: {
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
+    letterSpacing: 1,
   },
+
   confirmButtonText: {
-    color: '#000000',
+    color: "#062530",
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
+    letterSpacing: 1,
   },
 });
+
 
  export default PauseConfirmationModal

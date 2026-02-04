@@ -46,36 +46,80 @@ export const GetHelpSection = () => {
 
 /* ================= STYLES ================= */
 
+// const styles = StyleSheet.create({
+//   container: {
+//     backgroundColor: "#1a003d",
+//     padding: 12,
+//     borderRadius: 28
+//   },
+
+//   heading: {
+//     color: "white",
+//     fontSize: 14,
+//     fontWeight: "800",
+//     marginBottom: 8,
+//   },
+
+//   list: {
+//     gap: 4,
+//   },
+
+//   item: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     gap: 10,
+//     paddingVertical: 10,
+//     paddingHorizontal: 10,
+//     borderRadius: 12,
+//   },
+
+//   label: {
+//     color: "#d1d5db",
+//     fontSize: 13,
+//     fontWeight: "500",
+//   },
+// });
+
+
+
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1a003d",
-    padding: 12,
-    borderRadius: 28
+    backgroundColor: "#0b3442",
+    padding: 16,
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   heading: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: "800",
-    marginBottom: 8,
+    fontWeight: "900",
+    letterSpacing: 0.6,
+    marginBottom: 12,
   },
 
   list: {
-    gap: 4,
+    gap: 6,
   },
 
   item: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    borderRadius: 12,
+    gap: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 14,
+    backgroundColor: "rgba(255,255,255,0.03)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.06)",
   },
 
   label: {
-    color: "#d1d5db",
+    color: "#8fbac4",
     fontSize: 13,
-    fontWeight: "500",
+    fontWeight: "600",
+    letterSpacing: 0.3,
   },
 });

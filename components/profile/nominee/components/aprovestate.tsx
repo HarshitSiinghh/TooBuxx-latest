@@ -106,9 +106,7 @@ const ApprovedKYC: React.FC<ApprovedKYCProps> = ({ nominee }) => {
   );
 };
 
-// export default ApprovedKYC;
-
-
+export default ApprovedKYC;
 
 
 
@@ -121,145 +119,165 @@ const ApprovedKYC: React.FC<ApprovedKYCProps> = ({ nominee }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a003d',
+    backgroundColor: "#062530",
   },
+
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 24,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    borderBottomColor: "#104e64",
   },
+
   headerTitle: {
-    color: 'white',
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginLeft: 16,
     letterSpacing: 1.5,
   },
+
   scrollContent: {
     padding: 20,
     paddingBottom: 40,
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
+
   card: {
-    backgroundColor: '#2f2360',
+    backgroundColor: "#0b3442",
     borderRadius: 40,
     padding: 30,
     borderWidth: 1,
-    borderColor: 'rgba(16, 185, 129, 0.2)', // Subtle green border
-    shadowColor: '#10b981',
+    borderColor: "#104e64",
+    shadowColor: "#041d26",
     shadowOffset: { width: 0, height: 15 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.4,
     shadowRadius: 25,
     elevation: 8,
   },
+
   successHeader: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 35,
   },
+
   iconOuterCircle: {
     height: 100,
     width: 100,
     borderRadius: 50,
-    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "rgba(34,197,94,0.15)",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 20,
   },
+
   iconInnerCircle: {
     height: 80,
     width: 80,
     borderRadius: 40,
-    backgroundColor: '#1a003d',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#062530",
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
-    borderColor: 'rgba(16, 185, 129, 0.3)',
+    borderColor: "rgba(34,197,94,0.4)",
   },
+
   statusTitle: {
-    color: 'white',
+    color: "#ffffff",
     fontSize: 24,
-    fontWeight: '900',
+    fontWeight: "900",
     marginBottom: 8,
   },
+
   statusSubtitle: {
-    color: '#10b981',
+    color: "#22c55e",
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: "600",
     letterSpacing: 0.5,
   },
+
   detailsContainer: {
-    backgroundColor: '#1a003d',
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 24,
     padding: 20,
     marginBottom: 25,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
+
   sectionLabel: {
-    color: '#c084fc',
+    color: "#facc15",
     fontSize: 10,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 2,
     marginBottom: 15,
   },
+
   detailRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+    borderBottomColor: "rgba(16,78,100,0.4)",
   },
+
   labelGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 10,
   },
+
   detailLabel: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 13,
   },
+
   detailValue: {
-    color: 'white',
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
+
   badgeContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 30,
   },
+
   verifiedBadge: {
-    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+    backgroundColor: "rgba(34,197,94,0.18)",
     paddingHorizontal: 16,
     paddingVertical: 6,
     borderRadius: 100,
     borderWidth: 1,
-    borderColor: '#10b981',
+    borderColor: "#22c55e",
   },
+
   verifiedText: {
-    color: '#10b981',
+    color: "#22c55e",
     fontSize: 10,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 1.5,
   },
+
   doneButton: {
-    backgroundColor: '#10b981',
+    backgroundColor: "#facc15",
     paddingVertical: 18,
     borderRadius: 20,
-    alignItems: 'center',
-    shadowColor: '#10b981',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
+    alignItems: "center",
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.4,
+    shadowRadius: 12,
   },
+
   doneButtonText: {
-    color: 'white',
-    fontWeight: '900',
+    color: "#062530",
+    fontWeight: "900",
     letterSpacing: 1.5,
     fontSize: 13,
   },
 });
-
-export default ApprovedKYC;

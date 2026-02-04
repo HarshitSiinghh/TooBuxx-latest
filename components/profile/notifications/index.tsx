@@ -242,40 +242,198 @@ const formatDate = (dateString: string) => {
 
 /* ================= STYLES ================= */
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#1a003d" },
+// const styles = StyleSheet.create({
+//   container: { flex: 1, backgroundColor: "#1a003d" },
 
+//   header: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     padding: 18,
+//     marginTop:-30,
+//     borderBottomWidth: 1,
+//     borderBottomColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   backBtn: {
+//     padding: 10,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 12,
+//   },
+
+//   settingBtn: {
+//     marginLeft: "auto",
+//     padding: 10,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 12,
+//   },
+
+//   title: { color: "white", fontSize: 20, fontWeight: "900" },
+//   subtitle: { color: "#c084fc", fontSize: 10, fontWeight: "700" },
+
+//   tabBar: {
+//     flexDirection: "row",
+//     margin: 16,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 14,
+//     padding: 4,
+//   },
+
+//   tabBtn: {
+//     flex: 1,
+//     paddingVertical: 12,
+//     alignItems: "center",
+//     borderRadius: 10,
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     gap: 6,
+//   },
+
+//   tabBtnActive: {
+//     backgroundColor: "#7c3aed",
+//   },
+
+//   tabText: {
+//     color: "#9ca3af",
+//     fontWeight: "900",
+//     fontSize: 12,
+//   },
+
+//   tabTextActive: {
+//     color: "white",
+//   },
+
+//   badge: {
+//     backgroundColor: "#dc2626",
+//     minWidth: 18,
+//     height: 18,
+//     borderRadius: 9,
+//     alignItems: "center",
+//     justifyContent: "center",
+//     paddingHorizontal: 5,
+//   },
+
+//   badgeText: {
+//     color: "white",
+//     fontSize: 10,
+//     fontWeight: "900",
+//   },
+
+//   body: { padding: 16, paddingBottom: 30 },
+
+//   center: {
+//     alignItems: "center",
+//     marginTop: 60,
+//     opacity: 0.8,
+//   },
+
+//   infoText: {
+//     color: "#9ca3af",
+//     fontSize: 12,
+//     marginTop: 10,
+//   },
+
+//   errorText: {
+//     color: "#f87171",
+//     fontSize: 12,
+//     marginTop: 10,
+//   },
+
+//   item: {
+//     flexDirection: "row",
+//     gap: 12,
+//     backgroundColor: "rgba(255,255,255,0.04)",
+//     borderRadius: 16,
+//     padding: 14,
+//     marginBottom: 10,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.06)",
+//   },
+
+// iconBox: {
+// width: 38,
+// height: 38,
+// justifyContent: "center",
+// alignItems: "center",
+// backgroundColor: "rgba(255,255,255,0.06)",
+// borderRadius: 12,
+// },
+
+//   itemTitle: {
+//     color: "white",
+//     fontWeight: "900",
+//     fontSize: 13,
+//   },
+
+//   itemMsg: {
+//     color: "#9ca3af",
+//     fontSize: 11,
+//     marginTop: 2,
+//   },
+
+//   itemTime: {
+//     color: "#6b7280",
+//     fontSize: 9,
+//     marginTop: 4,
+//     fontWeight: "700",
+//   },
+// });
+
+
+
+const styles = StyleSheet.create({
+  /* ================= ROOT ================= */
+  container: {
+    flex: 1,
+    backgroundColor: "#062530",
+  },
+
+  /* ================= HEADER ================= */
   header: {
     flexDirection: "row",
     alignItems: "center",
     padding: 18,
-    marginTop:-30,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomColor: "#104e64",
   },
 
   backBtn: {
     padding: 10,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   settingBtn: {
     marginLeft: "auto",
     padding: 10,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
-  title: { color: "white", fontSize: 20, fontWeight: "900" },
-  subtitle: { color: "#c084fc", fontSize: 10, fontWeight: "700" },
+  title: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "900",
+  },
 
+  subtitle: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "700",
+  },
+
+  /* ================= TABS ================= */
   tabBar: {
     flexDirection: "row",
     margin: 16,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 14,
     padding: 4,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   tabBtn: {
@@ -289,17 +447,17 @@ const styles = StyleSheet.create({
   },
 
   tabBtnActive: {
-    backgroundColor: "#7c3aed",
+    backgroundColor: "#facc15",
   },
 
   tabText: {
-    color: "#9ca3af",
+    color: "#8fbac4",
     fontWeight: "900",
     fontSize: 12,
   },
 
   tabTextActive: {
-    color: "white",
+    color: "#062530",
   },
 
   badge: {
@@ -313,21 +471,25 @@ const styles = StyleSheet.create({
   },
 
   badgeText: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 10,
     fontWeight: "900",
   },
 
-  body: { padding: 16, paddingBottom: 30 },
+  /* ================= BODY ================= */
+  body: {
+    padding: 16,
+    paddingBottom: 30,
+  },
 
   center: {
     alignItems: "center",
     marginTop: 60,
-    opacity: 0.8,
+    opacity: 0.85,
   },
 
   infoText: {
-    color: "#9ca3af",
+    color: "#8fbac4",
     fontSize: 12,
     marginTop: 10,
   },
@@ -338,34 +500,37 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
+  /* ================= ITEMS ================= */
   item: {
     flexDirection: "row",
     gap: 12,
-    backgroundColor: "rgba(255,255,255,0.04)",
+    backgroundColor: "#0b3442",
     borderRadius: 16,
     padding: 14,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
+    borderColor: "#104e64",
   },
 
-iconBox: {
-width: 38,
-height: 38,
-justifyContent: "center",
-alignItems: "center",
-backgroundColor: "rgba(255,255,255,0.06)",
-borderRadius: 12,
-},
+  iconBox: {
+    width: 38,
+    height: 38,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
 
   itemTitle: {
-    color: "white",
+    color: "#ffffff",
     fontWeight: "900",
     fontSize: 13,
   },
 
   itemMsg: {
-    color: "#9ca3af",
+    color: "#8fbac4",
     fontSize: 11,
     marginTop: 2,
   },

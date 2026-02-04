@@ -191,297 +191,267 @@ export default function ReferralPage() {
   );
 }
 
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a003d',
+    backgroundColor: "#062530",
   },
+
+  /* HEADER */
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.1)',
+    borderBottomColor: "#104e64",
   },
+
   backButton: {
-    marginRight: 15,
+    marginRight: 14,
+    padding: 8,
+    borderRadius: 12,
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
+
   headerTitle: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '700',
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "900",
+    letterSpacing: 0.5,
   },
+
+  /* SCROLL */
   scrollContent: {
     padding: 20,
-    paddingBottom: 40,
+    paddingBottom: 50,
   },
+
+  /* HERO CARD */
   heroCardContainer: {
-    position: 'relative',
-    marginBottom: 24,
+    position: "relative",
+    marginBottom: 28,
   },
+
   cardGradientBorder: {
-    position: 'absolute',
-    top: -2, left: -2, right: -2, bottom: -2,
-    borderRadius: 32,
-    backgroundColor: '#7c3aed', // fallback for gradient border
-    opacity: 0.2,
+    position: "absolute",
+    top: -2,
+    left: -2,
+    right: -2,
+    bottom: -2,
+    borderRadius: 36,
+    backgroundColor: "#104e64",
+    opacity: 0.6,
   },
+
   heroCard: {
-    backgroundColor: '#1a003d',
-    borderRadius: 32,
+    backgroundColor: "#0b3442",
+    borderRadius: 36,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
+    borderColor: "#104e64",
     padding: 30,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
+
   heroGlow: {
-    position: 'absolute',
-    top: -50,
-    right: -50,
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: 'rgba(124, 58, 237, 0.2)',
+    position: "absolute",
+    top: -60,
+    right: -60,
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    backgroundColor: "rgba(250,204,21,0.25)",
   },
+
   limitedTimeBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    paddingHorizontal: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: "rgba(250,204,21,0.15)",
+    paddingHorizontal: 14,
     paddingVertical: 6,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-    marginBottom: 20,
+    borderColor: "rgba(250,204,21,0.35)",
+    marginBottom: 22,
+    gap: 6,
   },
+
   limitedTimeText: {
-    color: '#facc15',
+    color: "#facc15",
     fontSize: 10,
-    fontWeight: 'bold',
-    marginLeft: 6,
+    fontWeight: "900",
     letterSpacing: 1,
   },
+
   heroTitle: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 32,
-    fontWeight: '900',
-    textAlign: 'center',
+    fontWeight: "900",
+    textAlign: "center",
   },
+
   heroTitleHighlight: {
     fontSize: 32,
-    fontWeight: '900',
-    textAlign: 'center',
-    color: '#facc15', // Yellow gradient fallback
-    marginBottom: 10,
+    fontWeight: "900",
+    textAlign: "center",
+    color: "#facc15",
+    marginBottom: 14,
   },
+
   heroSubtext: {
-    color: '#9ca3af',
-    textAlign: 'center',
+    color: "#8fbac4",
+    textAlign: "center",
     fontSize: 14,
-    marginBottom: 30,
     lineHeight: 20,
+    marginBottom: 34,
   },
+
+  /* REFERRAL CODE */
   codeContainer: {
-    width: '100%',
+    width: "100%",
   },
+
   codeDashedBox: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.2)',
-    borderStyle: 'dashed',
-    borderRadius: 16,
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderWidth: 1.5,
+    borderColor: "#104e64",
+    borderStyle: "dashed",
+    borderRadius: 20,
     padding: 20,
-    marginBottom: 15,
+    marginBottom: 18,
   },
+
   codeLabel: {
-    color: '#d8b4fe',
+    color: "#facc15",
     fontSize: 10,
-    fontWeight: 'bold',
-    letterSpacing: 1,
-    textAlign: 'center',
+    fontWeight: "900",
+    letterSpacing: 1.2,
+    textAlign: "center",
     marginBottom: 10,
   },
+
   codeValueBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#0f0025',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#062530",
     paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 12,
+    paddingVertical: 14,
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.05)',
+    borderColor: "#104e64",
   },
+
   codeText: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: 'bold',
-    letterSpacing: 1,
-    fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
+    fontWeight: "900",
+    letterSpacing: 1.2,
+    fontFamily: Platform.OS === "ios" ? "Courier" : "monospace",
   },
+
+  /* LINK BOX */
   linkBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderRadius: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderRadius: 18,
     padding: 6,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
+    borderColor: "#104e64",
   },
+
   linkText: {
     flex: 1,
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 12,
     paddingHorizontal: 12,
   },
+
   copyLinkButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#4f46e5',
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    borderRadius: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#facc15",
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderRadius: 14,
+    gap: 6,
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 14,
+    elevation: 6,
   },
+
   copyLinkButtonText: {
-    color: '#fff',
+    color: "#062530",
     fontSize: 12,
-    fontWeight: 'bold',
-    marginLeft: 6,
-  },
-  statsGrid: {
-    flexDirection: 'row',
-    gap: 12,
-    marginBottom: 30,
-  },
-  statCard: {
-    flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderRadius: 24,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-    padding: 20,
-    overflow: 'hidden',
-  },
-  statIconLeft: {
-    position: 'absolute',
-    right: -10,
-    top: -5,
-  },
-  statValue: {
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: '900',
-  },
-  statLabel: {
-    color: '#9ca3af',
-    fontSize: 8,
-    fontWeight: 'bold',
-    letterSpacing: 1,
-    marginTop: 4,
-  },
-  howItWorks: {
-    alignItems: 'center',
-  },
-  sectionTitle: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 24,
-  },
-  stepsContainer: {
-    flexDirection: 'column',
-    width: '100%',
-    gap: 24,
-  },
-  stepItem: {
-    alignItems: 'center',
-  },
-  stepIconBox: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  stepTitle: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  stepDesc: {
-    color: '#9ca3af',
-    fontSize: 12,
-    textAlign: 'center',
+    fontWeight: "900",
+    letterSpacing: 0.8,
   },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /* MODAL */
   modalOverlay: {
-  flex: 1,
-  backgroundColor: "rgba(0,0,0,0.6)",
-  justifyContent: "flex-end",
-},
+    flex: 1,
+    backgroundColor: "rgba(6,37,48,0.9)",
+    justifyContent: "flex-end",
+  },
 
-modalCard: {
-  backgroundColor: "#0f172a",
-  padding: 20,
-  borderTopLeftRadius: 24,
-  borderTopRightRadius: 24,
-},
+  modalCard: {
+    backgroundColor: "#0b3442",
+    padding: 22,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
 
-modalTitle: {
-  color: "#fff",
-  fontSize: 18,
-  fontWeight: "700",
-  marginBottom: 12,
-},
+  modalTitle: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "900",
+    marginBottom: 14,
+  },
 
-modalLinkBox: {
-  borderWidth: 1,
-  borderColor: "#7c3aed",
-  borderRadius: 12,
-  padding: 12,
-  marginBottom: 16,
-},
+  modalLinkBox: {
+    borderWidth: 1,
+    borderColor: "#facc15",
+    borderRadius: 14,
+    padding: 14,
+    marginBottom: 18,
+    backgroundColor: "rgba(250,204,21,0.12)",
+  },
 
-modalLinkText: {
-  color: "#e5e7eb",
-  fontSize: 14,
-},
+  modalLinkText: {
+    color: "#ffffff",
+    fontSize: 14,
+  },
 
-modalCopyBtn: {
-  backgroundColor: "#7c3aed",
-  paddingVertical: 12,
-  borderRadius: 12,
-  alignItems: "center",
-},
+  modalCopyBtn: {
+    backgroundColor: "#facc15",
+    paddingVertical: 14,
+    borderRadius: 14,
+    alignItems: "center",
+  },
 
-modalCopyText: {
-  color: "#fff",
-  fontWeight: "700",
-},
+  modalCopyText: {
+    color: "#062530",
+    fontWeight: "900",
+    letterSpacing: 1,
+  },
 
-modalCloseText: {
-  color: "#9ca3af",
-  textAlign: "center",
-  marginTop: 12,
-},
-
+  modalCloseText: {
+    color: "#8fbac4",
+    textAlign: "center",
+    marginTop: 14,
+    fontWeight: "700",
+  },
 });

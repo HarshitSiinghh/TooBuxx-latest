@@ -111,152 +111,333 @@ interface WeeklyActiveProps {
 };
  export default WeeklyActiveView
 
+// const styles = StyleSheet.create({
+//   container: {
+//     paddingVertical: 24,
+//     gap: 24,
+//   },
+//   badgeRow: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     gap: 16,
+//   },
+//   statusBadge: {
+//     paddingHorizontal: 12,
+//     paddingVertical: 4,
+//     borderRadius: 99,
+//     borderWidth: 1,
+//   },
+//   badgeActive: {
+//     backgroundColor: 'rgba(34, 197, 94, 0.2)',
+//     borderColor: 'rgba(34, 197, 94, 0.2)',
+//   },
+//   badgePaused: {
+//     backgroundColor: 'rgba(107, 114, 128, 0.2)',
+//     borderColor: 'rgba(107, 114, 128, 0.2)',
+//   },
+//   badgeText: {
+//     fontSize: 10,
+//     fontWeight: '900',
+//   },
+//   badgeTextActive: { color: '#4ade80' },
+//   badgeTextPaused: { color: '#9ca3af' },
+//   engineId: {
+//     color: '#6b7280',
+//     fontWeight: '700',
+//     fontSize: 10,
+//     fontStyle: 'italic',
+//     letterSpacing: 1,
+//   },
+//   card: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     borderRadius: 40,
+//     padding: 32,
+//     overflow: 'hidden',
+//   },
+//   cardPaused: {
+//     opacity: 0.6,
+//     borderColor: 'rgba(255, 255, 255, 0.05)',
+//   },
+//   cardContent: {
+//     flexDirection: 'column',
+//     justifyContent: 'space-between',
+//     gap: 32,
+//   },
+//   infoSection: {
+//     flex: 1,
+//   },
+//   label: {
+//     color: '#818cf8',
+//     fontSize: 12,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     letterSpacing: 2,
+//     marginBottom: 8,
+//   },
+//   amountText: {
+//     fontSize: 56,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     color: '#FFFFFF',
+//     marginBottom: 24,
+//     letterSpacing: -2,
+//   },
+//   textMuted: {
+//     color: '#6b7280',
+//   },
+//   buttonGroup: {
+//     flexDirection: 'row',
+//     gap: 12,
+//   },
+//   btnPrimary: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: '#FFFFFF',
+//     paddingHorizontal: 24,
+//     height: 48,
+//     borderRadius: 16,
+//     gap: 8,
+//   },
+//   btnPrimaryText: {
+//     color: '#1e1b4b',
+//     fontWeight: '900',
+//     fontSize: 12,
+//   },
+//   btnResume: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: '#4f46e5',
+//     paddingHorizontal: 24,
+//     height: 48,
+//     borderRadius: 16,
+//     gap: 8,
+//   },
+//   btnResumeText: {
+//     color: '#FFFFFF',
+//     fontWeight: '900',
+//     fontSize: 12,
+//   },
+//   btnStop: {
+//     justifyContent: 'center',
+//     backgroundColor: 'rgba(239, 68, 68, 0.1)',
+//     borderWidth: 1,
+//     borderColor: 'rgba(239, 68, 68, 0.2)',
+//     paddingHorizontal: 24,
+//     height: 48,
+//     borderRadius: 16,
+//   },
+//   btnStopText: {
+//     color: '#ef4444',
+//     fontWeight: '900',
+//     fontSize: 12,
+//   },
+//   disabled: { opacity: 0.5 },
+//   disabledStop: { opacity: 0.3 },
+//   streakSection: {
+//     alignItems: 'flex-start',
+//   },
+//   streakLabel: {
+//     color: '#6b7280',
+//     fontSize: 10,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     marginBottom: 4,
+//   },
+//   streakValueRow: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     gap: 8,
+//   },
+//   streakNumber: {
+//     fontSize: 64,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     lineHeight: 64,
+//   },
+//   streakActive: {
+//     color: '#f97316',
+//   },
+// });
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 24,
     gap: 24,
   },
+
   badgeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
   },
+
   statusBadge: {
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 99,
     borderWidth: 1,
   },
+
   badgeActive: {
-    backgroundColor: 'rgba(34, 197, 94, 0.2)',
-    borderColor: 'rgba(34, 197, 94, 0.2)',
+    backgroundColor: "rgba(34,197,94,0.15)",
+    borderColor: "rgba(34,197,94,0.25)",
   },
+
   badgePaused: {
-    backgroundColor: 'rgba(107, 114, 128, 0.2)',
-    borderColor: 'rgba(107, 114, 128, 0.2)',
+    backgroundColor: "rgba(143,186,196,0.15)",
+    borderColor: "rgba(143,186,196,0.25)",
   },
+
   badgeText: {
     fontSize: 10,
-    fontWeight: '900',
+    fontWeight: "900",
   },
-  badgeTextActive: { color: '#4ade80' },
-  badgeTextPaused: { color: '#9ca3af' },
+
+  badgeTextActive: { color: "#4ade80" },
+  badgeTextPaused: { color: "#8fbac4" },
+
   engineId: {
-    color: '#6b7280',
-    fontWeight: '700',
+    color: "#8fbac4",
+    fontWeight: "700",
     fontSize: 10,
-    fontStyle: 'italic',
+    fontStyle: "italic",
     letterSpacing: 1,
   },
+
   card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: "#0b3442",
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     borderRadius: 40,
     padding: 32,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
+
   cardPaused: {
     opacity: 0.6,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderColor: "rgba(16,78,100,0.6)",
   },
+
   cardContent: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    flexDirection: "column",
+    justifyContent: "space-between",
     gap: 32,
   },
+
   infoSection: {
     flex: 1,
   },
+
   label: {
-    color: '#818cf8',
+    color: "#60a5fa",
     fontSize: 12,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    fontStyle: "italic",
     letterSpacing: 2,
     marginBottom: 8,
   },
+
   amountText: {
     fontSize: 56,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    color: '#FFFFFF',
+    fontWeight: "900",
+    fontStyle: "italic",
+    color: "#ffffff",
     marginBottom: 24,
     letterSpacing: -2,
   },
+
   textMuted: {
-    color: '#6b7280',
+    color: "#8fbac4",
   },
+
   buttonGroup: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
   },
+
   btnPrimary: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
     paddingHorizontal: 24,
     height: 48,
     borderRadius: 16,
     gap: 8,
   },
+
   btnPrimaryText: {
-    color: '#1e1b4b',
-    fontWeight: '900',
+    color: "#062530",
+    fontWeight: "900",
     fontSize: 12,
   },
+
   btnResume: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#4f46e5',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#2563eb",
     paddingHorizontal: 24,
     height: 48,
     borderRadius: 16,
     gap: 8,
   },
+
   btnResumeText: {
-    color: '#FFFFFF',
-    fontWeight: '900',
+    color: "#ffffff",
+    fontWeight: "900",
     fontSize: 12,
   },
+
   btnStop: {
-    justifyContent: 'center',
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    justifyContent: "center",
+    backgroundColor: "rgba(239,68,68,0.1)",
     borderWidth: 1,
-    borderColor: 'rgba(239, 68, 68, 0.2)',
+    borderColor: "rgba(239,68,68,0.25)",
     paddingHorizontal: 24,
     height: 48,
     borderRadius: 16,
   },
+
   btnStopText: {
-    color: '#ef4444',
-    fontWeight: '900',
+    color: "#ef4444",
+    fontWeight: "900",
     fontSize: 12,
   },
+
   disabled: { opacity: 0.5 },
   disabledStop: { opacity: 0.3 },
+
   streakSection: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
+
   streakLabel: {
-    color: '#6b7280',
+    color: "#8fbac4",
     fontSize: 10,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    fontStyle: "italic",
     marginBottom: 4,
   },
+
   streakValueRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
+
   streakNumber: {
     fontSize: 64,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    fontStyle: "italic",
     lineHeight: 64,
   },
+
   streakActive: {
-    color: '#f97316',
+    color: "#f97316",
   },
 });

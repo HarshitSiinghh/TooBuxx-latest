@@ -268,37 +268,276 @@ export default function PaymentDetailsPage() {
 
 /* 🔽 STYLES (UNCHANGED) */
 
+// const styles = StyleSheet.create({
+//   container: { flex: 1, backgroundColor: "#1a003d" },
+//   loadingContainer: { flex: 1, backgroundColor: "#1a003d", justifyContent: "center", alignItems: "center" },
+//   glowTop: { position: "absolute", top: -height * 0.1, right: -width * 0.1, width: width * 0.8, height: width * 0.8, backgroundColor: "rgba(147, 51, 234, 0.1)", borderRadius: 1000 },
+//   glowBottom: { position: "absolute", bottom: height * 0.1, left: -width * 0.1, width: width * 0.7, height: width * 0.7, backgroundColor: "rgba(79, 70, 229, 0.1)", borderRadius: 1000 },
+//   header: { flexDirection: "row", alignItems: "center", padding: 20,  borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.05)" },
+//   backButton: { padding: 10, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 12, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
+//   headerTextContainer: { marginLeft: 16 },
+//   headerTitle: { color: "white", fontSize: 20, fontWeight: "900", fontStyle: "italic" },
+//   headerSubtitle: { color: "#a855f7", fontSize: 10, fontWeight: "bold", letterSpacing: 1 },
+//   scrollContent: { padding: 20 },
+//   tabContainer: { flexDirection: "row", backgroundColor: "rgba(255,255,255,0.05)", padding: 6, borderRadius: 20, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)", marginBottom: 24 },
+//   tabButton: { flex: 1, height: 45, justifyContent: "center", alignItems: "center" },
+//   activeTabBackground: { ...StyleSheet.absoluteFillObject, backgroundColor: "#9333ea", borderRadius: 15 },
+//   tabText: { color: "#6b7280", fontSize: 12, fontWeight: "900", letterSpacing: 1 },
+//   activeTabText: { color: "white" },
+//   formCard: { backgroundColor: "rgba(255,255,255,0.03)", borderRadius: 40, padding: 32, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
+//   cardHeader: { flexDirection: "row", alignItems: "center", marginBottom: 32 },
+//   iconBox: { padding: 12, backgroundColor: "rgba(147, 51, 234, 0.2)", borderRadius: 12, marginRight: 16 },
+//   cardTitle: { color: "white", fontWeight: "bold", fontSize: 14 },
+//   cardSubtitle: { color: "#6b7280", fontSize: 10, fontWeight: "bold", letterSpacing: 1 },
+//   updateButton: { backgroundColor: "#9333ea", padding: 20, borderRadius: 16, alignItems: "center", marginTop: 20 },
+//   updateButtonText: { color: "white", fontWeight: "900", fontStyle: "italic", letterSpacing: 2 },
+//   disabledButton: { opacity: 0.3 },
+//   modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.6)", justifyContent: "center", alignItems: "center", padding: 24 },
+//   modalContent: { backgroundColor: "#1a003d", width: "100%", borderRadius: 48, padding: 40, alignItems: "center", borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
+//   modalIconBox: { width: 80, height: 80, borderRadius: 24, justifyContent: "center", alignItems: "center", marginBottom: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
+//   modalTitle: { color: "white", fontSize: 24, fontWeight: "900", fontStyle: "italic", marginBottom: 8 },
+//   modalMessage: { color: "#9ca3af", textAlign: "center", fontSize: 14, lineHeight: 20, marginBottom: 32 },
+//   modalButton: { width: "100%", padding: 16, borderRadius: 16, alignItems: "center" },
+//   modalButtonSuccess: { backgroundColor: "white" },
+//   modalButtonError: { backgroundColor: "#ef4444" },
+//   modalButtonText: { fontWeight: "900", fontSize: 12, letterSpacing: 2 },
+// });
+
+
+
+
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#1a003d" },
-  loadingContainer: { flex: 1, backgroundColor: "#1a003d", justifyContent: "center", alignItems: "center" },
-  glowTop: { position: "absolute", top: -height * 0.1, right: -width * 0.1, width: width * 0.8, height: width * 0.8, backgroundColor: "rgba(147, 51, 234, 0.1)", borderRadius: 1000 },
-  glowBottom: { position: "absolute", bottom: height * 0.1, left: -width * 0.1, width: width * 0.7, height: width * 0.7, backgroundColor: "rgba(79, 70, 229, 0.1)", borderRadius: 1000 },
-  header: { flexDirection: "row", alignItems: "center", padding: 20,  borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.05)" },
-  backButton: { padding: 10, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 12, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
-  headerTextContainer: { marginLeft: 16 },
-  headerTitle: { color: "white", fontSize: 20, fontWeight: "900", fontStyle: "italic" },
-  headerSubtitle: { color: "#a855f7", fontSize: 10, fontWeight: "bold", letterSpacing: 1 },
-  scrollContent: { padding: 20 },
-  tabContainer: { flexDirection: "row", backgroundColor: "rgba(255,255,255,0.05)", padding: 6, borderRadius: 20, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)", marginBottom: 24 },
-  tabButton: { flex: 1, height: 45, justifyContent: "center", alignItems: "center" },
-  activeTabBackground: { ...StyleSheet.absoluteFillObject, backgroundColor: "#9333ea", borderRadius: 15 },
-  tabText: { color: "#6b7280", fontSize: 12, fontWeight: "900", letterSpacing: 1 },
-  activeTabText: { color: "white" },
-  formCard: { backgroundColor: "rgba(255,255,255,0.03)", borderRadius: 40, padding: 32, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
-  cardHeader: { flexDirection: "row", alignItems: "center", marginBottom: 32 },
-  iconBox: { padding: 12, backgroundColor: "rgba(147, 51, 234, 0.2)", borderRadius: 12, marginRight: 16 },
-  cardTitle: { color: "white", fontWeight: "bold", fontSize: 14 },
-  cardSubtitle: { color: "#6b7280", fontSize: 10, fontWeight: "bold", letterSpacing: 1 },
-  updateButton: { backgroundColor: "#9333ea", padding: 20, borderRadius: 16, alignItems: "center", marginTop: 20 },
-  updateButtonText: { color: "white", fontWeight: "900", fontStyle: "italic", letterSpacing: 2 },
-  disabledButton: { opacity: 0.3 },
-  modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.6)", justifyContent: "center", alignItems: "center", padding: 24 },
-  modalContent: { backgroundColor: "#1a003d", width: "100%", borderRadius: 48, padding: 40, alignItems: "center", borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
-  modalIconBox: { width: 80, height: 80, borderRadius: 24, justifyContent: "center", alignItems: "center", marginBottom: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
-  modalTitle: { color: "white", fontSize: 24, fontWeight: "900", fontStyle: "italic", marginBottom: 8 },
-  modalMessage: { color: "#9ca3af", textAlign: "center", fontSize: 14, lineHeight: 20, marginBottom: 32 },
-  modalButton: { width: "100%", padding: 16, borderRadius: 16, alignItems: "center" },
-  modalButtonSuccess: { backgroundColor: "white" },
-  modalButtonError: { backgroundColor: "#ef4444" },
-  modalButtonText: { fontWeight: "900", fontSize: 12, letterSpacing: 2 },
+  /* ================= ROOT ================= */
+  container: {
+    flex: 1,
+    backgroundColor: "#062530",
+  },
+
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: "#062530",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  /* ================= GLOWS ================= */
+  glowTop: {
+    position: "absolute",
+    top: -height * 0.1,
+    right: -width * 0.1,
+    width: width * 0.8,
+    height: width * 0.8,
+    backgroundColor: "rgba(250,204,21,0.12)",
+    borderRadius: 1000,
+  },
+
+  glowBottom: {
+    position: "absolute",
+    bottom: height * 0.1,
+    left: -width * 0.1,
+    width: width * 0.7,
+    height: width * 0.7,
+    backgroundColor: "rgba(16,185,129,0.12)",
+    borderRadius: 1000,
+  },
+
+  /* ================= HEADER ================= */
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#104e64",
+  },
+
+  backButton: {
+    padding: 10,
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  headerTextContainer: {
+    marginLeft: 16,
+  },
+
+  headerTitle: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "900",
+    letterSpacing: 1,
+  },
+
+  headerSubtitle: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "900",
+    letterSpacing: 2,
+  },
+
+  /* ================= CONTENT ================= */
+  scrollContent: {
+    padding: 20,
+  },
+
+  /* ================= TABS ================= */
+  tabContainer: {
+    flexDirection: "row",
+    backgroundColor: "rgba(16,78,100,0.35)",
+    padding: 6,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#104e64",
+    marginBottom: 24,
+  },
+
+  tabButton: {
+    flex: 1,
+    height: 45,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  activeTabBackground: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "#facc15",
+    borderRadius: 15,
+  },
+
+  tabText: {
+    color: "#8fbac4",
+    fontSize: 12,
+    fontWeight: "900",
+    letterSpacing: 1,
+  },
+
+  activeTabText: {
+    color: "#062530",
+  },
+
+  /* ================= FORM CARD ================= */
+  formCard: {
+    backgroundColor: "#0b3442",
+    borderRadius: 40,
+    padding: 32,
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 32,
+  },
+
+  iconBox: {
+    padding: 12,
+    backgroundColor: "rgba(250,204,21,0.15)",
+    borderRadius: 12,
+    marginRight: 16,
+    borderWidth: 1,
+    borderColor: "rgba(250,204,21,0.35)",
+  },
+
+  cardTitle: {
+    color: "#ffffff",
+    fontWeight: "900",
+    fontSize: 14,
+  },
+
+  cardSubtitle: {
+    color: "#facc15",
+    fontSize: 10,
+    fontWeight: "900",
+    letterSpacing: 1.5,
+  },
+
+  /* ================= UPDATE BUTTON ================= */
+  updateButton: {
+    backgroundColor: "#facc15",
+    padding: 20,
+    borderRadius: 16,
+    alignItems: "center",
+    marginTop: 20,
+  },
+
+  updateButtonText: {
+    color: "#062530",
+    fontWeight: "900",
+    letterSpacing: 2,
+    fontSize: 12,
+  },
+
+  disabledButton: {
+    opacity: 0.4,
+  },
+
+  /* ================= MODAL ================= */
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(6,37,48,0.85)",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+
+  modalContent: {
+    backgroundColor: "#0b3442",
+    width: "100%",
+    borderRadius: 48,
+    padding: 40,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  modalIconBox: {
+    width: 80,
+    height: 80,
+    borderRadius: 24,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  modalTitle: {
+    color: "#ffffff",
+    fontSize: 22,
+    fontWeight: "900",
+    letterSpacing: 1,
+    marginBottom: 8,
+  },
+
+  modalMessage: {
+    color: "#8fbac4",
+    textAlign: "center",
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 32,
+  },
+
+  modalButton: {
+    width: "100%",
+    padding: 16,
+    borderRadius: 16,
+    alignItems: "center",
+  },
+
+  modalButtonSuccess: {
+    backgroundColor: "#facc15",
+  },
+
+  modalButtonError: {
+    backgroundColor: "#ef4444",
+  },
+
+  modalButtonText: {
+    fontWeight: "900",
+    fontSize: 12,
+    letterSpacing: 2,
+  },
 });

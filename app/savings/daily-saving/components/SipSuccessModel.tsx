@@ -77,90 +77,194 @@ interface SuccessModalProps {
   );
 };
 
+// const styles = StyleSheet.create({
+//   backdrop: {
+//     flex: 1,
+//     backgroundColor: 'rgba(10, 0, 26, 0.8)', // Matches #0a001a/80
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     padding: 24,
+//   },
+//   centeredView: {
+//     width: '100%',
+//     maxWidth: 400,
+//   },
+//   modalView: {
+//     backgroundColor: '#1a003d',
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     borderRadius: 40,
+//     padding: 32,
+//     shadowColor: '#000',
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.5,
+//     shadowRadius: 20,
+//     elevation: 10,
+//   },
+//   closeButton: {
+//     position: 'absolute',
+//     right: 24,
+//     top: 24,
+//     padding: 8,
+//     borderRadius: 99,
+//   },
+//   content: {
+//     alignItems: 'center',
+//     gap: 24,
+//   },
+//   iconContainer: {
+//     width: 64,
+//     height: 64,
+//     backgroundColor: 'rgba(34, 197, 94, 0.1)',
+//     borderRadius: 20,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     borderWidth: 1,
+//     borderColor: 'rgba(34, 197, 94, 0.2)',
+//   },
+//   title: {
+//     fontSize: 22,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     color: '#ffffff',
+//     textAlign: 'center',
+//     textTransform: 'uppercase',
+//   },
+//   description: {
+//     fontSize: 14,
+//     color: '#9ca3af',
+//     textAlign: 'center',
+//     lineHeight: 20,
+//   },
+//   tagRow: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     gap: 8,
+//   },
+//   tagText: {
+//     fontSize: 11,
+//     fontWeight: '900',
+//     color: '#818cf8',
+//     letterSpacing: 1.5,
+//   },
+//   primaryButton: {
+//     backgroundColor: '#4f46e5',
+//     width: '100%',
+//     paddingVertical: 18,
+//     borderRadius: 20,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   buttonText: {
+//     color: 'white',
+//     fontSize: 12,
+//     fontWeight: '900',
+//     textTransform: 'uppercase',
+//   },
+// });
+
+export default SipSuccessModal
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
-    backgroundColor: 'rgba(10, 0, 26, 0.8)', // Matches #0a001a/80
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "rgba(6,37,48,0.9)", // #062530 overlay
+    justifyContent: "center",
+    alignItems: "center",
     padding: 24,
   },
+
   centeredView: {
-    width: '100%',
+    width: "100%",
     maxWidth: 400,
   },
+
   modalView: {
-    backgroundColor: '#1a003d',
+    backgroundColor: "#0b3442",
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     borderRadius: 40,
     padding: 32,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.45,
     shadowRadius: 20,
     elevation: 10,
   },
+
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 24,
     top: 24,
     padding: 8,
     borderRadius: 99,
   },
+
   content: {
-    alignItems: 'center',
+    alignItems: "center",
     gap: 24,
   },
+
   iconContainer: {
     width: 64,
     height: 64,
-    backgroundColor: 'rgba(34, 197, 94, 0.1)',
+    backgroundColor: "rgba(34,197,94,0.15)", // success green tint
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
-    borderColor: 'rgba(34, 197, 94, 0.2)',
+    borderColor: "rgba(34,197,94,0.35)",
   },
+
   title: {
     fontSize: 22,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    color: '#ffffff',
-    textAlign: 'center',
-    textTransform: 'uppercase',
+    fontWeight: "900",
+    fontStyle: "italic",
+    color: "#ffffff",
+    textAlign: "center",
+    textTransform: "uppercase",
   },
+
   description: {
     fontSize: 14,
-    color: '#9ca3af',
-    textAlign: 'center',
+    color: "#8fbac4",
+    textAlign: "center",
     lineHeight: 20,
   },
+
   tagRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
+
   tagText: {
     fontSize: 11,
-    fontWeight: '900',
-    color: '#818cf8',
+    fontWeight: "900",
+    color: "#facc15", // gold motivation text
     letterSpacing: 1.5,
   },
+
   primaryButton: {
-    backgroundColor: '#4f46e5',
-    width: '100%',
+    backgroundColor: "#facc15",
+    width: "100%",
     paddingVertical: 18,
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
+
   buttonText: {
-    color: 'white',
+    color: "#062530",
     fontSize: 12,
-    fontWeight: '900',
-    textTransform: 'uppercase',
+    fontWeight: "900",
+    textTransform: "uppercase",
+    fontStyle: "italic",
   },
 });
-
- export default SipSuccessModal

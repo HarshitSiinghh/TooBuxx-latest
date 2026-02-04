@@ -201,48 +201,187 @@ const Divider = () => <View style={styles.divider} />;
 
 /* ================= STYLES ================= */
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#1a003d" },
+// const styles = StyleSheet.create({
+//   container: { flex: 1, backgroundColor: "#1a003d" },
 
+//   header: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     padding: 18,
+//     marginTop:-40,
+//     // paddingBottom:10,
+//     borderBottomWidth: 1,
+//     borderBottomColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   backButton: {
+//     padding: 10,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 12,
+//   },
+
+//   title: { color: "white", fontSize: 20, fontWeight: "900" },
+//   subtitle: { color: "#c084fc", fontSize: 10, fontWeight: "700" },
+
+//   body: { padding: 18 },
+
+//   hero: {
+//     backgroundColor: "#240056",
+//     borderRadius: 22,
+//     padding: 20,
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     marginBottom: 20,
+//   },
+
+//   heroTitle: { color: "white", fontSize: 18, fontWeight: "900" },
+//   heroDesc: { color: "#9ca3af", fontSize: 12, marginTop: 4 },
+
+//   heroIcon: {
+//     backgroundColor: "rgba(192,132,252,0.2)",
+//     padding: 12,
+//     borderRadius: 16,
+//   },
+
+//   sectionTitle: {
+//     color: "#6b7280",
+//     fontSize: 10,
+//     fontWeight: "800",
+//     letterSpacing: 2,
+//     marginBottom: 8,
+//     marginLeft: 4,
+//   },
+
+//   card: {
+//     backgroundColor: "rgba(255,255,255,0.03)",
+//     borderRadius: 22,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.08)",
+//     marginBottom: 20,
+//   },
+
+//   toggleRow: {
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     padding: 18,
+//   },
+
+//   iconBox: {
+//     padding: 10,
+//     borderRadius: 14,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//   },
+
+//   toggleTitle: { color: "white", fontWeight: "900", fontSize: 14 },
+//   toggleDesc: { color: "#9ca3af", fontSize: 11, marginTop: 2 },
+
+//   switch: {
+//     width: 42,
+//     height: 24,
+//     borderRadius: 12,
+//     backgroundColor: "#1f2933",
+//     padding: 3,
+//   },
+
+//   switchActive: {
+//     backgroundColor: "#7c3aed",
+//   },
+
+//   knob: {
+//     width: 18,
+//     height: 18,
+//     backgroundColor: "white",
+//     borderRadius: 9,
+//   },
+
+//   divider: {
+//     height: 1,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     marginHorizontal: 16,
+//   },
+// });
+
+
+
+
+
+
+const styles = StyleSheet.create({
+  /* ================= ROOT ================= */
+  container: {
+    flex: 1,
+    backgroundColor: "#062530",
+  },
+
+  /* ================= HEADER ================= */
   header: {
     flexDirection: "row",
     alignItems: "center",
     padding: 18,
-    marginTop:-40,
-    // paddingBottom:10,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomColor: "#104e64",
   },
 
   backButton: {
     padding: 10,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
-  title: { color: "white", fontSize: 20, fontWeight: "900" },
-  subtitle: { color: "#c084fc", fontSize: 10, fontWeight: "700" },
+  title: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "900",
+  },
 
-  body: { padding: 18 },
+  subtitle: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "700",
+  },
 
+  /* ================= BODY ================= */
+  body: {
+    padding: 18,
+  },
+
+  /* ================= HERO ================= */
   hero: {
-    backgroundColor: "#240056",
+    backgroundColor: "#0b3442",
     borderRadius: 22,
     padding: 20,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
-  heroTitle: { color: "white", fontSize: 18, fontWeight: "900" },
-  heroDesc: { color: "#9ca3af", fontSize: 12, marginTop: 4 },
+  heroTitle: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "900",
+  },
+
+  heroDesc: {
+    color: "#8fbac4",
+    fontSize: 12,
+    marginTop: 4,
+  },
 
   heroIcon: {
-    backgroundColor: "rgba(192,132,252,0.2)",
+    backgroundColor: "rgba(250,204,21,0.15)",
     padding: 12,
     borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "rgba(250,204,21,0.35)",
   },
 
+  /* ================= SECTION ================= */
   sectionTitle: {
     color: "#6b7280",
     fontSize: 10,
@@ -252,14 +391,17 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
 
+  /* ================= CARD ================= */
   card: {
-    backgroundColor: "rgba(255,255,255,0.03)",
+    backgroundColor: "#0b3442",
     borderRadius: 22,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "#104e64",
     marginBottom: 20,
+    overflow: "hidden",
   },
 
+  /* ================= TOGGLE ROW ================= */
   toggleRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -270,34 +412,49 @@ const styles = StyleSheet.create({
   iconBox: {
     padding: 10,
     borderRadius: 14,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
-  toggleTitle: { color: "white", fontWeight: "900", fontSize: 14 },
-  toggleDesc: { color: "#9ca3af", fontSize: 11, marginTop: 2 },
+  toggleTitle: {
+    color: "#ffffff",
+    fontWeight: "900",
+    fontSize: 14,
+  },
 
+  toggleDesc: {
+    color: "#8fbac4",
+    fontSize: 11,
+    marginTop: 2,
+  },
+
+  /* ================= SWITCH ================= */
   switch: {
     width: 42,
     height: 24,
     borderRadius: 12,
-    backgroundColor: "#1f2933",
+    backgroundColor: "#041d26",
     padding: 3,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   switchActive: {
-    backgroundColor: "#7c3aed",
+    backgroundColor: "#facc15",
   },
 
   knob: {
     width: 18,
     height: 18,
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     borderRadius: 9,
   },
 
+  /* ================= DIVIDER ================= */
   divider: {
     height: 1,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "#104e64",
     marginHorizontal: 16,
   },
 });

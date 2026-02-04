@@ -230,7 +230,7 @@ if (pageLoading) {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#1a003d",
+        backgroundColor: "#062530",
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -358,66 +358,246 @@ if (pageLoading) {
     </SafeAreaView>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#0a001a" },
+  safe: {
+    flex: 1,
+    backgroundColor: "#062530",
+  },
+
   fixedHeader: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 40,
-    backgroundColor: "#0a001a",
+    paddingTop: 30,
+     paddingBottom:20,
+    backgroundColor: "#062530",
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomColor: "#104e64",
   },
-  scrollContent: { padding: 20, paddingBottom: 0 , flexGrow:1},
-  backBtn: { padding: 10, borderRadius: 12, backgroundColor: "rgba(255,255,255,0.06)", borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
+
+  scrollContent: {
+    padding: 20,
+    paddingBottom: 0,
+    flexGrow: 1,
+  },
+
+  backBtn: {
+    padding: 10,
+    borderRadius: 12,
+    backgroundColor: "rgba(16,78,100,0.4)",
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
   headerTitleContainer: { marginLeft: 16 },
-  title: { color: "white", fontSize: 20, fontWeight: "900" },
-  subtitle: { color: "#818cf8", fontSize: 10, fontWeight: "800", letterSpacing: 1 },
 
-  liveBadge: { flexDirection: "row", alignItems: "center", backgroundColor: "rgba(234,179,8,0.08)", borderRadius: 12, paddingHorizontal: 12, paddingVertical: 8, alignSelf: "flex-start", marginBottom: 20, borderWidth: 1, borderColor: "rgba(234,179,8,0.2)" },
-  pulseDot: { width: 6, height: 6, borderRadius: 6, backgroundColor: "#eab308", marginRight: 8 },
-  liveText: { color: "#eab308", fontSize: 11, fontWeight: "900" },
+  title: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "900",
+    fontStyle: "italic",
+  },
 
+  subtitle: {
+    color: "#facc15",
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 1,
+  },
+
+  /* LIVE RATE */
+  liveBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(250,204,21,0.12)",
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    alignSelf: "flex-start",
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "rgba(250,204,21,0.35)",
+  },
+
+  pulseDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: "#facc15",
+    marginRight: 8,
+  },
+
+  liveText: {
+    color: "#facc15",
+    fontSize: 11,
+    fontWeight: "900",
+  },
+
+  /* STATS */
   statsContainer: { gap: 12, marginBottom: 24 },
   statsRow: { flexDirection: "row", gap: 12 },
+
+  statCard: {
+    flex: 1,
+    backgroundColor: "#0b3442",
+    borderRadius: 20,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  statLabel: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "800",
+    marginBottom: 4,
+  },
+
+  statValue: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "900",
+  },
+
+  goldCard: {
+    backgroundColor: "rgba(250,204,21,0.08)",
+    borderColor: "rgba(250,204,21,0.35)",
+  },
+
+  goldLabel: {
+    color: "#facc15",
+    fontSize: 10,
+    fontWeight: "900",
+    marginBottom: 4,
+  },
+
+  goldValue: {
+    color: "#facc15",
+    fontSize: 18,
+    fontWeight: "900",
+  },
+
+  portfolioCard: {
+    backgroundColor: "#0b3442",
+    borderRadius: 24,
+    padding: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  portfolioLabel: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "800",
+    marginBottom: 4,
+  },
+
+  portfolioValue: {
+    color: "#ffffff",
+    fontSize: 24,
+    fontWeight: "900",
+  },
+
+  /* IDLE CARD */
+  idleCard: {
+    backgroundColor: "#0b3442",
+    borderRadius: 24,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  labelCaps: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 0.5,
+  },
+
+  amountDisplay: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 5,
+  },
+
+  currencySymbol: {
+    color: "#facc15",
+    fontSize: 28,
+    fontWeight: "700",
+    marginRight: 8,
+  },
+
   amountInput: {
-  color: "white",
-  fontSize: 42,
-  fontWeight: "900",
-  minWidth: 80,
-},
-  statCard: { flex: 1, backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 20, padding: 16, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
-  statLabel: { color: "#6b7280", fontSize: 10, fontWeight: "800", marginBottom: 4 },
-  statValue: { color: "white", fontSize: 18, fontWeight: "900" },
-  goldCard: { backgroundColor: "rgba(99,102,241,0.05)", borderColor: "rgba(99,102,241,0.2)" },
-  goldLabel: { color: "#818cf8", fontSize: 10, fontWeight: "900", marginBottom: 4 },
-  goldValue: { color: "#818cf8", fontSize: 18, fontWeight: "900" },
+    color: "#ffffff",
+    fontSize: 42,
+    fontWeight: "900",
+    minWidth: 80,
+  },
 
-  portfolioCard: { backgroundColor: "#130030", borderRadius: 24, padding: 20, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
-  portfolioLabel: { color: "#9ca3af", fontSize: 10, fontWeight: "800", marginBottom: 4 },
-  portfolioValue: { color: "white", fontSize: 24, fontWeight: "900" },
+  horizontalDivider: {
+    height: 1,
+    backgroundColor: "#104e64",
+    marginVertical: 15,
+  },
 
-  // IDLE CARD UI (Replica of Image 2)
-  idleCard: { backgroundColor: "#130025", borderRadius: 24, padding: 20, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
-  rowBetween: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 12 },
-  labelCaps: { color: "#9ca3af", fontSize: 10, fontWeight: "800", letterSpacing: 0.5 },
-  infoIcon: { color: "#9ca3af", fontSize: 14 },
-  amountDisplay: { flexDirection: "row", alignItems: "center", marginBottom: 5 },
-  currencySymbol: { color: "#9ca3af", fontSize: 28, fontWeight: "700", marginRight: 8 },
-  amountValue: { color: "white", fontSize: 42, fontWeight: "900" },
-  horizontalDivider: { height: 1, backgroundColor: "rgba(255,255,255,0.08)", marginVertical: 15 },
-  presetScroll: { gap: 10, paddingVertical: 5 },
-  presetBtn: { paddingHorizontal: 18, paddingVertical: 10, borderRadius: 12, backgroundColor: "rgba(255,255,255,0.04)", borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", minWidth: 65, alignItems: "center" },
-  activePresetBtn: { backgroundColor: "rgba(99,102,241,0.2)", borderColor: "#818cf8" },
-  presetText: { color: "#9ca3af", fontWeight: "700", fontSize: 13 },
-  activePresetText: { color: "white" },
-  activateBtn: { backgroundColor: "#4f46e5", borderRadius: 16, paddingVertical: 16, alignItems: "center", marginTop: 20 },
-  activateBtnText: { color: "white", fontWeight: "900", fontSize: 14, letterSpacing: 1 },
+  presetScroll: {
+    gap: 10,
+    paddingVertical: 5,
+  },
 
-  engineBox: { backgroundColor: "rgba(255,255,255,0.02)", borderRadius: 28, padding: 20, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
-  engineRow: { flexDirection: "row", gap: 16, marginBottom: 16 },
-  engineIcon: { width: 40, height: 40, borderRadius: 12, backgroundColor: "rgba(129,140,248,0.1)", justifyContent: "center", alignItems: "center" },
-  engineTitle: { color: "white", fontWeight: "900", fontSize: 12, textTransform: "uppercase" },
-  engineDesc: { color: "#9ca3af", fontSize: 11, lineHeight: 16 }
+  presetBtn: {
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 12,
+    backgroundColor: "rgba(16,78,100,0.25)",
+    borderWidth: 1,
+    borderColor: "#104e64",
+    minWidth: 65,
+    alignItems: "center",
+  },
+
+  activePresetBtn: {
+    backgroundColor: "rgba(250,204,21,0.25)",
+    borderColor: "#facc15",
+  },
+
+  presetText: {
+    color: "#8fbac4",
+    fontWeight: "700",
+    fontSize: 13,
+  },
+
+  activePresetText: {
+    color: "#ffffff",
+  },
+
+  activateBtn: {
+    backgroundColor: "#facc15",
+    borderRadius: 16,
+    paddingVertical: 16,
+    alignItems: "center",
+    marginTop: 20,
+  },
+
+  activateBtnText: {
+    color: "#062530",
+    fontWeight: "900",
+    fontSize: 14,
+    letterSpacing: 1,
+    fontStyle: "italic",
+  },
 });

@@ -79,7 +79,8 @@ interface IdleProps {
           activeOpacity={0.9}
         >
           <LinearGradient
-            colors={['#4f46e5', '#2563eb']}
+            colors={['#facc15', '#eab308']
+}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.activateButton}
@@ -93,120 +94,257 @@ interface IdleProps {
   );
 };
 
+// const styles = StyleSheet.create({
+//   container: {
+//     paddingVertical: 10,
+//     width: '100%',
+//   },
+//   titleContainer: {
+//     marginBottom: 24,
+//   },
+//   headerText: {
+//     fontSize: 38,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     color: 'white',
+//     lineHeight: 36,
+//     letterSpacing: -1.5,
+//   },
+//   headerTextGradient: {
+//     fontSize: 38,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     color: '#818cf8', // Indigo gradient approximation
+//     lineHeight: 36,
+//     letterSpacing: -1.5,
+//   },
+//   card: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.02)',
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     borderRadius: 32,
+//     padding: 24,
+//   },
+//   inputSection: {
+//     marginBottom: 24,
+//   },
+//   labelRow: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     marginBottom: 12,
+//   },
+//   label: {
+//     fontSize: 10,
+//     fontWeight: '900',
+//     color: '#6b7280',
+//     letterSpacing: 1.5,
+//   },
+//   inputWrapper: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     borderBottomWidth: 2,
+//     borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+//     paddingBottom: 8,
+//   },
+//   currencySymbol: {
+//     fontSize: 24,
+//     fontWeight: '900',
+//     color: '#4b5563',
+//     marginRight: 10,
+//   },
+//   textInput: {
+//     fontSize: 42,
+//     fontWeight: '900',
+//     color: 'white',
+//     flex: 1,
+//     padding: 0,
+//   },
+//   grid: {
+//     flexDirection: 'row',
+//     flexWrap: 'wrap',
+//     gap: 10,
+//     marginBottom: 28,
+//   },
+//   gridButton: {
+//     flex: 1,
+//     minWidth: '22%',
+//     paddingVertical: 12,
+//     borderRadius: 14,
+//     alignItems: 'center',
+//     borderWidth: 2,
+//   },
+//   gridButtonActive: {
+//     backgroundColor: '#4f46e5',
+//     borderColor: '#6366f1',
+//   },
+//   gridButtonInactive: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//   },
+//   gridButtonText: {
+//     fontSize: 14,
+//     fontWeight: '900',
+//   },
+//   textWhite: { color: 'white' },
+//   textGray: { color: '#6b7280' },
+//   activateButton: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     paddingVertical: 18,
+//     borderRadius: 20,
+//     gap: 10,
+//     shadowColor: '#4f46e5',
+//     shadowOffset: { width: 0, height: 6 },
+//     shadowOpacity: 0.3,
+//     shadowRadius: 10,
+//     elevation: 8,
+//   },
+//   activateButtonText: {
+//     color: 'white',
+//     fontSize: 16,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     textTransform: 'uppercase',
+//   },
+// });
+
+export default MonthlyIdleView
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
-    width: '100%',
+    width: "100%",
   },
+
   titleContainer: {
     marginBottom: 24,
   },
+
   headerText: {
     fontSize: 38,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    color: 'white',
+    fontWeight: "900",
+    fontStyle: "italic",
+    color: "#ffffff",
     lineHeight: 36,
     letterSpacing: -1.5,
   },
+
   headerTextGradient: {
     fontSize: 38,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    color: '#818cf8', // Indigo gradient approximation
+    fontWeight: "900",
+    fontStyle: "italic",
+    color: "#facc15", // gold headline
     lineHeight: 36,
     letterSpacing: -1.5,
   },
+
   card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    backgroundColor: "#0b3442",
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     borderRadius: 32,
     padding: 24,
   },
+
   inputSection: {
     marginBottom: 24,
   },
+
   labelRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 12,
   },
+
   label: {
     fontSize: 10,
-    fontWeight: '900',
-    color: '#6b7280',
+    fontWeight: "900",
+    color: "#8fbac4",
     letterSpacing: 1.5,
   },
+
   inputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderBottomWidth: 2,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    borderBottomColor: "#104e64",
     paddingBottom: 8,
   },
+
   currencySymbol: {
     fontSize: 24,
-    fontWeight: '900',
-    color: '#4b5563',
+    fontWeight: "900",
+    color: "#facc15",
     marginRight: 10,
   },
+
   textInput: {
     fontSize: 42,
-    fontWeight: '900',
-    color: 'white',
+    fontWeight: "900",
+    color: "#ffffff",
     flex: 1,
     padding: 0,
   },
+
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 10,
     marginBottom: 28,
   },
+
   gridButton: {
     flex: 1,
-    minWidth: '22%',
+    minWidth: "22%",
     paddingVertical: 12,
     borderRadius: 14,
-    alignItems: 'center',
+    alignItems: "center",
     borderWidth: 2,
   },
+
   gridButtonActive: {
-    backgroundColor: '#4f46e5',
-    borderColor: '#6366f1',
+    backgroundColor: "rgba(250,204,21,0.25)",
+    borderColor: "#facc15",
   },
+
   gridButtonInactive: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: "rgba(16,78,100,0.25)",
+    borderColor: "#104e64",
   },
+
   gridButtonText: {
     fontSize: 14,
-    fontWeight: '900',
+    fontWeight: "900",
   },
-  textWhite: { color: 'white' },
-  textGray: { color: '#6b7280' },
+
+  textWhite: { color: "#ffffff" },
+  textGray: { color: "#8fbac4" },
+
   activateButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 18,
     borderRadius: 20,
     gap: 10,
-    shadowColor: '#4f46e5',
+    shadowColor: "#facc15",
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.35,
     shadowRadius: 10,
     elevation: 8,
   },
+
   activateButtonText: {
-    color: 'white',
+    color: "#062530",
     fontSize: 16,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    textTransform: 'uppercase',
+    fontWeight: "900",
+    fontStyle: "italic",
+    textTransform: "uppercase",
   },
 });
-
- export default MonthlyIdleView

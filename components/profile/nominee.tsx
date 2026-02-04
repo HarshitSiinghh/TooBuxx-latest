@@ -22,26 +22,54 @@ export const NomineeSection: React.FC = () => {
   const { setOpen } = Navigation();
   const router = useRouter();
 
+
+
+
+
+
   const cards: SettingCardItem[] = [
-    {
-      id: 1,
-      title: "Add a nominee to your account",
-      time: "SAFEGUARD YOUR SAVING FOR THE FUTURE",
-      icon: "user",
-      trigger: "Add a Nominee",
-      route: "/profile/nominee",
-      colors: ["#2563eb", "#4338ca"], // Blue Gradient
-    },
-    {
-      id: 2,
-      title: "Get verified",
-      time: "COMPLETE YOUR KYC TO UNLOCK MORE FEATURES",
-      icon: "shield",
-      trigger: null,
-      route: "/spin-and-win/KYC",
-      colors: ["#9333ea", "#a21caf"], // Purple Gradient
-    },
-  ];
+  {
+    id: 1,
+    title: "Add a nominee to your account",
+    time: "SAFEGUARD YOUR SAVING FOR THE FUTURE",
+    icon: "user",
+    trigger: "Add a Nominee",
+    route: "/profile/nominee",
+    colors: ["#104e64", "#062530"], // ✅ THEME GRADIENT
+  },
+  {
+    id: 2,
+    title: "Get KYC verified",
+    time: "COMPLETE YOUR KYC TO UNLOCK MORE FEATURES",
+    icon: "shield",
+    trigger: null,
+    route: "/spin-and-win/KYC",
+    colors: ["#0b3442", "#062530"], // ✅ THEME GRADIENT
+  },
+];
+
+  // const cards: SettingCardItem[] = [
+
+
+  //   {
+  //     id: 1,
+  //     title: "Add a nominee to your account",
+  //     time: "SAFEGUARD YOUR SAVING FOR THE FUTURE",
+  //     icon: "user",
+  //     trigger: "Add a Nominee",
+  //     route: "/profile/nominee",
+  //     colors: ["#2563eb", "#4338ca"], // Blue Gradient
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Get verified",
+  //     time: "COMPLETE YOUR KYC TO UNLOCK MORE FEATURES",
+  //     icon: "shield",
+  //     trigger: null,
+  //     route: "/spin-and-win/KYC",
+  //     colors: ["#9333ea", "#a21caf"], // Purple Gradient
+  //   },
+  // ];
 
   return (
     <View style={styles.wrapper}>

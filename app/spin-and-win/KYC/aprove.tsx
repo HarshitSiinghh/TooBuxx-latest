@@ -43,7 +43,8 @@ const KYCVerified12 = () => {
   if (loading) {
     return (
       <View style={[styles.mainWrapper, { justifyContent: "center" }]}>
-        <ActivityIndicator size="large" color="#a855f7" />
+      <ActivityIndicator size="large" color="#facc15" />
+
       </View>
     );
   }
@@ -117,130 +118,156 @@ const KYCVerified12 = () => {
   );
 };
 
+
+
+export default KYCVerified12;
+
+
+
+
 const styles = StyleSheet.create({
+  /* ================= ROOT ================= */
   mainWrapper: {
     flex: 1,
-    backgroundColor: '#1a003d',
+    backgroundColor: "#062530",
   },
+
+  /* ================= GLOWS ================= */
   glow: {
-    position: 'absolute',
+    position: "absolute",
     borderRadius: 1000,
-    opacity: 0.1,
+    opacity: 0.12,
   },
   topGlow: {
-    top: -50,
-    right: -50,
+    top: -60,
+    right: -60,
     width: width * 0.8,
     height: width * 0.8,
-    backgroundColor: '#22c55e', // Green glow for verified status
+    backgroundColor: "#22c55e",
   },
+
+  /* ================= WRAPPER ================= */
   wrapper: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingHorizontal: 20,
   },
+
+  /* ================= CARD ================= */
   container: {
-    backgroundColor: '#2f2360', // Card Color from Theme
+    backgroundColor: "#0b3442",
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     borderRadius: 40,
     padding: 32,
-    shadowColor: '#000',
+    shadowColor: "#041d26",
     shadowOffset: { width: 0, height: 20 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.6,
     shadowRadius: 30,
     elevation: 10,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
+
   topInnerGlow: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     height: 1,
-    backgroundColor: 'rgba(74, 222, 128, 0.4)',
+    backgroundColor: "rgba(34,197,94,0.45)",
   },
+
+  /* ================= CONTENT ================= */
   content: {
-    alignItems: 'center',
+    alignItems: "center",
   },
+
+  /* ================= ICON ================= */
   iconWrapper: {
-    marginBottom: 20,
-    position: 'relative',
+    marginBottom: 24,
+    position: "relative",
   },
   iconCircle: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: 'rgba(26, 0, 61, 0.5)',
+    backgroundColor: "rgba(34,197,94,0.12)",
     borderWidth: 2,
-    borderColor: 'rgba(74, 222, 128, 0.3)',
+    borderColor: "rgba(34,197,94,0.35)",
     justifyContent: "center",
     alignItems: "center",
   },
   badgeOverlay: {
-    position: 'absolute',
-    bottom: 5,
-    right: 5,
-    backgroundColor: '#22c55e',
+    position: "absolute",
+    bottom: 6,
+    right: 6,
+    backgroundColor: "#22c55e",
     padding: 6,
-    borderRadius: 12,
+    borderRadius: 14,
     borderWidth: 2,
-    borderColor: '#2f2360',
+    borderColor: "#062530",
   },
+
+  /* ================= TEXT ================= */
   title: {
     fontSize: 26,
     fontWeight: "900",
-    color: "white",
     fontStyle: "italic",
+    color: "#ffffff",
     textTransform: "uppercase",
     letterSpacing: -0.5,
   },
   subtitle: {
     color: "#4ade80",
     fontSize: 10,
-    fontWeight: "bold",
+    fontWeight: "900",
     textTransform: "uppercase",
     letterSpacing: 2,
     marginTop: 6,
   },
+
+  /* ================= DETAILS LIST ================= */
   detailsList: {
-    width: '100%',
-    marginTop: 40,
-    backgroundColor: 'rgba(26, 0, 61, 0.3)',
+    width: "100%",
+    marginTop: 36,
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 24,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderColor: "#104e64",
   },
+
   detailRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255, 255, 255, 0.05)",
+    borderBottomColor: "rgba(16,78,100,0.4)",
   },
+
   label: {
-    color: "#6b7280",
+    color: "#8fbac4",
     fontSize: 9,
     fontWeight: "900",
     textTransform: "uppercase",
-    letterSpacing: 1,
+    letterSpacing: 1.2,
     marginBottom: 4,
   },
+
   value: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 14,
     fontWeight: "700",
   },
+
+  /* ================= FOOTER ================= */
   bankGradeText: {
-    textAlign: 'center',
-    color: '#374151',
+    textAlign: "center",
+    color: "#8fbac4",
     fontSize: 10,
-    fontWeight: '900',
-    letterSpacing: 4,
-    marginTop: 40,
+    fontWeight: "900",
+    letterSpacing: 3,
+    marginTop: 36,
   },
 });
-
-export default KYCVerified12;

@@ -158,224 +158,517 @@ export  function PromoCode() {
   );
 }
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#1a003d',
+//   },
+//   header: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'space-between',
+//     paddingHorizontal: 20,
+//     paddingVertical: 15,
+//     backgroundColor: 'rgba(26, 0, 61, 0.8)',
+//     borderBottomWidth: 1,
+//     borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+//   },
+//   headerLeft: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   backButton: {
+//     padding: 10,
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     borderRadius: 12,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//   },
+//   headerText: {
+//     marginLeft: 15,
+//   },
+//   headerTitle: {
+//     color: '#fff',
+//     fontSize: 20,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//   },
+//   headerSub: {
+//     color: '#a855f7',
+//     fontSize: 9,
+//     fontWeight: 'bold',
+//     letterSpacing: 1,
+//     marginTop: 2,
+//   },
+//   scrollContent: {
+//     padding: 20,
+//     paddingBottom: 40,
+//   },
+//   redeemCard: {
+//     backgroundColor: '#240056',
+//     borderRadius: 40,
+//     padding: 24,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     overflow: 'hidden',
+//     marginBottom: 32,
+//   },
+//   glowEffect: {
+//     position: 'absolute',
+//     top: -50,
+//     right: -50,
+//     width: 150,
+//     height: 150,
+//     borderRadius: 75,
+//     backgroundColor: 'rgba(147, 51, 234, 0.15)',
+//   },
+//   cardHeader: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     marginBottom: 24,
+//     gap: 12,
+//   },
+//   iconBox: {
+//     padding: 10,
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     borderRadius: 16,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//   },
+//   cardTitle: {
+//     color: '#fff',
+//     fontSize: 18,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//   },
+//   inputContainer: {
+//     gap: 16,
+//   },
+//   textInputWrapper: {
+//     position: 'relative',
+//     justifyContent: 'center',
+//   },
+//   textInput: {
+//     backgroundColor: '#1a003d',
+//     borderRadius: 16,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     paddingHorizontal: 20,
+//     paddingVertical: 16,
+//     color: '#fff',
+//     fontSize: 14,
+//     fontWeight: 'bold',
+//     letterSpacing: 2,
+//   },
+//   checkIcon: {
+//     position: 'absolute',
+//     right: 15,
+//   },
+//   applyButton: {
+//     backgroundColor: '#7c3aed',
+//     height: 60,
+//     borderRadius: 16,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     shadowColor: '#7c3aed',
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.3,
+//     shadowRadius: 15,
+//     elevation: 8,
+//   },
+//   applyButtonText: {
+//     color: '#fff',
+//     fontSize: 12,
+//     fontWeight: '900',
+//     letterSpacing: 2,
+//   },
+//   termsText: {
+//     color: '#4b5563',
+//     fontSize: 10,
+//     fontWeight: 'bold',
+//     textAlign: 'center',
+//     marginTop: 20,
+//     lineHeight: 16,
+//   },
+//   offersSection: {
+//     gap: 16,
+//   },
+//   sectionLabel: {
+//     color: '#4b5563',
+//     fontSize: 10,
+//     fontWeight: '900',
+//     letterSpacing: 2,
+//     marginLeft: 8,
+//   },
+//   offerCard: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.03)',
+//     borderRadius: 32,
+//     padding: 20,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//   },
+//   offerRow: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//   },
+//   offerLeft: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     gap: 16,
+//     flex: 1,
+//   },
+//   offerIconBox: {
+//     padding: 12,
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     borderRadius: 16,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.05)',
+//   },
+//   offerTextContent: {
+//     flex: 1,
+//   },
+//   offerCode: {
+//     color: '#fff',
+//     fontSize: 14,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//   },
+//   offerDesc: {
+//     color: '#9ca3af',
+//     fontSize: 11,
+//     fontWeight: 'bold',
+//     marginTop: 4,
+//   },
+//   expiryBadge: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     paddingHorizontal: 10,
+//     paddingVertical: 5,
+//     borderRadius: 20,
+//   },
+//   expiryText: {
+//     color: '#6b7280',
+//     fontSize: 8,
+//     fontWeight: '900',
+//   },
+//   hintCard: {
+//     marginTop: 32,
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: 'rgba(79, 70, 229, 0.1)',
+//     borderRadius: 32,
+//     padding: 20,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.05)',
+//     gap: 16,
+//   },
+//   hintIconBox: {
+//     width: 48,
+//     height: 48,
+//     backgroundColor: '#facc15',
+//     borderRadius: 12,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     transform: [{ rotate: '-10deg' }],
+//   },
+//   hintText: {
+//     flex: 1,
+//     color: '#c7d2fe',
+//     fontSize: 12,
+//     fontWeight: 'bold',
+//     lineHeight: 18,
+//   },
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a003d',
+    backgroundColor: "#062530",
   },
+
+  /* ================= HEADER ================= */
+
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: 'rgba(26, 0, 61, 0.8)',
+    paddingVertical: 16,
+    backgroundColor: "#062530",
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+    borderBottomColor: "#104e64",
   },
+
   headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
+
   backButton: {
     padding: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 12,
+    backgroundColor: "rgba(255,255,255,0.06)",
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "rgba(255,255,255,0.12)",
   },
+
   headerText: {
-    marginLeft: 15,
+    marginLeft: 14,
   },
+
   headerTitle: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 20,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    letterSpacing: 0.5,
   },
+
   headerSub: {
-    color: '#a855f7',
+    color: "#facc15",
     fontSize: 9,
-    fontWeight: 'bold',
-    letterSpacing: 1,
+    fontWeight: "900",
+    letterSpacing: 1.5,
     marginTop: 2,
   },
+
+  /* ================= CONTENT ================= */
+
   scrollContent: {
     padding: 20,
     paddingBottom: 40,
   },
+
+  /* ================= REDEEM CARD ================= */
+
   redeemCard: {
-    backgroundColor: '#240056',
-    borderRadius: 40,
-    padding: 24,
+    backgroundColor: "#0b3442",
+    borderRadius: 36,
+    padding: 26,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    overflow: 'hidden',
-    marginBottom: 32,
+    borderColor: "#104e64",
+    overflow: "hidden",
+    marginBottom: 34,
   },
+
   glowEffect: {
-    position: 'absolute',
-    top: -50,
-    right: -50,
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: 'rgba(147, 51, 234, 0.15)',
+    position: "absolute",
+    top: -60,
+    right: -60,
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    backgroundColor: "rgba(250,204,21,0.15)",
   },
+
   cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 24,
     gap: 12,
   },
+
   iconBox: {
-    padding: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    padding: 12,
+    backgroundColor: "rgba(250,204,21,0.12)",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "rgba(250,204,21,0.35)",
   },
+
   cardTitle: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    letterSpacing: 1,
   },
+
   inputContainer: {
     gap: 16,
   },
+
   textInputWrapper: {
-    position: 'relative',
-    justifyContent: 'center',
+    position: "relative",
+    justifyContent: "center",
   },
+
   textInput: {
-    backgroundColor: '#1a003d',
-    borderRadius: 16,
+    backgroundColor: "#062530",
+    borderRadius: 18,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     paddingHorizontal: 20,
     paddingVertical: 16,
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "900",
     letterSpacing: 2,
   },
+
   checkIcon: {
-    position: 'absolute',
-    right: 15,
+    position: "absolute",
+    right: 16,
   },
+
   applyButton: {
-    backgroundColor: '#7c3aed',
+    backgroundColor: "#facc15",
     height: 60,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#7c3aed',
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#facc15",
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 15,
-    elevation: 8,
+    shadowOpacity: 0.35,
+    shadowRadius: 16,
+    elevation: 10,
   },
+
   applyButtonText: {
-    color: '#fff',
+    color: "#062530",
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2,
   },
+
   termsText: {
-    color: '#4b5563',
+    color: "#8fbac4",
     fontSize: 10,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 20,
+    fontWeight: "700",
+    textAlign: "center",
+    marginTop: 18,
     lineHeight: 16,
   },
+
+  /* ================= OFFERS ================= */
+
   offersSection: {
     gap: 16,
   },
+
   sectionLabel: {
-    color: '#4b5563',
+    color: "#8fbac4",
     fontSize: 10,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2,
     marginLeft: 8,
   },
+
   offerCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 32,
+    backgroundColor: "rgba(255,255,255,0.04)",
+    borderRadius: 30,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "rgba(255,255,255,0.08)",
   },
+
   offerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
+
   offerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
     flex: 1,
   },
+
   offerIconBox: {
     padding: 12,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: "rgba(255,255,255,0.06)",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderColor: "rgba(255,255,255,0.1)",
   },
+
   offerTextContent: {
     flex: 1,
   },
+
   offerCode: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    letterSpacing: 1,
   },
+
   offerDesc: {
-    color: '#9ca3af',
+    color: "#9ca3af",
     fontSize: 11,
-    fontWeight: 'bold',
+    fontWeight: "700",
     marginTop: 4,
   },
+
   expiryBadge: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: "rgba(250,204,21,0.15)",
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 6,
     borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "rgba(250,204,21,0.35)",
   },
+
   expiryText: {
-    color: '#6b7280',
+    color: "#facc15",
     fontSize: 8,
-    fontWeight: '900',
+    fontWeight: "900",
+    letterSpacing: 1,
   },
+
+  /* ================= HINT ================= */
+
   hintCard: {
     marginTop: 32,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(79, 70, 229, 0.1)',
-    borderRadius: 32,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(250,204,21,0.12)",
+    borderRadius: 30,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderColor: "rgba(250,204,21,0.35)",
     gap: 16,
   },
+
   hintIconBox: {
     width: 48,
     height: 48,
-    backgroundColor: '#facc15',
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    transform: [{ rotate: '-10deg' }],
+    backgroundColor: "#facc15",
+    borderRadius: 14,
+    justifyContent: "center",
+    alignItems: "center",
+    transform: [{ rotate: "-10deg" }],
   },
+
   hintText: {
     flex: 1,
-    color: '#c7d2fe',
+    color: "#ffffff",
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: "800",
     lineHeight: 18,
   },
 });

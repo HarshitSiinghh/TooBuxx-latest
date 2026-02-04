@@ -82,7 +82,8 @@ interface IdleProps {
           activeOpacity={0.9}
         >
           <LinearGradient
-            colors={['#4f46e5', '#2563eb']}
+            colors={['#facc15', '#eab308']
+}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.activateButton}
@@ -96,118 +97,258 @@ interface IdleProps {
   );
 };
 
+// const styles = StyleSheet.create({
+//   container: {
+//     gap: 24,
+//   },
+//   headerContainer: {
+//     gap: 4,
+//   },
+//   headerText: {
+//     color: 'white',
+//     fontSize: 32,
+//     fontWeight: '900',
+//     letterSpacing: -1,
+//   },
+//   headerTextGradient: {
+//     color: '#818cf8',
+//     fontSize: 32,
+//     fontWeight: '900',
+//     letterSpacing: -1,
+//   },
+//   card: {
+//     backgroundColor: 'rgba(255,255,255,0.03)',
+//     borderRadius: 28,
+//     padding: 24,
+//     gap: 24,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255,255,255,0.05)',
+//   },
+//   inputSection: {
+//     gap: 12,
+//   },
+//   labelRow: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     gap: 8,
+//   },
+//   label: {
+//     color: '#6b7280',
+//     fontSize: 11,
+//     fontWeight: '800',
+//     letterSpacing: 1,
+//     textTransform: 'uppercase',
+//   },
+//   inputWrapper: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: 'rgba(255,255,255,0.05)',
+//     borderRadius: 16,
+//     paddingHorizontal: 20,
+//     paddingVertical: 16,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255,255,255,0.1)',
+//   },
+//   currencySymbol: {
+//     color: 'white',
+//     fontSize: 24,
+//     fontWeight: '900',
+//     marginRight: 8,
+//   },
+//   textInput: {
+//     flex: 1,
+//     color: 'white',
+//     fontSize: 24,
+//     fontWeight: '900',
+//     padding: 0,
+//   },
+//   grid: {
+//     flexDirection: 'row',
+//     flexWrap: 'wrap',
+//     gap: 12,
+//   },
+//   gridButton: {
+//     flex: 1,
+//     minWidth: '45%',
+//     paddingVertical: 16,
+//     borderRadius: 14,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     borderWidth: 1,
+//   },
+//   gridButtonActive: {
+//     backgroundColor: 'rgba(99,102,241,0.2)',
+//     borderColor: 'rgba(99,102,241,0.4)',
+//   },
+//   gridButtonInactive: {
+//     backgroundColor: 'rgba(255,255,255,0.03)',
+//     borderColor: 'rgba(255,255,255,0.08)',
+//   },
+//   gridButtonText: {
+//     fontSize: 16,
+//     fontWeight: '800',
+//   },
+//   textWhite: {
+//     color: 'white',
+//   },
+//   textGray: {
+//     color: '#6b7280',
+//   },
+//   activateButton: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     gap: 8,
+//     paddingVertical: 18,
+//     borderRadius: 16,
+//   },
+//   activateButtonText: {
+//     color: 'white',
+//     fontSize: 14,
+//     fontWeight: '900',
+//     letterSpacing: 1,
+//     textTransform: 'uppercase',
+//   },
+// });
+
+ export default SipIdleView
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     gap: 24,
   },
+
   headerContainer: {
     gap: 4,
   },
+
   headerText: {
-    color: 'white',
+    color: "#ffffff",
     fontSize: 32,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: -1,
   },
+
   headerTextGradient: {
-    color: '#818cf8',
+    color: "#facc15", // gold headline
     fontSize: 32,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: -1,
   },
+
   card: {
-    backgroundColor: 'rgba(255,255,255,0.03)',
+    backgroundColor: "#0b3442",
     borderRadius: 28,
     padding: 24,
     gap: 24,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.05)',
+    borderColor: "#104e64",
   },
+
   inputSection: {
     gap: 12,
   },
+
   labelRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
+
   label: {
-    color: '#6b7280',
+    color: "#8fbac4",
     fontSize: 11,
-    fontWeight: '800',
+    fontWeight: "800",
     letterSpacing: 1,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
+
   inputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 16,
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
+    borderColor: "#104e64",
   },
+
   currencySymbol: {
-    color: 'white',
+    color: "#facc15",
     fontSize: 24,
-    fontWeight: '900',
+    fontWeight: "900",
     marginRight: 8,
+    fontStyle: "italic",
   },
+
   textInput: {
     flex: 1,
-    color: 'white',
+    color: "#ffffff",
     fontSize: 24,
-    fontWeight: '900',
+    fontWeight: "900",
     padding: 0,
   },
+
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 12,
   },
+
   gridButton: {
     flex: 1,
-    minWidth: '45%',
+    minWidth: "45%",
     paddingVertical: 16,
     borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
   },
+
   gridButtonActive: {
-    backgroundColor: 'rgba(99,102,241,0.2)',
-    borderColor: 'rgba(99,102,241,0.4)',
+    backgroundColor: "rgba(250,204,21,0.18)",
+    borderColor: "rgba(250,204,21,0.45)",
   },
+
   gridButtonInactive: {
-    backgroundColor: 'rgba(255,255,255,0.03)',
-    borderColor: 'rgba(255,255,255,0.08)',
+    backgroundColor: "rgba(16,78,100,0.25)",
+    borderColor: "#104e64",
   },
+
   gridButtonText: {
     fontSize: 16,
-    fontWeight: '800',
+    fontWeight: "800",
   },
+
   textWhite: {
-    color: 'white',
+    color: "#ffffff",
   },
+
   textGray: {
-    color: '#6b7280',
+    color: "#8fbac4",
   },
+
   activateButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 8,
     paddingVertical: 18,
     borderRadius: 16,
   },
+
   activateButtonText: {
-    color: 'white',
+    color: "#062530",
     fontSize: 14,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 1,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
+    fontStyle: "italic",
   },
 });
-
- export default SipIdleView

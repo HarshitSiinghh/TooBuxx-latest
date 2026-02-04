@@ -312,10 +312,11 @@ export default function WithdrawScreen() {
             },
           ]}
         >
-          <LinearGradient
-            colors={["#7c3aed", "#4f46e5"]}
-            style={styles.withdrawBtn}
-          >
+       <LinearGradient
+  colors={["#facc15", "#eab308"]}
+  style={styles.withdrawBtn}
+>
+
             <Text style={styles.withdrawText}>
               {submitting ? "PROCESSING..." : "AUTHORIZE WITHDRAWAL"}
             </Text>
@@ -403,185 +404,438 @@ export default function WithdrawScreen() {
 
 /* ================= STYLES ================= */
 
-const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#0f0225" },
-  container: { flex: 1 },
-  // scrollContent: {
-  //   paddingHorizontal: 20,
-  //   paddingTop: Platform.OS === "android" ? 10 : 0,
-  //   paddingBottom: 60,
-  // },
 
+
+
+// const styles = StyleSheet.create({
+//   safeArea: { flex: 1, backgroundColor: "#0a001a" },
+//   container: { flex: 1 },
+
+//   scrollContent: {
+//     paddingHorizontal: 20,
+//     paddingTop: 140,
+//     paddingBottom: 60,
+//   },
+
+//   loaderWrap: {
+//     flex: 1,
+//     backgroundColor: "#0a001a",
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+//   loaderText: { marginTop: 10, color: "#818cf8", fontWeight: "700" },
+
+//   header: {
+//     position: "absolute",
+//     top: 0,
+//     left: 0,
+//     right: 0,
+//     zIndex: 100,
+//     elevation: 10,
+//     flexDirection: "row",
+//     alignItems: "center",
+//     justifyContent: "space-between",
+//     paddingHorizontal: 20,
+//     paddingTop: Platform.OS === "android" ? 65 : 55,
+//     paddingBottom: 15,
+//     backgroundColor: "#0a001a",
+//     borderBottomWidth: 1,
+//     borderBottomColor: "rgba(255,255,255,0.06)",
+//   },
+
+//   backBtn: {
+//     width: 42,
+//     height: 42,
+//     borderRadius: 14,
+//     borderWidth: 1,
+//     borderColor: "rgba(251,191,36,0.3)",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     backgroundColor: "rgba(251,191,36,0.08)",
+//   },
+
+//   title: {
+//     color: "white",
+//     fontSize: 22,
+//     fontWeight: "900",
+//     textTransform: "uppercase",
+//   },
+
+//   priceChip: {
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     padding: 16,
+//     borderRadius: 14,
+//     marginBottom: 20,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.08)",
+//   },
+
+//   priceText: { color: "#818cf8", fontSize: 10, fontWeight: "800" },
+//   priceValue: { color: "#22c55e", fontSize: 14, fontWeight: "900" },
+
+//   tabsRow: { flexDirection: "row", gap: 8, marginBottom: 20 },
+//   tabBtn: {
+//     flex: 1,
+//     paddingVertical: 12,
+//     borderRadius: 12,
+//     backgroundColor: "rgba(255,255,255,0.04)",
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.08)",
+//     alignItems: "center",
+//   },
+//   activeTab: {
+//     backgroundColor: "rgba(129,140,248,0.2)",
+//     borderColor: "#818cf8",
+//   },
+//   tabText: { color: "#9ca3af", fontWeight: "800", fontSize: 10 },
+//   activeTabText: { color: "white" },
+
+//   infoCard: {
+//     backgroundColor: "rgba(255,255,255,0.04)",
+//     borderRadius: 20,
+//     padding: 20,
+//     marginBottom: 20,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.08)",
+//   },
+
+//   infoLabel: { fontSize: 10, color: "#9ca3af", fontWeight: "800" },
+//   infoValue: { color: "white", fontSize: 26, fontWeight: "900", marginTop: 4 },
+//   infoLabelSmall: { marginTop: 15, fontSize: 10, color: "#9ca3af", fontWeight: "800" },
+//   infoValueSmall: { marginTop: 4, fontSize: 18, color: "#22c55e", fontWeight: "900" },
+
+//   inputBox: { marginBottom: 20 },
+//   inputLabel: { color: "#9ca3af", fontSize: 10, fontWeight: "800", marginBottom: 8 },
+//   input: {
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 16,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//     paddingHorizontal: 18,
+//     paddingVertical: 14,
+//     fontSize: 24,
+//     color: "white",
+//     fontWeight: "900",
+//   },
+
+//   estimateBox: {
+//     backgroundColor: "rgba(255,255,255,0.04)",
+//     borderRadius: 16,
+//     padding: 16,
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     marginBottom: 25,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.08)",
+//   },
+
+//   estimateLabel: { fontSize: 9, color: "#9ca3af", fontWeight: "800" },
+//   estimateValue: { color: "#22c55e", fontSize: 18, fontWeight: "900" },
+//   estimateValueSmall: { marginTop: 4, color: "#e9d5ff", fontSize: 16, fontWeight: "900" },
+
+//   payoutCard: {
+//     backgroundColor: "rgba(255,255,255,0.04)",
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.08)",
+//     borderRadius: 16,
+//     padding: 16,
+//     marginTop: 10,
+//   },
+
+//   payoutActive: {
+//     borderColor: "#818cf8",
+//     backgroundColor: "rgba(129,140,248,0.25)",
+//   },
+
+//   payoutTitle: { color: "white", fontWeight: "800", fontSize: 14 },
+//   payoutSub: { color: "#9ca3af", marginTop: 4, fontSize: 11, fontWeight: "600" },
+
+//   mainBtnWrapper: { marginTop: 30 },
+//   withdrawBtn: { paddingVertical: 18, borderRadius: 18, alignItems: "center" },
+//   withdrawText: { color: "white", fontWeight: "900", fontSize: 12, letterSpacing: 2 },
+
+//   alertOverlay: {
+//     ...StyleSheet.absoluteFillObject,
+//     backgroundColor: "rgba(10,0,26,0.9)",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     zIndex: 9999,
+//   },
+
+//   alertBox: {
+//     width: "85%",
+//     backgroundColor: "#1a003d",
+//     borderRadius: 28,
+//     padding: 25,
+//     alignItems: "center",
+//     borderWidth: 1,
+//     borderColor: "rgba(129,140,248,0.4)",
+//   },
+
+//   alertIcon: { fontSize: 44, marginBottom: 10 },
+//   alertTitle: { fontSize: 18, fontWeight: "900", color: "white", marginBottom: 8 },
+//   alertMsg: { fontSize: 13, color: "#c7d2fe", textAlign: "center", marginBottom: 25 },
+
+//   alertBtnRow: { flexDirection: "row", gap: 12 },
+
+//   alertCancelBtn: {
+//     flex: 1,
+//     paddingVertical: 12,
+//     borderRadius: 12,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//     alignItems: "center",
+//   },
+
+//   alertCancelText: { color: "#9ca3af", fontSize: 12, fontWeight: "800" },
+
+//   alertAddBtn: {
+//     paddingVertical: 12,
+//     paddingHorizontal: 30,
+//     borderRadius: 12,
+//     backgroundColor: "#4f46e5",
+//     alignItems: "center",
+//   },
+
+//   alertAddText: { color: "white", fontSize: 12, fontWeight: "900" },
+// });
+const styles = StyleSheet.create({
+  safeArea: { flex: 1, backgroundColor: "#062530" },
+  container: { flex: 1 },
 
   scrollContent: {
-  paddingHorizontal: 20,
-  paddingTop: 140, // 🔥 header height ke barabar / thoda zyada
-  paddingBottom: 60,
-},
+    paddingHorizontal: 20,
+    paddingTop: 140,
+    paddingBottom: 60,
+  },
+
   loaderWrap: {
     flex: 1,
-    backgroundColor: "#0f0225",
+    backgroundColor: "#062530",
     justifyContent: "center",
     alignItems: "center",
   },
-  loaderText: { marginTop: 10, color: "#a78bfa", fontWeight: "700" },
-  // header: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "space-between",
-  //   marginVertical: 20,
-  //   paddingVertical: 43,
-  // },
-
-
+  loaderText: { marginTop: 10, color: "#8fbac4", fontWeight: "700" },
 
   header: {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  zIndex: 100,
-  elevation: 10, // android shadow layer
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  paddingHorizontal: 20,
-  paddingTop: Platform.OS === "android" ? 65 : 55,
-  paddingBottom: 15,
-  backgroundColor: "#0f0225", // solid so scroll ke time transparent na ho
-  borderBottomWidth: 1,
-  borderBottomColor: "rgba(255,255,255,0.06)",
-},
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 100,
+    elevation: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingTop: Platform.OS === "android" ? 65 : 55,
+    paddingBottom: 15,
+    backgroundColor: "#062530",
+    borderBottomWidth: 1,
+    borderBottomColor: "#104e64",
+  },
+
   backBtn: {
     width: 42,
     height: 42,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "rgba(251,191,36,0.3)",
+    borderColor: "rgba(250,204,21,0.35)",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(251,191,36,0.08)",
+    backgroundColor: "rgba(250,204,21,0.12)",
   },
+
   title: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 22,
     fontWeight: "900",
     textTransform: "uppercase",
   },
+
   priceChip: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     padding: 16,
     borderRadius: 14,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
   },
-  priceText: { color: "#a78bfa", fontSize: 10, fontWeight: "800" },
+
+  priceText: { color: "#facc15", fontSize: 10, fontWeight: "800" },
   priceValue: { color: "#22c55e", fontSize: 14, fontWeight: "900" },
+
   tabsRow: { flexDirection: "row", gap: 8, marginBottom: 20 },
+
   tabBtn: {
     flex: 1,
     paddingVertical: 12,
     borderRadius: 12,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.25)",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "#104e64",
     alignItems: "center",
   },
-  activeTab: { backgroundColor: "rgba(124,58,237,0.25)", borderColor: "#7c3aed" },
-  tabText: { color: "#9ca3af", fontWeight: "800", fontSize: 10 },
-  activeTabText: { color: "white" },
+
+  activeTab: {
+    backgroundColor: "rgba(250,204,21,0.18)",
+    borderColor: "#facc15",
+  },
+
+  tabText: { color: "#8fbac4", fontWeight: "800", fontSize: 10 },
+  activeTabText: { color: "#ffffff" },
+
   infoCard: {
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "#0b3442",
     borderRadius: 20,
     padding: 20,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "#104e64",
   },
-  infoLabel: { fontSize: 10, color: "#9ca3af", fontWeight: "800" },
-  infoValue: { color: "white", fontSize: 26, fontWeight: "900", marginTop: 4 },
-  infoLabelSmall: { marginTop: 15, fontSize: 10, color: "#9ca3af", fontWeight: "800" },
+
+  infoLabel: { fontSize: 10, color: "#8fbac4", fontWeight: "800" },
+  infoValue: { color: "#ffffff", fontSize: 26, fontWeight: "900", marginTop: 4 },
+  infoLabelSmall: { marginTop: 15, fontSize: 10, color: "#8fbac4", fontWeight: "800" },
   infoValueSmall: { marginTop: 4, fontSize: 18, color: "#22c55e", fontWeight: "900" },
+
   inputBox: { marginBottom: 20 },
-  inputLabel: { color: "#9ca3af", fontSize: 10, fontWeight: "800", marginBottom: 8 },
+
+  inputLabel: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "800",
+    marginBottom: 8,
+  },
+
   input: {
-    backgroundColor: "#14052d",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
     paddingHorizontal: 18,
     paddingVertical: 14,
     fontSize: 24,
-    color: "white",
+    color: "#ffffff",
     fontWeight: "900",
   },
+
   estimateBox: {
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     borderRadius: 16,
     padding: 16,
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 25,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "#104e64",
   },
-  estimateLabel: { fontSize: 9, color: "#9ca3af", fontWeight: "800" },
+
+  estimateLabel: { fontSize: 9, color: "#8fbac4", fontWeight: "800" },
   estimateValue: { color: "#22c55e", fontSize: 18, fontWeight: "900" },
-  estimateValueSmall: { marginTop: 4, color: "#e9d5ff", fontSize: 16, fontWeight: "900" },
+  estimateValueSmall: {
+    marginTop: 4,
+    color: "#facc15",
+    fontSize: 16,
+    fontWeight: "900",
+  },
+
   payoutCard: {
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.3)",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "#104e64",
     borderRadius: 16,
     padding: 16,
     marginTop: 10,
   },
-  payoutActive: { borderColor: "#7c3aed", backgroundColor: "rgba(124,58,237,0.25)" },
-  payoutTitle: { color: "white", fontWeight: "800", fontSize: 14 },
-  payoutSub: { color: "#9ca3af", marginTop: 4, fontSize: 11, fontWeight: "600" },
+
+  payoutActive: {
+    borderColor: "#facc15",
+    backgroundColor: "rgba(250,204,21,0.18)",
+  },
+
+  payoutTitle: { color: "#ffffff", fontWeight: "800", fontSize: 14 },
+  payoutSub: { color: "#8fbac4", marginTop: 4, fontSize: 11, fontWeight: "600" },
+
   mainBtnWrapper: { marginTop: 30 },
-  withdrawBtn: { paddingVertical: 18, borderRadius: 18, alignItems: "center" },
-  withdrawText: { color: "white", fontWeight: "900", fontSize: 12, letterSpacing: 2 },
+
+  withdrawBtn: {
+    paddingVertical: 18,
+    borderRadius: 18,
+    alignItems: "center",
+  },
+
+  withdrawText: {
+    color: "#062530",
+    fontWeight: "900",
+    fontSize: 12,
+    letterSpacing: 2,
+  },
 
   alertOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(5,0,15,0.9)",
+    backgroundColor: "rgba(6,37,48,0.92)",
     justifyContent: "center",
     alignItems: "center",
     zIndex: 9999,
   },
+
   alertBox: {
     width: "85%",
-    backgroundColor: "#0f0225",
-    borderRadius: 24,
+    backgroundColor: "#0b3442",
+    borderRadius: 28,
     padding: 25,
     alignItems: "center",
-    borderWidth: 1.5,
-    borderColor: "rgba(124,58,237,0.5)",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
+
   alertIcon: { fontSize: 44, marginBottom: 10 },
-  alertTitle: { fontSize: 18, fontWeight: "900", color: "white", marginBottom: 8 },
-  alertMsg: { fontSize: 13, color: "#c4b5fd", textAlign: "center", marginBottom: 25 },
+
+  alertTitle: {
+    fontSize: 18,
+    fontWeight: "900",
+    color: "#ffffff",
+    marginBottom: 8,
+  },
+
+  alertMsg: {
+    fontSize: 13,
+    color: "#8fbac4",
+    textAlign: "center",
+    marginBottom: 25,
+  },
+
   alertBtnRow: { flexDirection: "row", gap: 12 },
+
   alertCancelBtn: {
     flex: 1,
     paddingVertical: 12,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
     alignItems: "center",
   },
-  alertCancelText: { color: "#9ca3af", fontSize: 12, fontWeight: "800" },
+
+  alertCancelText: { color: "#8fbac4", fontSize: 12, fontWeight: "800" },
+
   alertAddBtn: {
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 12,
-    backgroundColor: "#7c3aed",
+    backgroundColor: "#facc15",
     alignItems: "center",
   },
-  alertAddText: { color: "white", fontSize: 12, fontWeight: "900" },
+
+  alertAddText: {
+    color: "#062530",
+    fontSize: 12,
+    fontWeight: "900",
+  },
 });

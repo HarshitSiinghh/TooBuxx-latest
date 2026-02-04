@@ -80,107 +80,237 @@ interface StopModalProps {
   );
 };
 
+// const styles = StyleSheet.create({
+//   backdrop: {
+//     flex: 1,
+//     backgroundColor: 'rgba(10, 0, 26, 0.8)', // #0a001a/80
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     padding: 24,
+//   },
+//   centeredView: {
+//     width: '100%',
+//     maxWidth: 400,
+//   },
+//   modalView: {
+//     backgroundColor: '#1a003d',
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     borderRadius: 40,
+//     padding: 32,
+//     shadowColor: '#000',
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.5,
+//     shadowRadius: 20,
+//     elevation: 10,
+//   },
+//   closeButton: {
+//     position: 'absolute',
+//     right: 24,
+//     top: 24,
+//     padding: 8,
+//     borderRadius: 99,
+//   },
+//   content: {
+//     alignItems: 'center',
+//   },
+//   iconContainer: {
+//     width: 64,
+//     height: 64,
+//     backgroundColor: 'rgba(239, 68, 68, 0.1)', // red-500/10
+//     borderRadius: 16,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     borderWidth: 1,
+//     borderColor: 'rgba(239, 68, 68, 0.2)',
+//     marginBottom: 24,
+//   },
+//   textContainer: {
+//     alignItems: 'center',
+//     marginBottom: 32,
+//   },
+//   title: {
+//     fontSize: 24,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     color: '#ffffff',
+//     textAlign: 'center',
+//     marginBottom: 8,
+//     letterSpacing: -0.5,
+//   },
+//   description: {
+//     fontSize: 14,
+//     color: '#9ca3af',
+//     textAlign: 'center',
+//     lineHeight: 20,
+//     paddingHorizontal: 10,
+//   },
+//   streakHighlight: {
+//     color: '#f97316', // orange-500
+//     fontWeight: '700',
+//   },
+//   buttonContainer: {
+//     flexDirection: 'column', // Stacked on mobile for better touch targets
+//     gap: 12,
+//     width: '100%',
+//   },
+//   button: {
+//     width: '100%',
+//     paddingVertical: 18,
+//     borderRadius: 20,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   cancelButton: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//   },
+//   stopButton: {
+//     backgroundColor: '#dc2626', // red-600
+//     shadowColor: '#dc2626',
+//     shadowOffset: { width: 0, height: 4 },
+//     shadowOpacity: 0.2,
+//     shadowRadius: 8,
+//     elevation: 4,
+//   },
+//   cancelText: {
+//     color: '#ffffff',
+//     fontSize: 12,
+//     fontWeight: '900',
+//   },
+//   stopText: {
+//     color: '#ffffff',
+//     fontSize: 12,
+//     fontWeight: '900',
+//   },
+// });
+
+
+
+
+
+export default StopConfirmationModal
 const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
-    backgroundColor: 'rgba(10, 0, 26, 0.8)', // #0a001a/80
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "rgba(6,37,48,0.9)", // #062530 overlay
+    justifyContent: "center",
+    alignItems: "center",
     padding: 24,
   },
+
   centeredView: {
-    width: '100%',
+    width: "100%",
     maxWidth: 400,
   },
+
   modalView: {
-    backgroundColor: '#1a003d',
+    backgroundColor: "#0b3442",
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     borderRadius: 40,
     padding: 32,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.45,
     shadowRadius: 20,
     elevation: 10,
   },
+
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 24,
     top: 24,
     padding: 8,
     borderRadius: 99,
   },
+
   content: {
-    alignItems: 'center',
+    alignItems: "center",
   },
+
   iconContainer: {
     width: 64,
     height: 64,
-    backgroundColor: 'rgba(239, 68, 68, 0.1)', // red-500/10
+    backgroundColor: "rgba(239,68,68,0.15)", // danger red tint
     borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
-    borderColor: 'rgba(239, 68, 68, 0.2)',
+    borderColor: "rgba(239,68,68,0.35)",
     marginBottom: 24,
   },
+
   textContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
   },
+
   title: {
     fontSize: 24,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    color: '#ffffff',
-    textAlign: 'center',
+    fontWeight: "900",
+    fontStyle: "italic",
+    color: "#ffffff",
+    textAlign: "center",
     marginBottom: 8,
     letterSpacing: -0.5,
   },
+
   description: {
     fontSize: 14,
-    color: '#9ca3af',
-    textAlign: 'center',
+    color: "#8fbac4",
+    textAlign: "center",
     lineHeight: 20,
     paddingHorizontal: 10,
   },
+
   streakHighlight: {
-    color: '#f97316', // orange-500
-    fontWeight: '700',
+    color: "#facc15", // gold emphasis instead of orange
+    fontWeight: "700",
   },
+
   buttonContainer: {
-    flexDirection: 'column', // Stacked on mobile for better touch targets
+    flexDirection: "column",
     gap: 12,
-    width: '100%',
+    width: "100%",
   },
+
   button: {
-    width: '100%',
+    width: "100%",
     paddingVertical: 18,
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
+
   cancelButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
+
   stopButton: {
-    backgroundColor: '#dc2626', // red-600
-    shadowColor: '#dc2626',
+    backgroundColor: "#dc2626", // keep danger red
+    shadowColor: "#dc2626",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 4,
   },
+
   cancelText: {
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
+    letterSpacing: 1,
   },
+
   stopText: {
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
+    letterSpacing: 1,
   },
 });
- export default StopConfirmationModal
+
+
+

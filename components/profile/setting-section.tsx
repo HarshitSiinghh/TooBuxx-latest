@@ -43,7 +43,7 @@ export const SettingSection = () => {
     // },
     {
       icon: "user",
-      label: "Add a Nominee",
+      label: "Nominee Details ",
       route: "/profile/nominee" as Href,
     },
     {
@@ -61,11 +61,11 @@ export const SettingSection = () => {
       label: "Payment Details",
       route: "/profile/paymentdetails", // Changed to action to toggle hovercard
     },
-    {
-      icon: "globe",
-      label: "Change App Language",
-      route: "/profile/language" as Href,
-    },
+    // {
+    //   icon: "globe",
+    //   label: "Change App Language",
+    //   route: "/profile/language" as Href,
+    // },
     {
       icon: "log-out",
       label: "Logout",
@@ -164,20 +164,67 @@ export const SettingSection = () => {
 };
 /* ================= STYLES ================= */
 
+// const styles = StyleSheet.create({
+//   wrapper: {
+//     backgroundColor: "#2d1b4e",
+//     padding: 12,
+//     borderRadius: 16,
+//     marginBottom: 10,
+//   },
+
+//   heading: {
+//     color: "white",
+//     fontSize: 14,
+//     fontWeight: "800",
+//     marginBottom: 8,
+//     letterSpacing: 0.5,
+//   },
+
+//   list: {
+//     gap: 6,
+//   },
+
+//   item: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     justifyContent: "space-between",
+//     padding: 10,
+//     borderRadius: 12,
+//   },
+
+//   left: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     gap: 10,
+//   },
+
+//   label: {
+//     fontSize: 13,
+//     fontWeight: "600",
+//     color: "#d1d5db",
+//   },
+// });
+
+
+
+
+
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: "#2d1b4e",
-    padding: 12,
-    borderRadius: 16,
-    marginBottom: 10,
+    backgroundColor: "#0b3442",
+    padding: 14,
+    borderRadius: 20,
+    marginBottom: 14,
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
   heading: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 14,
-    fontWeight: "800",
-    marginBottom: 8,
-    letterSpacing: 0.5,
+    fontWeight: "900",
+    marginBottom: 10,
+    letterSpacing: 1,
   },
 
   list: {
@@ -188,19 +235,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 10,
-    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 14,
+    backgroundColor: "rgba(255,255,255,0.03)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.06)",
   },
 
   left: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 12,
   },
 
   label: {
     fontSize: 13,
-    fontWeight: "600",
-    color: "#d1d5db",
+    fontWeight: "800",
+    color: "#8fbac4",
+    letterSpacing: 0.3,
   },
 });

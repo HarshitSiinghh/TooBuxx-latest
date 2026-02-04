@@ -82,99 +82,215 @@ interface StopModalProps {
   );
 };
 
+// const styles = StyleSheet.create({
+//   backdrop: {
+//     flex: 1,
+//     backgroundColor: 'rgba(0, 0, 0, 0.85)',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     padding: 20,
+//   },
+//   centeredView: {
+//     width: '100%',
+//     maxWidth: 400,
+//   },
+//   modalView: {
+//     backgroundColor: '#1a003d',
+//     borderRadius: 40,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     padding: 32,
+//     position: 'relative',
+//     overflow: 'hidden',
+//     shadowColor: '#000',
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.5,
+//     shadowRadius: 20,
+//     elevation: 10,
+//   },
+//   closeButton: {
+//     position: 'absolute',
+//     top: 24,
+//     right: 24,
+//     zIndex: 10,
+//   },
+//   content: {
+//     alignItems: 'center',
+//   },
+//   iconCircle: {
+//     width: 80,
+//     height: 80,
+//     backgroundColor: 'rgba(239, 68, 68, 0.1)',
+//     borderRadius: 40,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     marginBottom: 24,
+//   },
+//   textSection: {
+//     alignItems: 'center',
+//     marginBottom: 32,
+//   },
+//   titleText: {
+//     color: 'white',
+//     fontSize: 24,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     textTransform: 'uppercase',
+//     letterSpacing: -0.5,
+//     marginBottom: 12,
+//   },
+//   descriptionText: {
+//     color: '#9ca3af',
+//     fontSize: 14,
+//     textAlign: 'center',
+//     lineHeight: 22,
+//     fontWeight: '500',
+//   },
+//   buttonStack: {
+//     width: '100%',
+//     gap: 12,
+//   },
+//   confirmBtn: {
+//     backgroundColor: '#dc2626',
+//     paddingVertical: 18,
+//     borderRadius: 20,
+//     alignItems: 'center',
+//   },
+//   confirmBtnText: {
+//     color: 'white',
+//     fontSize: 12,
+//     fontWeight: '900',
+//     letterSpacing: 1.5,
+//     fontStyle: 'italic',
+//   },
+//   cancelBtn: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     paddingVertical: 18,
+//     borderRadius: 20,
+//     alignItems: 'center',
+//   },
+//   cancelBtnText: {
+//     color: '#9ca3af',
+//     fontSize: 12,
+//     fontWeight: '900',
+//     letterSpacing: 1.5,
+//   },
+// });
+
+ export default StopModal
+
+
+
+
+
 const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.85)',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "rgba(6,37,48,0.9)", // #062530 overlay
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
+
   centeredView: {
-    width: '100%',
+    width: "100%",
     maxWidth: 400,
   },
+
   modalView: {
-    backgroundColor: '#1a003d',
+    backgroundColor: "#0b3442",
     borderRadius: 40,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     padding: 32,
-    position: 'relative',
-    overflow: 'hidden',
-    shadowColor: '#000',
+    position: "relative",
+    overflow: "hidden",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.45,
     shadowRadius: 20,
     elevation: 10,
   },
+
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 24,
     right: 24,
     zIndex: 10,
   },
+
   content: {
-    alignItems: 'center',
+    alignItems: "center",
   },
+
   iconCircle: {
     width: 80,
     height: 80,
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    backgroundColor: "rgba(239,68,68,0.15)", // danger tint
     borderRadius: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 24,
+    borderWidth: 1,
+    borderColor: "rgba(239,68,68,0.35)",
   },
+
   textSection: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
   },
+
   titleText: {
-    color: 'white',
+    color: "#ffffff",
     fontSize: 24,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    textTransform: 'uppercase',
+    fontWeight: "900",
+    fontStyle: "italic",
+    textTransform: "uppercase",
     letterSpacing: -0.5,
     marginBottom: 12,
   },
+
   descriptionText: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 14,
-    textAlign: 'center',
+    textAlign: "center",
     lineHeight: 22,
-    fontWeight: '500',
+    fontWeight: "500",
   },
+
   buttonStack: {
-    width: '100%',
+    width: "100%",
     gap: 12,
   },
+
   confirmBtn: {
-    backgroundColor: '#dc2626',
+    backgroundColor: "#dc2626", // keep danger red
     paddingVertical: 18,
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
+
   confirmBtnText: {
-    color: 'white',
+    color: "#ffffff",
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 1.5,
-    fontStyle: 'italic',
+    fontStyle: "italic",
   },
+
   cancelBtn: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: "rgba(16,78,100,0.35)",
     paddingVertical: 18,
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
+
   cancelBtnText: {
-    color: '#9ca3af',
+    color: "#ffffff",
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 1.5,
   },
 });
-
- export default StopModal

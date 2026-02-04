@@ -2,6 +2,11 @@
 
 import { useRouter } from 'expo-router';
 import { LockKeyhole, Mail, ShieldCheck } from 'lucide-react-native';
+
+// import { StyleSheet } from 'react-native';
+// import { colors } from '@/theme/colors';
+//  import { Colors } from '@/constants/theme';
+// import { colors } from '@/constants/theme';
 import React, { useState } from 'react';
 import {
   Dimensions,
@@ -146,127 +151,282 @@ export default function LoginPage() {
   );
 }
 
-const styles = StyleSheet.create({
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#0a0118', // Image jaisa deep dark background
+//   },
+//   flex: {
+//     flex: 1,
+//   },
+//   scrollContent: {
+//     flexGrow: 1,
+//     justifyContent: 'center',
+//     padding: 24,
+//   },
+//   loginCard: {
+//     backgroundColor: '#15052d', // Image wala purple-black card color
+//     borderRadius: 60, // Image ki tarah bahut rounded corners
+//     paddingHorizontal: 30,
+//     paddingVertical: 50,
+//     borderWidth: 1,
+//     borderColor: '#241244',
+//   },
+//   header: {
+//     alignItems: 'center',
+//     marginBottom: 40,
+//   },
+//   iconCircle: {
+//     width: 60,
+//     height: 60,
+//     backgroundColor: '#1e0a3c',
+//     borderRadius: 20,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     marginBottom: 20,
+//     borderWidth: 1,
+//     borderColor: '#3a1a6b',
+//   },
+//   title: {
+//     color: '#fff',
+//     fontSize: 32,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     letterSpacing: 1,
+//   },
+//   subtitle: {
+//     color: '#9ca3af',
+//     fontSize: 10,
+//     fontWeight: 'bold',
+//     letterSpacing: 2,
+//     marginTop: 10,
+//     textTransform: 'uppercase',
+//   },
+//   form: {
+//     gap: 25,
+//   },
+//   inputGroup: {
+//     width: '100%',
+//   },
+//   label: {
+//     color: '#9ca3af',
+//     fontSize: 11,
+//     fontWeight: '800',
+//     letterSpacing: 1.5,
+//     marginBottom: 10,
+//     marginLeft: 5,
+//   },
+//   inputWrapper: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: '#0a0118', 
+//     borderRadius: 20,
+//     paddingHorizontal: 18,
+//     height: 65,
+//     borderWidth: 1,
+//     borderColor: '#241244',
+//   },
+//   inputIcon: {
+//     marginRight: 15,
+//   },
+//   input: {
+//     flex: 1,
+//     color: '#fff',
+//     fontSize: 15,
+//     fontWeight: '600',
+//   },
+//   button: {
+//     marginTop: 20,
+//     backgroundColor: '#7c3aed', // Purple Button
+//     height: 70,
+//     borderRadius: 25,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     // Glow effect
+//     shadowColor: '#7c3aed',
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.4,
+//     shadowRadius: 15,
+//     elevation: 8,
+//   },
+//   buttonText: {
+//     color: '#fff',
+//     fontSize: 16,
+//     fontWeight: '900',
+//     letterSpacing: 2,
+//   },
+//   footerLinkContainer: {
+//     marginTop: 40,
+//     alignItems: 'center',
+//   },
+//   footerLinkText: {
+//     color: '#9ca3af',
+//     fontSize: 13,
+//   },
+//   signUpText: {
+//     color: '#a855f7',
+//     fontWeight: '900',
+//   },
+//   copyright: {
+//     textAlign: 'center',
+//     color: '#4b5563',
+//     fontSize: 11,
+//     fontWeight: 'bold',
+//     letterSpacing: 3,
+//     marginTop: 40,
+//   },
+// });
+
+
+
+
+
+
+
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0a0118', // Image jaisa deep dark background
+    backgroundColor: "#062530",
   },
+
   flex: {
     flex: 1,
   },
+
   scrollContent: {
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 24,
   },
+
+  /* ================= CARD ================= */
   loginCard: {
-    backgroundColor: '#15052d', // Image wala purple-black card color
-    borderRadius: 60, // Image ki tarah bahut rounded corners
+    backgroundColor: "#0b3442",
+    borderRadius: 60,
     paddingHorizontal: 30,
     paddingVertical: 50,
     borderWidth: 1,
-    borderColor: '#241244',
+    borderColor: "#104e64",
   },
+
+  /* ================= HEADER ================= */
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 40,
   },
+
   iconCircle: {
     width: 60,
     height: 60,
-    backgroundColor: '#1e0a3c',
+    backgroundColor: "rgba(16, 78, 100, 0.4)",
     borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#3a1a6b',
+    borderColor: "#104e64",
   },
+
   title: {
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 32,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    fontStyle: "italic",
     letterSpacing: 1,
   },
+
   subtitle: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 10,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 2,
     marginTop: 10,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
+
+  /* ================= FORM ================= */
   form: {
     gap: 25,
   },
+
   inputGroup: {
-    width: '100%',
+    width: "100%",
   },
+
   label: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 11,
-    fontWeight: '800',
+    fontWeight: "800",
     letterSpacing: 1.5,
     marginBottom: 10,
     marginLeft: 5,
   },
+
   inputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#0a0118', 
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(16, 78, 100, 0.35)",
     borderRadius: 20,
     paddingHorizontal: 18,
     height: 65,
     borderWidth: 1,
-    borderColor: '#241244',
+    borderColor: "#104e64",
   },
+
   inputIcon: {
     marginRight: 15,
   },
+
   input: {
     flex: 1,
-    color: '#fff',
+    color: "#ffffff",
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: "600",
   },
+
+  /* ================= BUTTON ================= */
   button: {
     marginTop: 20,
-    backgroundColor: '#7c3aed', // Purple Button
+    backgroundColor: "#facc15",
     height: 70,
     borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // Glow effect
-    shadowColor: '#7c3aed',
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#facc15",
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.35,
     shadowRadius: 15,
     elevation: 8,
   },
+
   buttonText: {
-    color: '#fff',
+    color: "#062530",
     fontSize: 16,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2,
   },
+
+  /* ================= FOOTER ================= */
   footerLinkContainer: {
     marginTop: 40,
-    alignItems: 'center',
+    alignItems: "center",
   },
+
   footerLinkText: {
-    color: '#9ca3af',
+    color: "#8fbac4",
     fontSize: 13,
   },
+
   signUpText: {
-    color: '#a855f7',
-    fontWeight: '900',
+    color: "#facc15",
+    fontWeight: "900",
   },
+
   copyright: {
-    textAlign: 'center',
-    color: '#4b5563',
+    textAlign: "center",
+    color: "#6b9aa6",
     fontSize: 11,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 3,
     marginTop: 40,
   },

@@ -82,16 +82,42 @@ export function CarouselPrevious({ onPress, children }: ControlProps) {
 
 /* ================= STYLES ================= */
 
+// const styles = StyleSheet.create({
+//   root: {
+//     position: "relative",
+//   },
+//   btn: {
+//     marginTop: 14,
+//     alignSelf: "center",
+//     backgroundColor: "#4F46E5",
+//     paddingHorizontal: 18,
+//     paddingVertical: 10,
+//     borderRadius: 999,
+//   },
+// });
+
+
+
 const styles = StyleSheet.create({
   root: {
     position: "relative",
+    borderRadius: 20,
+    overflow: "hidden",
   },
+
   btn: {
     marginTop: 14,
     alignSelf: "center",
-    backgroundColor: "#4F46E5",
-    paddingHorizontal: 18,
-    paddingVertical: 10,
+    backgroundColor: "#facc15", // gold CTA
+    paddingHorizontal: 22,
+    paddingVertical: 12,
     borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "rgba(250,204,21,0.4)",
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.35,
+    shadowRadius: 16,
+    elevation: 6,
   },
 });

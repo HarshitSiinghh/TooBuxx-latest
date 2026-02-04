@@ -62,18 +62,39 @@ export default function AutoInvestCard() {
     </View>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#1a003d",
+    backgroundColor: "#104e64",
     borderRadius: 18,
     padding: 18,
     marginBottom: 20,
+
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+
+    // subtle depth
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    elevation: 6,
   },
 
   title: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: "600",
+    fontWeight: "800",
     marginBottom: 16,
     textAlign: "center",
   },
@@ -94,17 +115,18 @@ const styles = StyleSheet.create({
   },
 
   iconBox: {
-    backgroundColor: "#2a1d61",
+    backgroundColor: "rgba(255,255,255,0.12)", // glass feel
     padding: 14,
     borderRadius: 14,
     marginBottom: 4,
   },
 
   featureText: {
-    color: "#d1d5db",
+    color: "#c7e4ec",
     fontSize: 12,
     textAlign: "center",
     lineHeight: 16,
+    fontWeight: "600",
   },
 
   actions: {
@@ -114,29 +136,31 @@ const styles = StyleSheet.create({
 
   secondaryBtn: {
     flex: 1,
-    backgroundColor: "#2a1d61",
+    backgroundColor: "rgba(255,255,255,0.12)",
     paddingVertical: 14,
     borderRadius: 14,
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.2)",
   },
 
   primaryBtn: {
     flex: 1,
-    backgroundColor: "#4b26b4",
+    backgroundColor: "#facc15", // gold CTA
     paddingVertical: 14,
     borderRadius: 14,
     alignItems: "center",
   },
 
   secondaryText: {
-    color: "#d1d5db",
+    color: "#c7e4ec",
     fontSize: 13,
-    fontWeight: "500",
+    fontWeight: "600",
   },
 
   primaryText: {
-    color: "white",
+    color: "#062530", // dark teal text
     fontSize: 13,
-    fontWeight: "700",
+    fontWeight: "800",
   },
 });

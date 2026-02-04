@@ -47,59 +47,166 @@ export  function Learn() {
   );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const styles = StyleSheet.create({
+//   outerContainer: {
+//     width: '100%',
+//     padding: 16,
+//     backgroundColor: '#062530',
+//   },
+
+//   card: {
+//     backgroundColor: '#104e64',
+//     borderRadius: 24,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.08)',
+//     paddingVertical: 40,
+//     paddingHorizontal: 32,
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'space-between',
+//     shadowColor: '#000',
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.25,
+//     shadowRadius: 15,
+//     elevation: 8,
+//   },
+
+//   textStack: {
+//     flex: 1,
+//     gap: 12,
+//   },
+
+//   title: {
+//     fontSize: 20,
+//     fontWeight: '900',
+//     color: '#ffffff',
+//   },
+
+//   subtitle: {
+//     fontSize: 10,
+//     fontWeight: '900',
+//     color: 'rgba(143, 186, 196, 0.7)', // muted teal
+//     letterSpacing: 1.5,
+//   },
+
+//   button: {
+//     backgroundColor: '#facc15', // gold CTA
+//     alignSelf: 'flex-start',
+//     paddingHorizontal: 24,
+//     paddingVertical: 10,
+//     borderRadius: 12,
+//     marginTop: 4,
+//   },
+
+//   buttonText: {
+//     color: '#062530', // dark teal text
+//     fontSize: 10,
+//     fontWeight: '900',
+//     letterSpacing: 1.5,
+//   },
+
+//   coinImage: {
+//     height: 96,
+//     width: 96,
+//     marginLeft: 16,
+//     opacity: 0.95,
+//   },
+// });
+
+
+
+
+
 const styles = StyleSheet.create({
   outerContainer: {
-    width: '100%',
+    width: "100%",
     padding: 16,
+    backgroundColor: "#062530",
   },
+
   card: {
-    backgroundColor: '#2f2360',
+    backgroundColor: "#0b3442", // glass card
     borderRadius: 24,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderColor: "#104e64",
     paddingVertical: 40,
     paddingHorizontal: 32,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    shadowColor: '#000',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.25,
     shadowRadius: 15,
     elevation: 8,
   },
+
   textStack: {
     flex: 1,
     gap: 12,
   },
+
   title: {
     fontSize: 20,
-    fontWeight: '900',
-    color: '#ffffff',
+    fontWeight: "900",
+    color: "#ffffff",
   },
+
   subtitle: {
     fontSize: 10,
-    fontWeight: 'bold',
-    color: 'rgba(216, 180, 254, 0.4)', // purple-300/40
+    fontWeight: "900",
+    color: "#8fbac4",
     letterSpacing: 1.5,
   },
+
   button: {
-    backgroundColor: '#9333ea', // purple-600
-    alignSelf: 'flex-start',
+    backgroundColor: "#facc15",
+    alignSelf: "flex-start",
     paddingHorizontal: 24,
     paddingVertical: 10,
     borderRadius: 12,
     marginTop: 4,
+
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
+    elevation: 6,
   },
+
   buttonText: {
-    color: '#ffffff',
+    color: "#062530",
     fontSize: 10,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 1.5,
   },
+
   coinImage: {
     height: 96,
     width: 96,
     marginLeft: 16,
+    opacity: 0.95,
   },
 });

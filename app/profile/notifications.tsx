@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileTab() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#1a003d" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#062530" }}>
       <NotificationPage />
     </SafeAreaView>
   );

@@ -100,143 +100,345 @@ export default function DailyGoldSavings() {
   );
 }
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#1a003d",
+//   },
+//   headerContainer: {
+//     paddingVertical: 15,
+//     paddingHorizontal: 20,
+//     backgroundColor: "#1a003d",
+//     borderBottomWidth: 0.5,
+//     borderBottomColor: "#333",
+//   },
+//   headerText: {
+//     color: "#fff",
+//     fontSize: 18,
+//     fontWeight: "700",
+//     textAlign: "center",
+//   },
+//   scrollContent: {
+//     padding: 20,
+//     paddingBottom: 120, // Space for footer
+//   },
+//   banner: {
+//     backgroundColor: "#2d0b5a",
+//     borderRadius: 16,
+//     padding: 20,
+//     marginBottom: 25,
+//   },
+//   bannerTitle: {
+//     color: "#fff",
+//     fontSize: 20,
+//     fontWeight: "bold",
+//     marginBottom: 10,
+//   },
+//   features: {
+//     gap: 5,
+//   },
+//   feature: {
+//     color: "#ccc",
+//     fontSize: 13,
+//   },
+//   inputSection: {
+//     marginBottom: 25,
+//   },
+//   label: {
+//     color: "#aaa",
+//     fontSize: 14,
+//     marginBottom: 10,
+//   },
+//   amountBox: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderWidth: 1,
+//     borderColor: "#4c1d95",
+//     borderRadius: 12,
+//     padding: 15,
+//     marginBottom: 15,
+//   },
+//   currency: {
+//     color: "#fff",
+//     fontSize: 24,
+//     marginRight: 5,
+//   },
+//   amountText: {
+//     color: "#fff",
+//     fontSize: 26,
+//     fontWeight: "bold",
+//   },
+//   amountRow: {
+//     flexDirection: "row",
+//     marginHorizontal: -5, // Negative margin to align with content
+//   },
+//   amountRowContent: {
+//     paddingRight: 20, // Extra padding for last button
+//     gap: 10,
+//   },
+//   amountBtn: {
+//     borderWidth: 1,
+//     borderColor: "#7C3AED",
+//     paddingVertical: 8,
+//     paddingHorizontal: 15,
+//     borderRadius: 10,
+//     minWidth: 70,
+//     alignItems: "center",
+//   },
+//   activeBtn: {
+//     backgroundColor: "#7C3AED",
+//   },
+//   amountBtnText: {
+//     color: "#a78bfa",
+//     fontWeight: "600",
+//   },
+//   activeText: {
+//     color: "#fff",
+//   },
+//   infoBanner: {
+//     backgroundColor: "rgba(20, 83, 45, 0.3)",
+//     padding: 12,
+//     borderRadius: 10,
+//   },
+//   infoText: {
+//     color: "#6ee7b7",
+//     fontSize: 12,
+//     textAlign: "center",
+//   },
+//   footer: {
+//     position: "absolute",
+//     bottom: 0,
+//     width: "100%",
+//     backgroundColor: "#1a003d",
+//     padding: 20,
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     borderTopWidth: 1,
+//     borderTopColor: "#333",
+//   },
+//   footerAmount: {
+//     color: "#fff",
+//     fontSize: 22,
+//     fontWeight: "bold",
+//   },
+//   breakup: {
+//     color: "#a78bfa",
+//     fontSize: 12,
+//     textDecorationLine: "underline",
+//   },
+//   cta: {
+//     backgroundColor: "#7C3AED",
+//     paddingVertical: 14,
+//     paddingHorizontal: 25,
+//     borderRadius: 12,
+//   },
+//   ctaText: {
+//     color: "#fff",
+//     fontSize: 16,
+//     fontWeight: "bold",
+//   },
+// });
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#1a003d",
   },
+
+  /* ---------- HEADER ---------- */
   headerContainer: {
-    paddingVertical: 15,
+    paddingVertical: 16,
     paddingHorizontal: 20,
     backgroundColor: "#1a003d",
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#333",
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(255,255,255,0.06)",
   },
+
   headerText: {
-    color: "#fff",
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: "900",
+    letterSpacing: 0.6,
     textAlign: "center",
   },
+
+  /* ---------- SCROLL ---------- */
   scrollContent: {
     padding: 20,
-    paddingBottom: 120, // Space for footer
+    paddingBottom: 140,
   },
+
+  /* ---------- BANNER ---------- */
   banner: {
-    backgroundColor: "#2d0b5a",
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 25,
+    backgroundColor: "#240056",
+    borderRadius: 24,
+    padding: 22,
+    marginBottom: 28,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
   },
+
   bannerTitle: {
-    color: "#fff",
+    color: "#ffffff",
     fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
+    fontWeight: "900",
+    marginBottom: 14,
   },
+
   features: {
-    gap: 5,
+    gap: 6,
   },
+
   feature: {
-    color: "#ccc",
+    color: "#c7d2fe",
     fontSize: 13,
+    fontWeight: "600",
   },
+
+  /* ---------- INPUT ---------- */
   inputSection: {
-    marginBottom: 25,
+    marginBottom: 28,
   },
+
   label: {
-    color: "#aaa",
-    fontSize: 14,
-    marginBottom: 10,
+    color: "#9ca3af",
+    fontSize: 11,
+    fontWeight: "900",
+    letterSpacing: 1.5,
+    marginBottom: 12,
   },
+
   amountBox: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "rgba(255,255,255,0.05)",
     borderWidth: 1,
-    borderColor: "#4c1d95",
-    borderRadius: 12,
-    padding: 15,
-    marginBottom: 15,
+    borderColor: "rgba(168,85,247,0.35)",
+    borderRadius: 18,
+    paddingVertical: 18,
+    paddingHorizontal: 20,
+    marginBottom: 18,
   },
+
   currency: {
-    color: "#fff",
+    color: "#e9d5ff",
     fontSize: 24,
-    marginRight: 5,
+    fontWeight: "900",
+    marginRight: 6,
   },
+
   amountText: {
-    color: "#fff",
-    fontSize: 26,
-    fontWeight: "bold",
+    color: "#ffffff",
+    fontSize: 28,
+    fontWeight: "900",
+    letterSpacing: 0.5,
   },
+
+  /* ---------- AMOUNT ROW ---------- */
   amountRow: {
-    flexDirection: "row",
-    marginHorizontal: -5, // Negative margin to align with content
+    marginHorizontal: -4,
   },
+
   amountRowContent: {
-    paddingRight: 20, // Extra padding for last button
-    gap: 10,
+    paddingRight: 20,
+    gap: 12,
   },
+
   amountBtn: {
     borderWidth: 1,
-    borderColor: "#7C3AED",
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-    borderRadius: 10,
-    minWidth: 70,
+    borderColor: "rgba(168,85,247,0.45)",
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    borderRadius: 14,
+    minWidth: 72,
     alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.02)",
   },
+
   activeBtn: {
-    backgroundColor: "#7C3AED",
+    backgroundColor: "#7c3aed",
+    borderColor: "#7c3aed",
   },
+
   amountBtnText: {
-    color: "#a78bfa",
-    fontWeight: "600",
+    color: "#c4b5fd",
+    fontWeight: "800",
+    fontSize: 13,
   },
+
   activeText: {
-    color: "#fff",
+    color: "#ffffff",
   },
+
+  /* ---------- INFO ---------- */
   infoBanner: {
-    backgroundColor: "rgba(20, 83, 45, 0.3)",
-    padding: 12,
-    borderRadius: 10,
+    backgroundColor: "rgba(34,197,94,0.12)",
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "rgba(34,197,94,0.25)",
   },
+
   infoText: {
-    color: "#6ee7b7",
+    color: "#86efac",
     fontSize: 12,
+    fontWeight: "700",
     textAlign: "center",
   },
+
+  /* ---------- FOOTER ---------- */
   footer: {
     position: "absolute",
     bottom: 0,
     width: "100%",
     backgroundColor: "#1a003d",
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 18,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderTopWidth: 1,
-    borderTopColor: "#333",
+    borderTopColor: "rgba(255,255,255,0.08)",
   },
+
   footerAmount: {
-    color: "#fff",
-    fontSize: 22,
-    fontWeight: "bold",
+    color: "#ffffff",
+    fontSize: 24,
+    fontWeight: "900",
   },
+
   breakup: {
-    color: "#a78bfa",
-    fontSize: 12,
+    color: "#c4b5fd",
+    fontSize: 11,
+    fontWeight: "700",
+    marginTop: 2,
     textDecorationLine: "underline",
   },
+
   cta: {
-    backgroundColor: "#7C3AED",
+    backgroundColor: "#facc15",
     paddingVertical: 14,
-    paddingHorizontal: 25,
-    borderRadius: 12,
+    paddingHorizontal: 26,
+    borderRadius: 18,
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.35,
+    shadowRadius: 16,
+    elevation: 6,
   },
+
   ctaText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
+    color: "#1a003d",
+    fontSize: 14,
+    fontWeight: "900",
+    letterSpacing: 1,
   },
 });

@@ -1,10 +1,12 @@
 // // export const BASE_URL = "192.168.1.6:3001/api/v1";
 // export const BASE_URL = "https://trade.toobux.com/api/v1";
-
-
+// 
+// 
 // // export const BASE_URL = "http://192.168.1.13:3001/api/v1";
-// // export const BASE_URL = "http://10.0.2.2:3001/api/v1";
 export const BASE_URL = "http://10.0.2.2:3001/api/v1";
+
+
+// export const BASE_URL = "http://10.0.2.2:3001/api/v1";
 
 
 

@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  Clipboard ,
   Modal,
+  Alert,
   Dimensions,
   SafeAreaView,
   StatusBar,
@@ -34,9 +36,25 @@ export default function ManualDepositMobile() {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  
+const [showCopyToast, setShowCopyToast] = useState(false);
+const [copyText, setCopyText] = useState("");
 
   const upiId = "merchant@upi";
   const router = useRouter();
+
+
+  const handleCopyUpi = () => {
+  Clipboard.setString(upiId);
+  setCopyText("UPI ID copied successfully");
+  setShowCopyToast(true);
+
+  setTimeout(() => {
+    setShowCopyToast(false);
+  }, 2000);
+};
+
 
   // ✅ Pick real image
   const handlePickFile = async () => {
@@ -77,6 +95,8 @@ console.log("✅ DEPOSIT RESPONSE 👉", res);
 } {
       setLoading(false);
     }
+ 
+
   };
 
   return (
@@ -112,9 +132,11 @@ console.log("✅ DEPOSIT RESPONSE 👉", res);
               <Text style={styles.inputLabelSmall}>MERCHANT UPI ID</Text>
               <Text style={styles.upiText}>{upiId}</Text>
             </View>
+            <TouchableOpacity   onPress={handleCopyUpi}>
             <View style={styles.copyButton}>
               <Copy size={20} color="#a855f7" />
             </View>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -177,12 +199,19 @@ console.log("✅ DEPOSIT RESPONSE 👉", res);
           </View>
 
           <TouchableOpacity disabled={loading} onPress={handleDepositTrigger}>
-            <LinearGradient
+            {/* <LinearGradient
               colors={["#9333ea", "#4f46e5"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={styles.submitButton}
-            >
+            > */}
+            <LinearGradient
+  colors={["#facc15", "#eab308"]}
+  start={{ x: 0, y: 0 }}
+  end={{ x: 1, y: 0 }}
+  style={styles.submitButton}
+>
+
               <Text style={styles.submitButtonText}>
                 {loading ? "SUBMITTING..." : "CONFIRM DEPOSIT"}
               </Text>
@@ -262,91 +291,384 @@ console.log("✅ DEPOSIT RESPONSE 👉", res);
           </View>
         </View>
       </Modal>
+      {showCopyToast && (
+  <View style={styles.copyToast}>
+    <CheckCircle2 size={18} color="#22c55e" />
+    <Text style={styles.copyToastText}>{copyText}</Text>
+  </View>
+)}
+
     </SafeAreaView>
   );
 }
 
 
 
+// const styles = StyleSheet.create({
+//   container: { flex: 1, backgroundColor: "#1a003d" },
+//   header: {
+//     //  paddingVertical:70,
+//     flexDirection: "row",
+//     alignItems: "center",
+//     padding: 24,
+//     paddingTop:70,
+//     borderBottomWidth: 1,
+//     borderBottomColor: "rgba(255,255,255,0.1)",
+//   },
+//   backButton: {
+//     padding: 10,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 12,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//   },
+//   headerTitle: { fontSize: 20, fontWeight: "900", color: "#fff", fontStyle: "italic" },
+//   headerSubtitle: { fontSize: 10, color: "#a855f7", fontWeight: "bold", letterSpacing: 1 },
+//   scrollContent: { padding: 20,  },
+//   glassCard: {
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     borderRadius: 48,
+//     padding: 32,
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//     alignItems: "center",
+//   },
+//   stepLabel: { fontSize: 10, fontWeight: "900", color: "#a855f7", letterSpacing: 3, marginBottom: 24 },
+//   qrContainer: { backgroundColor: "#fff", padding: 16, borderRadius: 32, marginBottom: 32 },
+//   qrImage: { width: 180, height: 180 },
+//   upiRow: {
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     padding: 16,
+//     borderRadius: 16,
+//     width: "100%",
+//   },
+//   upiText: { color: "#fff", fontWeight: "900", fontSize: 14 },
+//   copyButton: { padding: 8, backgroundColor: "rgba(168,85,247,0.2)", borderRadius: 12 },
+//   infoBox: {
+//     flexDirection: "row",
+//     backgroundColor: "rgba(79,70,229,0.1)",
+//     padding: 16,
+//     borderRadius: 24,
+//     marginTop: 20,
+//     alignItems: "center",
+//   },
+//   infoIconContainer: { padding: 10, backgroundColor: "rgba(129,140,248,0.2)", borderRadius: 12, marginRight: 12 },
+//   infoText: { color: "rgba(199,210,254,0.7)", fontSize: 12, flex: 1, lineHeight: 18 },
+//   formHeader: { flexDirection: "row", alignItems: "center", alignSelf: "flex-start", marginBottom: 32 },
+//   formTitle: { color: "#fff", fontSize: 22, fontWeight: "900", marginLeft: 12, fontStyle: "italic" },
+//   inputGroup: { width: "100%", marginBottom: 32 },
+//   inputLabelSmall: { fontSize: 10, fontWeight: "900", color: "#6b7280", letterSpacing: 2, marginBottom: 8 },
+//   amountInputRow: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     borderBottomWidth: 4,
+//     borderBottomColor: "rgba(255,255,255,0.1)",
+//     paddingBottom: 8,
+//   },
+//   currencySymbol: { fontSize: 32, fontWeight: "900", color: "#4b5563", marginRight: 16, fontStyle: "italic" },
+//   textInput: { flex: 1, fontSize: 36, fontWeight: "900", color: "#fff", fontStyle: "italic" },
+//   uploadBox: {
+//     borderWidth: 2,
+//     borderStyle: "dashed",
+//     borderColor: "rgba(255,255,255,0.1)",
+//     backgroundColor: "rgba(255,255,255,0.02)",
+//     borderRadius: 32,
+//     padding: 40,
+//     alignItems: "center",
+//   },
+//   uploadBoxSuccess: { borderColor: "rgba(34,197,94,0.5)", backgroundColor: "rgba(34,197,94,0.05)" },
+//   uploadIconCircle: { padding: 16, backgroundColor: "rgba(168,85,247,0.1)", borderRadius: 16, marginBottom: 12 },
+//   uploadText: { color: "#9ca3af", fontWeight: "900", fontStyle: "italic", fontSize: 14 },
+//   fileName: { color: "#4ade80", fontWeight: "900", fontSize: 12, marginTop: 8 },
+//   submitButton: {
+//     width: "100%",
+//     padding: 20,
+//     borderRadius: 32,
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     shadowColor: "#9333ea",
+//     shadowOffset: { width: 0, height: 10 },
+//     shadowOpacity: 0.4,
+//     shadowRadius: 20,
+//   },
+//   submitButtonText: { color: "#fff", fontWeight: "900", fontSize: 18, fontStyle: "italic", marginRight: 12 },
+//   modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 },
+//   modalContent: {
+//     backgroundColor: "rgba(30,30,30,0.95)",
+//     borderRadius: 40,
+//     padding: 32,
+//     width: "100%",
+//     alignItems: "center",
+//     borderWidth: 1,
+//     borderColor: "rgba(255,255,255,0.1)",
+//     overflow: "hidden"
+//   },
+//   modalGlow: { position: "absolute", top: -50, width: 200, height: 200, borderRadius: 100, opacity: 0.5 },
+//   modalIconCircle: { padding: 16, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 20, marginBottom: 24, borderWidth: 1 },
+//   modalTitle: { fontSize: 28, fontWeight: "900", color: "#fff", fontStyle: "italic", marginBottom: 12 },
+//   modalMessage: { color: "#d1d5db", textAlign: "center", marginBottom: 24, lineHeight: 22, fontWeight: "500" },
+//   modalWindowBox: { backgroundColor: "rgba(255,255,255,0.05)", padding: 16, borderRadius: 16, width: "100%", marginBottom: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
+//   windowLabel: { color: "#9ca3af", fontSize: 10, fontWeight: "900", textAlign: "center", letterSpacing: 2 },
+//   windowTime: { color: "#fff", fontSize: 14, fontStyle: "italic", textAlign: "center", marginTop: 4, fontWeight: "700" },
+//   modalButton: { width: "100%", padding: 18, borderRadius: 20, alignItems: "center" },
+//   modalButtonText: { fontWeight: "900", fontStyle: "italic", letterSpacing: 2 },
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#1a003d" },
+  container: {
+    flex: 1,
+    backgroundColor: "#062530",
+  },
+
+  /* ================= HEADER ================= */
   header: {
-    //  paddingVertical:70,
     flexDirection: "row",
     alignItems: "center",
     padding: 24,
-    paddingTop:70,
+    paddingTop: 70,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.1)",
+    borderBottomColor: "#104e64",
+    backgroundColor: "#062530",
   },
+
   backButton: {
     padding: 10,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.4)",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
   },
-  headerTitle: { fontSize: 20, fontWeight: "900", color: "#fff", fontStyle: "italic" },
-  headerSubtitle: { fontSize: 10, color: "#a855f7", fontWeight: "bold", letterSpacing: 1 },
-  scrollContent: { padding: 20,  },
+
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "900",
+    color: "#ffffff",
+    fontStyle: "italic",
+  },
+
+  headerSubtitle: {
+    fontSize: 10,
+    color: "#facc15",
+    fontWeight: "bold",
+    letterSpacing: 1,
+  },
+
+  scrollContent: {
+    padding: 20,
+  },
+
+  /* ================= GLASS CARD ================= */
   glassCard: {
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "#0b3442",
     borderRadius: 48,
     padding: 32,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#104e64",
     alignItems: "center",
   },
-  stepLabel: { fontSize: 10, fontWeight: "900", color: "#a855f7", letterSpacing: 3, marginBottom: 24 },
-  qrContainer: { backgroundColor: "#fff", padding: 16, borderRadius: 32, marginBottom: 32 },
-  qrImage: { width: 180, height: 180 },
+
+  stepLabel: {
+    fontSize: 10,
+    fontWeight: "900",
+    color: "#facc15",
+    letterSpacing: 3,
+    marginBottom: 24,
+  },
+
+  qrContainer: {
+    backgroundColor: "#ffffff",
+    padding: 16,
+    borderRadius: 32,
+    marginBottom: 32,
+  },
+  copyToast: {
+  position: "absolute",
+  bottom: 100,
+  alignSelf: "center",
+  backgroundColor: "#020617",
+  paddingHorizontal: 20,
+  paddingVertical: 12,
+  borderRadius: 30,
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+  borderWidth: 1,
+  borderColor: "rgba(34,197,94,0.4)",
+  elevation: 10,
+},
+
+copyToastText: {
+  color: "#22c55e",
+  fontSize: 14,
+  fontWeight: "600",
+},
+
+
+  qrImage: {
+    width: 180,
+    height: 180,
+  },
+
   upiRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     padding: 16,
     borderRadius: 16,
     width: "100%",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
-  upiText: { color: "#fff", fontWeight: "900", fontSize: 14 },
-  copyButton: { padding: 8, backgroundColor: "rgba(168,85,247,0.2)", borderRadius: 12 },
+
+  upiText: {
+    color: "#ffffff",
+    fontWeight: "900",
+    fontSize: 14,
+  },
+
+  copyButton: {
+    padding: 8,
+    backgroundColor: "rgba(250,204,21,0.15)",
+    borderRadius: 12,
+  },
+
+  /* ================= INFO ================= */
   infoBox: {
     flexDirection: "row",
-    backgroundColor: "rgba(79,70,229,0.1)",
+    backgroundColor: "rgba(250,204,21,0.12)",
     padding: 16,
     borderRadius: 24,
     marginTop: 20,
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(250,204,21,0.3)",
   },
-  infoIconContainer: { padding: 10, backgroundColor: "rgba(129,140,248,0.2)", borderRadius: 12, marginRight: 12 },
-  infoText: { color: "rgba(199,210,254,0.7)", fontSize: 12, flex: 1, lineHeight: 18 },
-  formHeader: { flexDirection: "row", alignItems: "center", alignSelf: "flex-start", marginBottom: 32 },
-  formTitle: { color: "#fff", fontSize: 22, fontWeight: "900", marginLeft: 12, fontStyle: "italic" },
-  inputGroup: { width: "100%", marginBottom: 32 },
-  inputLabelSmall: { fontSize: 10, fontWeight: "900", color: "#6b7280", letterSpacing: 2, marginBottom: 8 },
+
+  infoIconContainer: {
+    padding: 10,
+    backgroundColor: "rgba(250,204,21,0.25)",
+    borderRadius: 12,
+    marginRight: 12,
+  },
+
+  infoText: {
+    color: "#ffffff",
+    fontSize: 12,
+    flex: 1,
+    lineHeight: 18,
+  },
+
+  /* ================= FORM ================= */
+  formHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
+    marginBottom: 32,
+  },
+
+  formTitle: {
+    color: "#ffffff",
+    fontSize: 22,
+    fontWeight: "900",
+    marginLeft: 12,
+    fontStyle: "italic",
+  },
+
+  inputGroup: {
+    width: "100%",
+    marginBottom: 32,
+  },
+
+  inputLabelSmall: {
+    fontSize: 10,
+    fontWeight: "900",
+    color: "#8fbac4",
+    letterSpacing: 2,
+    marginBottom: 8,
+  },
+
   amountInputRow: {
     flexDirection: "row",
     alignItems: "center",
-    borderBottomWidth: 4,
-    borderBottomColor: "rgba(255,255,255,0.1)",
+    borderBottomWidth: 3,
+    borderBottomColor: "#104e64",
     paddingBottom: 8,
   },
-  currencySymbol: { fontSize: 32, fontWeight: "900", color: "#4b5563", marginRight: 16, fontStyle: "italic" },
-  textInput: { flex: 1, fontSize: 36, fontWeight: "900", color: "#fff", fontStyle: "italic" },
+
+  currencySymbol: {
+    fontSize: 32,
+    fontWeight: "900",
+    color: "#facc15",
+    marginRight: 16,
+    fontStyle: "italic",
+  },
+
+  textInput: {
+    flex: 1,
+    fontSize: 36,
+    fontWeight: "900",
+    color: "#ffffff",
+    fontStyle: "italic",
+  },
+
   uploadBox: {
     borderWidth: 2,
     borderStyle: "dashed",
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(255,255,255,0.02)",
+    borderColor: "#104e64",
+    backgroundColor: "rgba(16,78,100,0.25)",
     borderRadius: 32,
     padding: 40,
     alignItems: "center",
   },
-  uploadBoxSuccess: { borderColor: "rgba(34,197,94,0.5)", backgroundColor: "rgba(34,197,94,0.05)" },
-  uploadIconCircle: { padding: 16, backgroundColor: "rgba(168,85,247,0.1)", borderRadius: 16, marginBottom: 12 },
-  uploadText: { color: "#9ca3af", fontWeight: "900", fontStyle: "italic", fontSize: 14 },
-  fileName: { color: "#4ade80", fontWeight: "900", fontSize: 12, marginTop: 8 },
+
+  uploadBoxSuccess: {
+    borderColor: "#22c55e",
+    backgroundColor: "rgba(34,197,94,0.15)",
+  },
+
+  uploadIconCircle: {
+    padding: 16,
+    backgroundColor: "rgba(250,204,21,0.2)",
+    borderRadius: 16,
+    marginBottom: 12,
+  },
+
+  uploadText: {
+    color: "#8fbac4",
+    fontWeight: "900",
+    fontStyle: "italic",
+    fontSize: 14,
+  },
+
+  fileName: {
+    color: "#22c55e",
+    fontWeight: "900",
+    fontSize: 12,
+    marginTop: 8,
+  },
+
+  /* ================= SUBMIT ================= */
   submitButton: {
     width: "100%",
     padding: 20,
@@ -354,40 +676,111 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#9333ea",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.4,
+    shadowColor: "#facc15",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.35,
     shadowRadius: 20,
+     elevation: 6,
   },
-  submitButtonText: { color: "#fff", fontWeight: "900", fontSize: 18, fontStyle: "italic", marginRight: 12 },
-  modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 },
+
+  submitButtonText: {
+    color: "#062530",
+    fontWeight: "900",
+    fontSize: 18,
+    fontStyle: "italic",
+    marginRight: 12,
+  },
+
+  /* ================= MODAL ================= */
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(6,37,48,0.9)",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+
   modalContent: {
-    backgroundColor: "rgba(30,30,30,0.95)",
+    backgroundColor: "#0b3442",
     borderRadius: 40,
     padding: 32,
     width: "100%",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    overflow: "hidden"
+    borderColor: "#104e64",
+    overflow: "hidden",
   },
-  modalGlow: { position: "absolute", top: -50, width: 200, height: 200, borderRadius: 100, opacity: 0.5 },
-  modalIconCircle: { padding: 16, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 20, marginBottom: 24, borderWidth: 1 },
-  modalTitle: { fontSize: 28, fontWeight: "900", color: "#fff", fontStyle: "italic", marginBottom: 12 },
-  modalMessage: { color: "#d1d5db", textAlign: "center", marginBottom: 24, lineHeight: 22, fontWeight: "500" },
-  modalWindowBox: { backgroundColor: "rgba(255,255,255,0.05)", padding: 16, borderRadius: 16, width: "100%", marginBottom: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
-  windowLabel: { color: "#9ca3af", fontSize: 10, fontWeight: "900", textAlign: "center", letterSpacing: 2 },
-  windowTime: { color: "#fff", fontSize: 14, fontStyle: "italic", textAlign: "center", marginTop: 4, fontWeight: "700" },
-  modalButton: { width: "100%", padding: 18, borderRadius: 20, alignItems: "center" },
-  modalButtonText: { fontWeight: "900", fontStyle: "italic", letterSpacing: 2 },
+
+  modalGlow: {
+    position: "absolute",
+    top: -50,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    opacity: 0.4,
+  },
+
+  modalIconCircle: {
+    padding: 16,
+    backgroundColor: "rgba(16,78,100,0.35)",
+    borderRadius: 20,
+    marginBottom: 24,
+    borderWidth: 1,
+  },
+
+  modalTitle: {
+    fontSize: 28,
+    fontWeight: "900",
+    color: "#ffffff",
+    fontStyle: "italic",
+    marginBottom: 12,
+  },
+
+  modalMessage: {
+    color: "#8fbac4",
+    textAlign: "center",
+    marginBottom: 24,
+    lineHeight: 22,
+    fontWeight: "500",
+  },
+
+  modalWindowBox: {
+    backgroundColor: "rgba(16,78,100,0.35)",
+    padding: 16,
+    borderRadius: 16,
+    width: "100%",
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: "#104e64",
+  },
+
+  windowLabel: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "900",
+    textAlign: "center",
+    letterSpacing: 2,
+  },
+
+  windowTime: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontStyle: "italic",
+    textAlign: "center",
+    marginTop: 4,
+    fontWeight: "700",
+  },
+
+  modalButton: {
+    width: "100%",
+    padding: 18,
+    borderRadius: 20,
+    alignItems: "center",
+  },
+
+  modalButtonText: {
+    fontWeight: "900",
+    fontStyle: "italic",
+    letterSpacing: 2,
+  },
 });
-
-
-
-
-
-
-
-
-
-

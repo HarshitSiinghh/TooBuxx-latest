@@ -136,18 +136,19 @@ if (pageLoading) {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#1a003d",
+        backgroundColor: "#062530",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <ActivityIndicator size="large" color="#a855f7" />
-      <Text style={{ marginTop: 10, color: "#fff", fontWeight: "bold" }}>
+      <ActivityIndicator size="large" color="#facc15" />
+      <Text style={{ marginTop: 10, color: "#ffffff", fontWeight: "900" }}>
         Loading...
       </Text>
     </SafeAreaView>
   );
 }
+
 
   return (
     
@@ -252,115 +253,300 @@ if (pageLoading) {
   );
 }
 
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#0a001a" },
-  container: { flex: 1, paddingHorizontal: 16 },
+// const styles = StyleSheet.create({
+//   safe: { flex: 1, backgroundColor: "#0a001a" },
+//   container: { flex: 1, paddingHorizontal: 16 },
 
-  header: { 
-    flexDirection: "row", 
-    alignItems: "center", 
-    paddingHorizontal: 16, 
-    paddingTop: 70,
-    paddingBottom:15,
-    // paddingb 1,
-    borderBottomColor: 'rgba(255,255,255,0.05)'
+//   header: { 
+//     flexDirection: "row", 
+//     alignItems: "center", 
+//     paddingHorizontal: 16, 
+//     paddingTop: 70,
+//     paddingBottom:15,
+//     // paddingb 1,
+//     borderBottomColor: 'rgba(255,255,255,0.05)'
+//   },
+//   backBtn: {
+//     width: 40,
+//     height: 40,
+//     borderRadius: 12,
+//     backgroundColor: "rgba(255,255,255,0.08)",
+//     justifyContent: 'center',
+//     alignItems: 'center'
+//   },
+
+//   title: { color: "white", fontSize: 18, fontWeight: "900" },
+//   subtitle: {
+//     color: "#818cf8",
+//     fontSize: 9,
+//     fontWeight: '700',
+//     marginTop: 1,
+//     letterSpacing: 1.5,
+//   },
+
+//   liveBadge: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     backgroundColor: "rgba(234,179,8,0.08)",
+//     borderRadius: 10,
+//     paddingHorizontal: 10,
+//     paddingVertical: 8,
+//     alignSelf: "center",
+//     marginTop: 20,
+//     borderWidth: 1,
+//     borderColor: "rgba(234,179,8,0.2)",
+//   },
+
+//   pulseDot: {
+//     width: 6,
+//     height: 6,
+//     borderRadius: 6,
+//     backgroundColor: "#eab308",
+//     marginRight: 8
+//   },
+
+//   liveText: { color: "#eab308", fontSize: 12, fontWeight: "800" },
+
+//   statsGrid: { gap: 12, marginTop: 24 },
+//   statsRow: { flexDirection: 'row', gap: 12 },
+
+//   statCard: {
+//     flex: 1,
+//     backgroundColor: "rgba(255,255,255,0.04)",
+//     borderRadius: 20,
+//     padding: 16,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255,255,255,0.06)'
+//   },
+
+//   statLabel: { color: "#9ca3af", fontSize: 10, fontWeight: '600', marginBottom: 4 },
+//   statValue: { color: "white", fontSize: 18, fontWeight: "900" },
+
+//   goldCard: { 
+//     backgroundColor: 'rgba(99,102,241,0.05)',
+//     borderColor: "rgba(99,102,241,0.3)", 
+//     borderWidth: 1 
+//   },
+//   goldCardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
+//   goldLabel: { color: "#818cf8", fontSize: 11, fontWeight: '700' },
+//   goldValue: { color: "#FFF", fontSize: 28, fontWeight: "900" },
+
+//   purchaseSection: {
+//     marginTop: 24,
+//   },
+
+//   engineBox: {
+//     marginTop: 32,
+//     backgroundColor: "rgba(255,255,255,0.03)",
+//     borderRadius: 24,
+//     padding: 20,
+//     borderWidth: 1,
+//     borderColor: 'rgba(255,255,255,0.05)'
+//   },
+//   engineHeading: {
+//     color: '#FFF',
+//     fontSize: 14,
+//     fontWeight: '800',
+//     marginBottom: 20,
+//     textAlign: 'center',
+//     opacity: 0.8
+//   },
+
+//   engineRow: { flexDirection: "row", gap: 16, alignItems: "center", marginBottom: 18 },
+//   engineIcon: {
+//     width: 44,
+//     height: 44,
+//     borderRadius: 14,
+//     backgroundColor: "rgba(255,255,255,0.05)",
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+
+//   engineTitle: { color: "white", fontWeight: "700", fontSize: 13, marginBottom: 2 },
+//   engineDesc: { color: "#6b7280", fontSize: 11, lineHeight: 16 },
+// });
+
+
+
+
+const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: "#062530",
   },
+
+  container: {
+    flex: 1,
+    paddingHorizontal: 16,
+  },
+
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingTop: 70,
+    paddingBottom: 15,
+    backgroundColor: "#062530",
+    borderBottomWidth: 1,
+    borderBottomColor: "#104e64",
+  },
+
   backBtn: {
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: "rgba(255,255,255,0.08)",
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: "rgba(16,78,100,0.4)",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
-  title: { color: "white", fontSize: 18, fontWeight: "900" },
+  title: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "900",
+    fontStyle: "italic",
+  },
+
   subtitle: {
-    color: "#818cf8",
+    color: "#facc15",
     fontSize: 9,
-    fontWeight: '700',
+    fontWeight: "700",
     marginTop: 1,
     letterSpacing: 1.5,
   },
 
+  /* LIVE RATE */
   liveBadge: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(234,179,8,0.08)",
+    backgroundColor: "rgba(250,204,21,0.12)",
     borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 8,
     alignSelf: "center",
     marginTop: 20,
     borderWidth: 1,
-    borderColor: "rgba(234,179,8,0.2)",
+    borderColor: "rgba(250,204,21,0.35)",
   },
 
   pulseDot: {
     width: 6,
     height: 6,
     borderRadius: 6,
-    backgroundColor: "#eab308",
-    marginRight: 8
+    backgroundColor: "#facc15",
+    marginRight: 8,
   },
 
-  liveText: { color: "#eab308", fontSize: 12, fontWeight: "800" },
+  liveText: {
+    color: "#facc15",
+    fontSize: 12,
+    fontWeight: "800",
+  },
 
+  /* STATS */
   statsGrid: { gap: 12, marginTop: 24 },
-  statsRow: { flexDirection: 'row', gap: 12 },
+  statsRow: { flexDirection: "row", gap: 12 },
 
   statCard: {
     flex: 1,
-    backgroundColor: "rgba(255,255,255,0.04)",
+    backgroundColor: "#0b3442",
     borderRadius: 20,
     padding: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.06)'
+    borderColor: "#104e64",
   },
 
-  statLabel: { color: "#9ca3af", fontSize: 10, fontWeight: '600', marginBottom: 4 },
-  statValue: { color: "white", fontSize: 18, fontWeight: "900" },
-
-  goldCard: { 
-    backgroundColor: 'rgba(99,102,241,0.05)',
-    borderColor: "rgba(99,102,241,0.3)", 
-    borderWidth: 1 
+  statLabel: {
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "600",
+    marginBottom: 4,
   },
-  goldCardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
-  goldLabel: { color: "#818cf8", fontSize: 11, fontWeight: '700' },
-  goldValue: { color: "#FFF", fontSize: 28, fontWeight: "900" },
+
+  statValue: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "900",
+  },
+
+  goldCard: {
+    backgroundColor: "rgba(250,204,21,0.08)",
+    borderColor: "rgba(250,204,21,0.35)",
+    borderWidth: 1,
+  },
+
+  goldCardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 6,
+  },
+
+  goldLabel: {
+    color: "#facc15",
+    fontSize: 11,
+    fontWeight: "700",
+  },
+
+  goldValue: {
+    color: "#ffffff",
+    fontSize: 28,
+    fontWeight: "900",
+  },
 
   purchaseSection: {
     marginTop: 24,
   },
 
+  /* TRUST / INFO */
   engineBox: {
     marginTop: 32,
-    backgroundColor: "rgba(255,255,255,0.03)",
+    backgroundColor: "#0b3442",
     borderRadius: 24,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.05)'
-  },
-  engineHeading: {
-    color: '#FFF',
-    fontSize: 14,
-    fontWeight: '800',
-    marginBottom: 20,
-    textAlign: 'center',
-    opacity: 0.8
+    borderColor: "#104e64",
   },
 
-  engineRow: { flexDirection: "row", gap: 16, alignItems: "center", marginBottom: 18 },
+  engineHeading: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "800",
+    marginBottom: 20,
+    textAlign: "center",
+    opacity: 0.85,
+  },
+
+  engineRow: {
+    flexDirection: "row",
+    gap: 16,
+    alignItems: "center",
+    marginBottom: 18,
+  },
+
   engineIcon: {
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(16,78,100,0.35)",
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#104e64",
   },
 
-  engineTitle: { color: "white", fontWeight: "700", fontSize: 13, marginBottom: 2 },
-  engineDesc: { color: "#6b7280", fontSize: 11, lineHeight: 16 },
+  engineTitle: {
+    color: "#ffffff",
+    fontWeight: "700",
+    fontSize: 13,
+    marginBottom: 2,
+  },
+
+  engineDesc: {
+    color: "#8fbac4",
+    fontSize: 11,
+    lineHeight: 16,
+  },
 });

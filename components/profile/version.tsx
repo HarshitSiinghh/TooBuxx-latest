@@ -9,15 +9,35 @@ export const VersionSection = () => {
   );
 };
 
+// const styles = StyleSheet.create({
+//   container: {
+//     marginBottom: 36,
+//     alignItems: "center",
+//   },
+
+//   text: {
+//     color: "#9ca3af", 
+//     fontSize: 11,
+//     textAlign: "center",
+//   },
+// });
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     marginBottom: 36,
     alignItems: "center",
+    opacity: 0.7,
   },
 
   text: {
-    color: "#9ca3af", 
-    fontSize: 11,
+    color: "#8fbac4",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.2,
     textAlign: "center",
   },
 });

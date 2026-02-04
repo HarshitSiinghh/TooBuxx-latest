@@ -107,24 +107,44 @@ const styles = StyleSheet.create({
     padding: 14,
   },
 
-  card: {
-    backgroundColor: "#2f2360",
-    borderRadius: 32,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
-    padding: 22,
-    overflow: "hidden",
-  },
+  // card: {
+  //   backgroundColor: "#2f2360",
+  //   borderRadius: 32,
+  //   borderWidth: 1,
+  //   borderColor: "rgba(255,255,255,0.06)",
+  //   padding: 22,
+  //   overflow: "hidden",
+  // },
+card: {
+  backgroundColor: "#104e64",
+  borderRadius: 32,
+  borderWidth: 1,
+  borderColor: "rgba(255,255,255,0.08)",
+  padding: 22,
+  overflow: "hidden",
+},
+
+  // glow: {
+  //   position: "absolute",
+  //   top: -40,
+  //   right: -40,
+  //   width: 140,
+  //   height: 140,
+  //   borderRadius: 100,
+  //   backgroundColor: "rgba(168,85,247,0.15)",
+  // },
+
+
 
   glow: {
-    position: "absolute",
-    top: -40,
-    right: -40,
-    width: 140,
-    height: 140,
-    borderRadius: 100,
-    backgroundColor: "rgba(168,85,247,0.15)",
-  },
+  position: "absolute",
+  top: -40,
+  right: -40,
+  width: 160,
+  height: 160,
+  borderRadius: 100,
+  backgroundColor: "rgba(250,204,21,0.18)", // gold glow
+},
 
   inner: {
     flexDirection: "row",
@@ -132,54 +152,76 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
-  title: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "900",
-  },
+ title: {
+  color: "#ffffff",
+  fontSize: 20,
+  fontWeight: "900",
+},
 
-  subTitle: {
-    marginTop: 2,
-    color: "#c084fc",
-    fontSize: 10,
-    fontWeight: "800",
-    letterSpacing: 2,
-  },
+subTitle: {
+  marginTop: 2,
+  color: "#8fbac4",
+  fontSize: 10,
+  fontWeight: "800",
+  letterSpacing: 2,
+},
 
-  bigText: {
-    marginTop: 12,
-    color: "#e9d5ff",
-    fontSize: 16,
-    fontWeight: "900",
-  },
+bigText: {
+  marginTop: 12,
+  color: "#c7e4ec",
+  fontSize: 16,
+  fontWeight: "900",
+},
+
 
   pointsText: {
-    color: "#facc15",
+    // color: "#facc15",
+
+      color: "#facc15",
     fontSize: 34,
     fontWeight: "900",
     marginTop: 2,
   },
 
-  tagLine: {
-    marginTop: 4,
-    color: "rgba(192,132,252,0.7)",
-    fontSize: 10,
-    fontWeight: "800",
-    letterSpacing: 2,
-    textTransform: "uppercase",
-  },
+  // tagLine: {
+  //   marginTop: 4,
+  //   color: "rgba(192,132,252,0.7)",
+  //   fontSize: 10,
+  //   fontWeight: "800",
+  //   letterSpacing: 2,
+  //   textTransform: "uppercase",
+  // },
 
-  note: {
-    color: "rgba(250,204,21,0.85)",
-    fontSize: 10,
-    fontWeight: "900",
-    letterSpacing: 1.5,
-    textTransform: "uppercase",
-    marginBottom: 10,
-  },
+  // note: {
+  //   color: "rgba(250,204,21,0.85)",
+  //   fontSize: 10,
+  //   fontWeight: "900",
+  //   letterSpacing: 1.5,
+  //   textTransform: "uppercase",
+  //   marginBottom: 10,
+  // },
+tagLine: {
+  marginTop: 4,
+  color: "rgba(199,228,236,0.7)",
+  fontSize: 10,
+  fontWeight: "800",
+  letterSpacing: 2,
+  textTransform: "uppercase",
+},
+
+note: {
+  color: "rgba(250,204,21,0.85)",
+  fontSize: 10,
+  fontWeight: "900",
+  letterSpacing: 1.5,
+  textTransform: "uppercase",
+  marginBottom: 10,
+},
 
   btn: {
-    backgroundColor: "white",
+    // backgroundColor: "white",
+    
+  backgroundColor: "#facc15",
     alignSelf: "flex-start",
     paddingVertical: 12,
     paddingHorizontal: 22,
@@ -187,7 +229,9 @@ const styles = StyleSheet.create({
   },
 
   btnText: {
-    color: "#1a003d",
+    // color: "#1a003d",
+    
+  color: "#062530",
     fontSize: 10,
     fontWeight: "900",
     letterSpacing: 2,

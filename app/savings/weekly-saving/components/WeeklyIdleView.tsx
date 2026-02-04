@@ -94,117 +94,264 @@ interface IdleProps {
 
 
  export default WeeklyIdleView
+
+
+
+// const styles = StyleSheet.create({
+//   container: {
+//     gap: 24,
+//     maxWidth: 600,
+//   },
+//   header: {
+//     gap: 8,
+//   },
+//   titleLine: {
+//     fontSize: 40,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//     color: '#FFFFFF',
+//     lineHeight: 40,
+//     letterSpacing: -1,
+//   },
+//   highlightText: {
+//     color: '#818cf8', // Indigo-400 fallback for gradient
+//   },
+//   subtitle: {
+//     color: '#6b7280',
+//     fontSize: 14,
+//     fontWeight: '500',
+//     lineHeight: 22,
+//     maxWidth: 300,
+//   },
+//   card: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.02)',
+//     borderWidth: 1,
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//     borderRadius: 32,
+//     padding: 24,
+//     gap: 24,
+//   },
+//   inputHeader: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//   },
+//   inputLabel: {
+//     fontSize: 10,
+//     fontWeight: '900',
+//     color: '#6b7280',
+//     letterSpacing: 1.5,
+//   },
+//   inputWrapper: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     borderBottomWidth: 2,
+//     borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+//     paddingBottom: 8,
+//   },
+//   currencySymbol: {
+//     fontSize: 24,
+//     fontWeight: '900',
+//     color: '#374151',
+//     marginRight: 12,
+//   },
+//   textInput: {
+//     fontSize: 40,
+//     fontWeight: '900',
+//     color: '#FFFFFF',
+//     flex: 1,
+//     padding: 0,
+//   },
+//   grid: {
+//     flexDirection: 'row',
+//     flexWrap: 'wrap',
+//     gap: 10,
+//   },
+//   gridItem: {
+//     flex: 1,
+//     minWidth: '30%', // Grid-like behavior
+//     height: 48,
+//     borderRadius: 12,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     borderWidth: 2,
+//   },
+//   gridItemActive: {
+//     backgroundColor: '#4f46e5',
+//     borderColor: '#6366f1',
+//   },
+//   gridItemInactive: {
+//     backgroundColor: 'rgba(255, 255, 255, 0.05)',
+//     borderColor: 'rgba(255, 255, 255, 0.1)',
+//   },
+//   gridText: {
+//     fontSize: 12,
+//     fontWeight: '900',
+//   },
+//   gridTextActive: { color: '#FFFFFF' },
+//   gridTextInactive: { color: '#6b7280' },
+//   activateBtn: {
+//     backgroundColor: '#4f46e5',
+//     flexDirection: 'row',
+//     height: 64,
+//     borderRadius: 20,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     gap: 12,
+//     shadowColor: '#4f46e5',
+//     shadowOffset: { width: 0, height: 8 },
+//     shadowOpacity: 0.3,
+//     shadowRadius: 12,
+//     elevation: 8,
+//   },
+//   activateBtnText: {
+//     color: '#FFFFFF',
+//     fontSize: 18,
+//     fontWeight: '900',
+//     fontStyle: 'italic',
+//   },
+// });
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     gap: 24,
     maxWidth: 600,
   },
+
   header: {
     gap: 8,
   },
+
   titleLine: {
     fontSize: 40,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    color: '#FFFFFF',
+    fontWeight: "900",
+    fontStyle: "italic",
+    color: "#ffffff",
     lineHeight: 40,
     letterSpacing: -1,
   },
+
   highlightText: {
-    color: '#818cf8', // Indigo-400 fallback for gradient
+    color: "#60a5fa",
   },
+
   subtitle: {
-    color: '#6b7280',
+    color: "#8fbac4",
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: "500",
     lineHeight: 22,
     maxWidth: 300,
   },
+
   card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    backgroundColor: "#0b3442",
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: "#104e64",
     borderRadius: 32,
     padding: 24,
     gap: 24,
   },
+
   inputHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
+
   inputLabel: {
     fontSize: 10,
-    fontWeight: '900',
-    color: '#6b7280',
+    fontWeight: "900",
+    color: "#8fbac4",
     letterSpacing: 1.5,
   },
+
   inputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderBottomWidth: 2,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    borderBottomColor: "#104e64",
     paddingBottom: 8,
   },
+
   currencySymbol: {
     fontSize: 24,
-    fontWeight: '900',
-    color: '#374151',
+    fontWeight: "900",
+    color: "#7aa6b2",
     marginRight: 12,
   },
+
   textInput: {
     fontSize: 40,
-    fontWeight: '900',
-    color: '#FFFFFF',
+    fontWeight: "900",
+    color: "#ffffff",
     flex: 1,
     padding: 0,
   },
+
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 10,
   },
+
   gridItem: {
     flex: 1,
-    minWidth: '30%', // Grid-like behavior
+    minWidth: "30%",
     height: 48,
     borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 2,
   },
+
   gridItemActive: {
-    backgroundColor: '#4f46e5',
-    borderColor: '#6366f1',
+    backgroundColor: "#2563eb",
+    borderColor: "#60a5fa",
   },
+
   gridItemInactive: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: "rgba(255,255,255,0.04)",
+    borderColor: "rgba(16,78,100,0.6)",
   },
+
   gridText: {
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: "900",
   },
-  gridTextActive: { color: '#FFFFFF' },
-  gridTextInactive: { color: '#6b7280' },
+
+  gridTextActive: {
+    color: "#ffffff",
+  },
+
+  gridTextInactive: {
+    color: "#8fbac4",
+  },
+
   activateBtn: {
-    backgroundColor: '#4f46e5',
-    flexDirection: 'row',
+    backgroundColor: "#2563eb",
+    flexDirection: "row",
     height: 64,
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     gap: 12,
-    shadowColor: '#4f46e5',
+    shadowColor: "#2563eb",
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.3,
     shadowRadius: 12,
     elevation: 8,
   },
+
   activateBtnText: {
-    color: '#FFFFFF',
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontWeight: "900",
+    fontStyle: "italic",
   },
 });

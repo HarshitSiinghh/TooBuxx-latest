@@ -55,13 +55,15 @@ export default function NomineeIndex() {
 
 if (loading) {
   return (
-    <View style={{
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "#1a003d",   // ✅ yahan background color
-    }}>
-      <ActivityIndicator size="large" color="#a855f7" />
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#062530",
+      }}
+    >
+      <ActivityIndicator size="large" color="#facc15" />
     </View>
   );
 }
