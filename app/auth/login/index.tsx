@@ -1,5 +1,3 @@
-
-
 import { useRouter } from 'expo-router';
 import { LockKeyhole, Mail, ShieldCheck } from 'lucide-react-native';
 

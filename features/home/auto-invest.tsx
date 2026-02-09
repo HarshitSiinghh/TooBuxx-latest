@@ -51,7 +51,7 @@ export default function AutoInvestCard() {
            <Pressable style={styles.primaryBtn}
                     onPress={() => {
                     
-                      router.push("/savings/daily-saving");
+                      router.push("/metals/gold/engine");
                     }}
                    
                   >

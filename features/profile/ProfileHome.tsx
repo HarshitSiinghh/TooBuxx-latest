@@ -46,14 +46,14 @@ interface SectionTitleProps {
 }
 
 const ROUTES = {
-  DAILY: "/savings/daily-saving",
-  INSTANT: "/savings/instant-saving",
+  DAILY: "/metals/gold/engine",
+  INSTANT: "/metals/silver/engine",
   SPINS: "/spin-and-win/spin-wheel",
   REWARDS: "/profile/reward",
-  WEEKLY: "/savings/weekly-saving",
-  MONTHLY: "/savings/monthly-saving",
+  WEEKLY: "/metals/platinium/engine",
+  MONTHLY: "/portfolio",
   REFER: "/spin-and-win/referral",
-  WITHDRAW: "/savings/withdrawalFrom",
+  WITHDRAW: "/withdraw",
   DEPOSIT: "/paymentsDetails/deposite",
 };
 
@@ -96,10 +96,10 @@ const ModernForYou = () => {
 const ModernGoldGrid = () => {
   const router = useRouter();
   const data = [
-    { label: "Daily Savings", icon: Calendar, color: "#A855F7", path: ROUTES.DAILY },
-    { label: "Instant Savings", icon: Zap, color: "#F59E0B", path: ROUTES.INSTANT },
-    { label: "Weekly Saving", icon: TrendingUp, color: "#10B981", path: ROUTES.WEEKLY },
-    { label: "Monthly Savings", icon: PieChart, color: "#6366F1", path: ROUTES.MONTHLY },
+    { label: "Gold ", icon: Calendar, color: "#A855F7", path: ROUTES.DAILY },
+    { label: "Silver", icon: Zap, color: "#F59E0B", path: ROUTES.INSTANT },
+    { label: "Platinium", icon: TrendingUp, color: "#10B981", path: ROUTES.WEEKLY },
+    { label: "Portfolio", icon: PieChart, color: "#6366F1", path: ROUTES.MONTHLY },
     { label: "Refer & Earn", icon: Users, color: "#EC4899", path: ROUTES.REFER },
     { label: "Withdraw Saving", icon: ArrowUpRight, color: "#EF4444", path: ROUTES.WITHDRAW },
     { label: "Spins", icon: Disc, color: "#8B5CF6", path: ROUTES.SPINS },
@@ -330,10 +330,10 @@ function Profile() {
         <SectionTitle title="SECURITY & NOMINATIONS" dotColor="#A855F7" />
         <NomineeSection />
 
-        <SectionTitle title="EXCLUSIVELY FOR YOU" dotColor="#6366f1" marginTop={24} />
-        <ModernForYou />
+        {/* <SectionTitle title="EXCLUSIVELY FOR YOU" dotColor="#6366f1" marginTop={24} /> */}
+        {/* <ModernForYou /> */}
 
-        <SectionTitle title="GOLD SERVICES" dotColor="#F59E0B" marginTop={24} />
+        <SectionTitle title="TOOBUX SERVICES" dotColor="#F59E0B" marginTop={24} />
         <ModernGoldGrid />
 
         <View style={styles.settingsGroup}>

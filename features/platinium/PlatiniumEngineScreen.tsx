@@ -1,74 +1,176 @@
-import React, { useState } from "react";
-import { 
-  ScrollView, 
-  StyleSheet, 
-  View, 
-  SafeAreaView, 
-  StatusBar, 
-  TouchableOpacity, 
-  Text 
+
+
+import React, { useState, useEffect } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  SafeAreaView,
+  StatusBar,
+  TouchableOpacity,
+  Text,
 } from "react-native";
 
-import { Bucket, PlatinumEngineState } from "./types";
-import { MOCK_PLATINUM_ENGINE } from "./mock"; // Hamara naya mock data
+import { Bucket } from "./types";
 import { COLORS } from "./constants";
 import { useRouter } from "expo-router";
 
-// Platinum Components
-// import PlatinumHeader from "./components/PlatinumHeader";
-import PlatinumHeader from "./components/PlatiniumHeader";
-// import PlatinumTabs from "./components/PlatinumTabs";
-import PlatinumTabs from "./components/PlatiniumTabs";
-// import PlatinumBuyFlow from "./components/PlatinumBuyFlow";
- import PlatinumBuyFlow from "./components/BuyFlow";
+import { getMyPlatinumSipApi } from "@/services/platinium";
+import { getProfileApi } from "../../services/profile";
+import { getPortfolioApi } from "../../services/portfolio";
 
-// import PlatinumRunningEngine from "./components/PlatinumRunningEngine";
- import PlatinumRunningEngine from "./components/RunningEngine";
+import PlatinumHeader from "./components/PlatiniumHeader";
+import PlatinumTabs from "./components/PlatiniumTabs";
+import PlatinumBuyFlow from "./components/BuyFlow";
+import PlatinumRunningEngine from "./components/RunningEngine";
 
 export default function PlatinumEngineScreen() {
-  const [engine, setEngine] = useState<PlatinumEngineState>(MOCK_PLATINUM_ENGINE);
-  const [activeBucket, setActiveBucket] = useState<Bucket>("instant");
-
-  const currentEngine = engine.engines[activeBucket];
   const router = useRouter();
 
-//   // Platinum Accent Color
-// const PLATINUM_ACCENT = COLORS.ACCENT;
+  const [engine, setEngine] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [activeBucket, setActiveBucket] = useState<Bucket>("instant");
+
   const PLATINUM_ACCENT = COLORS.PLATINUM_ACCENT || "#00D2FF";
+
+  useEffect(() => {
+    loadEngine();
+  }, []);
+
+  const loadEngine = async () => {
+    try {
+      setLoading(true);
+
+      /* ================= PROFILE ================= */
+      const profileRes = await getProfileApi();
+      const walletBalance = Number(
+        profileRes?.data?.wallet?.total_money_balance || 0
+      );
+
+      /* ================= PORTFOLIO ================= */
+      const portfolioRes = await getPortfolioApi();
+
+      const platinumGrams = Number(portfolioRes?.platinum?.grams || 0);
+      const platinumValue = Number(portfolioRes?.platinum?.current_value || 0);
+
+      const pricePerGram =
+        platinumGrams > 0 ? platinumValue / platinumGrams : 0;
+
+      /* ================= SIP ================= */
+      const sipRes = await getMyPlatinumSipApi();
+      console.log("🔥 PLATINUM SIP FULL", sipRes);
+
+      const sipObj = sipRes?.data || {};
+
+      /* ===== DAILY ===== */
+      const dailySips = sipObj?.daily || [];
+      const activeDaily = dailySips.find(
+        (s: any) => s?.status?.toUpperCase() !== "STOPPED"
+      );
+
+      /* ===== WEEKLY ===== */
+      const weeklySips = sipObj?.weekly || [];
+      const activeWeekly = weeklySips.find(
+        (s: any) => s?.status?.toUpperCase() !== "STOPPED"
+      );
+
+      /* ===== MONTHLY ===== */
+      const monthlySips = sipObj?.monthly || [];
+      const activeMonthly = monthlySips.find(
+        (s: any) => s?.status?.toUpperCase() !== "STOPPED"
+      );
+
+      /* ================= FINAL ENGINE ================= */
+      const formatted = {
+        pricePerGram,
+        walletBalance,
+
+        engines: {
+          instant: {
+            savedGrams: platinumGrams,
+          },
+
+          daily: {
+            isActive: !!activeDaily,
+            isPaused:
+              activeDaily?.status?.toUpperCase() === "PAUSED",
+            sip_id: activeDaily?.sip_id,
+            amount: activeDaily?.amount_per_cycle || 0,
+            savedGrams: activeDaily?.platinum_grams || 0,
+            streak: activeDaily?.streak || 0,
+          },
+
+          weekly: {
+            isActive: !!activeWeekly,
+            isPaused:
+              activeWeekly?.status?.toUpperCase() === "PAUSED",
+            sip_id: activeWeekly?.sip_id,
+            amount: activeWeekly?.amount_per_cycle || 0,
+            savedGrams: activeWeekly?.platinum_grams || 0,
+            streak: activeWeekly?.streak || 0,
+          },
+
+          monthly: {
+            isActive: !!activeMonthly,
+            isPaused:
+              activeMonthly?.status?.toUpperCase() === "PAUSED",
+            sip_id: activeMonthly?.sip_id,
+            amount: activeMonthly?.amount_per_cycle || 0,
+            savedGrams: activeMonthly?.platinum_grams || 0,
+            streak: activeMonthly?.streak || 0,
+          },
+        },
+      };
+
+      console.log("🚀 FINAL ENGINE", formatted);
+      setEngine(formatted);
+    } catch (e) {
+      console.log("ENGINE LOAD ERROR ❌", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= LOADER ================= */
+  if (loading || !engine) {
+    return (
+      <SafeAreaView
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#000",
+        }}
+      >
+        <Text style={{ color: "#fff", fontSize: 16 }}>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  const currentEngine = engine.engines[activeBucket];
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" />
 
-      {/* CUSTOM TOP NAV BAR */}
+      {/* NAV */}
       <View style={styles.navBar}>
-        <TouchableOpacity 
-          onPress={() => router.back()} 
+        <TouchableOpacity
+          onPress={() => router.back()}
           style={styles.backButton}
-          activeOpacity={0.7}
         >
-          <View style={styles.arrowIcon}>
-             <View style={[styles.arrowTop, { backgroundColor: PLATINUM_ACCENT }]} />
-             <View style={[styles.arrowBottom, { backgroundColor: PLATINUM_ACCENT }]} />
-          </View>
+          <Text style={{ color: PLATINUM_ACCENT }}>←</Text>
         </TouchableOpacity>
-        
+
         <Text style={styles.navTitle}>Platinum Engine</Text>
-        
         <View style={styles.emptySpace} />
       </View>
-      
-      <ScrollView 
-        style={styles.container} 
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Header Section */}
+
+      <ScrollView style={styles.container}>
         <View style={styles.section}>
           <PlatinumHeader engine={engine} />
         </View>
 
-        {/* Tabs Section */}
         <View style={styles.tabSection}>
           <PlatinumTabs
             active={activeBucket}
@@ -76,34 +178,36 @@ export default function PlatinumEngineScreen() {
           />
         </View>
 
-        {/* Content Area - Logic for switching between Buy and Running state */}
         <View style={styles.mainContent}>
           {activeBucket === "instant" ? (
             <PlatinumBuyFlow
               bucket="instant"
               engine={engine}
-              setEngine={setEngine}
+              // setEngine={setEngine}
+              reloadEngine={loadEngine}
             />
           ) : (
             <>
-              {currentEngine.isActive ? (
+              {currentEngine?.isActive ? (
                 <PlatinumRunningEngine
                   bucket={activeBucket}
                   engine={engine}
                   setEngine={setEngine}
+                  reloadEngine={loadEngine}
                 />
               ) : (
                 <PlatinumBuyFlow
                   bucket={activeBucket}
                   engine={engine}
-                  setEngine={setEngine}
+                  // setEngine={setEngine}
+                  reloadEngine={loadEngine}
                 />
               )}
             </>
           )}
         </View>
-        
-        <View style={{ height: 40 }} />
+
+        <View style={{ height: 50 }} />
       </ScrollView>
     </SafeAreaView>
   );

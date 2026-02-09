@@ -105,12 +105,12 @@ return () => clearInterval(interval);
           </View>
 
           <View style={{ alignItems: "center" }}>
-            <Text style={styles.goldLabel}>Gold Price</Text>
+            {/* <Text style={styles.goldLabel}></Text> */}
             {/* <Text style={styles.goldPrice}>
               {goldPrice ? `₹ ${goldPrice} /gm` : "Loading..."}
             </Text> */}
 
-            <Text
+            {/* <Text
   style={[
     styles.goldPrice,
     priceTrend === "up" && styles.priceUp,
@@ -118,7 +118,11 @@ return () => clearInterval(interval);
   ]}
 >
   {goldPrice ? `₹ ${goldPrice} /gm` : "Loading..."}
+</Text> */}
+<Text style={styles.goldPrice}>
+  {goldPrice ? `₹ ${goldPrice} /gm` : "Loading..."}
 </Text>
+
 
           </View>
         </View>
@@ -416,7 +420,7 @@ const styles = StyleSheet.create({
     gap: 10,
     backgroundColor: "rgba(16, 78, 100, 0.45)", // glass effect
     paddingHorizontal: 14,
-    paddingVertical: 6,
+    paddingVertical: 10,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: "#104e64",
@@ -435,11 +439,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
 
-  goldLabel: {
-    color: "#ffffff",
-    fontSize: 10,
-    opacity: 0.8,
-  },
+ 
 
   goldPrice: {
     color: "#ffffff", // default

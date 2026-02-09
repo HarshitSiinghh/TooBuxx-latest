@@ -31,8 +31,8 @@ export default function Home() {
         </View>
 
         {/* <Plan /> */}
-        <LivePriceCards/>
-        <PortfolioSummary/>
+        {/* <LivePriceCards/> */}
+        {/* <PortfolioSummary/> */}
         <About />
         {/* <SavingsSteps /> */}
 

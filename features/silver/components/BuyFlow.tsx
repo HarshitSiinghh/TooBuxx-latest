@@ -1,19 +1,254 @@
 
+// import React, { useState } from "react";
+// import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal } from "react-native";
+// import { Bucket, SilverEngineState } from "../types";
+// import { COLORS, calculateGrams } from "../constants";
+// import { buySilverApi, createSilverSipApi } from "@/services/silver";
+
+// // import { buySilverApi } from "@/services/silver";
+// interface Props {
+//   bucket: Bucket;
+//   engine: SilverEngineState;
+//   setEngine: React.Dispatch<React.SetStateAction<SilverEngineState>>;
+  
+//   reloadEngine?: () => void;   // 🔥 ADD THIS
+// }
+
+// // Actions ke liye types define kiye hain
+// type ActionType = "BUY" | "PAUSE" | "STOP";
+
+// export default function BuyFlow({ bucket, engine, setEngine,
+//   reloadEngine
+//  }: Props) {
+//   const [amount, setAmount] = useState<string>("");
+//   const [showConfirm, setShowConfirm] = useState(false);
+//   const [currentAction, setCurrentAction] = useState<ActionType>("BUY");
+
+//   const grams = calculateGrams(Number(amount) || 0, engine.pricePerGram);
+//   const currentSIP = engine.engines[bucket as keyof typeof engine.engines];
+
+//   // --- Modal Open karne wale functions ---
+//   const onBuyPress = () => {
+//     if (Number(amount) <= 0) return;
+//     setCurrentAction("BUY");
+//     setShowConfirm(true);
+//   };
+
+//   const onPausePress = () => {
+//     setCurrentAction("PAUSE");
+//     setShowConfirm(true);
+//   };
+
+//   const onStopPress = () => {
+//     setCurrentAction("STOP");
+//     setShowConfirm(true);
+//   };
+
+
+// // const handleAction = async () => {
+// //   try {
+// //     if (currentAction === "BUY") {
+// //       // 🔥 instant buy call
+// //       const res = await buySilverApi(Number(amount));
+// //       console.log("BUY RES", res);
+
+// //       if (!res.success) {
+// //         alert(res.message || "Buy failed");
+// //         return;
+// //       }
+
+// //       alert("Silver purchased successfully");
+// //     }
+
+// //     setShowConfirm(false);
+// //     setAmount("");
+
+// //     // 🔥 wait for backend update
+// //     setTimeout(() => {
+// //       reloadEngine && reloadEngine();
+// //     }, 1200);
+
+// //   } catch (e) {
+// //     console.log("BUY ERROR", e);
+// //     alert("Server error");
+// //   }
+// // };
+
+// const handleAction = async () => {
+//   try {
+
+//     if (currentAction === "BUY") {
+
+//       /* ===== INSTANT BUY ===== */
+//       if (bucket === "instant") {
+//         const res = await buySilverApi(Number(amount));
+//         console.log("BUY RES 👉", res);
+
+//         if (!res?.success) {
+//           alert(res?.message || "Buy failed");
+//           return;
+//         }
+
+//         alert("Silver purchased successfully");
+//       }
+
+//       /* ===== CREATE SIP ===== */
+//       if (bucket !== "instant") {
+//         const res = await createSilverSipApi(Number(amount));
+//         console.log("CREATE SIP 👉", res);
+
+//         if (!res?.success) {
+//           alert(res?.message || "SIP failed");
+//           return;
+//         }
+
+//         alert("SIP started successfully");
+//       }
+//     }
+
+//     setShowConfirm(false);
+//     setAmount("");
+
+//     // 🔥 backend ko time do update ka
+//     setTimeout(() => {
+//       reloadEngine && reloadEngine();
+//     }, 1500);
+
+//   } catch (e) {
+//     console.log("BUY/SIP ERROR ❌", e);
+//     alert("Server error");
+//   }
+// };
+
+
+//   // --- UI Content based on Action ---
+//   const getModalUI = () => {
+//     switch (currentAction) {
+//       case "BUY":
+//         return {
+//           title: bucket === "instant" ? "Confirm Purchase" : "Start SIP",
+//           msg: `Confirm investment of ₹${amount}?`,
+//           btn: COLORS.ACCENT,
+//           text: "Confirm Buy"
+//         };
+//       case "PAUSE":
+//         const isPaused = currentSIP?.isPaused;
+//         return {
+//           title: isPaused ? "Resume SIP" : "Pause SIP",
+//           msg: `Are you sure you want to ${isPaused ? "resume" : "pause"} your investment?`,
+//           btn: "#E5E7EB",
+//           text: isPaused ? "Resume Now" : "Pause Now"
+//         };
+//       case "STOP":
+//         return {
+//           title: "Stop Investment",
+//           msg: "This will permanently deactivate this SIP. Continue?",
+//           btn: "#FF453A",
+//           text: "Stop Permanently"
+//         };
+//     }
+//   };
+
+//   const modalUI = getModalUI();
+
+//   return (
+//     <View style={styles.card}>
+//       <Text style={styles.label}>ENTER AMOUNT</Text>
+//       <View style={styles.inputContainer}>
+//         <Text style={styles.currencySymbol}>₹</Text>
+//         <TextInput
+//           keyboardType="numeric"
+//           placeholder="0.00"
+//           placeholderTextColor={COLORS.TEXT_MUTED}
+//           value={amount}
+//           onChangeText={setAmount}
+//           style={styles.input}
+//         />
+//       </View>
+
+//       <TouchableOpacity style={styles.buyBtn} onPress={onBuyPress}>
+//         <Text style={styles.buyText}>{bucket === "instant" ? "BUY NOW" : "ACTIVATE SIP"}</Text>
+//       </TouchableOpacity>
+
+//       {/* SIP Management Buttons (Sirf tab dikhenge jab SIP active ho) */}
+// {bucket !== "instant" && (currentSIP?.status === "ACTIVE" || currentSIP?.status === "PAUSED") && (
+//   <View style={styles.manageRow}>
+//     <TouchableOpacity onPress={onPausePress} style={styles.secondaryBtn}>
+//       <Text style={styles.secondaryBtnText}>
+//         {currentSIP?.status === "PAUSED" ? "RESUME" : "PAUSE"}
+//       </Text>
+//     </TouchableOpacity>
+
+//     <TouchableOpacity
+//       onPress={onStopPress}
+//       style={[styles.secondaryBtn, { borderColor: "#FF453A22" }]}
+//     >
+//       <Text style={[styles.secondaryBtnText, { color: "#FF453A" }]}>
+//         STOP
+//       </Text>
+//     </TouchableOpacity>
+//   </View>
+// )}
+
+
+//       {/* ================= MODAL ================= */}
+//       <Modal visible={showConfirm} transparent animationType="fade">
+//         <View style={styles.overlay}>
+//           <View style={styles.modal}>
+//             <Text style={styles.modalTitle}>{modalUI.title}</Text>
+//             <Text style={styles.modalMsg}>{modalUI.msg}</Text>
+
+//             <View style={styles.modalActions}>
+//               <TouchableOpacity style={styles.backBtn} onPress={() => setShowConfirm(false)}>
+//                 <Text style={styles.backText}>Go Back</Text>
+//               </TouchableOpacity>
+              
+//               <TouchableOpacity 
+//                 style={[styles.confirmBtn, { backgroundColor: modalUI.btn }]} 
+//                 onPress={handleAction}
+//               >
+//                 <Text style={styles.confirmText}>{modalUI.text}</Text>
+//               </TouchableOpacity>
+//             </View>
+//           </View>
+//         </View>
+//       </Modal>
+//     </View>
+//   );
+// }
+
+
+
+
+
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+} from "react-native";
 import { Bucket, SilverEngineState } from "../types";
 import { COLORS, calculateGrams } from "../constants";
+import { buySilverApi, createSilverSipApi } from "@/services/silver";
 
 interface Props {
   bucket: Bucket;
   engine: SilverEngineState;
   setEngine: React.Dispatch<React.SetStateAction<SilverEngineState>>;
+  reloadEngine?: () => void;
 }
 
-// Actions ke liye types define kiye hain
 type ActionType = "BUY" | "PAUSE" | "STOP";
 
-export default function BuyFlow({ bucket, engine, setEngine }: Props) {
+export default function BuyFlow({
+  bucket,
+  engine,
+  setEngine,
+  reloadEngine,
+}: Props) {
   const [amount, setAmount] = useState<string>("");
   const [showConfirm, setShowConfirm] = useState(false);
   const [currentAction, setCurrentAction] = useState<ActionType>("BUY");
@@ -21,9 +256,21 @@ export default function BuyFlow({ bucket, engine, setEngine }: Props) {
   const grams = calculateGrams(Number(amount) || 0, engine.pricePerGram);
   const currentSIP = engine.engines[bucket as keyof typeof engine.engines];
 
-  // --- Modal Open karne wale functions ---
+  /* =====================================================
+        🔥 GET SIP TYPE DYNAMIC
+  ===================================================== */
+  const getSipType = () => {
+    if (bucket === "daily") return "DAILY";
+    if (bucket === "weekly") return "WEEKLY";
+    if (bucket === "monthly") return "MONTHLY";
+    return "DAILY";
+  };
+
+  /* =====================================================
+        🔥 BUTTON ACTIONS
+  ===================================================== */
   const onBuyPress = () => {
-    if (Number(amount) <= 0) return;
+    if (Number(amount) <= 0) return alert("Enter valid amount");
     setCurrentAction("BUY");
     setShowConfirm(true);
   };
@@ -38,37 +285,67 @@ export default function BuyFlow({ bucket, engine, setEngine }: Props) {
     setShowConfirm(true);
   };
 
-  // --- Final Execution (Jab User "Confirm" dabaye) ---
-  const handleAction = () => {
-    let newEngine = { ...engine };
+  /* =====================================================
+        🔥 MAIN ACTION HANDLER
+  ===================================================== */
+  const handleAction = async () => {
+    try {
+      console.log("🟢 CURRENT TAB 👉", bucket);
 
-    if (currentAction === "BUY") {
-      newEngine.walletBalance -= Number(amount);
-      if (bucket === "instant") {
-        newEngine.engines.instant.savedGrams += grams;
-      } else {
-        newEngine.engines[bucket] = {
-          isActive: true,
-          isPaused: false,
-          amount: Number(amount),
-          savedGrams: grams,
-          streak: 1,
-        };
+      if (currentAction === "BUY") {
+        /* ================= INSTANT BUY ================= */
+        if (bucket === "instant") {
+          console.log("🔥 INSTANT BUY AMOUNT", amount);
+
+          const res = await buySilverApi(Number(amount));
+          console.log("BUY RES 👉", res);
+
+          if (!res?.success) {
+            alert(res?.message || "Buy failed");
+            return;
+          }
+
+          alert("Silver purchased successfully");
+        }
+
+        /* ================= CREATE SIP ================= */
+        if (bucket !== "instant") {
+      const payload = {
+  amount_per_cycle: Number(amount),
+  sip_type: getSipType() as "DAILY" | "WEEKLY" | "MONTHLY",
+};
+
+
+          console.log("🚀 CREATING SIP PAYLOAD", payload);
+
+          const res = await createSilverSipApi(payload);
+          console.log("CREATE SIP RESPONSE 👉", res);
+
+          if (!res?.success) {
+            alert(res?.message || "SIP failed");
+            return;
+          }
+
+          alert(`${getSipType()} SIP started successfully`);
+        }
       }
-      setAmount("");
-    } 
-    else if (currentAction === "PAUSE") {
-      newEngine.engines[bucket].isPaused = !newEngine.engines[bucket].isPaused;
-    } 
-    else if (currentAction === "STOP") {
-      newEngine.engines[bucket].isActive = false;
-    }
 
-    setEngine(newEngine);
-    setShowConfirm(false);
+      setShowConfirm(false);
+      setAmount("");
+
+      // 🔥 backend update wait
+      setTimeout(() => {
+        reloadEngine && reloadEngine();
+      }, 1500);
+    } catch (e) {
+      console.log("BUY/SIP ERROR ❌", e);
+      alert("Server error");
+    }
   };
 
-  // --- UI Content based on Action ---
+  /* =====================================================
+        🔥 MODAL UI
+  ===================================================== */
   const getModalUI = () => {
     switch (currentAction) {
       case "BUY":
@@ -76,22 +353,24 @@ export default function BuyFlow({ bucket, engine, setEngine }: Props) {
           title: bucket === "instant" ? "Confirm Purchase" : "Start SIP",
           msg: `Confirm investment of ₹${amount}?`,
           btn: COLORS.ACCENT,
-          text: "Confirm Buy"
+          text: "Confirm",
         };
       case "PAUSE":
         const isPaused = currentSIP?.isPaused;
         return {
           title: isPaused ? "Resume SIP" : "Pause SIP",
-          msg: `Are you sure you want to ${isPaused ? "resume" : "pause"} your investment?`,
+          msg: `Are you sure you want to ${
+            isPaused ? "resume" : "pause"
+          } your SIP?`,
           btn: "#E5E7EB",
-          text: isPaused ? "Resume Now" : "Pause Now"
+          text: isPaused ? "Resume" : "Pause",
         };
       case "STOP":
         return {
-          title: "Stop Investment",
-          msg: "This will permanently deactivate this SIP. Continue?",
+          title: "Stop SIP",
+          msg: "This will permanently stop your SIP. Continue?",
           btn: "#FF453A",
-          text: "Stop Permanently"
+          text: "Stop",
         };
     }
   };
@@ -101,6 +380,7 @@ export default function BuyFlow({ bucket, engine, setEngine }: Props) {
   return (
     <View style={styles.card}>
       <Text style={styles.label}>ENTER AMOUNT</Text>
+
       <View style={styles.inputContainer}>
         <Text style={styles.currencySymbol}>₹</Text>
         <TextInput
@@ -114,22 +394,10 @@ export default function BuyFlow({ bucket, engine, setEngine }: Props) {
       </View>
 
       <TouchableOpacity style={styles.buyBtn} onPress={onBuyPress}>
-        <Text style={styles.buyText}>{bucket === "instant" ? "BUY NOW" : "ACTIVATE SIP"}</Text>
+        <Text style={styles.buyText}>
+          {bucket === "instant" ? "BUY NOW" : "ACTIVATE SIP"}
+        </Text>
       </TouchableOpacity>
-
-      {/* SIP Management Buttons (Sirf tab dikhenge jab SIP active ho) */}
-      {bucket !== "instant" && currentSIP?.isActive && (
-        <View style={styles.manageRow}>
-          <TouchableOpacity onPress={onPausePress} style={styles.secondaryBtn}>
-            <Text style={styles.secondaryBtnText}>
-              {currentSIP.isPaused ? "RESUME" : "PAUSE"}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onStopPress} style={[styles.secondaryBtn, { borderColor: '#FF453A22' }]}>
-            <Text style={[styles.secondaryBtnText, { color: '#FF453A' }]}>STOP</Text>
-          </TouchableOpacity>
-        </View>
-      )}
 
       {/* ================= MODAL ================= */}
       <Modal visible={showConfirm} transparent animationType="fade">
@@ -139,12 +407,15 @@ export default function BuyFlow({ bucket, engine, setEngine }: Props) {
             <Text style={styles.modalMsg}>{modalUI.msg}</Text>
 
             <View style={styles.modalActions}>
-              <TouchableOpacity style={styles.backBtn} onPress={() => setShowConfirm(false)}>
-                <Text style={styles.backText}>Go Back</Text>
+              <TouchableOpacity
+                style={styles.backBtn}
+                onPress={() => setShowConfirm(false)}
+              >
+                <Text style={styles.backText}>Cancel</Text>
               </TouchableOpacity>
-              
-              <TouchableOpacity 
-                style={[styles.confirmBtn, { backgroundColor: modalUI.btn }]} 
+
+              <TouchableOpacity
+                style={[styles.confirmBtn, { backgroundColor: modalUI.btn }]}
                 onPress={handleAction}
               >
                 <Text style={styles.confirmText}>{modalUI.text}</Text>
@@ -156,7 +427,7 @@ export default function BuyFlow({ bucket, engine, setEngine }: Props) {
     </View>
   );
 }
-
+// Yahan aapki purani StyleSheet as it is rahegi...
 const styles = StyleSheet.create({
   card: { backgroundColor: COLORS.CARD, padding: 24, borderRadius: 28, marginTop: 12 },
   label: { color: COLORS.TEXT_MUTED, fontSize: 11, fontWeight: "800", letterSpacing: 1, marginBottom: 10 },

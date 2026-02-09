@@ -1,87 +1,119 @@
+
+
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
-import { Bucket, PlatinumEngineState } from "../types"; // Updated to Platinum types
+import { Bucket } from "../types";
 import { COLORS } from "../constants";
-// import StreakCard from "./StreakCard";
 import StreakCard from "@/features/silver/components/StreakCard";
+
+import {
+  pausePlatinumSipApi,
+  resumePlatinumSipApi,
+  stopPlatinumSipApi,
+} from "../../../services/platinium";
 
 interface Props {
   bucket: Bucket;
-  engine: PlatinumEngineState; // Platinum Engine State
-  setEngine: React.Dispatch<React.SetStateAction<PlatinumEngineState>>;
+  engine: any;
+  setEngine: any;
+  reloadEngine?: () => void;
 }
 
-export default function PlatinumRunningEngine({ bucket, engine, setEngine }: Props) {
-  const currentEngine = engine.engines[bucket];
-  const [alertConfig, setAlertConfig] = useState<{
-    visible: boolean;
-    type: "pause" | "stop";
-  }>({ visible: false, type: "pause" });
+export default function PlatinumRunningEngine({
+  bucket,
+  engine,
+  reloadEngine,
+}: Props) {
 
-  const confirmAction = () => {
-    if (alertConfig.type === "pause") {
-      setEngine({
-        ...engine,
-        engines: {
-          ...engine.engines,
-          [bucket]: { ...currentEngine, isPaused: true },
-        },
-      });
-    } else {
-      setEngine({
-        ...engine,
-        engines: {
-          ...engine.engines,
-          [bucket]: {
-            isActive: false,
-            amount: 0,
-            savedGrams: 0,
-            streak: 0,
-          },
-        },
-      });
+  const currentEngine = engine.engines[bucket];
+
+  const [alertConfig, setAlertConfig] = useState({
+    visible: false,
+    type: "pause" as "pause" | "stop",
+  });
+
+  const PLATINUM_COLOR = COLORS.PLATINUM_ACCENT || "#00D2FF";
+
+  /* ================= BACKEND ACTION ================= */
+  const confirmAction = async () => {
+    try {
+      const sipId = currentEngine?.sip_id;
+
+      if (!sipId) {
+        alert("SIP id missing");
+        setAlertConfig({ ...alertConfig, visible: false });
+        return;
+      }
+
+      if (alertConfig.type === "pause") {
+        const res = await pausePlatinumSipApi(sipId);
+        console.log("PAUSE", res);
+        if (res.success) alert("SIP paused");
+      }
+
+      if (alertConfig.type === "stop") {
+        const res = await stopPlatinumSipApi(sipId);
+        console.log("STOP", res);
+        if (res.success) alert("SIP stopped");
+      }
+
+      reloadEngine && reloadEngine();
+    } catch (e) {
+      console.log("RUNNING ERROR", e);
+      alert("Server error");
+    } finally {
+      setAlertConfig({ ...alertConfig, visible: false });
     }
-    setAlertConfig({ ...alertConfig, visible: false });
   };
 
-  // Platinum Accent Color logic
-  const PLATINUM_COLOR = COLORS.PLATINUM_ACCENT || "#E5E4E2";
-
   return (
-    <View style={styles.card}>
-      {/* --- CUSTOM ALERT MODAL --- */}
+    <>
+      {/* ================= MODAL (TOP LEVEL) ================= */}
       <Modal visible={alertConfig.visible} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.alertBox}>
             <Text style={styles.alertEmoji}>
               {alertConfig.type === "pause" ? "⏸️" : "⚠️"}
             </Text>
+
             <Text style={styles.alertTitle}>
-              {alertConfig.type === "pause" ? "Pause Platinum SIP?" : "Stop Platinum SIP?"}
+              {alertConfig.type === "pause"
+                ? "Pause Platinum SIP?"
+                : "Stop Platinum SIP?"}
             </Text>
+
             <Text style={styles.alertDesc}>
-              {alertConfig.type === "pause" 
-                ? "Your progress will be saved, but your automated Platinum purchases will stop temporarily."
-                : "Stopping will deactivate this plan permanently and reset your streak. Proceed?"}
+              {alertConfig.type === "pause"
+                ? "Your Platinum SIP will pause temporarily."
+                : "This will permanently stop your SIP."}
             </Text>
-            
+
             <View style={styles.modalRow}>
-              <TouchableOpacity 
-                onPress={() => setAlertConfig({ ...alertConfig, visible: false })}
+              <TouchableOpacity
+                onPress={() =>
+                  setAlertConfig({ ...alertConfig, visible: false })
+                }
                 style={styles.cancelBtn}
               >
-                <Text style={styles.cancelBtnText}>Keep Active</Text>
+                <Text style={styles.cancelBtnText}>Cancel</Text>
               </TouchableOpacity>
-              
-              <TouchableOpacity 
+
+              <TouchableOpacity
                 onPress={confirmAction}
                 style={[
-                  styles.confirmBtn, 
-                  { backgroundColor: alertConfig.type === 'stop' ? COLORS.DANGER : PLATINUM_COLOR }
+                  styles.confirmBtn,
+                  {
+                    backgroundColor:
+                      alertConfig.type === "stop"
+                        ? COLORS.DANGER
+                        : PLATINUM_COLOR,
+                  },
                 ]}
               >
-                <Text style={[styles.confirmBtnText, { color: alertConfig.type === 'stop' ? '#fff' : '#000' }]}>
-                  {alertConfig.type === "pause" ? "Confirm Pause" : "Stop Plan"}
+                <Text style={styles.confirmBtnText}>
+                  {alertConfig.type === "pause"
+                    ? "Confirm Pause"
+                    : "Stop Plan"}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -89,47 +121,238 @@ export default function PlatinumRunningEngine({ bucket, engine, setEngine }: Pro
         </View>
       </Modal>
 
-      {/* --- HEADER --- */}
-      <View style={styles.header}>
-        <View style={[styles.statusBadge, { backgroundColor: 'rgba(229, 228, 226, 0.1)' }]}>
-          <View style={[styles.pulseDot, { backgroundColor: PLATINUM_COLOR }]} />
-          <Text style={[styles.statusText, { color: PLATINUM_COLOR }]}>PLATINUM ACTIVE</Text>
+      {/* ================= CARD ================= */}
+      <View style={styles.card}>
+        <View style={styles.header}>
+          <View
+            style={[
+              styles.statusBadge,
+              { backgroundColor: "rgba(229, 228, 226, 0.1)" },
+            ]}
+          >
+            <View
+              style={[styles.pulseDot, { backgroundColor: PLATINUM_COLOR }]}
+            />
+            <Text style={[styles.statusText, { color: PLATINUM_COLOR }]}>
+              PLATINUM ACTIVE
+            </Text>
+          </View>
+          <Text style={styles.bucketType}>{bucket.toUpperCase()}</Text>
         </View>
-        <Text style={styles.bucketType}>{bucket.toUpperCase()}</Text>
-      </View>
 
-      <View style={styles.amountContainer}>
-        <Text style={styles.currencySymbol}>₹</Text>
-        <Text style={styles.amountText}>{currentEngine.amount}</Text>
-        <Text style={styles.perCycle}>/ cycle</Text>
-      </View>
+        <View style={styles.amountContainer}>
+          <Text style={styles.currencySymbol}>₹</Text>
+          <Text style={styles.amountText}>{currentEngine.amount}</Text>
+          <Text style={styles.perCycle}>/ cycle</Text>
+        </View>
 
-      <View style={styles.divider} />
-      
-      <View style={styles.streakWrapper}>
-        {/* Streak card will receive platinum streak count */}
-        <StreakCard streak={currentEngine.streak || 0} />
-      </View>
+        <View style={styles.divider} />
 
-      <View style={styles.row}>
-        <TouchableOpacity 
-          onPress={() => setAlertConfig({ visible: true, type: "pause" })} 
-          style={styles.pauseBtn}
-        >
-          <Text style={styles.pauseText}>Pause Plan</Text>
-        </TouchableOpacity>
+        <View style={styles.streakWrapper}>
+          <StreakCard streak={currentEngine.streak || 0} />
+        </View>
 
-        <TouchableOpacity 
-          onPress={() => setAlertConfig({ visible: true, type: "stop" })} 
-          style={styles.stopBtn}
-        >
-          <Text style={styles.stopText}>Stop</Text>
-        </TouchableOpacity>
+        <View style={styles.row}>
+          <TouchableOpacity
+            onPress={() => {
+              console.log("PAUSE CLICK");
+              setAlertConfig({ visible: true, type: "pause" });
+            }}
+            style={styles.pauseBtn}
+          >
+            <Text style={styles.pauseText}>Pause Plan</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              console.log("STOP CLICK");
+              setAlertConfig({ visible: true, type: "stop" });
+            }}
+            style={styles.stopBtn}
+          >
+            <Text style={styles.stopText}>Stop</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import { View, Text, TouchableOpacity, Modal ,StyleSheet} from "react-native";
+// import { Bucket } from "../types";
+// import { COLORS } from "../constants";
+// import StreakCard from "@/features/silver/components/StreakCard";
+
+// import {
+//   pausePlatinumSipApi,
+//   resumePlatinumSipApi,
+//   stopPlatinumSipApi,
+// } from "../../../services/platinium";
+
+// interface Props {
+//   bucket: Bucket;
+//   engine: any;
+//   setEngine: any;
+//   reloadEngine?: () => void;
+// }
+
+// export default function PlatinumRunningEngine({
+//   bucket,
+//   engine,
+//   reloadEngine,
+// }: Props) {
+//   const currentEngine = engine.engines[bucket];
+  
+//   // Status flags check karein
+//   const isCurrentlyPaused = currentEngine?.status === "PAUSED";
+//   const PLATINUM_COLOR = COLORS.PLATINUM_ACCENT || "#00D2FF";
+
+//   const [alertConfig, setAlertConfig] = useState({
+//     visible: false,
+//     type: "pause" as "pause" | "stop",
+//   });
+
+//   /* ================= BACKEND ACTION ================= */
+//   const confirmAction = async () => {
+//     try {
+//       const sipId = currentEngine?.sip_id;
+
+//       if (!sipId) {
+//         alert("SIP id missing");
+//         setAlertConfig({ ...alertConfig, visible: false });
+//         return;
+//       }
+
+//       if (alertConfig.type === "pause") {
+//         // Toggle logic: Agar pehle se paused hai toh resume call karein
+//         if (isCurrentlyPaused) {
+//           const res = await resumePlatinumSipApi(sipId);
+//           if (res.success) alert("SIP resumed successfully");
+//           else alert(res.message || "Failed to resume");
+//         } else {
+//           const res = await pausePlatinumSipApi(sipId);
+//           if (res.success) alert("SIP paused successfully");
+//           else alert(res.message || "Failed to pause");
+//         }
+//       }
+
+//       if (alertConfig.type === "stop") {
+//         const res = await stopPlatinumSipApi(sipId);
+//         if (res.success) alert("SIP stopped permanently");
+//         else alert(res.message || "Failed to stop");
+//       }
+
+//       reloadEngine && reloadEngine();
+//     } catch (e) {
+//       console.log("RUNNING ERROR", e);
+//       alert("Server error");
+//     } finally {
+//       setAlertConfig({ ...alertConfig, visible: false });
+//     }
+//   };
+
+//   return (
+//     <>
+//       {/* ================= MODAL ================= */}
+//       <Modal visible={alertConfig.visible} transparent animationType="fade">
+//         <View style={styles.modalOverlay}>
+//           <View style={styles.alertBox}>
+//             <Text style={styles.alertEmoji}>
+//               {alertConfig.type === "pause" ? (isCurrentlyPaused ? "▶️" : "⏸️") : "🛑"}
+//             </Text>
+
+//             <Text style={styles.alertTitle}>
+//               {alertConfig.type === "pause"
+//                 ? isCurrentlyPaused ? "Resume Platinum SIP?" : "Pause Platinum SIP?"
+//                 : "Stop Platinum SIP?"}
+//             </Text>
+
+//             <Text style={styles.alertDesc}>
+//               {alertConfig.type === "pause"
+//                 ? isCurrentlyPaused ? "Your investment will start again." : "Your Platinum SIP will pause temporarily."
+//                 : "This will permanently stop your SIP and cannot be undone."}
+//             </Text>
+
+//             <View style={styles.modalRow}>
+//               <TouchableOpacity
+//                 onPress={() => setAlertConfig({ ...alertConfig, visible: false })}
+//                 style={styles.cancelBtn}
+//               >
+//                 <Text style={styles.cancelBtnText}>Cancel</Text>
+//               </TouchableOpacity>
+
+//               <TouchableOpacity
+//                 onPress={confirmAction}
+//                 style={[
+//                   styles.confirmBtn,
+//                   {
+//                     backgroundColor: alertConfig.type === "stop" ? COLORS.DANGER : PLATINUM_COLOR,
+//                   },
+//                 ]}
+//               >
+//                 <Text style={styles.confirmBtnText}>
+//                   {alertConfig.type === "pause"
+//                     ? isCurrentlyPaused ? "Confirm Resume" : "Confirm Pause"
+//                     : "Stop Plan"}
+//                 </Text>
+//               </TouchableOpacity>
+//             </View>
+//           </View>
+//         </View>
+//       </Modal>
+
+//       {/* ================= CARD ================= */}
+//       <View style={styles.card}>
+//         <View style={styles.header}>
+//           <View style={[styles.statusBadge, { backgroundColor: "rgba(229, 228, 226, 0.1)" }]}>
+//             <View style={[styles.pulseDot, { backgroundColor: isCurrentlyPaused ? "#FF9500" : PLATINUM_COLOR }]} />
+//             <Text style={[styles.statusText, { color: isCurrentlyPaused ? "#FF9500" : PLATINUM_COLOR }]}>
+//               {isCurrentlyPaused ? "SIP PAUSED" : "PLATINUM ACTIVE"}
+//             </Text>
+//           </View>
+//           <Text style={styles.bucketType}>{bucket.toUpperCase()}</Text>
+//         </View>
+
+//         <View style={styles.amountContainer}>
+//           <Text style={styles.currencySymbol}>₹</Text>
+//           <Text style={styles.amountText}>{currentEngine.amount}</Text>
+//           <Text style={styles.perCycle}>/ cycle</Text>
+//         </View>
+
+//         <View style={styles.divider} />
+
+//         <View style={styles.streakWrapper}>
+//           <StreakCard streak={currentEngine.streak || 0} />
+//         </View>
+
+//         <View style={styles.row}>
+//           <TouchableOpacity
+//             onPress={() => setAlertConfig({ visible: true, type: "pause" })}
+//             style={styles.pauseBtn}
+//           >
+//             <Text style={styles.pauseText}>
+//                {isCurrentlyPaused ? "Resume Plan" : "Pause Plan"}
+//             </Text>
+//           </TouchableOpacity>
+
+//           <TouchableOpacity
+//             onPress={() => setAlertConfig({ visible: true, type: "stop" })}
+//             style={styles.stopBtn}
+//           >
+//             <Text style={styles.stopText}>Stop</Text>
+//           </TouchableOpacity>
+//         </View>
+//       </View>
+//     </>
+//   );
+// }
 const styles = StyleSheet.create({
   card: {
     backgroundColor: COLORS.CARD,

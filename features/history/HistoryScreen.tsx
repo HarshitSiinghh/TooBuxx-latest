@@ -140,7 +140,7 @@ useFocusEffect(
 
           <TouchableOpacity
             style={styles.saveButton}
-            onPress={() => router.push("/savings/daily-saving")}
+            onPress={() => router.push("/metals/gold/engine")}
           >
             <Plus color="#fff" size={18} strokeWidth={3} />
             <Text style={styles.saveButtonText}>SAVE DAILY</Text>

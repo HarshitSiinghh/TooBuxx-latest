@@ -212,10 +212,10 @@ export default function SpinWheel() {
   </Text>
 
   <TouchableOpacity
-    onPress={() => router.push("/savings/daily-saving")} // 🔴 apna actual route yahan daalna
+    onPress={() => router.push("/metals/gold/engine")} // 🔴 apna actual route yahan daalna
     style={styles.dailyBtn}
   >
-    <Text style={styles.dailyBtnText}>GO TO DAILY SAVINGS</Text>
+    <Text style={styles.dailyBtnText}> INVEST IN GOLD </Text>
   </TouchableOpacity>
 </View>
 

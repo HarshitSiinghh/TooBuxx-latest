@@ -15,10 +15,10 @@ export const StartSaving = () => {
           </Text>
 
           <Text style={styles.desc}>
-            Auto starting from ₹500 daily toward your future goals
+            Auto starting from ₹10 daily toward your future goals
           </Text>
 
-          <Pressable style={styles.button}   onPress={()=>router.push("/savings/daily-saving",)}>
+          <Pressable style={styles.button}   onPress={()=>router.push("/metals/gold/engine",)}>
             <Text style={styles.buttonText}>Save Now</Text>
             <Feather name="arrow-right" size={14} color="#5b21b6" />
           </Pressable>

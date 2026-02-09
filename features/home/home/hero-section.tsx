@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect,useCallback } from "react";
 import { View, Text, StyleSheet, Pressable, Dimensions } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -7,10 +5,10 @@ import { getGoldPriceApi } from "@/services/goldprice";
 import { getProfileApi } from "@/services/profile";
 import { useRouter,useFocusEffect } from "expo-router";
 import { useProfileStore } from "@/store/profileStore";
+import { getPortfolioApi } from "@/services/portfolio";
 import { LinearGradient } from "expo-linear-gradient";
 
 const { width } = Dimensions.get("window");
-
 export const HeroSection = () => {
   const router = useRouter();
   const profile = useProfileStore((s) => s.profile);
@@ -20,18 +18,18 @@ const [prevPrice, setPrevPrice] = useState<number | null>(null);
 
   const [goldPrice, setGoldPrice] = useState<number | null>(null);
   const [totalGold, setTotalGold] = useState(0);
+  const [totalSavings, setTotalSavings] = useState(0);
+
   const [dailyValue, setDailyValue] = useState(0);
   const [walletBalance, setWalletBalance] = useState<number | null>(null); // ✅ NEW
 
-  // useEffect(() => {
-  //   loadGoldPrice();
-  //   loadWallet();
-  // }, []);
+  
 
   useFocusEffect(
   useCallback(() => {
     loadGoldPrice();
     loadWallet();
+     loadPortfolio(); 
 
     const interval = setInterval(() => {
       loadGoldPrice();
@@ -41,29 +39,34 @@ const [prevPrice, setPrevPrice] = useState<number | null>(null);
   }, [])
 );
 
+
+
+const loadPortfolio = async () => {
+  try {
+    const res = await getPortfolioApi();
+
+    if (res?.success) {
+      console.log("PORTFOLIO 👉", res);
+
+      const total =
+        Number(res?.gold_24K?.current_value || 0) +
+        Number(res?.gold_22K?.current_value || 0) +
+        Number(res?.gold_18K?.current_value || 0) +
+        Number(res?.silver?.current_value || 0) +
+        Number(res?.platinum?.current_value || 0);
+
+      setTotalSavings(total);
+    }
+  } catch (e) {
+    console.log("Portfolio error:", e);
+  }
+};
+
   useEffect(() => {
     if (goldPrice !== null) {
       setDailyValue(totalGold * goldPrice);
     }
   }, [goldPrice, totalGold]);
-
-  // const loadGoldPrice = async () => {
-  //   try {
-  //     const res = await getGoldPriceApi();
-  //     if (res?.success) {
-  //       setGoldPrice(Number(res.data?.market_sell_price));
-  //     }
-  //   } catch (e) {
-  //     console.log("Gold price error:", e);
-  //   }
-  // };
-
-
-
-
-
-
-
 const loadGoldPrice = async () => {
   try {
     const res = await getGoldPriceApi();
@@ -122,11 +125,7 @@ const loadGoldPrice = async () => {
 
       {/* Card */}
       <LinearGradient
-        // colors={["#2f2360", "#1a003d"]}
-        // start={{ x: 0, y: 0 }}
-        // end={{ x: 1, y: 1 }}
-        // style={styles.card}
-
+        
 
 
         colors={["#104e64", "#062530"]}   // 🔥 NEW THEME GRADIENT
@@ -173,21 +172,15 @@ const loadGoldPrice = async () => {
 
         <View style={styles.savingsRow}>
           <View style={styles.savingsInfo}>
-            <Text style={styles.savingsLabel}>TOTAL  GOLD</Text>
-            {/* <Text style={styles.amount}>₹{dailyValue.toFixed(2)}</Text> */}
+            <Text style={styles.savingsLabel}>TOTAL  SAVINGS</Text>
+           
 
-
-   <Text
-  style={[
-    styles.amount,
-    priceTrend === "up" && styles.priceUp,
-    priceTrend === "down" && styles.priceDown,
-  ]}
->
-  ₹{dailyValue.toFixed(2)}
+<Text style={styles.amount}>
+  ₹{totalSavings.toFixed(2)}
 </Text>
 
-            <Text style={styles.grams}>{totalGold}gm in 24K Gold</Text>
+
+            {/* <Text style={styles.grams}>{totalGold}gm in 24K Gold</Text> */}
           </View>
         </View>
       </LinearGradient>
@@ -196,14 +189,14 @@ const loadGoldPrice = async () => {
       <View style={styles.actionButtonsRow}>
         <Pressable
           style={styles.withdrawBtn}
-          onPress={() => router.push("/savings/withdrawalFrom")}
+          onPress={() => router.push("/withdraw")}
         >
           <Text style={styles.btnTextLight}>WITHDRAW</Text>
         </Pressable>
 
         <Pressable
           style={styles.savingBtnWrapper}
-          onPress={() => router.push("/savings/instant-saving")}
+          onPress={() => router.push("/abc/pricecard")}
         >
           <LinearGradient
             colors={["#BF953F", "#FCF6BA", "#B38728", "#FBF5B7", "#AA771C"]}
@@ -211,7 +204,7 @@ const loadGoldPrice = async () => {
             end={{ x: 1, y: 0 }}
             style={styles.savingBtnGradient}
           >
-            <Text style={styles.btnTextDark}>Buy 24K Gold</Text>
+            <Text style={styles.btnTextDark}>Start Investing </Text>
           </LinearGradient>
         </Pressable>
       </View>
@@ -532,7 +525,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     borderWidth: 1.5,
     borderColor: "#104e64",
-    backgroundColor: "rgba(16,78,100,0.35)",
+
     alignItems: "center",
     justifyContent: "center",
   },
