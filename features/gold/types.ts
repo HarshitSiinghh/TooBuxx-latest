@@ -1,31 +1,3 @@
-// export type GoldTab = "instant" | "daily" | "weekly" | "monthly";
-// export type Karat = "18K" | "22K" | "24K";
-// export type PlanStatus = "active" | "paused" | "stopped";
-
-// export interface GoldPlan {
-//   id: string;
-//   tab: GoldTab;
-//   karat: Karat;
-//   amount: number;
-//   returnRate: number;
-//   duration: string;
-//   status: PlanStatus;
-//   savedGrams: number; 
-// }
-
-// export interface GoldEngineState {
-//   pricePerGram: number;
-//   walletBalance: number;
-//   engines: {
-//     [key in GoldTab]: {
-//       savedGrams: number;
-//       isActive: boolean;    // Yeh add kiya taaki STOP logic chale
-//       isPaused: boolean;    // Yeh add kiya taaki PAUSE logic chale
-//       amount: number;       // SIP amount track karne ke liye
-//       streak?: number;      // Optional: continuous investment track karne ke liye
-//     };
-//   };
-// }
 
 
 export type GoldTab = "instant" | "daily" | "weekly" | "monthly";
@@ -44,17 +16,20 @@ export interface GoldSipData {
   next_run_date?: string;
 }
 
-/* ================= OPTIONAL PLAN ================= */
+
 export interface GoldEngineState {
   pricePerGram: number;
   walletBalance: number;
 
-  /* 🔥 ADD THESE TWO */
+  // 🔥 ADD THESE (IMPORTANT)
+  price18k?: number;
+  price22k?: number;
+  price24k?: number;
+
   selectedGoldGrams: number;
   selectedGoldValue: number;
-  totalGoldGrams:number;
-totalGoldValue:number;
-
+  totalGoldGrams: number;
+  totalGoldValue: number;
 
   engines: {
     [key in GoldTab]: {
@@ -63,7 +38,6 @@ totalGoldValue:number;
       isPaused: boolean;
       amount: number;
       streak?: number;
-
       data?: GoldSipData | null;
     };
   };

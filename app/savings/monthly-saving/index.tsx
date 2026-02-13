@@ -210,7 +210,7 @@ export default function MonthlySaving() {
 //         alignItems: "center",
 //       }}
 //     >
-//       <ActivityIndicator size="large" color="#a855f7" />
+//       <ActivityIndicator size="large" color="#" />
 //       <Text style={{ marginTop: 10, color: "#fff", fontWeight: "bold" }}>
 //         Loading...
 //       </Text>

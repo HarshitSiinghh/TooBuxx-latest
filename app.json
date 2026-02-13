@@ -15,14 +15,15 @@
     },
 
     "android": {
+      "icon": "./assets/images/icon.png",
       "package": "com.harshit_siinghh.gold",
       "edgeToEdgeEnabled": false,
       "predictiveBackGestureEnabled": false,
 
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png",
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundImage": "./assets/images/icon.png",
+        "monochromeImage": "./assets/images/icon.png",
         "backgroundColor": "#062530"
       },
 

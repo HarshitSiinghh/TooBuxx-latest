@@ -1,5 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
+import  { useEffect, useState } from "react";
+import LottieView from "lottie-react-native";
 
 import AutoInvestCard from "../home/auto-invest";
 import Header from "./header";
@@ -15,6 +17,36 @@ import { StartSaving } from "./home/saving";
 import LivePriceCards from "./home/PriceCard";
  import PortfolioSummary from "./home/PortfolioSummary";
 export default function Home() {
+
+
+   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // fake loading (ya api load hone tak)
+    
+      setLoading(false);
+    ; // 1.5 sec loader
+  }, []);
+  if (loading) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#062530",
+      }}
+    >
+      <LottieView
+        source={require("../../assets/gold.json")}
+        autoPlay
+        loop
+        style={{ width: 180, height: 180 }}
+      />
+    </View>
+  );
+}
+
   return (
     <View style={styles.container}>
       <Header />

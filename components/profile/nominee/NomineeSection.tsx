@@ -219,7 +219,7 @@ export function NomineeSection({ onSuccess }: Props) {
 
             <View style={styles.formTitleSection}>
               <View style={styles.iconBox}>
-                <UserPlus color="#a855f7" size={24} />
+                <UserPlus color="#facc15" size={24} />
               </View>
               <View>
                 <Text style={styles.formTitle}>Nominee Details</Text>
@@ -343,12 +343,12 @@ export function NomineeSection({ onSuccess }: Props) {
                   >
                     {selectedFile ? (
                       <View style={styles.fileInfo}>
-                        <CheckCircle2 color="#a855f7" size={14} />
+                        <CheckCircle2 color="#facc15" size={14} />
                         <Text numberOfLines={1} style={styles.fileName}>
                           {selectedFile.fileName || "document.jpg"}
                         </Text>
                         <TouchableOpacity onPress={removeFile}>
-                          <X color="#a855f7" size={14} />
+                          <X color="#facc15" size={14} />
                         </TouchableOpacity>
                       </View>
                     ) : (
@@ -427,7 +427,7 @@ export function NomineeSection({ onSuccess }: Props) {
       </KeyboardAvoidingView>
          {loading && (
         <View style={styles.loaderOverlay}>
-          <ActivityIndicator size="large" color="#a855f7" />
+          <ActivityIndicator size="large" color="#facc15" />
           <Text style={styles.loaderText}>Uploading nominee...</Text>
         </View>
       )}
@@ -436,316 +436,6 @@ export function NomineeSection({ onSuccess }: Props) {
 }
 
 
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#1a003d',
-//   },
-
-//   // ❌ Glass orbs removed
-//   bgOrb: { display: "none" },
-//   topOrb: {},
-//   bottomOrb: {},
-
-//   header: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     paddingHorizontal: 20,
-//     paddingVertical: 15,
-//     backgroundColor: '#1a003d',
-//     borderBottomWidth: 1,
-//     borderBottomColor: 'rgba(255,255,255,0.08)',
-//   },
-
-//   backButton: {
-//     padding: 10,
-//     backgroundColor: '#24004f',
-//     borderRadius: 12,
-//     borderWidth: 1,
-//     borderColor: 'rgba(255, 255, 255, 0.15)',
-//   },
-// loaderOverlay: {
-//   position: "absolute",
-//   top: 0,
-//   left: 0,
-//   right: 0,
-//   bottom: 0,
-//   backgroundColor: "rgba(0,0,0,0.6)",
-//   justifyContent: "center",
-//   alignItems: "center",
-//   zIndex: 9999,
-// },
-
-// loaderText: {
-//   marginTop: 12,
-//   color: "#fff",
-//   fontSize: 12,
-//   fontWeight: "900",
-//   letterSpacing: 1,
-// },
-//   headerTextContainer: {
-//     marginLeft: 15,
-//   },
-
-//   headerTitle: {
-//     color: '#fff',
-//     fontSize: 18,
-//     fontWeight: '900',
-//     letterSpacing: 0.5,
-//   },
-
-//   headerSub: {
-//     color: '#a855f7',
-//     fontSize: 10,
-//     fontWeight: 'bold',
-//     letterSpacing: 1,
-//     marginTop: 2,
-//   },
-
-//   scrollContent: {
-//     padding: 20,
-//     paddingBottom: 40,
-//   },
-
-//   formCard: {
-//     backgroundColor: '#22004f', // ✅ solid instead of glass
-//     borderRadius: 40,
-//     borderWidth: 1,
-//     borderColor: 'rgba(255, 255, 255, 0.12)',
-//     padding: 24,
-//   },
-
-//   topGlowLine: {
-//     height: 2,
-//     backgroundColor: 'rgba(168, 85, 247, 0.25)',
-//   },
-
-//   formTitleSection: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginBottom: 30,
-//     gap: 15,
-//   },
-
-//   iconBox: {
-//     padding: 12,
-//     backgroundColor: '#2b0063',
-//     borderRadius: 16,
-//     borderWidth: 1,
-//     borderColor: 'rgba(168, 85, 247, 0.35)',
-//   },
-
-//   formTitle: {
-//     color: '#fff',
-//     fontSize: 20,
-//     fontWeight: '900',
-//   },
-
-//   formSub: {
-//     color: '#9ca3af',
-//     fontSize: 10,
-//     fontWeight: 'bold',
-//     marginTop: 2,
-//   },
-
-//   inputStack: {
-//     gap: 20,
-//   },
-
-//   inputGroup: {
-//     width: '100%',
-//   },
-
-//   row: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//   },
-
-//   label: {
-//     color: '#9ca3af',
-//     fontSize: 9,
-//     fontWeight: '900',
-//     letterSpacing: 1.5,
-//     marginBottom: 10,
-//     marginLeft: 4,
-//   },
-
-//   input: {
-//     backgroundColor: '#2a0061',
-//     borderRadius: 16,
-//     borderWidth: 1,
-//     borderColor: 'rgba(255, 255, 255, 0.15)',
-//     paddingHorizontal: 20,
-//     paddingVertical: 14,
-//     color: '#fff',
-//     fontSize: 14,
-//     fontWeight: 'bold',
-//   },
-
-//   pickerTrigger: {
-//     backgroundColor: '#2a0061',
-//     borderRadius: 16,
-//     borderWidth: 1,
-//     borderColor: 'rgba(255, 255, 255, 0.15)',
-//     paddingHorizontal: 16,
-//     paddingVertical: 14,
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     alignItems: 'center',
-//   },
-
-//   pickerText: {
-//     color: '#e5e7eb',
-//     fontSize: 13,
-//     fontWeight: 'bold',
-//   },
-
-//   phoneInputWrapper: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     backgroundColor: '#2a0061',
-//     borderRadius: 16,
-//     borderWidth: 1,
-//     borderColor: 'rgba(255, 255, 255, 0.15)',
-//     paddingRight: 12,
-//   },
-
-//   mobileBadge: {
-//     backgroundColor: '#2f006d',
-//     paddingHorizontal: 8,
-//     paddingVertical: 4,
-//     borderRadius: 6,
-//     borderWidth: 1,
-//     borderColor: 'rgba(168, 85, 247, 0.3)',
-//   },
-
-//   mobileBadgeText: {
-//     color: '#a855f7',
-//     fontSize: 8,
-//     fontWeight: '900',
-//   },
-
-//   uploadBox: {
-//     borderRadius: 16,
-//     borderWidth: 1.5,
-//     borderStyle: 'dashed',
-//     justifyContent: 'center',
-//     minHeight: 48,
-//   },
-
-//   uploadBoxInactive: {
-//     backgroundColor: '#240054',
-//     borderColor: 'rgba(255, 255, 255, 0.2)',
-//   },
-
-//   uploadBoxActive: {
-//     backgroundColor: '#2d0066',
-//     borderColor: 'rgba(168, 85, 247, 0.6)',
-//   },
-
-//   uploadPlaceholder: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     gap: 8,
-//   },
-
-//   uploadText: {
-//     color: '#9ca3af',
-//     fontSize: 13,
-//     fontWeight: 'bold',
-//   },
-
-//   fileInfo: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'space-between',
-//     paddingHorizontal: 10,
-//     gap: 5,
-//   },
-
-//   fileName: {
-//     flex: 1,
-//     color: '#d8b4fe',
-//     fontSize: 11,
-//     fontWeight: '900',
-//   },
-
-//   footerSection: {
-//     marginTop: 40,
-//     gap: 20,
-//   },
-
-//   securityNote: {
-//     flexDirection: 'row',
-//     backgroundColor: '#2a004f',
-//     borderWidth: 1,
-//     borderColor: 'rgba(234, 179, 8, 0.2)',
-//     borderRadius: 16,
-//     padding: 12,
-//     gap: 10,
-//   },
-
-//   securityText: {
-//     flex: 1,
-//     color: '#fef08a',
-//     fontSize: 9,
-//     fontWeight: 'bold',
-//     lineHeight: 14,
-//   },
-
-//   submitButton: {
-//     backgroundColor: '#7c3aed',
-//     height: 60,
-//     borderRadius: 20,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-
-//   submitButtonText: {
-//     color: '#fff',
-//     fontSize: 12,
-//     fontWeight: '900',
-//     letterSpacing: 1,
-//   },
-
-//   copyrightText: {
-//     textAlign: 'center',
-//     color: '#374151',
-//     fontSize: 10,
-//     fontWeight: '900',
-//     letterSpacing: 4,
-//     marginTop: 40,
-//     paddingHorizontal: 20,
-//   },
-
-//   dropdown: {
-//     position: "absolute",
-//     top: 76,
-//     width: "100%",
-//     backgroundColor: "#240054",
-//     borderRadius: 14,
-//     borderWidth: 1,
-//     borderColor: "rgba(168,85,247,0.35)",
-//     zIndex: 999,
-//     overflow: "hidden",
-//   },
-
-//   dropItem: {
-//     paddingVertical: 12,
-//     paddingHorizontal: 14,
-//     borderBottomWidth: 1,
-//     borderBottomColor: "rgba(255,255,255,0.08)",
-//   },
-
-//   dropText: {
-//     color: "#e5e7eb",
-//     fontSize: 13,
-//     fontWeight: "600",
-//     letterSpacing: 0.6,
-//   },
-// });
 
 
 

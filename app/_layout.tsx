@@ -1,3 +1,4 @@
+import LottieView from "lottie-react-native";
 
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -58,16 +59,23 @@ export default function RootLayout() {
 
 if (loading) {
   return (
-    <View
+
+   <View
       style={{
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#062530", // app primary bg
+        backgroundColor: "#062530",
       }}
     >
-      <ActivityIndicator size="large" color="#facc15" />
+      <LottieView
+        source={require("../assets/gold.json")}
+        autoPlay
+        loop
+        style={{ width: 180, height: 180 }}
+      />
     </View>
+
   );
 }
 

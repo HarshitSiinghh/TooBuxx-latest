@@ -138,3 +138,14 @@ export const getMyGoldSipApi = async () => {
 
   return res.json();
 };
+
+
+/* ================= LIVE METAL PRICE ================= */
+export const getLiveMetalPriceApi = async () => {
+  const res = await fetch(`${BASE_URL}/metals/live`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  return res.json();
+};

@@ -3,7 +3,8 @@ import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../constants";
 import { Bucket } from "../types";
 import StreakCard from "./StreakCard";
-
+ import BaseAlert from "../BaseAlert";
+ import ManageSipMenu from "./ManageSipMenu";
 /* 🔥 SILVER APIs */
 import {
   pauseSilverSipApi,
@@ -31,17 +32,34 @@ console.log("🔥 BUTTON PRESSED SIP ID:", sipId);
     visible: boolean;
     type: "pause" | "stop";
   }>({ visible: false, type: "pause" });
+const [baseAlert, setBaseAlert] = useState({
+  visible: false,
+  title: "",
+  msg: "",
+  type: "info" as "success" | "error" | "warning" | "info",
+});
+const [showManageMenu, setShowManageMenu] = useState(false);
 
+
+const showAlert = (
+  title: string,
+  msg: string,
+  type: "success" | "error" | "warning" | "info" = "info"
+) => {
+  setBaseAlert({ visible: true, title, msg, type });
+};
   /* ================= BACKEND ACTION ================= */
   const confirmAction = async () => {
     try {
       const sipId = currentEngine?.sip_id;
 
-      if (!sipId) {
-        alert("SIP not found");
+    if (!sipId) {
+  showAlert("Error", "SIP not found", "error");
+
         setAlertConfig({ ...alertConfig, visible: false });
         return;
       }
+
 
       /* ===== PAUSE / RESUME ===== */
       if (alertConfig.type === "pause") {
@@ -50,14 +68,23 @@ console.log("🔥 BUTTON PRESSED SIP ID:", sipId);
           console.log(" your SIP is ", sipId);
 
           console.log("RESUME", res);
-          if (!res.success) return alert(res.message);
-          alert("SIP resumed");
+         if (!res.success) {
+  showAlert("Error", res.message, "error");
+  return;
+}
+
+          showAlert("SIP resumed,successfully", "success");
         } else {
           console.log("your sip id is", sipId);
           const res = await pauseSilverSipApi(sipId);
           console.log("PAUSE", res);
-          if (!res.success) return alert(res.message);
-          alert("SIP paused");
+         if (!res.success) {
+  showAlert("Error", res.message, "error");
+  return;
+}
+
+       showAlert("Success", "SIP resumed", "success");
+;
         }
       }
 
@@ -67,17 +94,20 @@ console.log("🔥 BUTTON PRESSED SIP ID:", sipId);
         const res = await stopSilverSipApi(sipId);
         console.log("STOP", res);
         if (!res.success) return alert(res.message);
-        alert("SIP stopped");
+      showAlert("Success", "SIP stopped", "success");
+
       }
 
       reloadEngine && reloadEngine();
     } catch (e) {
       console.log("RUNNING ENGINE ERROR", e);
-      alert("Server error");
+ showAlert("Server Error","Something went wrong","error")
     } finally {
       setAlertConfig({ ...alertConfig, visible: false });
     }
   };
+
+  
   console.log("CURRENT ENGINE 👉", currentEngine);
 
   return (
@@ -90,9 +120,14 @@ console.log("🔥 BUTTON PRESSED SIP ID:", sipId);
               {alertConfig.type === "pause" ? "⏸️" : "🛑"}
             </Text>
 
-            <Text style={styles.alertTitle}>
-              {alertConfig.type === "pause" ? "Pause SIP?" : "Stop SIP?"}
-            </Text>
+          <Text style={styles.alertTitle}>
+  {alertConfig.type === "pause"
+    ? currentEngine?.isPaused
+      ? "Resume SIP?"
+      : "Pause SIP?"
+    : "Stop SIP?"}
+</Text>
+
 
             <Text style={styles.alertDesc}>
               {alertConfig.type === "pause"
@@ -153,7 +188,7 @@ console.log("🔥 BUTTON PRESSED SIP ID:", sipId);
           <StreakCard streak={currentEngine.streak || 0} />
         </View>
 
-        <View style={styles.row}>
+        {/* <View style={styles.row}>
           <TouchableOpacity
             onPress={() => setAlertConfig({ visible: true, type: "pause" })}
             style={styles.pauseBtn}
@@ -169,7 +204,35 @@ console.log("🔥 BUTTON PRESSED SIP ID:", sipId);
           >
             <Text style={styles.stopText}>STOP</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
+        <View style={{ marginTop: 14 }}>
+  <TouchableOpacity
+    style={styles.manageBtn}
+    onPress={() => setShowManageMenu(true)}
+    activeOpacity={0.8}
+  >
+    <Text style={styles.manageText}>MANAGE SIP</Text>
+  </TouchableOpacity>
+</View>
+
+        <BaseAlert
+  visible={baseAlert.visible}
+  title={baseAlert.title}
+  message={baseAlert.msg}
+  type={baseAlert.type}
+  confirmText="OK"
+  onConfirm={() => setBaseAlert({ ...baseAlert, visible: false })}
+  onCancel={() => setBaseAlert({ ...baseAlert, visible: false })}
+/>
+<ManageSipMenu
+  visible={showManageMenu}
+  onClose={() => setShowManageMenu(false)}
+  onPausePress={() => setAlertConfig({ visible: true, type: "pause" })}
+  onStopPress={() => setAlertConfig({ visible: true, type: "stop" })}
+  isPaused={currentEngine?.isPaused}
+/>
+
+
       </View>
     </>
   );
@@ -218,6 +281,24 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginRight: 4,
   },
+
+  manageBtn: {
+  backgroundColor: "#E5E4E2",
+  paddingVertical: 14,
+  borderRadius: 14,
+  alignItems: "center",
+  borderWidth: 1,
+  borderColor: "#ffffff15",
+  marginTop: 10,
+},
+
+manageText: {
+  color: "#104e64",
+  fontWeight: "700",
+  fontSize: 14,
+  letterSpacing: 1,
+},
+
   amountText: { color: COLORS.TEXT_PRIMARY, fontSize: 36, fontWeight: "800" },
   perCycle: { color: COLORS.TEXT_MUTED, fontSize: 14, marginLeft: 6 },
   divider: {
@@ -229,16 +310,16 @@ const styles = StyleSheet.create({
   row: { flexDirection: "row", gap: 12 },
   pauseBtn: {
     flex: 2,
-    backgroundColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "#E5E7EB",
     height: 48,
     borderRadius: 14,
     alignItems: "center",
     justifyContent: "center",
   },
-  pauseText: { color: "#fff", fontWeight: "600" },
+  pauseText: { color: "#141313", fontWeight: "600" },
   stopBtn: {
     flex: 1,
-    backgroundColor: "rgba(255, 59, 48, 0.15)",
+    backgroundColor: "#ef4444",
     height: 48,
     borderRadius: 14,
     alignItems: "center",
@@ -246,7 +327,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(255, 59, 48, 0.2)",
   },
-  stopText: { color: COLORS.DANGER, fontWeight: "700" },
+  stopText: { color: "#1b1919", fontWeight: "700" },
 
   // --- NEW MODAL STYLES ---
   modalOverlay: {

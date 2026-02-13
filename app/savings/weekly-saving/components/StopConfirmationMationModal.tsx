@@ -152,7 +152,7 @@ interface StopModalProps {
 //     paddingHorizontal: 10,
 //   },
 //   highlightText: {
-//     color: '#c084fc', // purple-400
+//     color: '#  ', // purple-400
 //     fontWeight: '900',
 //     fontStyle: 'italic',
 //   },

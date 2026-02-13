@@ -20,8 +20,8 @@ type ApprovedKYCProps = {
     approved_at?: string;
   };
 };
-const router = useRouter()
 const ApprovedKYC: React.FC<ApprovedKYCProps> = ({ nominee }) => {
+  const router = useRouter()
 
   // ✅ backend se aane wala real data
   const nomineeDetails = {
@@ -42,7 +42,7 @@ const ApprovedKYC: React.FC<ApprovedKYCProps> = ({ nominee }) => {
         <TouchableOpacity hitSlop={20}>
           <MoveLeft size={20}   color="#9ca3af" onPress={()=>router.push("/(tabs)")} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>KYC STATUS</Text>
+        <Text style={styles.headerTitle}>NOMINEE STATUS</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -55,7 +55,7 @@ const ApprovedKYC: React.FC<ApprovedKYCProps> = ({ nominee }) => {
                 <CheckCircle2 size={50} color="#10b981" strokeWidth={2.5} />
               </View>
             </View>
-            <Text style={styles.statusTitle}>KYC Approved</Text>
+            <Text style={styles.statusTitle}>Nominee Approved</Text>
             <Text style={styles.statusSubtitle}>Your nominee details are verified</Text>
           </View>
 
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 24,
-    paddingVertical: 20,
+  paddingBottom:12,
     borderBottomWidth: 1,
     borderBottomColor: "#104e64",
   },

@@ -1,156 +1,6 @@
 
-// import { useEffect, useState } from "react";
-// import { getMyGoldSipApi, getGoldPriceApi } from "@/services/gold";
-// import { getProfileApi } from "@/services/profile";
-//  import { getPortfolioApi } from "@/services/portfolio";
-
-// export type Bucket = "instant" | "daily" | "weekly" | "monthly";
-// export type Karat = "18K" | "22K" | "24K";
-
-// export const useGoldEngine = () => {
-
-//   const [tab,setTab] = useState<Bucket>("instant");
-//   const [karat,setKarat] = useState<Karat>("24K");
-
-//   const [engine,setEngine] = useState<any>({
-//     pricePerGram:0,
-//     walletBalance:0,
-
-//     engines:{
-//       instant:{ savedGrams:0 },
-
-//       daily:{ isActive:false, isPaused:false, amount:0, savedGrams:0, data:null },
-//       weekly:{ isActive:false, isPaused:false, amount:0, savedGrams:0, data:null },
-//       monthly:{ isActive:false, isPaused:false, amount:0, savedGrams:0, data:null }
-//     }
-//   });
-
-//   /* ================= LOAD ENGINE ================= */
-
-//   const loadEngine = async ()=>{
-//     try{
-
-//       /* ===== PRICE ===== */
-//       const priceRes = await getGoldPriceApi();
-//       console.log("GOLD PRICE 👉",priceRes);
-
-//       /* ===== MY SIP ===== */
-//       const sipRes = await getMyGoldSipApi();
-//       console.log("MY GOLD SIP 👉",JSON.stringify(sipRes));
-
-//       /* ================= PRICE SET ================= */
-
-//       const pricePerGram =
-//         priceRes?.data?.price_per_gram_24K ||
-//         priceRes?.data?.market_sell_price_24K ||
-//         0;
-
-//       /* ================= SIP DATA ================= */
-
-//       const sipData = sipRes?.data || {};
-
-//       const dailyArr = sipData?.daily || [];
-//       const weeklyArr = sipData?.weekly || [];
-//       const monthlyArr = sipData?.monthly || [];
-
-//       /* ===== FILTER BY CARET ===== */
-
-//       /* ===== PROFILE WALLET ===== */
-// const profileRes = await getProfileApi();
-// console.log("PROFILE 👉",profileRes);
-
-// const wallet = profileRes?.data?.wallet;
-
-// /* ===== PORTFOLIO ===== */
-// const portfolioRes = await getPortfolioApi();
-// console.log("PORTFOLIO 👉",portfolioRes);
-
-// const portfolio = portfolioRes || {};
-
-//       // const dailySip = dailyArr.find((s:any)=>s.caret===karat);
-//       // const weeklySip = weeklyArr.find((s:any)=>s.caret===karat);
-//       // const monthlySip = monthlyArr.find((s:any)=>s.caret===karat);
-
-
-//       /* ===== PICK LATEST ACTIVE SIP PER CARET ===== */
-
-// const getLatestSip = (arr:any[])=>{
-//   if(!arr?.length) return null;
-
-//   const filtered = arr.filter((s:any)=>s.caret===karat);
-//   if(!filtered.length) return null;
-
-//   // ACTIVE sip first
-//   const active = filtered.find((s:any)=>s.status==="ACTIVE");
-//   if(active) return active;
-
-//   // warna latest sip
-//   return filtered[filtered.length-1];
-// };
-
-// const dailySip = getLatestSip(dailyArr);
-// const weeklySip = getLatestSip(weeklyArr);
-// const monthlySip = getLatestSip(monthlyArr);
-
-//       /* ================= SET ENGINE ================= */
-
-//       setEngine((prev:any)=>({
-//         ...prev,
-//         pricePerGram,
-
-//         engines:{
-//           instant:{ ...prev.engines.instant },
-
-//           daily:{
-//             ...prev.engines.daily,
-//             isActive: !!dailySip && dailySip.status!=="STOPPED",
-//             isPaused: dailySip?.status==="PAUSED",
-//             amount: dailySip?.amount_per_cycle || 0,
-//             savedGrams: dailySip?.gold_grams || 0,
-//             data: dailySip || null
-//           },
-
-//           weekly:{
-//             ...prev.engines.weekly,
-//             isActive: !!weeklySip && weeklySip.status!=="STOPPED",
-//             isPaused: weeklySip?.status==="PAUSED",
-//             amount: weeklySip?.amount_per_cycle || 0,
-//             savedGrams: weeklySip?.gold_grams || 0,
-//             data: weeklySip || null
-//           },
-
-//           monthly:{
-//             ...prev.engines.monthly,
-//             isActive: !!monthlySip && monthlySip.status!=="STOPPED",
-//             isPaused: monthlySip?.status==="PAUSED",
-//             amount: monthlySip?.amount_per_cycle || 0,
-//             savedGrams: monthlySip?.gold_grams || 0,
-//             data: monthlySip || null
-//           }
-//         }
-//       }));
-
-//     }catch(e){
-//       console.log("GOLD LOAD ERROR",e);
-//     }
-//   };
-
-//   /* ===== AUTO LOAD ===== */
-//   useEffect(()=>{
-//     loadEngine();
-//   },[karat]);
-
-//   return{
-//     tab,setTab,
-//     karat,setKarat,
-//     engine,setEngine,
-//     loadEngine
-//   };
-// };
-
-
-import { useEffect, useState } from "react";
-import { getMyGoldSipApi, getGoldPriceApi } from "@/services/gold";
+import { useEffect, useRef, useState } from "react";
+import { getMyGoldSipApi, getLiveMetalPriceApi } from "@/services/gold";
 import { getProfileApi } from "@/services/profile";
 import { getPortfolioApi } from "@/services/portfolio";
 
@@ -158,149 +8,204 @@ export type Bucket = "instant" | "daily" | "weekly" | "monthly";
 export type Karat = "18K" | "22K" | "24K";
 
 export const useGoldEngine = () => {
+  const [tab, setTab] = useState<Bucket>("instant");
+  const [karat, setKarat] = useState<Karat>("24K");
 
-  const [tab,setTab] = useState<Bucket>("instant");
-  const [karat,setKarat] = useState<Karat>("24K");
+  const loadingRef = useRef(false);
+  const [loading, setLoading] = useState(false);
 
-  const [engine,setEngine] = useState<any>({
-    pricePerGram:0,
-    walletBalance:0,
-    totalGoldGrams:0,
-    totalGoldValue:0,
-
-    engines:{
-      instant:{ savedGrams:0 },
-
-      daily:{ isActive:false, isPaused:false, amount:0, savedGrams:0, data:null },
-      weekly:{ isActive:false, isPaused:false, amount:0, savedGrams:0, data:null },
-      monthly:{ isActive:false, isPaused:false, amount:0, savedGrams:0, data:null }
-    }
+  const [engine, setEngine] = useState<any>({
+    pricePerGram: 0,
+    walletBalance: 0,
+    totalGoldGrams: 0,
+    totalGoldValue: 0,
+    portfolio: {},
+    engines: {
+      instant: { savedGrams: 0 },
+      daily: { isActive: false, isPaused: false, amount: 0, savedGrams: 0, data: null },
+      weekly: { isActive: false, isPaused: false, amount: 0, savedGrams: 0, data: null },
+      monthly: { isActive: false, isPaused: false, amount: 0, savedGrams: 0, data: null },
+    },
   });
 
   /* ================= LOAD ENGINE ================= */
+  const loadEngine = async () => {
+    if (loadingRef.current) return;
+    loadingRef.current = true;
+    setLoading(true);
 
-  const loadEngine = async ()=>{
-    try{
+    try {
 
-      /* ===== GOLD PRICE ===== */
-      const priceRes = await getGoldPriceApi();
-      console.log("GOLD PRICE 👉",priceRes);
+      /* ================= ⚡ PARALLEL FAST API ================= */
+      const [
+        priceRes,
+        sipRes,
+        profileRes,
+        portfolioRes
+      ] = await Promise.all([
+        getLiveMetalPriceApi(),
+        getMyGoldSipApi(),
+        getProfileApi(),
+        getPortfolioApi()
+      ]);
 
-      const pricePerGram =
-        priceRes?.data?.price_per_gram_24K ||
-        priceRes?.data?.market_sell_price_24K ||
-        0;
+      console.log("⚡ ALL GOLD API DONE");
 
-      /* ===== SIP ===== */
-      const sipRes = await getMyGoldSipApi();
-      console.log("MY GOLD SIP 👉",JSON.stringify(sipRes));
+      /* ================= PRICE ================= */
+      const gold = priceRes?.data?.GOLD || {};
 
+      const price18k = Number(gold?.["18K"]?.buy || 0);
+      const price22k = Number(gold?.["22K"]?.buy || 0);
+      const price24k = Number(gold?.["24K"]?.buy || 0);
+
+      let selectedPrice = price24k;
+      if (karat === "22K") selectedPrice = price22k;
+      if (karat === "18K") selectedPrice = price18k;
+
+      /* ================= SIP ================= */
       const sipData = sipRes?.data || {};
-      const dailyArr = sipData?.daily || [];
-      const weeklyArr = sipData?.weekly || [];
-      const monthlyArr = sipData?.monthly || [];
 
-      /* ===== PROFILE WALLET ===== */
-      const profileRes = await getProfileApi();
-      console.log("PROFILE 👉",profileRes);
+      const karatKey =
+        karat === "24K"
+          ? "gold24k"
+          : karat === "22K"
+          ? "gold22k"
+          : "gold18k";
 
-      const wallet = profileRes?.data?.wallet;
+      const karatData = sipData?.[karatKey] || {};
 
-      /* ===== PORTFOLIO ===== */
-     const portfolioRes = await getPortfolioApi();
-console.log("PORTFOLIO 👉",portfolioRes);
+      const dailyArr = karatData?.DAILY || [];
+      const weeklyArr = karatData?.WEEKLY || [];
+      const monthlyArr = karatData?.MONTHLY || [];
 
-const portfolio = portfolioRes || {};
+      /* ================= PROFILE ================= */
+      const wallet = profileRes?.data?.wallet || {};
 
+      /* ================= PORTFOLIO ================= */
+      const portfolio = portfolioRes || {};
 
+      const totalGoldGrams =
+        Number(portfolio?.gold_24K?.grams || 0) +
+        Number(portfolio?.gold_22K?.grams || 0) +
+        Number(portfolio?.gold_18K?.grams || 0);
 
-      /* ===== TOTAL GOLD ===== */
-const totalGoldGrams =
-  Number(portfolio?.gold_24K?.grams || 0) +
-  Number(portfolio?.gold_22K?.grams || 0) +
-  Number(portfolio?.gold_18K?.grams || 0);
+      const totalGoldValue =
+        Number(portfolio?.gold_24K?.current_value || 0) +
+        Number(portfolio?.gold_22K?.current_value || 0) +
+        Number(portfolio?.gold_18K?.current_value || 0);
 
-const totalGoldValue =
-  Number(portfolio?.gold_24K?.current_value || 0) +
-  Number(portfolio?.gold_22K?.current_value || 0) +
-  Number(portfolio?.gold_18K?.current_value || 0);
+      /* ================= FIND LATEST SIP ================= */
+      const getLatestSip = (arr: any[]) => {
+        if (!arr?.length) return null;
 
+        const filtered = arr.filter((s: any) => {
+          const sipKarat =
+            s.caret ||
+            s.karat ||
+            s.purity ||
+            s.gold_caret ||
+            s.gold_karat;
 
-      /* ===== SIP PICK FUNCTION ===== */
-      const getLatestSip = (arr:any[])=>{
-        if(!arr?.length) return null;
+          return sipKarat?.toString().toUpperCase() === karat.toUpperCase();
+        });
 
-        const filtered = arr.filter((s:any)=>s.caret===karat);
-        if(!filtered.length) return null;
+        if (!filtered.length) return null;
 
-        const active = filtered.find((s:any)=>s.status==="ACTIVE");
-        if(active) return active;
+        const running = filtered.filter((s: any) => {
+          const st = s.status?.toUpperCase();
+          return st === "ACTIVE" || st === "PAUSED";
+        });
 
-        return filtered[filtered.length-1];
+        if (!running.length) return null;
+
+        return running.sort(
+          (a: any, b: any) =>
+            new Date(b.created_at || b.start_date || 0).getTime() -
+            new Date(a.created_at || a.start_date || 0).getTime()
+        )[0];
       };
 
       const dailySip = getLatestSip(dailyArr);
       const weeklySip = getLatestSip(weeklyArr);
       const monthlySip = getLatestSip(monthlyArr);
 
-      /* ===== SET ENGINE ===== */
-
-      setEngine((prev:any)=>({
-        ...prev,
-        pricePerGram,
-
-        walletBalance:Number(wallet?.deposit_balance || 0),
+      /* ================= FINAL ENGINE ================= */
+      const newEngine = {
+        pricePerGram: selectedPrice,
+        price18k,
+        price22k,
+        price24k,
+        walletBalance: Number(wallet?.deposit_balance || 0),
         totalGoldGrams,
         totalGoldValue,
 
-        engines:{
-          instant:{
-            ...prev.engines.instant,
-            savedGrams:totalGoldGrams
+        portfolio: {
+          gold_18K_value: Number(portfolio?.gold_18K?.current_value || 0),
+          gold_22K_value: Number(portfolio?.gold_22K?.current_value || 0),
+          gold_24K_value: Number(portfolio?.gold_24K?.current_value || 0),
+          gold_18K_grams: Number(portfolio?.gold_18K?.grams || 0),
+          gold_22K_grams: Number(portfolio?.gold_22K?.grams || 0),
+          gold_24K_grams: Number(portfolio?.gold_24K?.grams || 0),
+        },
+
+        engines: {
+          instant: {
+            savedGrams: Number(wallet?.instant_gold_grams || 0),
           },
 
-          daily:{
-            ...prev.engines.daily,
-            isActive: !!dailySip && dailySip.status!=="STOPPED",
-            isPaused: dailySip?.status==="PAUSED",
+          daily: {
+            isActive: !!dailySip,
+            isPaused: dailySip?.status?.toUpperCase() === "PAUSED",
             amount: dailySip?.amount_per_cycle || 0,
-            savedGrams: dailySip?.total_grams || 0,
-            data: dailySip || null
+            savedGrams: Number(wallet?.daily_gold_grams || 0),
+            streak: Number(dailySip?.current_streak || 0),
+            data: dailySip || null,
           },
 
-          weekly:{
-            ...prev.engines.weekly,
-            isActive: !!weeklySip && weeklySip.status!=="STOPPED",
-            isPaused: weeklySip?.status==="PAUSED",
+          weekly: {
+            isActive: !!weeklySip,
+            isPaused: weeklySip?.status?.toUpperCase() === "PAUSED",
             amount: weeklySip?.amount_per_cycle || 0,
-            savedGrams: weeklySip?.total_grams || 0,
-            data: weeklySip || null
+            savedGrams: Number(wallet?.weekly_gold_grams || 0),
+            streak: Number(weeklySip?.current_streak || 0),
+            data: weeklySip || null,
           },
 
-          monthly:{
-            ...prev.engines.monthly,
-            isActive: !!monthlySip && monthlySip.status!=="STOPPED",
-            isPaused: monthlySip?.status==="PAUSED",
+          monthly: {
+            isActive: !!monthlySip,
+            isPaused: monthlySip?.status?.toUpperCase() === "PAUSED",
             amount: monthlySip?.amount_per_cycle || 0,
-            savedGrams: monthlySip?.total_grams || 0,
-            data: monthlySip || null
-          }
-        }
-      }));
+            savedGrams: Number(wallet?.monthly_gold_grams || 0),
+            streak: Number(monthlySip?.current_streak || 0),
+            data: monthlySip || null,
+          },
+        },
+      };
 
-    }catch(e){
-      console.log("GOLD LOAD ERROR",e);
+      console.log("🔥 FINAL GOLD ENGINE", newEngine);
+      setEngine(newEngine);
+
+    } catch (e) {
+      console.log("GOLD ENGINE ERROR", e);
+    } finally {
+      loadingRef.current = false;
+      setLoading(false);
     }
   };
 
-  useEffect(()=>{
+  /* ===== AUTO LOAD ===== */
+  useEffect(() => {
     loadEngine();
-  },[karat]);
+  }, [karat]);
 
-  return{
-    tab,setTab,
-    karat,setKarat,
-    engine,setEngine,
-    loadEngine
+  return {
+    tab,
+    setTab,
+    karat,
+    setKarat,
+    engine,
+    loading,
+    setEngine,
+    loadEngine,
   };
 };

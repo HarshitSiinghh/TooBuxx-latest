@@ -47,7 +47,8 @@ export default function PlanTabs({ plan, onChange }: Props) {
           return (
             <Pressable
               key={item.key}
-              onPress={() => onChange(item.key)}
+            onPress={() => onChange(item.key as Plan)}
+
               style={[
                 styles.tab,
                 isActive && styles.activeTab,
@@ -81,90 +82,6 @@ export default function PlanTabs({ plan, onChange }: Props) {
   );
 }
 
-
-
-// const styles = StyleSheet.create({
-//   container: {
-//     marginTop: 25,
-//   },
-
-//   title: {
-//     color: "#8fbac4",
-//     fontSize: 10,
-//     fontWeight: "800",
-//     marginBottom: 12,
-//     letterSpacing: 1.5,
-//   },
-
-//   tabsRow: {
-//     flexDirection: "row",
-//     // flexWrap hatane se ya flex:1 dene se height sync hoti hai
-//     justifyContent: "space-between",
-//     gap: 12,
-//   },
-
-//   tab: {
-//     flex: 1, // <--- Yeh sabse important hai, dono tabs ko equal width aur height dega
-//     padding: 16,
-//     borderRadius: 16,
-//     backgroundColor: "rgba(16,78,100,0.25)",
-//     borderWidth: 1,
-//     borderColor: "#104e64",
-//     // Taaki description agar lambi ho to button stretch ho jaye barabar se
-//     // minHeight: 100, 
-//     justifyContent: 'space-between' // Content ko balance karne ke liye
-//   },
-
-//   activeTab: {
-//     backgroundColor: "rgba(250,204,21,0.12)", // Thoda subtle yellow
-//     borderColor: "#facc15",
-//     // Elevation ya shadow add kar sakte ho premium feel ke liye
-//     shadowColor: "#facc15",
-//     shadowOffset: { width: 0, height: 4 },
-//     shadowOpacity: 0.1,
-//     shadowRadius: 8,
-//     elevation: 3,
-//   },
-
-//   headerRow: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     marginBottom: 8,
-//   },
-
-//   tabLabel: {
-//     fontSize: 12, // Thoda bada kiya clarity ke liye
-//     fontWeight: "800",
-//     color: "#8fbac4",
-//   },
-
-//   activeTabLabel: {
-//     color: "#facc15", // Isse yellow shade premium lagega
-//   },
-
-//   activeDot: {
-//     width: 8,
-//     height: 8,
-//     borderRadius: 4,
-//     backgroundColor: "#facc15",
-//     // Glow effect
-//     shadowColor: "#facc15",
-//     shadowRadius: 4,
-//     shadowOpacity: 0.8,
-//   },
-
-//   description: {
-//     fontSize: 10,
-//     color: "#8fbac4",
-//     fontWeight: "500",
-//     lineHeight: 14,
-//   },
-
-//   activeDescription: {
-//     color: "#ffffff",
-//   },
-// });
 
 const styles = StyleSheet.create({
   container: {

@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState } from "react";
 import {
   View,
@@ -12,14 +8,14 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const AMOUNTS = [10, 30, 40, 100, 200, 500]; // Extra amount added for scroll feel
+const AMOUNTS = [10, 30, 40, 100, 200, 500]; // E x t r a   a  m o u n t   a d d e d   f o r   s c r o l l   f e e l 
 
 export default function DailyGoldSavings() {
   const [amount, setAmount] = useState(30);
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* FIXED HEADER: Ab ye scroll nahi hoga */}
+      {/* F I X E D   H E A D E R :   A b   y e   s c r o l l   n a h i   h o g a   */}
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Daily Gold Savings</Text>
       </View>
@@ -46,7 +42,7 @@ export default function DailyGoldSavings() {
             <Text style={styles.amountText}>{amount}</Text>
           </View>
 
-          {/* FIXED BUTTONS ROW: Horizontal scrollable, no wrapping */}
+          {/* F I X E D   B U T T O N S   R O W :   H o r i z o n t a l   s c r o l l a b l e ,   n o   w r a p p i n g   */}
           <ScrollView 
             horizontal 
             showsHorizontalScrollIndicator={false} 
@@ -83,7 +79,7 @@ export default function DailyGoldSavings() {
         </View>
       </ScrollView>
 
-      {/* FOOTER: Fixed at the bottom */}
+      {/* F O O T E R :   F i x e d   a t   t h e   b o t t o m   */}
       <View style={styles.footer}>
         <View>
           <Text style={styles.footerAmount}>₹{amount}</Text>
@@ -99,153 +95,6 @@ export default function DailyGoldSavings() {
     </SafeAreaView>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#1a003d",
-//   },
-//   headerContainer: {
-//     paddingVertical: 15,
-//     paddingHorizontal: 20,
-//     backgroundColor: "#1a003d",
-//     borderBottomWidth: 0.5,
-//     borderBottomColor: "#333",
-//   },
-//   headerText: {
-//     color: "#fff",
-//     fontSize: 18,
-//     fontWeight: "700",
-//     textAlign: "center",
-//   },
-//   scrollContent: {
-//     padding: 20,
-//     paddingBottom: 120, // Space for footer
-//   },
-//   banner: {
-//     backgroundColor: "#2d0b5a",
-//     borderRadius: 16,
-//     padding: 20,
-//     marginBottom: 25,
-//   },
-//   bannerTitle: {
-//     color: "#fff",
-//     fontSize: 20,
-//     fontWeight: "bold",
-//     marginBottom: 10,
-//   },
-//   features: {
-//     gap: 5,
-//   },
-//   feature: {
-//     color: "#ccc",
-//     fontSize: 13,
-//   },
-//   inputSection: {
-//     marginBottom: 25,
-//   },
-//   label: {
-//     color: "#aaa",
-//     fontSize: 14,
-//     marginBottom: 10,
-//   },
-//   amountBox: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderWidth: 1,
-//     borderColor: "#4c1d95",
-//     borderRadius: 12,
-//     padding: 15,
-//     marginBottom: 15,
-//   },
-//   currency: {
-//     color: "#fff",
-//     fontSize: 24,
-//     marginRight: 5,
-//   },
-//   amountText: {
-//     color: "#fff",
-//     fontSize: 26,
-//     fontWeight: "bold",
-//   },
-//   amountRow: {
-//     flexDirection: "row",
-//     marginHorizontal: -5, // Negative margin to align with content
-//   },
-//   amountRowContent: {
-//     paddingRight: 20, // Extra padding for last button
-//     gap: 10,
-//   },
-//   amountBtn: {
-//     borderWidth: 1,
-//     borderColor: "#7C3AED",
-//     paddingVertical: 8,
-//     paddingHorizontal: 15,
-//     borderRadius: 10,
-//     minWidth: 70,
-//     alignItems: "center",
-//   },
-//   activeBtn: {
-//     backgroundColor: "#7C3AED",
-//   },
-//   amountBtnText: {
-//     color: "#a78bfa",
-//     fontWeight: "600",
-//   },
-//   activeText: {
-//     color: "#fff",
-//   },
-//   infoBanner: {
-//     backgroundColor: "rgba(20, 83, 45, 0.3)",
-//     padding: 12,
-//     borderRadius: 10,
-//   },
-//   infoText: {
-//     color: "#6ee7b7",
-//     fontSize: 12,
-//     textAlign: "center",
-//   },
-//   footer: {
-//     position: "absolute",
-//     bottom: 0,
-//     width: "100%",
-//     backgroundColor: "#1a003d",
-//     padding: 20,
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     borderTopWidth: 1,
-//     borderTopColor: "#333",
-//   },
-//   footerAmount: {
-//     color: "#fff",
-//     fontSize: 22,
-//     fontWeight: "bold",
-//   },
-//   breakup: {
-//     color: "#a78bfa",
-//     fontSize: 12,
-//     textDecorationLine: "underline",
-//   },
-//   cta: {
-//     backgroundColor: "#7C3AED",
-//     paddingVertical: 14,
-//     paddingHorizontal: 25,
-//     borderRadius: 12,
-//   },
-//   ctaText: {
-//     color: "#fff",
-//     fontSize: 16,
-//     fontWeight: "bold",
-//   },
-// });
-
-
-
-
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -341,7 +190,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
 
-  /* ---------- AMOUNT ROW ---------- */
+  /* ---------- A M O U N T     R O W   ---------- */
   amountRow: {
     marginHorizontal: -4,
   },
@@ -363,8 +212,8 @@ const styles = StyleSheet.create({
   },
 
   activeBtn: {
-    backgroundColor: "#7c3aed",
-    borderColor: "#7c3aed",
+    backgroundColor: "#7c 3aed",
+    borderColor: "#7 c3aed",
   },
 
   amountBtnText: {
@@ -377,7 +226,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
 
-  /* ---------- INFO ---------- */
+  /* ---------- I N F O ---------- */
   infoBanner: {
     backgroundColor: "rgba(34,197,94,0.12)",
     paddingVertical: 14,

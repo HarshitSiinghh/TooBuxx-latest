@@ -107,13 +107,13 @@ export default function MyPoints() {
 
         {/* ACTIVITY */}
         <View style={styles.sectionHeader}>
-          <History size={18} color="#c084fc" />
+          <History size={18} color="#facc15" />
           <Text style={styles.sectionTitle}>RECENT ACTIVITY</Text>
         </View>
 
         {loading ? (
           <View style={{ marginTop: 40 }}>
-            <ActivityIndicator size="large" color="#a855f7" />
+            <ActivityIndicator size="large" color="#facc15" />
           </View>
         ) : activities.length === 0 ? (
           <View style={styles.emptyBox}>
@@ -176,173 +176,6 @@ const formatDate = (dateString: string) => {
   }
 };
 
-/* ================= STYLES ================= */
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: "#1a003d" },
-
-//   header: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     padding: 18,
-//     borderBottomWidth: 1,
-//     borderBottomColor: "rgba(255,255,255,0.05)",
-//   },
-
-//   backBtn: {
-//     padding: 10,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 12,
-//   },
-
-//   title: { color: "white", fontSize: 20, fontWeight: "900" },
-//   subtitle: { color: "#facc15", fontSize: 10, fontWeight: "800" },
-
-//   body: { padding: 18, paddingBottom: 40 },
-
-//   pointsCard: {
-//     backgroundColor: "rgba(255,255,255,0.04)",
-//     borderRadius: 30,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.08)",
-//     padding: 30,
-//     alignItems: "center",
-//     marginBottom: 24,
-//   },
-
-//   cardLabel: {
-//     color: "rgba(255,255,255,0.4)",
-//     fontSize: 10,
-//     fontWeight: "900",
-//     letterSpacing: 3,
-//     marginBottom: 6,
-//   },
-
-//   pointsText: {
-//     fontSize: 64,
-//     fontWeight: "900",
-//     color: "white",
-//   },
-
-//   pointsBadge: {
-//     flexDirection: "row",
-//     gap: 6,
-//     marginTop: 10,
-//     paddingHorizontal: 12,
-//     paddingVertical: 6,
-//     borderRadius: 20,
-//     backgroundColor: "rgba(74,222,128,0.1)",
-//     borderWidth: 1,
-//     borderColor: "rgba(74,222,128,0.2)",
-//   },
-
-//   pointsBadgeText: {
-//     color: "#4ade80",
-//     fontSize: 10,
-//     fontWeight: "800",
-//     letterSpacing: 1,
-//   },
-
-//   actionRow: {
-//     flexDirection: "row",
-//     gap: 12,
-//     marginBottom: 30,
-//   },
-
-//   earnBtn: {
-//     flex: 1,
-//     backgroundColor: "#7c3aed",
-//     paddingVertical: 16,
-//     borderRadius: 18,
-//     alignItems: "center",
-//   },
-
-//   useBtn: {
-//     flex: 1,
-//     backgroundColor: "rgba(255,255,255,0.06)",
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.1)",
-//     paddingVertical: 16,
-//     borderRadius: 18,
-//     alignItems: "center",
-//   },
-
-//   actionText: {
-//     color: "white",
-//     fontSize: 12,
-//     fontWeight: "900",
-//     letterSpacing: 2,
-//   },
-
-//   sectionHeader: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     gap: 8,
-//     marginBottom: 12,
-//   },
-
-//   sectionTitle: {
-//     color: "rgba(255,255,255,0.6)",
-//     fontSize: 11,
-//     fontWeight: "900",
-//     letterSpacing: 3,
-//   },
-
-//   historyItem: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     backgroundColor: "rgba(255,255,255,0.04)",
-//     borderRadius: 18,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.06)",
-//     padding: 16,
-//     marginBottom: 10,
-//   },
-
-//   historyTitle: {
-//     color: "white",
-//     fontWeight: "800",
-//     fontSize: 13,
-//   },
-
-//   historyMsg: {
-//     color: "#9ca3af",
-//     fontSize: 11,
-//     marginTop: 2,
-//   },
-
-//   historyDate: {
-//     color: "#6b7280",
-//     fontSize: 9,
-//     marginTop: 6,
-//     fontWeight: "700",
-//   },
-
-//   historyPoints: {
-//     color: "#4ade80",
-//     fontWeight: "900",
-//     fontSize: 18,
-//   },
-
-//   emptyBox: {
-//     padding: 24,
-//     borderRadius: 18,
-//     borderWidth: 1,
-//     borderStyle: "dashed",
-//     borderColor: "rgba(255,255,255,0.15)",
-//     alignItems: "center",
-//   },
-
-//   emptyText: {
-//     color: "rgba(255,255,255,0.4)",
-//     fontSize: 11,
-//     fontWeight: "900",
-//     letterSpacing: 2,
-//   },
-// });
-
-
-
 
 
 
@@ -358,7 +191,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 18,
+   paddingHorizontal:18,
+  paddingBottom:10,
     borderBottomWidth: 1,
     borderBottomColor: "rgba(16,78,100,0.6)",
   },

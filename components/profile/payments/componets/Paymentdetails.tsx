@@ -32,7 +32,7 @@ const GlassInput = ({
         placeholder={placeholder}
         placeholderTextColor="#374151" // gray-700
         keyboardType={keyboardType}
-        selectionColor="#a855f7" // purple-400
+        selectionColor="#facc15" // purple-400
         style={styles.input}
       />
     </View>
@@ -116,7 +116,7 @@ export const UpiDetailForm = ({ data, setData }: { data: any, setData: any }) =>
 //   label: {
 //     fontSize: 10,
 //     fontWeight: "900",
-//     color: "#c084fc", // purple-400
+//     color: "# ", // purple-400
 //     letterSpacing: 2,
 //     marginLeft: 4,
 //     textTransform: "uppercase",

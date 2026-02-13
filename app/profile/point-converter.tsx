@@ -109,7 +109,7 @@ export default function PointConverter() {
   if (!canRender || loading) {
     return (
       <SafeAreaView style={styles.center}>
-        <ActivityIndicator size="large" color="#a855f7" />
+        <ActivityIndicator size="large" color="#facc15" />
         <Text style={styles.loadingText}>Fetching exchange rates...</Text>
       </SafeAreaView>
     );
@@ -176,7 +176,7 @@ export default function PointConverter() {
           </View>
 
           <View style={styles.arrowWrap}>
-            <ArrowRightLeft size={18} color="#a855f7" />
+            <ArrowRightLeft size={18} color="#facc15" />
           </View>
 
           <View style={styles.walletBox}>
@@ -190,7 +190,7 @@ export default function PointConverter() {
           </View>
 
           <View style={styles.rateBox}>
-            <Info size={14} color="#c084fc" />
+            <Info size={14} color="#facc15" />
             <Text style={styles.rateText}>
               Rate: {pointsPerRupee} Points = ₹1
             </Text>
@@ -268,7 +268,10 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 18,
+    // padding: 18,
+    paddingTop:5,
+      paddingBottom:12,
+       paddingHorizontal:18,
     borderBottomWidth: 1,
     borderBottomColor: "rgba(255,255,255,0.08)",
   },

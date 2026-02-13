@@ -1,46 +1,75 @@
 
-
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { GoldEngineState } from "../types";
 import { COLORS } from "../data/constants";
+import { GoldEngineState, Karat } from "../types";
 
 interface Props {
   engine: GoldEngineState;
+  karat: Karat;
 }
 
-export default function GoldHeader({ engine }: Props) {
-  const portfolioValue = engine.totalGoldValue || 0;
+export default function GoldHeader({ engine, karat }: Props) {
   const GOLD_ACCENT = "#FFD700";
+
+  /* 🔥 KARAT BASED VALUE */
+  let portfolioValue = 0;
+  let price = 0;
+
+  if (karat === "18K") {
+    portfolioValue = (engine as any)?.portfolio?.gold_18K_value || 0;
+    price = (engine as any)?.price18k || engine?.pricePerGram || 0;
+  }
+
+  if (karat === "22K") {
+    portfolioValue = (engine as any)?.portfolio?.gold_22K_value || 0;
+    price = (engine as any)?.price22k || engine?.pricePerGram || 0;
+  }
+
+  if (karat === "24K") {
+    portfolioValue = (engine as any)?.portfolio?.gold_24K_value || 0;
+    price = (engine as any)?.price24k || engine?.pricePerGram || 0;
+  }
+
+  // Fallback to values on the engine if external priceRes is not available
+  const price18k = Number((engine as any)?.price18k || engine?.pricePerGram || 0);
+  const price22k = Number((engine as any)?.price22k || engine?.pricePerGram || 0);
+  const price24k = Number((engine as any)?.price24k || engine?.pricePerGram || 0);
+
+/* selected karat price */
+let selectedPrice = price24k;
+if (karat === "22K") selectedPrice = price22k;
+if (karat === "18K") selectedPrice = price18k;
 
   return (
     <View style={styles.wrapper}>
-      {/* LIVE PRICE CHIP */}
+      {/* LIVE PRICE */}
       <View style={styles.rateRow}>
-        <View style={[styles.liveIndicator, { backgroundColor: GOLD_ACCENT, shadowColor: GOLD_ACCENT }]} />
+        <View
+          style={[styles.liveIndicator, { backgroundColor: GOLD_ACCENT }]}
+        />
         <Text style={styles.rateText}>
-          LIVE GOLD:{" "}
+          LIVE {karat} GOLD:{" "}
           <Text style={[styles.boldRate, { color: GOLD_ACCENT }]}>
-            ₹{engine.pricePerGram || 0}/gm
+       ₹{engine.pricePerGram}/gm
           </Text>
         </Text>
       </View>
 
-      {/* STATS ROW: Total Value and Available Cash (Platinum Style Grid) */}
+      {/* GRID */}
       <View style={styles.statsGrid}>
-        
-        {/* Total Gold Value Card */}
+        {/* VALUE */}
         <View style={styles.miniCard}>
-          <Text style={styles.miniLabel}>TOTAL GOLD VALUE</Text>
+          <Text style={styles.miniLabel}>{karat} GOLD VALUE</Text>
           <View style={styles.valueContainer}>
             <Text style={styles.currencySymbol}>₹</Text>
             <Text style={styles.miniValue}>
-              {portfolioValue.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+              {Number(portfolioValue).toLocaleString("en-IN")}
             </Text>
           </View>
         </View>
 
-        {/* Available Cash Card */}
+        {/* WALLET */}
         <View style={styles.miniCard}>
           <Text style={styles.miniLabel}>AVAILABLE CASH</Text>
           <View style={styles.valueContainer}>
@@ -50,12 +79,10 @@ export default function GoldHeader({ engine }: Props) {
             </Text>
           </View>
         </View>
-
       </View>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   wrapper: {
     paddingHorizontal: 16,

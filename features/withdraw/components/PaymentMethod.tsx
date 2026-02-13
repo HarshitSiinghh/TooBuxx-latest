@@ -1,129 +1,3 @@
-// import React from "react";
-// import { View, Text, Pressable, StyleSheet } from "react-native";
-// // import { PAYOUT_METHODS } from "@/constants/withdraw";
-// import { PAYOUT_METHODS } from "../constants/withdraw";
-// // import { PayoutMethod } from "@/hooks/useWithdraw";
-// import { PayoutMethod } from "../hooks/useWithdraw";
-
-// type Props = {
-//   value: PayoutMethod | null;
-//   onChange: (method: PayoutMethod) => void;
-// };
-
-// export default function PaymentMethod({ value, onChange }: Props) {
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Withdraw To</Text>
-
-//       {PAYOUT_METHODS.map((item) => {
-//         const isActive = value === item.key;
-
-//         return (
-//           <Pressable
-//             key={item.key}
-//             onPress={() => onChange(item.key)}
-//             style={[
-//               styles.card,
-//               isActive && styles.activeCard,
-//             ]}
-//           >
-//             <View>
-//               <Text
-//                 style={[
-//                   styles.label,
-//                   isActive && styles.activeLabel,
-//                 ]}
-//               >
-//                 {item.label}
-//               </Text>
-
-//               <Text style={styles.subLabel}>
-//                 {item.subLabel}
-//               </Text>
-//             </View>
-
-//             <View
-//               style={[
-//                 styles.radio,
-//                 isActive && styles.radioActive,
-//               ]}
-//             >
-//               {isActive && <View style={styles.radioDot} />}
-//             </View>
-//           </Pressable>
-//         );
-//       })}
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     marginTop: 20,
-//   },
-
-//   title: {
-//     fontSize: 14,
-//     fontWeight: "700",
-//     color: "#A6A6A6",
-//     marginBottom: 10,
-//   },
-
-//   card: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     padding: 16,
-//     borderRadius: 16,
-//     backgroundColor: "#1E1E1E",
-//     borderWidth: 1,
-//     borderColor: "#2C2C2C",
-//     marginBottom: 12,
-//   },
-
-//   activeCard: {
-//     backgroundColor: "#2B1F00",
-//     borderColor: "#D4AF37",
-//   },
-
-//   label: {
-//     fontSize: 14,
-//     fontWeight: "700",
-//     color: "#FFFFFF",
-//   },
-
-//   activeLabel: {
-//     color: "#D4AF37",
-//   },
-
-//   subLabel: {
-//     fontSize: 12,
-//     color: "#9A9A9A",
-//     marginTop: 4,
-//   },
-
-//   radio: {
-//     width: 20,
-//     height: 20,
-//     borderRadius: 10,
-//     borderWidth: 2,
-//     borderColor: "#9A9A9A",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-
-//   radioActive: {
-//     borderColor: "#D4AF37",
-//   },
-
-//   radioDot: {
-//     width: 10,
-//     height: 10,
-//     borderRadius: 5,
-//     backgroundColor: "#D4AF37",
-//   },
-// });
-
 
 
 
@@ -135,9 +9,12 @@ import { PayoutMethod } from "../hooks/useWithdraw";
 type Props = {
   value: PayoutMethod | null;
   onChange: (method: PayoutMethod) => void;
+  payout?: any; // 🔥 add this
 };
 
-export default function PaymentMethod({ value, onChange }: Props) {
+
+export default function PaymentMethod({ value, onChange, payout }: Props)
+{
   return (
     <View style={styles.container}>
       <Text style={styles.title}>WHERE SHOULD WE SEND MONEY?</Text>
@@ -171,9 +48,18 @@ export default function PaymentMethod({ value, onChange }: Props) {
                   {item.label}
                 </Text>
 
-                <Text style={styles.subLabel}>
+                {/* <Text style={styles.subLabel}>
                   {item.subLabel}
                 </Text>
+                 */}
+                 <Text style={styles.subLabel}>
+  {item.key === "bank"
+    ? payout?.bank
+      ? `${payout.bank.bank_name} ••••${payout.bank.account_number?.slice(-4)}`
+      : item.subLabel
+    : payout?.upi?.upi_id || item.subLabel}
+</Text>
+
               </View>
             </View>
 

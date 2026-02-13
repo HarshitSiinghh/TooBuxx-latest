@@ -79,7 +79,7 @@ export default function NotificationSettingsPage() {
   /* ================= UI ================= */
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} >
       <StatusBar barStyle="light-content" />
 
       {/* HEADER */}
@@ -109,7 +109,7 @@ export default function NotificationSettingsPage() {
             </Text>
           </View>
           <View style={styles.heroIcon}>
-            <Bell color="#c084fc" size={20} />
+            <Bell color="#facc15" size={20} />
           </View>
         </View>
 
@@ -118,7 +118,7 @@ export default function NotificationSettingsPage() {
 
         <View style={styles.card}>
           <ToggleItem
-            icon={<Smartphone color="#c084fc" />}
+            icon={<Smartphone color="#facc15" />}
             title="Push Notifications"
             desc="Instant alerts on your phone"
             active={settings.marketing}
@@ -199,111 +199,6 @@ function ToggleItem({ icon, title, desc, active, onToggle }: any) {
 
 const Divider = () => <View style={styles.divider} />;
 
-/* ================= STYLES ================= */
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: "#1a003d" },
-
-//   header: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     padding: 18,
-//     marginTop:-40,
-//     // paddingBottom:10,
-//     borderBottomWidth: 1,
-//     borderBottomColor: "rgba(255,255,255,0.05)",
-//   },
-
-//   backButton: {
-//     padding: 10,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 12,
-//   },
-
-//   title: { color: "white", fontSize: 20, fontWeight: "900" },
-//   subtitle: { color: "#c084fc", fontSize: 10, fontWeight: "700" },
-
-//   body: { padding: 18 },
-
-//   hero: {
-//     backgroundColor: "#240056",
-//     borderRadius: 22,
-//     padding: 20,
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     marginBottom: 20,
-//   },
-
-//   heroTitle: { color: "white", fontSize: 18, fontWeight: "900" },
-//   heroDesc: { color: "#9ca3af", fontSize: 12, marginTop: 4 },
-
-//   heroIcon: {
-//     backgroundColor: "rgba(192,132,252,0.2)",
-//     padding: 12,
-//     borderRadius: 16,
-//   },
-
-//   sectionTitle: {
-//     color: "#6b7280",
-//     fontSize: 10,
-//     fontWeight: "800",
-//     letterSpacing: 2,
-//     marginBottom: 8,
-//     marginLeft: 4,
-//   },
-
-//   card: {
-//     backgroundColor: "rgba(255,255,255,0.03)",
-//     borderRadius: 22,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.08)",
-//     marginBottom: 20,
-//   },
-
-//   toggleRow: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     padding: 18,
-//   },
-
-//   iconBox: {
-//     padding: 10,
-//     borderRadius: 14,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//   },
-
-//   toggleTitle: { color: "white", fontWeight: "900", fontSize: 14 },
-//   toggleDesc: { color: "#9ca3af", fontSize: 11, marginTop: 2 },
-
-//   switch: {
-//     width: 42,
-//     height: 24,
-//     borderRadius: 12,
-//     backgroundColor: "#1f2933",
-//     padding: 3,
-//   },
-
-//   switchActive: {
-//     backgroundColor: "#7c3aed",
-//   },
-
-//   knob: {
-//     width: 18,
-//     height: 18,
-//     backgroundColor: "white",
-//     borderRadius: 9,
-//   },
-
-//   divider: {
-//     height: 1,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     marginHorizontal: 16,
-//   },
-// });
-
-
-
 
 
 
@@ -318,7 +213,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 18,
+    // padding: 18,
+      paddingHorizontal: 24,  paddingBottom:12,
     borderBottomWidth: 1,
     borderBottomColor: "#104e64",
   },
@@ -391,7 +287,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
 
-  /* ================= CARD ================= */
+
   card: {
     backgroundColor: "#0b3442",
     borderRadius: 22,
@@ -401,7 +297,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
 
-  /* ================= TOGGLE ROW ================= */
+
   toggleRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -429,7 +325,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  /* ================= SWITCH ================= */
+
   switch: {
     width: 42,
     height: 24,
@@ -451,7 +347,6 @@ const styles = StyleSheet.create({
     borderRadius: 9,
   },
 
-  /* ================= DIVIDER ================= */
   divider: {
     height: 1,
     backgroundColor: "#104e64",

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { COLORS } from "../constants";
 
 export default function StreakCard({ streak }: { streak: number }) {
-  // Streak zero ho toh neutral color, warna orange/fire theme
+
   const hasStreak = streak > 0;
 
   return (

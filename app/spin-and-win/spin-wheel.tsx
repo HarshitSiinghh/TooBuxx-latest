@@ -13,6 +13,8 @@ import {
   ActivityIndicator,
   Dimensions,
 } from "react-native";
+import LottieView from "lottie-react-native";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Trophy, X, Lock } from "lucide-react-native";
 import Svg, { G, Path, Image as SvgImage, Circle } from "react-native-svg";
@@ -31,6 +33,7 @@ export default function SpinWheel() {
   const [prizes, setPrizes] = useState<Reward[]>([]);
   const [loading, setLoading] = useState(true);
   const [spinning, setSpinning] = useState(false);
+  
   const [winner, setWinner] = useState<Reward | null>(null);
   const [limitPopup, setLimitPopup] = useState(false);
 
@@ -93,26 +96,28 @@ export default function SpinWheel() {
     }
   };
 
-  if (!canRender) return null;
+  // if (!canRender) return null;
 
   if (loading) {
   return (
-    <SafeAreaView
+       <View
       style={{
         flex: 1,
-        backgroundColor: "#062530",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#062530",
       }}
     >
-      <ActivityIndicator size="large" color="#a855f7" />
-      <Text style={{ marginTop: 10, color: "#ffffff", fontWeight: "bold" }}>
-        Loading...
-      </Text>
-    </SafeAreaView>
+      <LottieView
+        source={require("../../assets/gold.json")}
+        autoPlay
+        loop
+        style={{ width: 180, height: 180 }}
+      />
+    </View>
   );
 }
-
+if (!canRender) return null;
 
   const rotate = spinAnim.interpolate({
     inputRange: [0, 360],
@@ -126,7 +131,7 @@ export default function SpinWheel() {
     <ArrowLeft size={22} color="#fbbf24" />
   </TouchableOpacity>
 
-  <Text style={styles.title}>GOLDEN SPIN</Text>
+  <Text style={styles.title}>Daily SPIN</Text>
 </View>
 
       {/* 🌟 WHEEL */}
@@ -219,7 +224,7 @@ export default function SpinWheel() {
   </TouchableOpacity>
 </View>
 
-      {/* 🏆 WIN MODAL */}
+      {/* 🏆 WIN gAL */}
       <Modal visible={!!winner} transparent animationType="fade">
         <View style={styles.modalBg}>
           <View style={styles.modalBox}>
@@ -285,6 +290,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 16,
+    //  paddingHorizontal:18,
+  paddingBottom:10,
     marginBottom: 18,
   },
 
@@ -343,19 +350,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#041d26",
   },
 
-  pointer: {
-    position: "absolute",
-    top: -16,
-    width: 0,
-    height: 0,
-    borderLeftWidth: 14,
-    borderRightWidth: 14,
-    borderBottomWidth: 28,
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
-    borderBottomColor: "#facc15",
-    zIndex: 50,
-  },
+  // },
+pointer: {
+  position: "absolute",
+  top: -16,   // 🔥 neeche shift
+  width: 0,
+  height: 0,
+  borderLeftWidth: 14,
+  borderRightWidth: 14,
+  borderTopWidth: 28,   // 🔥 top width use (ulta)
+  borderLeftColor: "transparent",
+  borderRightColor: "transparent",
+  borderTopColor: "#facc15", // 🔥 color top
+  zIndex: 50,
+},
 
   /* SPIN BUTTON */
   spinBtn: {
@@ -429,22 +437,43 @@ const styles = StyleSheet.create({
   },
 
   /* MODALS */
+  // modalBg: {
+  //   flex: 1,
+  //   backgroundColor: "rgba(6,37,48,0.92)",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
+
+
   modalBg: {
-    flex: 1,
-    backgroundColor: "rgba(6,37,48,0.92)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  flex: 1,
+  backgroundColor: "rgba(6,37,48,0.65)",
+  justifyContent: "flex-end",   // ✅ bottom
+  alignItems: "center",
+},
+
+
+  // modalBox: {
+  //   backgroundColor: "#0b3442",
+  //   padding: 28,
+  //   borderRadius: 26,
+  //   alignItems: "center",
+  //   width: "82%",
+  //   borderWidth: 1,
+  //   borderColor: "#104e64",
+  // },
 
   modalBox: {
-    backgroundColor: "#0b3442",
-    padding: 28,
-    borderRadius: 26,
-    alignItems: "center",
-    width: "82%",
-    borderWidth: 1,
-    borderColor: "#104e64",
-  },
+  backgroundColor: "#0b3442",
+  padding: 28,
+  borderRadius: 26,
+  alignItems: "center",
+  width: "90%",
+  borderWidth: 1,
+  borderColor: "#104e64",
+  marginBottom: 40,   // ✅ bottom space
+},
+
 
   close: {
     position: "absolute",

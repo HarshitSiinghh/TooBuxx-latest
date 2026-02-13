@@ -75,6 +75,8 @@ type Profile = {
   email: string;
   phone: string | null;
   profile_photo: string | null;
+  
+  nominee: number; 
 };
 
 type Referral = {
@@ -100,6 +102,7 @@ type Wallet = {
 
 type ProfileState = {
   profile: Profile | null;
+  
   referral: Referral | null;
   wallet: Wallet | null;                 // ✅ NEW
 

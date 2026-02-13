@@ -36,11 +36,7 @@ export const SettingSection = () => {
 
   // 🔹 Define items inside or outside; if inside, move below all other hooks
   const settingItems: SettingItem[] = [
-    // {
-    //   icon: "edit", // Changed icon to 'edit' for Profile Settings
-    //   label: "Edit Profile",
-    //   route: "/profile/edit-profile" as Href, // Path to your new edit screen
-    // },
+   
     {
       icon: "user",
       label: "Nominee Details ",
@@ -146,7 +142,7 @@ export const SettingSection = () => {
               <Feather
                 name={item.icon}
                 size={20}
-                color={item.danger ? "#f87171" : "#c084fc"}
+                color={item.danger ? "#f87171" : "#facc15"}
               />
               <Text style={[styles.label, item.danger && { color: "#fca5a5" }]}>
                 {item.label}
@@ -162,50 +158,6 @@ export const SettingSection = () => {
     </View>
   );
 };
-/* ================= STYLES ================= */
-
-// const styles = StyleSheet.create({
-//   wrapper: {
-//     backgroundColor: "#2d1b4e",
-//     padding: 12,
-//     borderRadius: 16,
-//     marginBottom: 10,
-//   },
-
-//   heading: {
-//     color: "white",
-//     fontSize: 14,
-//     fontWeight: "800",
-//     marginBottom: 8,
-//     letterSpacing: 0.5,
-//   },
-
-//   list: {
-//     gap: 6,
-//   },
-
-//   item: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "space-between",
-//     padding: 10,
-//     borderRadius: 12,
-//   },
-
-//   left: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     gap: 10,
-//   },
-
-//   label: {
-//     fontSize: 13,
-//     fontWeight: "600",
-//     color: "#d1d5db",
-//   },
-// });
-
-
 
 
 

@@ -1,6 +1,6 @@
-
-
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState } 
+from "react";
+ import LottieView from "lottie-react-native";
 import {
   View,
   Text,
@@ -35,14 +35,15 @@ import { NomineeSection } from "@/components/profile/nominee";
 import { GetHelpSection } from "@/components/profile/GetHelpSection";
 import { SettingSection } from "@/components/profile/setting-section";
 import { VersionSection } from "@/components/profile/version";
-
+ import { getKycStatusApi } from "@/services/kyc";
 const { width } = Dimensions.get("window");
-
+import { getPortfolioApi } from "@/services/portfolio";
 // --- TYPES ---
 interface SectionTitleProps {
   title: string;
   dotColor: string;
   marginTop?: number;
+  
 }
 
 const ROUTES = {
@@ -69,7 +70,7 @@ const SectionTitle = ({ title, dotColor, marginTop = 0 }: SectionTitleProps) => 
 const ModernForYou = () => {
   const router = useRouter();
   const items = [
-    { label: "Daily Savings", icon: CalendarClock, color: "#A855F7", path: ROUTES.DAILY },
+    { label: "Daily Savings", icon: CalendarClock, color: "#facc15", path: ROUTES.DAILY },
     { label: "Instant Savings", icon: Zap, color: "#F59E0B", path: ROUTES.INSTANT },
     { label: "Spins", icon: Disc, color: "#EC4899", path: ROUTES.SPINS },
     { label: "Rewards", icon: Gift, color: "#60A5FA", path: ROUTES.REWARDS },
@@ -96,14 +97,14 @@ const ModernForYou = () => {
 const ModernGoldGrid = () => {
   const router = useRouter();
   const data = [
-    { label: "Gold ", icon: Calendar, color: "#A855F7", path: ROUTES.DAILY },
-    { label: "Silver", icon: Zap, color: "#F59E0B", path: ROUTES.INSTANT },
-    { label: "Platinium", icon: TrendingUp, color: "#10B981", path: ROUTES.WEEKLY },
-    { label: "Portfolio", icon: PieChart, color: "#6366F1", path: ROUTES.MONTHLY },
-    { label: "Refer & Earn", icon: Users, color: "#EC4899", path: ROUTES.REFER },
-    { label: "Withdraw Saving", icon: ArrowUpRight, color: "#EF4444", path: ROUTES.WITHDRAW },
-    { label: "Spins", icon: Disc, color: "#8B5CF6", path: ROUTES.SPINS },
-    { label: "Deposit", icon: PlusCircle, color: "#60A5FA", path: ROUTES.DEPOSIT },
+    { label: "Gold savings", image: require("../../images/latest-images/New folder (2)/instant.png"), path: ROUTES.DAILY },
+    { label: "Silver savings", image: require("../../images/latest-images/New folder (2)/weekly.png"), path: ROUTES.INSTANT },
+    { label: "Platinium savings", image: require("../../images/latest-images/New folder (2)/monthly.png"), path: ROUTES.WEEKLY },
+    { label: "Portfolio", image: require("../../images/latest-images/New folder (2)/daily.png"), path: ROUTES.MONTHLY },
+    { label: "Refer & Earn", image: require("../../images/latest-images/New folder (2)/refer-earn.png"), path: ROUTES.REFER },
+    { label: "Withdraw Saving", image: require("../../images/latest-images/New folder (2)/withdrawal.png"), path: ROUTES.WITHDRAW },
+    { label: "Spins", image:require("../../images/latest-images/New folder (2)/spin.png"), path: ROUTES.SPINS },
+    { label: "Deposit", image:require("../../images/latest-images/New folder (2)/deposit.png"), path: ROUTES.DEPOSIT },
   ];
 
   return (
@@ -114,9 +115,14 @@ const ModernGoldGrid = () => {
           style={styles.gridBox} 
           onPress={() => router.push(item.path as any)}
         >
-          <View style={[styles.gridIconCircle, { backgroundColor: `${item.color}12` }]}>
-            <item.icon size={20} color={item.color} strokeWidth={2} />
+          <View style={styles.gridIconCircle}>
+            <Image
+              source={item.image}
+              style={styles.serviceImage}
+              resizeMode="contain"
+            />
           </View>
+
           <Text style={styles.gridLabelText}>{item.label.toUpperCase()}</Text>
         </Pressable>
       ))}
@@ -127,11 +133,13 @@ const ModernGoldGrid = () => {
 // --- MAIN PROFILE COMPONENT ---
 
 function Profile() {
+    const [totalSavings, setTotalSavings] = useState(0);
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { menu } = ShowEditMenu();
   const [showMenu, setShowMenu] = useState(false);
-  
+  const [kycStatus, setKycStatus] = useState<"pending" | "approved" | "rejected" | null>(null);
+
   const profile = useProfileStore((s) => s.profile);
   const wallet = useProfileStore((s) => s.wallet);
   const setProfile = useProfileStore((s) => s.setProfile);
@@ -141,13 +149,35 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [goldPrice, setGoldPrice] = useState(0);
 
+  const loadPortfolio = async () => {
+    try {
+      const res = await getPortfolioApi();
+  
+      if (res?.success) {
+        console.log("PORTFOLIO 👉", res);
+  
+        const total =
+          Number(res?.gold_24K?.current_value || 0) +
+          Number(res?.gold_22K?.current_value || 0) +
+          Number(res?.gold_18K?.current_value || 0) +
+          Number(res?.silver?.current_value || 0) +
+          Number(res?.platinum?.current_value || 0);
+  
+        setTotalSavings(total);
+      }
+    } catch (e) {
+      console.log("Portfolio error:", e);
+    }
+  };
   const loadProfile = async () => {
     try {
       setLoading(true);
-      const [res, goldRes] = await Promise.all([
+      const [res, goldRes,kycRes] = await Promise.all([
         getProfileApi(),
         getGoldPriceApi(),
+          getKycStatusApi(),
       ]);
+
 
       if (res?.success) {
         const { user, wallet: w, referral_reward } = res.data;
@@ -166,6 +196,20 @@ function Profile() {
       if (goldRes?.success) {
         setGoldPrice(Number(goldRes?.data?.market_sell_price || 0));
       }
+      // 👉 KYC STATUS SET
+console.log("FULL KYC API RES 👉", kycRes);
+console.log("FULL profile API RES 👉", User);
+
+if (kycRes?.success && kycRes?.kyc) {
+  const status = kycRes.kyc.status;   // 👈 direct read
+  console.log("KYC STATUS 👉", status);
+  setKycStatus(status);
+} else {
+  console.log("KYC NOT FOUND ❌");
+  setKycStatus(null);
+}
+
+
     } catch (err) {
       console.log("❌ PROFILE API ERROR:", err);
     } finally {
@@ -176,6 +220,7 @@ function Profile() {
   useFocusEffect(
     useCallback(() => {
       loadProfile();
+      loadPortfolio();
       const interval = setInterval(() => {
         getGoldPriceApi().then((g) => {
           if (g?.success) {
@@ -186,14 +231,27 @@ function Profile() {
       return () => clearInterval(interval);
     }, [])
   );
+console.log("full profile data",profile);
 
   const handleBack = useCallback(() => router.back(), []);
 
   if (loading) {
     return (
-      <View style={styles.loaderWrap}>
-        <ActivityIndicator size="large" color="#facc15" />
-      </View>
+    <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#062530",
+          }}
+        >
+          <LottieView
+            source={require("../../assets/gold.json")}
+            autoPlay
+            loop
+            style={{ width: 180, height: 180 }}
+          />
+        </View>
     );
   }
 
@@ -225,7 +283,7 @@ function Profile() {
               onPress={() => { router.push("/profile/edit-profile")}}
             >
               <View style={[styles.menuIconBg, { backgroundColor: 'rgba(168, 85, 247, 0.15)' }]}>
-                <UserRoundPen size={18} color="#A855F7" />
+                <UserRoundPen size={18} color="#facc15" />
               </View>
               <Text style={styles.menuText}>Edit Profile</Text>
             </Pressable>
@@ -242,15 +300,7 @@ function Profile() {
 
             <View style={styles.menuSeparator} />
 
-            {/* <Pressable 
-              style={({ pressed }) => [styles.menuItem, pressed && { backgroundColor: 'rgba(239, 68, 68, 0.1)' }]}
-              onPress={() => { setShowMenu(false); }}
-            >
-              <View style={[styles.menuIconBg, { backgroundColor: 'rgba(239, 68, 68, 0.15)' }]}>
-                <LogOut size={18} color="#EF4444" />
-              </View>
-              <Text style={[styles.menuText, { color: "#EF4444", fontWeight: '700' }]}>Logout</Text>
-            </Pressable> */}
+         
           </View>
         </Pressable>
       </Modal>
@@ -280,11 +330,7 @@ function Profile() {
           <View style={styles.profileRow}>
             <LinearGradient colors={["#a855f7", "#6366f1", "#60a5fa"]} style={styles.avatarBorder}>
               <View style={styles.avatarInner}>
-                {/* {profile?.profile_photo ? (
-                  <Image source={{ uri: profile.profile_photo }} style={styles.profileImg} />
-                ) : (
-                  <User size={32} color="rgba(168,85,247,0.5)" />
-                )} */}
+          
 
 
 
@@ -305,18 +351,77 @@ function Profile() {
             </LinearGradient>
 
             <View style={styles.userInfo}>
-              <View style={styles.nameBadgeRow}>
+              {/* <View style={styles.nameBadgeRow}>
                 <Text style={styles.userNameText} numberOfLines={1}>{profile?.username || "User"}</Text>
                 <BadgeCheck size={18} color="#facc15" />
               </View>
-              <Text style={styles.phoneText}>+91 {profile?.phone || "0000000000"}</Text>
+              
+              
+              */}
+              <View style={styles.nameBadgeRow}>
+  <Text style={styles.userNameText} numberOfLines={1}>
+    {profile?.username || "User"}
+  </Text>
+
+  {kycStatus === "approved" && (
+    <BadgeCheck size={18} color="#22c55e" />
+  )}
+</View>
+
+              {/* <Text style={styles.phoneText}>+91 {profile?.phone || "0000000000"}</Text>
+               */}
+
+               <Text style={styles.phoneText}>
+  +91 {profile?.phone || "0000000000"}
+</Text>
+
+{/* ✅ KYC STATUS TEXT */}
+{kycStatus === "approved" && (
+<Pressable onPress={()=> router.push("/spin-and-win/KYC")}>
+    <Text style={{
+    fontSize: 12,
+    color: "#22c55e",
+    marginTop: 2,
+    fontWeight: "600"
+  }}>
+    KYC Verified
+  </Text>
+</Pressable>
+)}
+
+{kycStatus === "pending" && (
+  <Text style={{
+    fontSize: 12,
+    color: "#f59e0b",
+    marginTop: 2,
+    fontWeight: "600"
+  }}>
+    KYC Pending
+  </Text>
+)}
+
+{kycStatus === "rejected" && (
+  <Text style={{
+    fontSize: 12,
+    color: "#ef4444",
+    marginTop: 2,
+    fontWeight: "600"
+  }}>
+    KYC Rejected
+  </Text>
+)}
+
+
+
+
+
             </View>
           </View>
 
           <View style={styles.statsRow}>
             {[
               { label: "DEPOSIT", val: `₹${Number(wallet?.deposit_balance || 0).toLocaleString()}` },
-              { label: "SAVINGS", val: `₹${(Number(wallet?.total_gold_grams || 0) * goldPrice).toLocaleString()}` },
+              { label: "SAVINGS", val:totalSavings.toFixed(2) },
               { label: "GOLD", val: `${Number(wallet?.total_gold_grams || 0).toFixed(3)}g` }
             ].map((stat, i) => (
               <View key={i} style={styles.statBox}>
@@ -327,8 +432,8 @@ function Profile() {
           </View>
         </View>
 
-        <SectionTitle title="SECURITY & NOMINATIONS" dotColor="#A855F7" />
-        <NomineeSection />
+        <SectionTitle title="SECURITY & NOMINATIONS" dotColor="#facc15" />
+        <NomineeSection   kycStatus={kycStatus}    nomineeStatus={profile?.nominee ?? 0}/>
 
         {/* <SectionTitle title="EXCLUSIVELY FOR YOU" dotColor="#6366f1" marginTop={24} /> */}
         {/* <ModernForYou /> */}
@@ -401,7 +506,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingBottom: 14,
-    paddingVertical: 28,
+    // paddingVertical: 20,
   },
 
   headerCenter: {
@@ -578,6 +683,10 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     textAlign: "center",
   },
+serviceImage: {
+  width: 36,
+  height: 36,
+},
 
   /* ===== GRID ===== */
   gridWrapper: {
@@ -705,127 +814,3 @@ const styles = StyleSheet.create({
   },
 });
 export default Profile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1 },
-//   loaderWrap: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#1a003d" },
-//   topGlow: { position: 'absolute', top: -50, right: -50, width: 250, height: 250, borderRadius: 125, backgroundColor: 'rgba(147, 51, 234, 0.12)', zIndex: 0 },
-//   bottomGlow: { position: 'absolute', bottom: 100, left: -100, width: 200, height: 200, borderRadius: 100, backgroundColor: 'rgba(79, 70, 229, 0.08)', zIndex: 0 },
-//   topWrapper: { backgroundColor: "#160531", paddingBottom: 10 },
-//   header: { flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingBottom: 14, paddingVertical: 28 },
-//   headerCenter: { flex: 1, alignItems: "center" },
-//   headerLabel: { fontSize: 10, fontWeight: "900", color: "#A855F7", letterSpacing: 2 },
-//   headerName: { fontSize: 16, fontWeight: "900", color: "#FFFFFF" },
-//   iconBtn: { padding: 10, backgroundColor: "rgba(255, 255, 255, 0.05)", borderRadius: 12, borderWidth: 1, borderColor: "rgba(255, 255, 255, 0.1)" },
-//   scrollContent: { padding: 20 },
-//   profileCard: { backgroundColor: "rgba(255, 255, 255, 0.04)", borderRadius: 28, padding: 16, borderWidth: 1, borderColor: "rgba(255, 255, 255, 0.08)", marginBottom: 25 },
-//   profileRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginBottom: 20 },
-//   avatarBorder: { width: 75, height: 75, borderRadius: 22, padding: 2 },
-//   avatarInner: { flex: 1, borderRadius: 20, backgroundColor: "#1a003d", alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
-//   profileImg: { width: '100%', height: '100%' },
-//   userInfo: { flex: 1 },
-//   nameBadgeRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-//   userNameText: { fontSize: 18, fontWeight: "900", color: "#FFFFFF" },
-//   phoneText: { fontSize: 12, fontWeight: "600", color: "#6B7280", marginTop: 2 },
-//   statsRow: { flexDirection: 'row', gap: 8 },
-//   statBox: { flex: 1, backgroundColor: "rgba(255, 255, 255, 0.03)", padding: 12, borderRadius: 16, borderWidth: 1, borderColor: "rgba(255, 255, 255, 0.05)" },
-//   statLabel: { fontSize: 8, fontWeight: "900", color: "#6B7280", letterSpacing: 1, marginBottom: 4 },
-//   statValue: { fontSize: 14, fontWeight: "900", color: "#FFFFFF" },
-//   sectionHeader: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 12, paddingLeft: 4 },
-//   sectionDot: { width: 4, height: 4, borderRadius: 2 },
-//   sectionHeaderText: { fontSize: 10, fontWeight: "900", color: "#6B7280", letterSpacing: 2 },
-//   glassContainer: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#1a003d', padding: 16, borderRadius: 24, borderWidth: 1, borderColor: 'rgba(255,255,255,0.05)' },
-//   iconBtnStack: { alignItems: 'center', flex: 1 },
-//   iconBg: { width: 46, height: 46, borderRadius: 14, justifyContent: 'center', alignItems: 'center', marginBottom: 8 },
-//   iconLabel: { fontSize: 8, fontWeight: '900', color: '#FFFFFF', textAlign: 'center' },
-//   gridWrapper: { flexDirection: 'row', flexWrap: 'wrap', backgroundColor: '#1a003d', padding: 12, borderRadius: 28, borderWidth: 1, borderColor: '#1a003d' },
-//   gridBox: { width: '25%', alignItems: 'center', marginBottom: 16, marginTop: 8 },
-//   gridIconCircle: { width: 48, height: 48, borderRadius: 16, justifyContent: 'center', alignItems: 'center', marginBottom: 8, borderWidth: 1, borderColor: 'rgba(255,255,255,0.03)' },
-//   gridLabelText: { fontSize: 7, fontWeight: '900', color: '#9CA3AF', textAlign: 'center', paddingHorizontal: 2 },
-//   settingsGroup: { marginTop: 24, backgroundColor: "rgba(255, 255, 255, 0.02)", borderRadius: 24, padding: 16, borderWidth: 1, borderColor: "rgba(255, 255, 255, 0.05)" },
-//   separator: { height: 1, backgroundColor: "rgba(255, 255, 255, 0.05)", marginVertical: 12 },
-
-//   // --- MENU STYLES ---
-//   menuOverlay: {
-//     flex: 1,
-//     backgroundColor: "rgba(0,0,0,0.6)",
-//     justifyContent: "flex-start",
-//     alignItems: "flex-end",
-//     paddingTop: 85,
-//     paddingRight: 20,
-//   },
-//   menuBox: {
-//     width: 200,
-//     backgroundColor: "#160531",
-//     borderRadius: 24,
-//     overflow: "hidden",
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.12)",
-//     elevation: 20,
-//     padding: 8,
-//   },
-//   menuHeader: {
-//     paddingHorizontal: 12,
-//     paddingVertical: 10,
-//     borderBottomWidth: 1,
-//     borderBottomColor: "rgba(255,255,255,0.05)",
-//     marginBottom: 4,
-//   },
-//   menuHeaderText: {
-//     color: "#6B7280",
-//     fontSize: 10,
-//     fontWeight: "900",
-//     letterSpacing: 1,
-//     textTransform: "uppercase",
-//   },
-//   menuItem: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     paddingVertical: 10,
-//     paddingHorizontal: 10,
-//     borderRadius: 14,
-//     marginVertical: 2,
-//   },
-//   menuItemPressed: {
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//   },
-//   menuIconBg: {
-//     width: 34,
-//     height: 34,
-//     borderRadius: 10,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     marginRight: 12,
-//   },
-//   menuText: {
-//     color: "#FFFFFF",
-//     fontSize: 14,
-//     fontWeight: "600",
-//   },
-//   menuSeparator: {
-//     height: 1,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     marginVertical: 6,
-//     marginHorizontal: 8,
-//   },
-// });
-
-// export default Profile;

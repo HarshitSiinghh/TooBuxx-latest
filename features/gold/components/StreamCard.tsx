@@ -1,22 +1,3 @@
-// // gold/components/StreamCard.tsx
-// import { View, Text } from "react-native";
-
-// export default function StreamCard() {
-//   return (
-//     <View style={{ flexDirection: "row", margin: 16, gap: 12 }}>
-//       <View style={{ flex: 1, padding: 16, borderRadius: 16, backgroundColor: "#08353B" }}>
-//         <Text style={{ color: "#8FDAD1", fontSize: 12 }}>WALLET BALANCE</Text>
-//         <Text style={{ color: "#fff", fontSize: 18 }}>₹10000</Text>
-//       </View>
-
-//       <View style={{ flex: 1, padding: 16, borderRadius: 16, backgroundColor: "#08353B" }}>
-//         <Text style={{ color: "#8FDAD1", fontSize: 12 }}>NET GROWTH</Text>
-//         <Text style={{ color: "#4CFF8F", fontSize: 18 }}>+2.4%</Text>
-//       </View>
-//     </View>
-//   );
-// }
-
 
 
 import React from "react";

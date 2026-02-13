@@ -52,7 +52,7 @@ const router = useRouter()
           {/* Status Icon */}
           <Animated.View style={[styles.iconContainer, { transform: [{ scale: pulseAnim }] }]}>
             <View style={styles.iconCircle}>
-              <Clock size={60} color="#c084fc" strokeWidth={1.5} />
+              <Clock size={60} color="#facc15" strokeWidth={1.5} />
             </View>
             <View style={styles.statusBadge}>
               <ShieldAlert size={16} color="white" />
@@ -125,7 +125,7 @@ const router = useRouter()
 //     alignItems: 'center',
 //     borderWidth: 1,
 //     borderColor: 'rgba(255, 255, 255, 0.05)',
-//     shadowColor: '#a855f7',
+//     shadowColor: '#a55f7',
 //     shadowOffset: { width: 0, height: 20 },
 //     shadowOpacity: 0.2,
 //     shadowRadius: 30,
@@ -176,7 +176,7 @@ const router = useRouter()
 //     textAlign: 'center',
 //   },
 //   highlight: {
-//     color: '#c084fc',
+//     color: '#',
 //     fontWeight: 'bold',
 //   },
 //   infoBox: {
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 24,
-    paddingVertical: 20,
+  paddingBottom:12,
     borderBottomWidth: 1,
     borderBottomColor: "#104e64",
   },

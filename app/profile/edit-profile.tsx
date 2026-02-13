@@ -136,7 +136,7 @@ const ChangeProfile = () => {
                     style={styles.avatarImage}
                   />
                 ) : (
-                  <User size={50} color="#7c3aed" />
+                  <User size={50} color="#FFD700" />
                 )}
               </View>
               <TouchableOpacity style={styles.cameraBadge} onPress={pickImage} activeOpacity={0.8}>
@@ -155,7 +155,7 @@ const ChangeProfile = () => {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>FULL NAME</Text>
               <View style={styles.inputWrapper}>
-                <User size={18} color="#7c3aed" style={styles.inputIcon} />
+                <User size={18} color="#FFD700" style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
                   value={fullName}
@@ -181,7 +181,7 @@ const ChangeProfile = () => {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>PHONE NUMBER</Text>
               <View style={styles.inputWrapper}>
-                <Phone size={18} color="#7c3aed" style={styles.inputIcon} />
+                <Phone size={18} color="#FFD700" style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
                   value={phone}
@@ -237,130 +237,6 @@ const ChangeProfile = () => {
 
 export default ChangeProfile;
 
-// const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: "#020617" },
-
-//   header: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "space-between",
-//     paddingHorizontal: 20,
-//     paddingVertical: 15,
-//     paddingTop:37,
-//   },
-//   backButton: {
-//     backgroundColor: "#1e293b",
-//     padding: 8,
-//     borderRadius: 12,
-//   },
-//   headerTitle: {
-//     color: "#fff",
-//     fontSize: 18,
-//     fontWeight: "800",
-//     letterSpacing: 0.5,
-//     textTransform: "uppercase",
-//   },
-
-//   scrollContent: { paddingBottom: 40, paddingHorizontal: 20 },
-
-//   avatarSection: { alignItems: "center", marginTop: 10, marginBottom: 30 },
-//   avatarWrapper: {
-//     position: "relative",
-//     shadowColor: "#7c3aed",
-//     shadowOffset: { width: 0, height: 10 },
-//     shadowOpacity: 0.3,
-//     shadowRadius: 20,
-//     elevation: 10,
-//   },
-//   avatarCircle: {
-//     width: 110,
-//     height: 110,
-//     borderRadius: 55,
-//     backgroundColor: "#0f172a",
-//     borderWidth: 3,
-//     borderColor: "#1e293b",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     overflow: "hidden",
-//   },
-//   avatarImage: { width: "100%", height: "100%" },
-//   cameraBadge: {
-//     position: "absolute",
-//     bottom: 0,
-//     right: 5,
-//     backgroundColor: "#7c3aed",
-//     borderRadius: 15,
-//     padding: 8,
-//     borderWidth: 3,
-//     borderColor: "#020617",
-//   },
-//   userName: { color: "#fff", fontSize: 22, fontWeight: "800", marginTop: 15 },
-//   badgeRow: { flexDirection: 'row', alignItems: 'center', gap: 5, marginTop: 4 },
-//   userStatus: { color: "#10b981", fontSize: 13, fontWeight: "600" },
-
-//   card: {
-//     backgroundColor: "#0f172a",
-//     borderRadius: 24,
-//     padding: 20,
-//     borderWidth: 1,
-//     borderColor: "#1e293b",
-//   },
-//   inputGroup: { marginBottom: 20 },
-//   label: {
-//     color: "#9ca3af",
-//     fontSize: 11,
-//     fontWeight: "700",
-//     marginBottom: 8,
-//     marginLeft: 4,
-//     letterSpacing: 1,
-//   },
-//   inputWrapper: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     backgroundColor: "#020617",
-//     borderWidth: 1,
-//     borderColor: "#334155",
-//     borderRadius: 16,
-//     paddingHorizontal: 15,
-//     height: 56,
-//   },
-//   lockedInput: { backgroundColor: "#0f172a", borderColor: "#1e293b", opacity: 0.7 },
-//   inputIcon: { marginRight: 12 },
-//   input: { flex: 1, color: "#f9fafb", fontSize: 15, fontWeight: "500" },
-
-//   securityButton: {
-//     marginTop: 10,
-//     backgroundColor: "#1e1b4b",
-//     borderWidth: 1,
-//     borderColor: "#4338ca",
-//     borderStyle: "dashed",
-//     borderRadius: 16,
-//     paddingVertical: 14,
-//     alignItems: "center",
-//   },
-//   securityButtonText: { color: "#a5b4fc", fontWeight: "600", fontSize: 14 },
-
-//   buttonContainer: { marginTop: 30 },
-//   submitButton: {
-//     backgroundColor: "#7c3aed",
-//     borderRadius: 18,
-//     height: 60,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     shadowColor: "#7c3aed",
-//     shadowOffset: { width: 0, height: 4 },
-//     shadowOpacity: 0.4,
-//     shadowRadius: 10,
-//     elevation: 5,
-//   },
-//   submitButtonText: { color: "#fff", fontWeight: "800", fontSize: 16, letterSpacing: 0.5 },
-//   cancelButton: { marginTop: 16, alignItems: "center", padding: 10 },
-//   cancelButtonText: { color: "#64748b", fontWeight: "600", fontSize: 15 },
-// });
-
-
-
-
 
 
 const styles = StyleSheet.create({
@@ -374,8 +250,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    paddingTop: 37,
+    // paddingVertical: 15,
+    // paddingTop: 37,
   },
 
   backButton: {

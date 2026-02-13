@@ -66,13 +66,6 @@ export default function AutoInvestCard() {
 
 
 
-
-
-
-
-
-
-
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#104e64",

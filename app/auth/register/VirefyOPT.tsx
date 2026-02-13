@@ -1,30 +1,40 @@
-import React, { useState, useRef, useEffect } from "react";
+
+import { LinearGradient } from "expo-linear-gradient";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import {
+  ArrowRight,
+  CheckCircle2,
+  MailCheck,
+  RefreshCcw,
+  X,
+} from "lucide-react-native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Dimensions,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Pressable,
   StyleSheet,
-  View,
   Text,
   TextInput,
   TouchableOpacity,
-  Modal,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  Dimensions,
-  Alert,
-  ActivityIndicator
+  View,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { MailCheck, RefreshCcw, ArrowRight, CheckCircle2, X } from "lucide-react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
 
-import { verifyOtpApi } from "@/services/auth";
+import { verifyOtpApi } from "@/services/auth"; // register otp
+// import { verifyOtpApi } from "@/services/forgotPassword"; // forgot otp
+//  import { verifyForgotOtpApi } from "@/services/forget-pass"; // forgot otp
+//  import { verifyOtpApi } from "@/services/forget-pass";
+import { verifyForgetOtpApi } from "@/services/forget-pass";
 import { useAuthStore } from "@/store/authStore";
 
 const { width } = Dimensions.get("window");
 
 const OTPVerifyPage = () => {
-    
-    const { email } = useLocalSearchParams();
+  const { email, type } = useLocalSearchParams(); // 🔥 type ayega forgot me
   const router = useRouter();
   const setUser = useAuthStore((s) => s.setUser);
 
@@ -33,7 +43,7 @@ const OTPVerifyPage = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const inputRefs = useRef<Array<TextInput | null>>([]);
+  const inputRefs = useRef<(TextInput | null)[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,7 +52,7 @@ const OTPVerifyPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleChange = (index: number, value: string) => {
+  const handleChange = (index: number, value: string): void => {
     if (!/^\d*$/.test(value)) return;
 
     const newOtp = [...otp];
@@ -68,24 +78,58 @@ const OTPVerifyPage = () => {
       }
     }
   };
-``
+
+  // =========================================
+  // 🔥 VERIFY OTP (REGISTER + FORGOT BOTH)
+  // =========================================
   const handleVerify = async () => {
     const finalOtp = otp.join("");
 
-    if (finalOtp.length < 6) return;
+    if (finalOtp.length < 6) {
+      return Alert.alert("Error", "Enter complete OTP");
+    }
 
     try {
       setLoading(true);
 
+      // =========================================
+
+      if (type === "forgot") {
+        const data = await verifyForgetOtpApi(String(email), finalOtp);
+
+        console.log("FORGOT VERIFY 👉", data);
+
+        if (!data?.success) {
+          return Alert.alert("Invalid OTP", data?.message || "Try again");
+        }
+
+        const resetToken = data?.data?.resetToken || data?.resetToken;
+
+        if (!resetToken) {
+          return Alert.alert("Error", "Reset token not received");
+        }
+
+        Alert.alert("OTP Verified", "Set new password");
+
+        router.push({
+          pathname: "/auth/forget-password/new-pass",
+          params: { token: resetToken },
+        });
+
+        return;
+      }
+
+      // =========================================
+      // 🟢 REGISTER FLOW
+      // =========================================
       const data = await verifyOtpApi(String(email), finalOtp);
 
       if (!data.success) {
         return Alert.alert("Invalid OTP", data.message || "Try again");
       }
 
-      setUser(data.user);      // ✅ user logged in
-      setShowSuccess(true);    // ✅ success modal
-
+      setUser(data.user);
+      setShowSuccess(true);
     } catch (err) {
       Alert.alert("Error", "Server not reachable");
     } finally {
@@ -107,25 +151,23 @@ const OTPVerifyPage = () => {
         style={styles.innerContainer}
       >
         <View style={styles.card}>
-          {/* Header */}
           <View style={styles.header}>
             <View style={styles.iconCircle}>
-              <MailCheck color="#a78bfa" size={24} />
+              <MailCheck color="#facc15" size={24} />
             </View>
-            <Text style={styles.title}>IDENTITY VERIFICATION</Text>
+            <Text style={styles.title}>OTP  VERIFICATION</Text>
             <Text style={styles.subtitle}>
-              WE SENT A 6 DIGIT CODE TO {email}
+              VERIFICATION CODE SEND TO  {email}
             </Text>
           </View>
 
-          {/* OTP inputs */}
           <View style={styles.otpContainer}>
             {otp.map((digit, index) => (
               <TextInput
                 key={index}
                 ref={(el) => {
-  inputRefs.current[index] = el;
-}}
+                  inputRefs.current[index] = el;
+                }}
                 style={[styles.input, digit ? styles.inputActive : null]}
                 keyboardType="number-pad"
                 maxLength={1}
@@ -138,16 +180,15 @@ const OTPVerifyPage = () => {
             ))}
           </View>
 
-          {/* Verify button */}
           <TouchableOpacity
             disabled={otp.join("").length < 6 || loading}
             onPress={handleVerify}
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={["#9333ea", "#4f46e5"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
+                 colors={["#facc15", "#ca8a04"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
               style={[
                 styles.button,
                 (otp.join("").length < 6 || loading) && { opacity: 0.2 },
@@ -157,14 +198,13 @@ const OTPVerifyPage = () => {
                 <ActivityIndicator color="#fff" />
               ) : (
                 <>
-                  <Text style={styles.buttonText}>AUTHORIZE ACCOUNT</Text>
+                  <Text style={styles.buttonText}>VERIFY OTP</Text>
                   <ArrowRight color="white" size={16} />
                 </>
               )}
             </LinearGradient>
           </TouchableOpacity>
 
-          {/* Timer */}
           <View style={styles.footer}>
             {timer > 0 ? (
               <Text style={styles.timerText}>
@@ -172,8 +212,11 @@ const OTPVerifyPage = () => {
                 <Text style={{ color: "#a78bfa" }}>{timer}S</Text>
               </Text>
             ) : (
-              <TouchableOpacity onPress={() => setTimer(59)} style={styles.resendBtn}>
-                <RefreshCcw color="#a78bfa" size={12} />
+              <TouchableOpacity
+                onPress={() => setTimer(59)}
+                style={styles.resendBtn}
+              >
+                <RefreshCcw color="#facc15" size={12} />
                 <Text style={styles.resendText}>RESEND CODE</Text>
               </TouchableOpacity>
             )}
@@ -181,7 +224,7 @@ const OTPVerifyPage = () => {
         </View>
       </KeyboardAvoidingView>
 
-      {/* Success modal */}
+      {/* SUCCESS MODAL ONLY FOR REGISTER */}
       <Modal visible={showSuccess} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
@@ -210,6 +253,7 @@ const OTPVerifyPage = () => {
 };
 
 export default OTPVerifyPage;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

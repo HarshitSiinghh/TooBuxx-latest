@@ -35,7 +35,7 @@ const activeOffers = [
     code: "FESTIVE10", 
     desc: "10% off on processing fees", 
     expiry: "Ends in 5 days", 
-    icon: <Zap color="#a855f7" size={24} /> 
+    icon: <Zap color="#facc15" size={24} /> 
   },
 ];
 
@@ -79,7 +79,7 @@ export  function PromoCode() {
           
           <View style={styles.cardHeader}>
             <View style={styles.iconBox}>
-              <Ticket color="#a855f7" size={24} />
+              <Ticket color="#facc15" size={24} />
             </View>
             <Text style={styles.cardTitle}>REDEEM CODE</Text>
           </View>
@@ -93,7 +93,7 @@ export  function PromoCode() {
                 placeholder="ENTER CODE (E.G. GOLD50)"
                 placeholderTextColor="#4b5563"
                 autoCapitalize="characters"
-                selectionColor="#a855f7"
+                selectionColor="#facc15"
               />
               {promoCode.length > 3 && (
                 <View style={styles.checkIcon}>
@@ -194,7 +194,7 @@ export  function PromoCode() {
 //     fontStyle: 'italic',
 //   },
 //   headerSub: {
-//     color: '#a855f7',
+//     color: '#',
 //     fontSize: 9,
 //     fontWeight: 'bold',
 //     letterSpacing: 1,
@@ -265,12 +265,12 @@ export  function PromoCode() {
 //     right: 15,
 //   },
 //   applyButton: {
-//     backgroundColor: '#7c3aed',
+//     backgroundColor: ' ',
 //     height: 60,
 //     borderRadius: 16,
 //     alignItems: 'center',
 //     justifyContent: 'center',
-//     shadowColor: '#7c3aed',
+//     shadowColor: '#7 c3aed',
 //     shadowOffset: { width: 0, height: 10 },
 //     shadowOpacity: 0.3,
 //     shadowRadius: 15,

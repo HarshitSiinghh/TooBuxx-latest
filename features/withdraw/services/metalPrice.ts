@@ -1,14 +1,5 @@
-// services/metalPrice.ts
 
-/**
- * NOTE:
- * Abhi yeh dummy prices hain
- * Baad mein isi file mein API call replace kar denge
- */
-
-/**
- * Supported metal types
- */
+ 
 export type MetalType = "gold" | "silver" | "platinum";
 
 /**

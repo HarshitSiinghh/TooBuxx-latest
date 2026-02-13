@@ -27,7 +27,7 @@ export const StartSaving = () => {
         {/* Right Section */}
         <View style={styles.right}>
           <Image
-            source={require("../../../images/box.webp")}
+            source={require("../../../images/latest-images/New folder (2)/box.png")}
             style={styles.image}
           />
         </View>
@@ -35,85 +35,6 @@ export const StartSaving = () => {
     </View>
   );
 };
-
-/* ================= STYLES ================= */
-
-// const styles = StyleSheet.create({
-//   wrapper: {
-//     marginTop: 20,
-//     marginBottom: 24,
-//   },
-
-//   card: {
-//     backgroundColor: "#2f2360",
-//     marginHorizontal: 16,
-//     padding: 16,
-//     borderRadius: 14,
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//   },
-
-//   left: {
-//     maxWidth: "60%",
-//     gap: 8,
-//   },
-
-//   title: {
-//     color: "white",
-//     fontWeight: "700",
-//     fontSize: 16,
-//     lineHeight: 22,
-//   },
-
-//   yellow: {
-//     color: "#facc15",
-//   },
-
-//   desc: {
-//     color: "#9ca3af",
-//     fontSize: 12,
-//   },
-
-//   button: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     gap: 6,
-//     backgroundColor: "#fffbeb",
-//     paddingHorizontal: 14,
-//     paddingVertical: 6,
-//     borderRadius: 6,
-//     alignSelf: "flex-start",
-//   },
-
-//   buttonText: {
-//     color: "#000",
-//     fontWeight: "600",
-//     fontSize: 13,
-//   },
-
-//   right: {
-//     width: "40%",
-//     alignItems: "flex-end",
-//   },
-
-//   image: {
-//     width: 100,
-//     height: 100,
-//     resizeMode: "contain",
-//   },
-// });
-
-
-
-
-
-
-
-
-
-
-
 
 
 

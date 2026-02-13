@@ -2,8 +2,8 @@ import React, { useState, useEffect ,useCallback} from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter,useFocusEffect } from "expo-router";
-import { getGoldPriceApi } from "@/services/goldprice";
-
+// import { getGoldPriceApi } from "@/services/goldprice";
+ import { getGoldPriceApi } from "@/services/gold";
  import { useNotificationStore } from "@/store/notificationstore";
 // import { useNotificationStore } from "@/store/notificationStore";
 
@@ -42,7 +42,7 @@ const [priceTrend, setPriceTrend] = useState<"up" | "down" | "same">("same");con
   try {
     const res = await getGoldPriceApi();
     if (res?.success) {
-      const newPrice = res.data?.price_per_gram;
+      const newPrice = res.data?.price_per_gram_24K;
 
       setPrevPrice(prev => {
         if (prev !== null) {

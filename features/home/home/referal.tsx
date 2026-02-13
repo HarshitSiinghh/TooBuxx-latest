@@ -10,7 +10,7 @@ export const Referral = () => {
         {/* ========== Left Section ========== */}
         <View style={styles.left}>
           <Text style={styles.heading}>
-            Refer & <Text style={styles.white}>Earn ₹100</Text>
+            Refer & <Text style={styles.white}>Earn 100 Points</Text>
           </Text>
 
           <Text style={styles.title}>
@@ -29,7 +29,7 @@ export const Referral = () => {
         {/* ========== Right Section ========== */}
         <View style={styles.right}>
           <Image
-            source={require("../../../images/refer-earn.png")}
+            source={require("../../../images/latest-images/New folder (2)/refer-earn.png")}
             style={styles.image}
           />
         </View>

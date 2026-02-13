@@ -99,17 +99,7 @@ screenOptions={{
     title: "",
     tabBarIcon: ({ focused }) => (
       <View style={{ alignItems: "center", marginTop: 36 }}>
-        {/* 🔵 Circle Button */}
-        {/* <View
-          style={[
-            styles.dailyButton,
-            { backgroundColor: focused ? "#7c3aed" : "#6d28d9" },
-          ]}
-        >
-          <Gift color="#fff" size={26} />
-        </View> */}
-
-
+       
         <View
   style={[
     styles.dailyButton,
@@ -144,7 +134,7 @@ screenOptions={{
       <Tabs.Screen
         name="history"
         options={{
-          title: "History",
+          title: "Transaction",
           tabBarIcon: ({ color, size }) => (
             <History size={size} color={color} />
           ),
@@ -164,59 +154,6 @@ screenOptions={{
     </Tabs>
   );
 }
-
-
-
-
-
-
-// const styles = StyleSheet.create({
-//   dailyWrapper: {
-//     top: -22,
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-// dailyButton: {
-//   width: 55,
-//   height: 55,
-//   borderRadius: 34,
-//   justifyContent: "center",
-//   alignItems: "center",
-//   elevation: 10,
-//   shadowColor: "#7c3aed",
-//   shadowOpacity: 0.45,
-//   shadowRadius: 10,
-//   shadowOffset: { width: 0, height: 6 },
-//   borderWidth: 3,
-//   borderColor: "#a78bfa", // makes it unique
-// },
-
-// savingText: {
-//   color: "#e9d5ff",
-//   marginTop: 6,
-//   fontSize: 13,
-//   fontWeight: "700",
-//   textAlign: "center",
-//   width: 70,            
-// },
-
-
-
-
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
 const styles = StyleSheet.create({
   dailyWrapper: {
     top: -22,

@@ -112,7 +112,7 @@ const ChangePasswordModal = ({ visible, onClose }: Props) => {
           {/* ---------- INPUTS ---------- */}
           <View style={styles.form}>
             <View style={styles.inputWrapper}>
-              <Lock size={18} color="#7c3aed" style={styles.inputIcon} />
+              <Lock size={18} color="#FFD700" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Current password"
@@ -124,7 +124,7 @@ const ChangePasswordModal = ({ visible, onClose }: Props) => {
             </View>
 
             <View style={styles.inputWrapper}>
-              <Lock size={18} color="#7c3aed" style={styles.inputIcon} />
+              <Lock size={18} color="#FFD700" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="New password"
@@ -136,7 +136,7 @@ const ChangePasswordModal = ({ visible, onClose }: Props) => {
             </View>
 
             <View style={styles.inputWrapper}>
-              <Lock size={18} color="#7c3aed" style={styles.inputIcon} />
+              <Lock size={18} color="#FFD700" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Confirm new password"
@@ -177,106 +177,6 @@ const ChangePasswordModal = ({ visible, onClose }: Props) => {
 };
 
 export default ChangePasswordModal;
-
-// const styles = StyleSheet.create({
-//   overlay: {
-//     flex: 1,
-//     backgroundColor: "rgba(2, 6, 23, 0.9)", // Darker glass effect
-//     justifyContent: "center", // Center focus
-//     alignItems: "center",
-//     paddingHorizontal: 20,
-//   },
-
-//   card: {
-//     width: "100%",
-//     backgroundColor: "#0f172a", // Match profile card color
-//     padding: 24,
-//     borderRadius: 30,
-//     borderWidth: 1,
-//     borderColor: "#1e293b",
-//     shadowColor: "#000",
-//     shadowOffset: { width: 0, height: 10 },
-//     shadowOpacity: 0.5,
-//     shadowRadius: 20,
-//     elevation: 10,
-//   },
-
-//   header: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     marginBottom: 8,
-//   },
-
-//   titleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-
-//   title: {
-//     color: "#fff",
-//     fontSize: 20,
-//     fontWeight: "800",
-//     letterSpacing: 0.5,
-//   },
-
-//   subTitle: {
-//     color: "#9ca3af",
-//     fontSize: 13,
-//     lineHeight: 18,
-//     marginBottom: 24,
-//   },
-
-//   closeBtn: {
-//     backgroundColor: "#1e293b",
-//     padding: 6,
-//     borderRadius: 10,
-//   },
-
-//   form: { gap: 16 },
-
-//   inputWrapper: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     backgroundColor: "#020617",
-//     borderWidth: 1,
-//     borderColor: "#334155",
-//     borderRadius: 16,
-//     paddingHorizontal: 15,
-//     height: 56,
-//   },
-
-//   inputIcon: { marginRight: 12 },
-
-//   input: {
-//     flex: 1,
-//     height: "100%",
-//     color: "#f9fafb",
-//     fontSize: 15,
-//   },
-
-//   button: {
-//     backgroundColor: "#7c3aed",
-//     borderRadius: 18,
-//     height: 56,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginTop: 24,
-//     shadowColor: "#7c3aed",
-//     shadowOffset: { width: 0, height: 4 },
-//     shadowOpacity: 0.3,
-//     shadowRadius: 8,
-//     elevation: 4,
-//   },
-
-//   buttonText: {
-//     color: "#fff",
-//     fontWeight: "800",
-//     fontSize: 16,
-//     letterSpacing: 0.5,
-//   },
-// });
-
-
-
-
 
 
 

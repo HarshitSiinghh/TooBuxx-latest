@@ -1,9 +1,3 @@
-// import NotificationPage from "@/components/profile/notifications/notification-hovercard";
-// import NotificationPage from "@/components/profile/notifications/notification-hovercard";
-//  NotificationSettingsPage
-
-
-
 
 
 import NotificationSettingsPage from "@/components/profile/notifications/notification-settings";

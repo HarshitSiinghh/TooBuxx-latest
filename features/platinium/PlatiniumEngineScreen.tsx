@@ -10,6 +10,10 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
+import       LottieView from "lottie-react-native";
+
+import { ActivityIndicator } from "react-native";
+import { ArrowLeft } from "lucide-react-native";
 
 import { Bucket } from "./types";
 import { COLORS } from "./constants";
@@ -18,7 +22,7 @@ import { useRouter } from "expo-router";
 import { getMyPlatinumSipApi } from "@/services/platinium";
 import { getProfileApi } from "../../services/profile";
 import { getPortfolioApi } from "../../services/portfolio";
-
+import BaseAlert from "../silver/BaseAlert";
 import PlatinumHeader from "./components/PlatiniumHeader";
 import PlatinumTabs from "./components/PlatiniumTabs";
 import PlatinumBuyFlow from "./components/BuyFlow";
@@ -32,6 +36,7 @@ export default function PlatinumEngineScreen() {
   const [activeBucket, setActiveBucket] = useState<Bucket>("instant");
 
   const PLATINUM_ACCENT = COLORS.PLATINUM_ACCENT || "#00D2FF";
+const [errorAlert, setErrorAlert] = useState(false);
 
   useEffect(() => {
     loadEngine();
@@ -92,32 +97,41 @@ export default function PlatinumEngineScreen() {
 
           daily: {
             isActive: !!activeDaily,
-            isPaused:
-              activeDaily?.status?.toUpperCase() === "PAUSED",
+         isPaused:
+  activeDaily?.status &&
+  activeDaily?.status.toString().toUpperCase() === "PAUSED",
+
             sip_id: activeDaily?.sip_id,
             amount: activeDaily?.amount_per_cycle || 0,
-            savedGrams: activeDaily?.platinum_grams || 0,
-            streak: activeDaily?.streak || 0,
+          
+  savedGrams: Number(activeDaily?.total_grams || 0),   // FIX 1
+  streak: Number(activeDaily?.current_streak || 0),    // FIX 2
           },
 
           weekly: {
             isActive: !!activeWeekly,
-            isPaused:
-              activeWeekly?.status?.toUpperCase() === "PAUSED",
+           isPaused:
+  activeWeekly?.status &&
+  activeWeekly?.status.toString().toUpperCase() === "PAUSED",
+
             sip_id: activeWeekly?.sip_id,
             amount: activeWeekly?.amount_per_cycle || 0,
-            savedGrams: activeWeekly?.platinum_grams || 0,
-            streak: activeWeekly?.streak || 0,
+            
+  savedGrams: Number(activeWeekly?.total_grams || 0),   // FIX
+  streak: Number(activeWeekly?.current_streak || 0),    // FIX
           },
 
           monthly: {
             isActive: !!activeMonthly,
-            isPaused:
-              activeMonthly?.status?.toUpperCase() === "PAUSED",
+          isPaused:
+  activeMonthly?.status &&
+  activeMonthly?.status.toString().toUpperCase() === "PAUSED",
+
             sip_id: activeMonthly?.sip_id,
             amount: activeMonthly?.amount_per_cycle || 0,
-            savedGrams: activeMonthly?.platinum_grams || 0,
-            streak: activeMonthly?.streak || 0,
+           
+  savedGrams: Number(activeMonthly?.total_grams || 0),   // FIX
+  streak: Number(activeMonthly?.current_streak || 0),    // FIX
           },
         },
       };
@@ -126,26 +140,33 @@ export default function PlatinumEngineScreen() {
       setEngine(formatted);
     } catch (e) {
       console.log("ENGINE LOAD ERROR ❌", e);
+      setErrorAlert(true);
     } finally {
       setLoading(false);
     }
   };
 
   /* ================= LOADER ================= */
-  if (loading || !engine) {
-    return (
-      <SafeAreaView
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#000",
-        }}
-      >
-        <Text style={{ color: "#fff", fontSize: 16 }}>Loading...</Text>
-      </SafeAreaView>
-    );
-  }
+if (loading || !engine) {
+  return (
+<View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#062530",
+      }}
+    >
+      <LottieView
+        source={require("../../assets/gold.json")}
+        autoPlay
+        loop
+        style={{ width: 180, height: 180 }}
+      />
+    </View>
+  );
+}
+
 
   const currentEngine = engine.engines[activeBucket];
 
@@ -154,17 +175,23 @@ export default function PlatinumEngineScreen() {
       <StatusBar barStyle="light-content" />
 
       {/* NAV */}
-      <View style={styles.navBar}>
-        <TouchableOpacity
-          onPress={() => router.back()}
-          style={styles.backButton}
-        >
-          <Text style={{ color: PLATINUM_ACCENT }}>←</Text>
-        </TouchableOpacity>
+{/* NAV */}
+<View style={styles.navBar}>
+  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <TouchableOpacity
+      onPress={() => router.back()}
+      style={styles.backBtn}
+      activeOpacity={0.7}
+    >
+      <ArrowLeft size={20} color="#9ca3af" />
+    </TouchableOpacity>
 
-        <Text style={styles.navTitle}>Platinum Engine</Text>
-        <View style={styles.emptySpace} />
-      </View>
+    <View style={{ marginLeft: 12 }}>
+      <Text style={styles.navTitle}>Platinum Engine</Text>
+      {/* <Text style={styles.navSubtitle}>Premium Automated Asset</Text> */}
+    </View>
+  </View>
+</View>
 
       <ScrollView style={styles.container}>
         <View style={styles.section}>
@@ -209,6 +236,19 @@ export default function PlatinumEngineScreen() {
 
         <View style={{ height: 50 }} />
       </ScrollView>
+      <BaseAlert
+  visible={errorAlert}
+  title="Error"
+  message="Failed to load platinum data"
+  type="error"
+  confirmText="Retry"
+  onConfirm={() => {
+    setErrorAlert(false);
+    loadEngine();
+  }}
+  onCancel={() => setErrorAlert(false)}
+/>
+
     </SafeAreaView>
   );
 }
@@ -219,7 +259,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.BG, // Fix: Use common BG color here
   },
   navBar: {
-    marginTop: 36,
+    marginTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -227,6 +267,19 @@ const styles = StyleSheet.create({
     height: 56,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255,255,255,0.05)',
+  },
+  loaderContainer: {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#062530",
+},
+navSubtitle: {
+    color: "#00D2FF", // Platinum Accent Color
+    fontSize: 10,
+    fontWeight: "800",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
   backButton: {
     width: 40,
@@ -250,6 +303,15 @@ const styles = StyleSheet.create({
     height: 20,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backBtn: {
+    padding: 10,
+    backgroundColor: "#104e64",
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.05)",
   },
   arrowTop: {
     width: 10,

@@ -1,237 +1,5 @@
 
 
-// import React, { useEffect, useState } from "react";
-// import {
-//   ScrollView,
-//   StyleSheet,
-//   View,
-//   SafeAreaView,
-//   StatusBar,
-//   TouchableOpacity,
-//   Text,
-// } from "react-native";
-
-// import { Bucket } from "./types";
-// import { COLORS } from "./constants";
-// import { useRouter } from "expo-router";
-
-// import SilverHeader from "./components/SilverHeader";
-// import SilverTabs from "./components/SilverTabs";
-// import BuyFlow from "./components/BuyFlow";
-// import RunningEngine from "./components/RunningEngine";
-
-// import { getProfileApi } from "@/services/profile";
-// import { getPortfolioApi } from "@/services/portfolio";
-// import { getMySilverSipApi } from "@/services/silver";
-// import { getLivePriceApi } from "@/services/liveprice";
-// export default function SilverEngineScreen() {
-//   const router = useRouter();
-
-//   const [engine, setEngine] = useState<any>(null);
-//   const [loading, setLoading] = useState(true);
-//   const [activeBucket, setActiveBucket] = useState<Bucket>("instant");
-
-//   useEffect(() => {
-//     loadEngine();
-//   }, []);
-
-//   /* =====================================================
-//         🔥 LOAD ENGINE (PLATINUM STYLE)
-//   ===================================================== */
-  
-//   const loadEngine = async () => {
-//     try {
-//       setLoading(true);
-
-//       /* ========= WALLET ========= */
-//       const profileRes = await getProfileApi();
-//       const walletBalance = Number(
-//         profileRes?.data?.wallet?.total_money_balance || 0
-//       );
-
-//       /* ========= PORTFOLIO ========= */
-//       const portfolioRes = await getPortfolioApi();
-//       console.log("SILVER PORTFOLIO 👉", portfolioRes);
-
-//       const silverGrams = Number(portfolioRes?.silver?.grams || 0);
-//       const silverValue = Number(portfolioRes?.silver?.current_value || 0);
-// /* ========= LIVE PRICE ========= */
-// const liveRes = await getLivePriceApi();
-// console.log("LIVE PRICE 👉", liveRes);
-
-// let pricePerGram = 0;
-
-// // 🔥 silver live buy price
-// if (liveRes?.data?.SILVER?.["999"]?.buy) {
-//   pricePerGram = Number(liveRes.data.SILVER["999"].buy);
-// }
-
-// // fallback agar API fail ho
-// if (!pricePerGram && silverGrams > 0) {
-//   pricePerGram = silverValue / silverGrams;
-// }
-
-// console.log("SILVER PRICE PER GRAM 👉", pricePerGram);
-
-    
-
-        
-
-//       /* ========= SIP ========= */
-//       const sipRes = await getMySilverSipApi();
-//       console.log("SILVER SIP 👉", sipRes);
-
-//       // const sipData = sipRes?.data || [];
-
-//       // // 🔥 stopped sip ignore (PLATINUM STYLE)
-//       // const activeSip = sipData?.find(
-//       //   (s: any) => s.status !== "stopped"
-//       // );
-
-
-//       const sipObj = sipRes?.data || {};
-
-// // 🔥 daily sip array
-// const dailySips = sipObj?.daily || [];
-
-// // 🔥 stopped ignore
-// const activeSip = dailySips.find(
-//   (s:any) => s.status !== "stopped"
-// );
-
-//       /* ========= FINAL ENGINE ========= */
-//       const formatted = {
-//         pricePerGram,
-//         walletBalance,
-
-//         engines: {
-//           instant: {
-//             savedGrams: silverGrams,
-//           },
-
-//        daily: {
-//   isActive: !!activeSip,
-//   isPaused: activeSip?.status === "paused",
-
-//   sip_id: activeSip?.sip_id,              // 🔥 correct key
-//   amount: activeSip?.amount_per_cycle || 0, // 🔥 correct key
-//   savedGrams: activeSip?.silver_grams || 0,
-//   streak: activeSip?.streak || 0,
-// },
-
-
-//           weekly: { savedGrams: 0 },
-//           monthly: { savedGrams: 0 },
-//         },
-//       };
-
-//       console.log("FINAL SILVER ENGINE 🚀", formatted);
-
-//       setEngine(formatted);
-//     } catch (e) {
-//       console.log("SILVER ENGINE ERROR ❌", e);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-  
-//   /* =====================================================
-//         🔥 LOADER
-//   ===================================================== */
-//   if (loading || !engine) {
-//     return (
-//       <SafeAreaView
-//         style={{
-//           flex: 1,
-//           justifyContent: "center",
-//           alignItems: "center",
-//           backgroundColor: "#000",
-//         }}
-//       >
-//         <Text style={{ color: "#fff", fontSize: 16 }}>Loading...</Text>
-//       </SafeAreaView>
-//     );
-//   }
-
-//   const currentEngine = engine.engines[activeBucket];
-
-//   return (
-//     <SafeAreaView style={styles.safeArea}>
-//       <StatusBar barStyle="light-content" />
-
-//       {/* NAV */}
-//       <View style={styles.navBar}>
-//         <TouchableOpacity
-//           onPress={() => router.back()}
-//           style={styles.backButton}
-//           activeOpacity={0.7}
-//         >
-//           <View style={styles.arrowIcon}>
-//             <View style={styles.arrowTop} />
-//             <View style={styles.arrowBottom} />
-//           </View>
-//         </TouchableOpacity>
-
-//         <Text style={styles.navTitle}>Silver Engine</Text>
-//         <View style={styles.emptySpace} />
-//       </View>
-
-//       <ScrollView
-//         style={styles.container}
-//         contentContainerStyle={styles.scrollContent}
-//         showsVerticalScrollIndicator={false}
-//       >
-//         {/* HEADER */}
-//         <View style={styles.section}>
-//           <SilverHeader engine={engine} />
-//         </View>
-
-//         {/* TABS */}
-//         <View style={styles.tabSection}>
-//           <SilverTabs
-//             active={activeBucket}
-//             onChange={(bucket) => setActiveBucket(bucket)}
-//           />
-//         </View>
-
-//         {/* CONTENT */}
-//         <View style={styles.mainContent}>
-//           {activeBucket === "instant" ? (
-//             <BuyFlow
-//               bucket="instant"
-//               engine={engine}
-//               setEngine={setEngine}
-//               reloadEngine={loadEngine}   // 🔥 IMPORTANT
-//             />
-//           ) : (
-//             <>
-//               {currentEngine.isActive ? (
-//                 <RunningEngine
-//                   bucket={activeBucket}
-//                   engine={engine}
-//                   setEngine={setEngine}
-//                   reloadEngine={loadEngine} // 🔥 IMPORTANT
-//                 />
-//               ) : (
-//                 <BuyFlow
-//                   bucket={activeBucket}
-//                   engine={engine}
-//                   setEngine={setEngine}
-//                   reloadEngine={loadEngine} // 🔥 IMPORTANT
-//                 />
-//               )}
-//             </>
-//           )}
-//         </View>
-
-//         <View style={{ height: 40 }} />
-//       </ScrollView>
-//     </SafeAreaView>
-//   );
-// }
-
-
 
 import React, { useEffect, useState } from "react";
 import {
@@ -243,15 +11,17 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-
+ import { ArrowLeft } from "lucide-react-native";
 import { Bucket } from "./types";
 import { COLORS } from "./constants";
 import { useRouter } from "expo-router";
+import { ActivityIndicator } from "react-native";
 
 import SilverHeader from "./components/SilverHeader";
 import SilverTabs from "./components/SilverTabs";
 import BuyFlow from "./components/BuyFlow";
 import RunningEngine from "./components/RunningEngine";
+ import LottieView from "lottie-react-native";
 
 import { getProfileApi } from "@/services/profile";
 import { getPortfolioApi } from "@/services/portfolio";
@@ -369,29 +139,35 @@ const activeMonthly = monthlySips
 
           daily: {
             isActive: !!activeDaily,
-            isPaused: activeDaily?.status === "paused",
+            isPaused: activeDaily?.status?.toUpperCase() === "PAUSED",
+
             sip_id: activeDaily?.sip_id,
             amount: activeDaily?.amount_per_cycle || 0,
             savedGrams: activeDaily?.silver_grams || 0,
-            streak: activeDaily?.streak || 0,
+       streak: Number(activeDaily?.current_streak || 0),
+
           },
 
           weekly: {
             isActive: !!activeWeekly,
-            isPaused: activeWeekly?.status === "paused",
+        isPaused: activeWeekly?.status?.toUpperCase() === "PAUSED",
+
             sip_id: activeWeekly?.sip_id,
             amount: activeWeekly?.amount_per_cycle || 0,
             savedGrams: activeWeekly?.silver_grams || 0,
-            streak: activeWeekly?.streak || 0,
+        streak: Number(activeWeekly?.current_streak || 0),
+
           },
 
           monthly: {
             isActive: !!activeMonthly,
-            isPaused: activeMonthly?.status === "paused",
+            isPaused: activeMonthly?.status?.toUpperCase() === "PAUSED",
+
             sip_id: activeMonthly?.sip_id,
             amount: activeMonthly?.amount_per_cycle || 0,
             savedGrams: activeMonthly?.silver_grams || 0,
-            streak: activeMonthly?.streak || 0,
+            streak: Number(activeMonthly?.current_streak || 0),
+
           },
         },
       };
@@ -406,20 +182,27 @@ const activeMonthly = monthlySips
   };
 
   /* ================= LOADER ================= */
-  if (loading || !engine) {
-    return (
-      <SafeAreaView
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#000",
-        }}
-      >
-        <Text style={{ color: "#fff", fontSize: 16 }}>Loading...</Text>
-      </SafeAreaView>
-    );
-  }
+if (loading || !engine) {
+  return (
+ <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#062530",
+      }}
+    >
+      <LottieView
+        source={require("../../assets/gold.json")}
+        autoPlay
+        loop
+        style={{ width: 180, height: 180 }}
+      />
+    </View>
+  );
+}
+
+
 
   const currentEngine = engine.engines[activeBucket];
 
@@ -427,23 +210,25 @@ const activeMonthly = monthlySips
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" />
 
+    
       {/* NAV */}
-      <View style={styles.navBar}>
-        <TouchableOpacity
-          onPress={() => router.back()}
-          style={styles.backButton}
-          activeOpacity={0.7}
-        >
-          <View style={styles.arrowIcon}>
-            <View style={styles.arrowTop} />
-            <View style={styles.arrowBottom} />
-          </View>
-        </TouchableOpacity>
+{/* NAV */}
+<View style={styles.navBar}>
+  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <TouchableOpacity
+      onPress={() => router.back()}
+      style={styles.backBtn}
+      activeOpacity={0.7}
+    >
+      <ArrowLeft size={20} color="#9ca3af" />
+    </TouchableOpacity>
 
-        <Text style={styles.navTitle}>Silver Engine</Text>
-        <View style={styles.emptySpace} />
-      </View>
-
+    <View style={{ marginLeft: 12 }}>
+      <Text style={styles.navTitle}>Silver Engine</Text>
+      <Text style={styles.navSubtitle}>Automated Investing</Text>
+    </View>
+  </View>
+</View>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.scrollContent}
@@ -517,17 +302,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#062530",
   },
-  navBar: {
-    marginTop:36,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    height: 56,
-    //  paddingTop:0,
-    // Subtle separator line
+  loaderContainer: {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#062530",
+},
+
+ navBar: {
+    marginTop: 30, // Safe Area padding ke liye
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 18,
+    paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.05)',
+    borderBottomColor: "rgba(16,78,100,0.6)",
   },
   backButton: {
     width: 40,
@@ -552,6 +341,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  
   arrowTop: {
     width: 10,
     height: 2,
@@ -561,6 +351,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 6,
     left: 4,
+  },
+  backBtn: {
+    padding: 10,
+    backgroundColor: "#104e64",
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
   },
   arrowBottom: {
     width: 10,
@@ -585,7 +382,15 @@ const styles = StyleSheet.create({
   tabSection: {
     marginBottom: 20,
   },
+  navSubtitle: {
+    color: "#facc15",
+    fontSize: 10,
+    fontWeight: "800",
+    textTransform: "uppercase",
+  },
   mainContent: {
     flex: 1,
   },
 });
+
+

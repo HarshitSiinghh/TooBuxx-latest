@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { GoldTab } from "../types";
 import { COLORS } from "../data/constants";
 
-// Agar GOLD_TABS constants file mein nahi hai, toh yahan define kar sakte hain
 const GOLD_TABS: { key: GoldTab; label: string }[] = [
   { key: "instant", label: "Instant" },
   { key: "daily", label: "Daily" },

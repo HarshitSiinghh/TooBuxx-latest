@@ -82,20 +82,6 @@ export function CarouselPrevious({ onPress, children }: ControlProps) {
 
 /* ================= STYLES ================= */
 
-// const styles = StyleSheet.create({
-//   root: {
-//     position: "relative",
-//   },
-//   btn: {
-//     marginTop: 14,
-//     alignSelf: "center",
-//     backgroundColor: "#4F46E5",
-//     paddingHorizontal: 18,
-//     paddingVertical: 10,
-//     borderRadius: 999,
-//   },
-// });
-
 
 
 const styles = StyleSheet.create({

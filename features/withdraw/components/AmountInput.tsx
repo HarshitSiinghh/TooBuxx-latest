@@ -13,15 +13,34 @@ type Props = {
 };
 
 export default function AmountInput({ amount, onChange }: Props) {
+
+
+  // const handleChange = (value: string) => {
+  //   // Sirf numbers allow
+  //   const numericValue = value.replace(/[^0-9]/g, "");
+  //   const num = Number(numericValue);
+
+  //   if (num > WITHDRAW_RULES.MAX_AMOUNT) return;
+
+  //   onChange(num);
+  // };
+
+
   const handleChange = (value: string) => {
-    // Sirf numbers allow
-    const numericValue = value.replace(/[^0-9]/g, "");
-    const num = Number(numericValue);
+  const numericValue = value.replace(/[^0-9]/g, "");
 
-    if (num > WITHDRAW_RULES.MAX_AMOUNT) return;
+  if (!numericValue) {
+    onChange(0);
+    return;
+  }
 
-    onChange(num);
-  };
+  const num = Number(numericValue);
+
+  if (num > WITHDRAW_RULES.MAX_AMOUNT) return;
+
+  onChange(num);
+};
+
 
   return (
     <View style={styles.container}>
@@ -41,16 +60,7 @@ export default function AmountInput({ amount, onChange }: Props) {
         />
       </View>
 
-      {/* Hint text styled with the muted blue color from reference */}
-      {/* <View style={styles.hintContainer}>
-        <Text style={styles.hint}>
-          Min <Text style={styles.hintValue}>₹{WITHDRAW_RULES.MIN_AMOUNT}</Text>
-        </Text>
-        <Text style={styles.hintSeparator}> • </Text>
-        <Text style={styles.hint}>
-          Max <Text style={styles.hintValue}>₹{WITHDRAW_RULES.MAX_AMOUNT.toLocaleString()}</Text>
-        </Text>
-      </View> */}
+   
     </View>
   );
 }

@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -120,7 +118,7 @@ export default function PaymentDetailsPage() {
           animate={{ rotate: "360deg" }}
           transition={{ loop: true, duration: 1000, type: "timing" }}
         >
-          <Loader2 color="#a855f7" size={48} opacity={0.5} />
+          <Loader2 color="#facc15" size={48} opacity={0.5} />
         </MotiView>
       </View>
     );
@@ -176,7 +174,7 @@ export default function PaymentDetailsPage() {
           >
             <View style={styles.cardHeader}>
               <View style={styles.iconBox}>
-                <Sparkles color="#c084fc" size={20} />
+                <Sparkles color="#facc15" size={20} />
               </View>
               <View>
                 <Text style={styles.cardTitle}>Settlement Destination</Text>
@@ -266,44 +264,6 @@ export default function PaymentDetailsPage() {
   );
 }
 
-/* 🔽 STYLES (UNCHANGED) */
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: "#1a003d" },
-//   loadingContainer: { flex: 1, backgroundColor: "#1a003d", justifyContent: "center", alignItems: "center" },
-//   glowTop: { position: "absolute", top: -height * 0.1, right: -width * 0.1, width: width * 0.8, height: width * 0.8, backgroundColor: "rgba(147, 51, 234, 0.1)", borderRadius: 1000 },
-//   glowBottom: { position: "absolute", bottom: height * 0.1, left: -width * 0.1, width: width * 0.7, height: width * 0.7, backgroundColor: "rgba(79, 70, 229, 0.1)", borderRadius: 1000 },
-//   header: { flexDirection: "row", alignItems: "center", padding: 20,  borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.05)" },
-//   backButton: { padding: 10, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 12, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
-//   headerTextContainer: { marginLeft: 16 },
-//   headerTitle: { color: "white", fontSize: 20, fontWeight: "900", fontStyle: "italic" },
-//   headerSubtitle: { color: "#a855f7", fontSize: 10, fontWeight: "bold", letterSpacing: 1 },
-//   scrollContent: { padding: 20 },
-//   tabContainer: { flexDirection: "row", backgroundColor: "rgba(255,255,255,0.05)", padding: 6, borderRadius: 20, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)", marginBottom: 24 },
-//   tabButton: { flex: 1, height: 45, justifyContent: "center", alignItems: "center" },
-//   activeTabBackground: { ...StyleSheet.absoluteFillObject, backgroundColor: "#9333ea", borderRadius: 15 },
-//   tabText: { color: "#6b7280", fontSize: 12, fontWeight: "900", letterSpacing: 1 },
-//   activeTabText: { color: "white" },
-//   formCard: { backgroundColor: "rgba(255,255,255,0.03)", borderRadius: 40, padding: 32, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
-//   cardHeader: { flexDirection: "row", alignItems: "center", marginBottom: 32 },
-//   iconBox: { padding: 12, backgroundColor: "rgba(147, 51, 234, 0.2)", borderRadius: 12, marginRight: 16 },
-//   cardTitle: { color: "white", fontWeight: "bold", fontSize: 14 },
-//   cardSubtitle: { color: "#6b7280", fontSize: 10, fontWeight: "bold", letterSpacing: 1 },
-//   updateButton: { backgroundColor: "#9333ea", padding: 20, borderRadius: 16, alignItems: "center", marginTop: 20 },
-//   updateButtonText: { color: "white", fontWeight: "900", fontStyle: "italic", letterSpacing: 2 },
-//   disabledButton: { opacity: 0.3 },
-//   modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.6)", justifyContent: "center", alignItems: "center", padding: 24 },
-//   modalContent: { backgroundColor: "#1a003d", width: "100%", borderRadius: 48, padding: 40, alignItems: "center", borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
-//   modalIconBox: { width: 80, height: 80, borderRadius: 24, justifyContent: "center", alignItems: "center", marginBottom: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)" },
-//   modalTitle: { color: "white", fontSize: 24, fontWeight: "900", fontStyle: "italic", marginBottom: 8 },
-//   modalMessage: { color: "#9ca3af", textAlign: "center", fontSize: 14, lineHeight: 20, marginBottom: 32 },
-//   modalButton: { width: "100%", padding: 16, borderRadius: 16, alignItems: "center" },
-//   modalButtonSuccess: { backgroundColor: "white" },
-//   modalButtonError: { backgroundColor: "#ef4444" },
-//   modalButtonText: { fontWeight: "900", fontSize: 12, letterSpacing: 2 },
-// });
-
-
 
 
 
@@ -346,7 +306,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal:18,
+  paddingBottom:10,
     borderBottomWidth: 1,
     borderBottomColor: "#104e64",
   },

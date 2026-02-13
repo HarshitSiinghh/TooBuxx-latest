@@ -48,13 +48,6 @@ export default function History() {
 
   const [typeFilter, setTypeFilter] = useState("ALL");
   const [typeOpen, setTypeOpen] = useState(false);
-
-  /* ================= LOAD TRANSACTIONS ================= */
-
-  // useEffect(() => {
-  //   loadTransactions();
-  // }, []);
-
   const loadTransactions = async () => {
     try {
       const res = await getMoneyTransactionsApi();
@@ -97,7 +90,7 @@ useFocusEffect(
   /* ================= UI ================= */
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={styles.container} edges={["left","right", ]} >
       <StatusBar barStyle="light-content" />
 
       {/* HEADER */}
@@ -111,7 +104,7 @@ useFocusEffect(
 
         <View style={styles.headerTextContainer}>
           <Text style={styles.headerTitle}>Transaction History</Text>
-          <Text style={styles.headerSub}>MONITOR YOUR GOLD GROWTH</Text>
+          <Text style={styles.headerSub}>MONITOR YOUR METALS GROWTH</Text>
         </View>
       </View>
 
@@ -121,7 +114,7 @@ useFocusEffect(
           <View style={styles.promoContent}>
             <View style={styles.imageContainer}>
               <Image
-                source={require("../../images/box.webp")}
+                source={require("../../images/latest-images/New folder (2)/box.png")}
                 style={styles.promoImage}
               />
             </View>
@@ -257,201 +250,20 @@ useFocusEffect(
   );
 }
 
-/* ================= STYLES ================= */
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: "#1a003d" },
-//   // scrollContent: { padding: 20, paddingBottom: 0},
-// scrollContent: {
-//   padding: 20,
-//   paddingBottom: 0,
-//   flexGrow: 1,   // 🔥 MOST IMPORTANT
-// },
-//   header: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     padding: 20,
-//     marginTop:-34,
-//     borderBottomWidth: 1,
-//     borderBottomColor: "rgba(255,255,255,0.05)",
-//   },
-
-//   backButton: {
-//     padding: 10,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 12,
-//   },
-
-//   headerTextContainer: { marginLeft: 15 },
-//   headerTitle: { color: "#fff", fontSize: 20, fontWeight: "900" },
-//   headerSub: {
-//     color: "#a855f7",
-//     fontSize: 10,
-//     fontWeight: "bold",
-//     letterSpacing: 1,
-//     marginTop: 2,
-//   },
-
-//   promoCard: {
-//     backgroundColor: "rgba(255,255,255,0.03)",
-//     borderRadius: 32,
-//     padding: 24,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.1)",
-//     marginBottom: 24,
-//   },
-
-//   promoContent: { flexDirection: "row", alignItems: "center" },
-//   imageContainer: {
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 16,
-//     padding: 4,
-//   },
-//   promoImage: { width: 70, height: 70, borderRadius: 12 },
-//   promoTextContainer: { marginLeft: 16, flex: 1 },
-
-//   promoLabel: {
-//     color: "#a855f7",
-//     fontSize: 10,
-//     fontWeight: "900",
-//     letterSpacing: 2,
-//   },
-//   promoTitle: { color: "#fff", fontSize: 18, fontWeight: "bold" },
-//   promoDesc: { color: "#9ca3af", fontSize: 12 },
-
-//   saveButton: {
-//     marginTop: 16,
-//     backgroundColor: "#7c3aed",
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     paddingVertical: 14,
-//     borderRadius: 16,
-//     gap: 8,
-//   },
-//   saveButtonText: { color: "#fff", fontWeight: "900", fontSize: 14 },
-
-//   filterRow: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     marginBottom: 12,
-//   },
-
-//   filterBtn: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     gap: 6,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     paddingHorizontal: 14,
-//     paddingVertical: 10,
-//     borderRadius: 14,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.1)",
-//   },
-
-//   filterText: { color: "white", fontWeight: "800", fontSize: 11 },
-
-//   transactionList: {
-//     backgroundColor: "rgba(255,255,255,0.02)",
-//     borderRadius: 32,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.05)",
-//     overflow: "hidden",
-//   },
-
-//   transactionItem: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     padding: 20,
-//     borderBottomWidth: 1,
-//     borderBottomColor: "rgba(255,255,255,0.05)",
-//   },
-
-//   txLeft: { flexDirection: "row", alignItems: "center", gap: 15 },
-
-//   txIconBox: {
-//     padding: 10,
-//     borderRadius: 16,
-//     borderWidth: 1,
-//   },
-
-//   txCreditIcon: {
-//     backgroundColor: "rgba(74,222,128,0.1)",
-//     borderColor: "rgba(74,222,128,0.2)",
-//   },
-
-//   txDebitIcon: {
-//     backgroundColor: "rgba(248,113,113,0.1)",
-//     borderColor: "rgba(248,113,113,0.2)",
-//   },
-
-//   txName: { color: "#fff", fontWeight: "900", fontSize: 15 },
-
-//   txDateContainer: { flexDirection: "row", alignItems: "center", gap: 5 },
-//   txDate: { color: "#6b7280", fontSize: 10, fontWeight: "bold" },
-
-//   txRight: { alignItems: "flex-end" },
-//   txAmount: { fontSize: 16, fontWeight: "900" },
-//   txStatus: {
-//     color: "#9ca3af",
-//     fontSize: 9,
-//     fontWeight: "900",
-//     marginTop: 4,
-//   },
-
-//   footerText: {
-//     textAlign: "center",
-//     color: "#374151",
-//     fontSize: 10,
-//     fontWeight: "900",
-//     letterSpacing: 3,
-//     marginTop: 40,
-//   },
-
-//   modalOverlay: {
-//     flex: 1,
-//     backgroundColor: "rgba(0,0,0,0.6)",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-
-//   modalBox: {
-//     width: "75%",
-//     backgroundColor: "#14002f",
-//     borderRadius: 20,
-//     padding: 16,
-//     gap: 10,
-//   },
-
-//   modalItem: {
-//     paddingVertical: 12,
-//     alignItems: "center",
-//     borderRadius: 12,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//   },
-
-//   modalText: { color: "white", fontWeight: "800" },
-// });
-
-
-
-
-
-
-
-
-
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#062530",
-  },
+    //  paddingTop: 0  
+    },
 
   scrollContent: {
     padding: 20,
+     paddingHorizontal:18,
+    // marginTop: -50,
+    //  paddingBottom:10,
     paddingBottom: 0,
     flexGrow: 1,
   },
@@ -460,8 +272,10 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 20,
-    marginTop: -34,
+    // padding: 20,
+     paddingHorizontal:18,
+    // marginTop: -50,
+     paddingBottom:10,
     borderBottomWidth: 1,
     borderBottomColor: "#104e64",
     backgroundColor: "#062530",

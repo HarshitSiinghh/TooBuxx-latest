@@ -125,7 +125,7 @@ export default function ReferralPage() {
                       Alert.alert("Copied", "Referral code copied");
                     }}
                   >
-                    <Copy color="#a855f7" size={20} />
+                    <Copy color="#facc15" size={20} />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -135,15 +135,6 @@ export default function ReferralPage() {
                 <Text numberOfLines={1} style={styles.linkText}>
                   {referralLink || "Loading..."}
                 </Text>
-
-                {/* <TouchableOpacity
-                  onPress={() => setShowModal(true)}
-                  // onPress={copyAndShareLink}}
-                  style={styles.copyLinkButton}
-                >
-                  <LinkIcon color="#fff" size={16} />
-                  <Text style={styles.copyLinkButtonText}>Copy Link</Text>
-                </TouchableOpacity> */}
 
 
                 <TouchableOpacity
@@ -207,7 +198,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 16,
+    // paddingVertical: 16,
+    paddingBottom: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#104e64",
   },

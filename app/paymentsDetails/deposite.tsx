@@ -134,7 +134,7 @@ console.log("✅ DEPOSIT RESPONSE 👉", res);
             </View>
             <TouchableOpacity   onPress={handleCopyUpi}>
             <View style={styles.copyButton}>
-              <Copy size={20} color="#a855f7" />
+              <Copy size={20} color="#facc15" />
             </View>
             </TouchableOpacity>
           </View>
@@ -155,7 +155,7 @@ console.log("✅ DEPOSIT RESPONSE 👉", res);
         {/* FORM */}
         <View style={[styles.glassCard, { marginTop: 24, borderRadius: 40 }]}>
           <View style={styles.formHeader}>
-            <Wallet2 size={24} color="#a855f7" />
+            <Wallet2 size={24} color="#facc15" />
             <Text style={styles.formTitle}>DEPOSIT FORM</Text>
           </View>
 
@@ -190,7 +190,7 @@ console.log("✅ DEPOSIT RESPONSE 👉", res);
               ) : (
                 <>
                   <View style={styles.uploadIconCircle}>
-                    <UploadCloud size={24} color="#a855f7" />
+                    <UploadCloud size={24} color="#facc15" />
                   </View>
                   <Text style={styles.uploadText}>UPLOAD SCREENSHOT</Text>
                 </>
@@ -302,138 +302,6 @@ console.log("✅ DEPOSIT RESPONSE 👉", res);
   );
 }
 
-
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: "#1a003d" },
-//   header: {
-//     //  paddingVertical:70,
-//     flexDirection: "row",
-//     alignItems: "center",
-//     padding: 24,
-//     paddingTop:70,
-//     borderBottomWidth: 1,
-//     borderBottomColor: "rgba(255,255,255,0.1)",
-//   },
-//   backButton: {
-//     padding: 10,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 12,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.1)",
-//   },
-//   headerTitle: { fontSize: 20, fontWeight: "900", color: "#fff", fontStyle: "italic" },
-//   headerSubtitle: { fontSize: 10, color: "#a855f7", fontWeight: "bold", letterSpacing: 1 },
-//   scrollContent: { padding: 20,  },
-//   glassCard: {
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 48,
-//     padding: 32,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.1)",
-//     alignItems: "center",
-//   },
-//   stepLabel: { fontSize: 10, fontWeight: "900", color: "#a855f7", letterSpacing: 3, marginBottom: 24 },
-//   qrContainer: { backgroundColor: "#fff", padding: 16, borderRadius: 32, marginBottom: 32 },
-//   qrImage: { width: 180, height: 180 },
-//   upiRow: {
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     padding: 16,
-//     borderRadius: 16,
-//     width: "100%",
-//   },
-//   upiText: { color: "#fff", fontWeight: "900", fontSize: 14 },
-//   copyButton: { padding: 8, backgroundColor: "rgba(168,85,247,0.2)", borderRadius: 12 },
-//   infoBox: {
-//     flexDirection: "row",
-//     backgroundColor: "rgba(79,70,229,0.1)",
-//     padding: 16,
-//     borderRadius: 24,
-//     marginTop: 20,
-//     alignItems: "center",
-//   },
-//   infoIconContainer: { padding: 10, backgroundColor: "rgba(129,140,248,0.2)", borderRadius: 12, marginRight: 12 },
-//   infoText: { color: "rgba(199,210,254,0.7)", fontSize: 12, flex: 1, lineHeight: 18 },
-//   formHeader: { flexDirection: "row", alignItems: "center", alignSelf: "flex-start", marginBottom: 32 },
-//   formTitle: { color: "#fff", fontSize: 22, fontWeight: "900", marginLeft: 12, fontStyle: "italic" },
-//   inputGroup: { width: "100%", marginBottom: 32 },
-//   inputLabelSmall: { fontSize: 10, fontWeight: "900", color: "#6b7280", letterSpacing: 2, marginBottom: 8 },
-//   amountInputRow: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     borderBottomWidth: 4,
-//     borderBottomColor: "rgba(255,255,255,0.1)",
-//     paddingBottom: 8,
-//   },
-//   currencySymbol: { fontSize: 32, fontWeight: "900", color: "#4b5563", marginRight: 16, fontStyle: "italic" },
-//   textInput: { flex: 1, fontSize: 36, fontWeight: "900", color: "#fff", fontStyle: "italic" },
-//   uploadBox: {
-//     borderWidth: 2,
-//     borderStyle: "dashed",
-//     borderColor: "rgba(255,255,255,0.1)",
-//     backgroundColor: "rgba(255,255,255,0.02)",
-//     borderRadius: 32,
-//     padding: 40,
-//     alignItems: "center",
-//   },
-//   uploadBoxSuccess: { borderColor: "rgba(34,197,94,0.5)", backgroundColor: "rgba(34,197,94,0.05)" },
-//   uploadIconCircle: { padding: 16, backgroundColor: "rgba(168,85,247,0.1)", borderRadius: 16, marginBottom: 12 },
-//   uploadText: { color: "#9ca3af", fontWeight: "900", fontStyle: "italic", fontSize: 14 },
-//   fileName: { color: "#4ade80", fontWeight: "900", fontSize: 12, marginTop: 8 },
-//   submitButton: {
-//     width: "100%",
-//     padding: 20,
-//     borderRadius: 32,
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     shadowColor: "#9333ea",
-//     shadowOffset: { width: 0, height: 10 },
-//     shadowOpacity: 0.4,
-//     shadowRadius: 20,
-//   },
-//   submitButtonText: { color: "#fff", fontWeight: "900", fontSize: 18, fontStyle: "italic", marginRight: 12 },
-//   modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 },
-//   modalContent: {
-//     backgroundColor: "rgba(30,30,30,0.95)",
-//     borderRadius: 40,
-//     padding: 32,
-//     width: "100%",
-//     alignItems: "center",
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.1)",
-//     overflow: "hidden"
-//   },
-//   modalGlow: { position: "absolute", top: -50, width: 200, height: 200, borderRadius: 100, opacity: 0.5 },
-//   modalIconCircle: { padding: 16, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: 20, marginBottom: 24, borderWidth: 1 },
-//   modalTitle: { fontSize: 28, fontWeight: "900", color: "#fff", fontStyle: "italic", marginBottom: 12 },
-//   modalMessage: { color: "#d1d5db", textAlign: "center", marginBottom: 24, lineHeight: 22, fontWeight: "500" },
-//   modalWindowBox: { backgroundColor: "rgba(255,255,255,0.05)", padding: 16, borderRadius: 16, width: "100%", marginBottom: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" },
-//   windowLabel: { color: "#9ca3af", fontSize: 10, fontWeight: "900", textAlign: "center", letterSpacing: 2 },
-//   windowTime: { color: "#fff", fontSize: 14, fontStyle: "italic", textAlign: "center", marginTop: 4, fontWeight: "700" },
-//   modalButton: { width: "100%", padding: 18, borderRadius: 20, alignItems: "center" },
-//   modalButtonText: { fontWeight: "900", fontStyle: "italic", letterSpacing: 2 },
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -445,7 +313,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 24,
-    paddingTop: 70,
+    paddingTop: 40,
     borderBottomWidth: 1,
     borderBottomColor: "#104e64",
     backgroundColor: "#062530",

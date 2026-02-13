@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -34,7 +30,7 @@ import {
 
 // import { useNotificationStore } from "@/store/notificationStore";
 
-
+ import LottieView from "lottie-react-native";
 
  import { useNotificationStore } from "@/store/notificationstore";
 type Tab = "INBOX" | "TRANSACTION";
@@ -74,7 +70,7 @@ export default function NotificationsPage() {
       }
 
       setNotifications(data || []);
-      loadCounts(); // 🔥 header refresh
+      loadCounts(); 
     } catch (e) {
       console.log("❌ NOTIFICATION API ERROR:", e);
       setError(true);
@@ -93,7 +89,7 @@ export default function NotificationsPage() {
   if (!canRender) return null;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}  edges={["left","right","bottom"]}>
       <StatusBar barStyle="light-content" />
 
       {/* HEADER */}
@@ -137,10 +133,25 @@ export default function NotificationsPage() {
       {/* CONTENT */}
       <ScrollView contentContainerStyle={styles.body}>
         {loading && (
-          <View style={styles.center}>
-            <ActivityIndicator size="large" color="#a855f7" />
-            <Text style={styles.infoText}>Loading notifications...</Text>
-          </View>
+       
+          <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        marginTop:200,
+        alignItems: "center",
+        backgroundColor: "#062530",
+      }}
+    >
+      <LottieView
+        source={require("../../../assets/gold.json")}
+        autoPlay
+        loop
+        style={{ width: 180, height: 180 }}
+      />
+    </View>
+
+
         )}
 
         {error && (
@@ -172,13 +183,10 @@ export default function NotificationsPage() {
   );
 }
 
-/* components + styles same as tumhara original code */
 
 
 
 
-
-/* ================= COMPONENTS ================= */
 
 function TabButton({ label, active, badge, onPress }: any) {
   return (
@@ -208,7 +216,7 @@ function NotificationItem({ title, message, time, type }: any) {
     <View style={styles.item}>
       <View style={styles.iconBox}>
         {isInbox ? (
-          <BellRing size={18} color="#c084fc" />
+          <BellRing size={18} color="#facc15" />
         ) : (
           <RotateCcw size={18} color="#60a5fa" />
         )}
@@ -240,143 +248,6 @@ const formatDate = (dateString: string) => {
   }
 };
 
-/* ================= STYLES ================= */
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: "#1a003d" },
-
-//   header: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     padding: 18,
-//     marginTop:-30,
-//     borderBottomWidth: 1,
-//     borderBottomColor: "rgba(255,255,255,0.05)",
-//   },
-
-//   backBtn: {
-//     padding: 10,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 12,
-//   },
-
-//   settingBtn: {
-//     marginLeft: "auto",
-//     padding: 10,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 12,
-//   },
-
-//   title: { color: "white", fontSize: 20, fontWeight: "900" },
-//   subtitle: { color: "#c084fc", fontSize: 10, fontWeight: "700" },
-
-//   tabBar: {
-//     flexDirection: "row",
-//     margin: 16,
-//     backgroundColor: "rgba(255,255,255,0.05)",
-//     borderRadius: 14,
-//     padding: 4,
-//   },
-
-//   tabBtn: {
-//     flex: 1,
-//     paddingVertical: 12,
-//     alignItems: "center",
-//     borderRadius: 10,
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     gap: 6,
-//   },
-
-//   tabBtnActive: {
-//     backgroundColor: "#7c3aed",
-//   },
-
-//   tabText: {
-//     color: "#9ca3af",
-//     fontWeight: "900",
-//     fontSize: 12,
-//   },
-
-//   tabTextActive: {
-//     color: "white",
-//   },
-
-//   badge: {
-//     backgroundColor: "#dc2626",
-//     minWidth: 18,
-//     height: 18,
-//     borderRadius: 9,
-//     alignItems: "center",
-//     justifyContent: "center",
-//     paddingHorizontal: 5,
-//   },
-
-//   badgeText: {
-//     color: "white",
-//     fontSize: 10,
-//     fontWeight: "900",
-//   },
-
-//   body: { padding: 16, paddingBottom: 30 },
-
-//   center: {
-//     alignItems: "center",
-//     marginTop: 60,
-//     opacity: 0.8,
-//   },
-
-//   infoText: {
-//     color: "#9ca3af",
-//     fontSize: 12,
-//     marginTop: 10,
-//   },
-
-//   errorText: {
-//     color: "#f87171",
-//     fontSize: 12,
-//     marginTop: 10,
-//   },
-
-//   item: {
-//     flexDirection: "row",
-//     gap: 12,
-//     backgroundColor: "rgba(255,255,255,0.04)",
-//     borderRadius: 16,
-//     padding: 14,
-//     marginBottom: 10,
-//     borderWidth: 1,
-//     borderColor: "rgba(255,255,255,0.06)",
-//   },
-
-// iconBox: {
-// width: 38,
-// height: 38,
-// justifyContent: "center",
-// alignItems: "center",
-// backgroundColor: "rgba(255,255,255,0.06)",
-// borderRadius: 12,
-// },
-
-//   itemTitle: {
-//     color: "white",
-//     fontWeight: "900",
-//     fontSize: 13,
-//   },
-
-//   itemMsg: {
-//     color: "#9ca3af",
-//     fontSize: 11,
-//     marginTop: 2,
-//   },
-
-//   itemTime: {
-//     color: "#6b7280",
-//     fontSize: 9,
-//     marginTop: 4,
-//     fontWeight: "700",
-//   },
-// });
 
 
 
@@ -391,7 +262,10 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 18,
+    // padding: 18,
+     paddingBottom:10,
+     paddingHorizontal:18,
+    // marginTop:-55,
     borderBottomWidth: 1,
     borderBottomColor: "#104e64",
   },

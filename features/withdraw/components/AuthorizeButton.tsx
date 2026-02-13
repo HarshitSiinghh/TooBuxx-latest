@@ -36,11 +36,14 @@ export default function AuthorizeButton({
     try {
       setInternalLoading(true);
 
-      const success = await onPress();
+const success = await onPress();
 
 if (success) {
   setShowSuccess(true);
+} else {
+  alert("Withdrawal failed. Please try again.");
 }
+
 
 
     } catch (err) {

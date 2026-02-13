@@ -1,249 +1,178 @@
+import { useEffect, useMemo, useState } from "react";
+import { BASE_URL } from "@/constants/api";
+import {
+  getPayoutMethodApi,
+  withdrawGoldApi,
+  withdrawPlatinumApi,
+  withdrawSilverApi,
+} from "@/services/withdrawal";
 
-
-
-
-// import { useMemo, useState } from "react";
-// import { getMetalPricePerGram } from "../services/metalPrice";
-
-// export type Metal = "gold" | "silver" | "platinum";
-// export type Plan = "instant" | "daily" | "weekly" | "monthly";
-// export type Karat = 24 | 22 | 18;
-// export type PayoutMethod = "bank" | "upi";
-
-// export const useWithdraw = () => {
-
-//   // 🔥 metal initially none
-//   const [metal, setMetal] = useState<Metal | null>(null);
-
-//   const [karat, setKarat] = useState<Karat | null>(null);
-//   const [plan, setPlan] = useState<Plan>("instant");
-
-//   // 🔥 dummy wallet
-//   // const walletBalances = {
-//   //   gold: 0.45802,
-//   //   silver: 12.25,
-//   //   platinum: 0,
-//   // };
-
-
-//   // 🔥 metal + plan wise wallet (dummy API)
-// const walletBalances = {
-//   gold: {
-//     instant: 0.45,
-//     daily: 0.80,
-//     weekly: 1.2,
-//     monthly: 2.5,
-//   },
-//   silver: {
-//     instant: 10,
-//     daily: 25,
-//     weekly: 40,
-//     monthly: 60,
-//   },
-//   platinum: {
-//     instant: 0,
-//     daily: 0,
-//     weekly: 0,
-//     monthly: 0,
-//   },
-// };
-
-
-//   const [amount, setAmount] = useState<number>(0);
-//   const [payoutMethod, setPayoutMethod] =
-//     useState<PayoutMethod | null>(null);
-
-//   // -----------------------
-//   // PRICE
-//   // -----------------------
-//   const pricePerGram = useMemo(() => {
-//     if (!metal) return 0;
-//     if (metal === "gold" && !karat) return 0;
-
-//     return getMetalPricePerGram(metal, karat ?? undefined);
-//   }, [metal, karat]);
-  
-
-//   // -----------------------
-//   // BALANCE
-//   // -----------------------
-//   const availableBalance = metal
-//     ? walletBalances[metal]
-//     : 0;
-
-//   // -----------------------
-//   // GRAMS
-//   // -----------------------
-//   const grams = useMemo(() => {
-//     if (!amount || !pricePerGram) return 0;
-//     return amount / pricePerGram;
-//   }, [amount, pricePerGram]);
-
-//   // -----------------------
-//   // VALIDATION
-//   // -----------------------
-//   const canWithdraw =
-//     amount > 0 &&
-//     payoutMethod !== null &&
-//     metal !== null &&
-//     (metal !== "gold" || karat !== null);
-
-//   // -----------------------
-//   // METAL CHANGE
-//   // -----------------------
-//   const onMetalChange = (newMetal: Metal) => {
-//     setMetal(newMetal);
-//     setAmount(0);
-//     setPayoutMethod(null);
-//     setKarat(null);
-//   };
-
-//   // -----------------------
-//   // RESET FORM 🔥
-//   // -----------------------
-//   const resetWithdraw = () => {
-//     // setMetal(null);
-//     //  setMetal("gold");
-//     setKarat(null);
-//     setPlan("instant");
-//     setAmount(0);
-//     setPayoutMethod(null);
-//   };
-
-//   return {
-//     metal,
-//     karat,
-//     plan,
-//     amount,
-//     payoutMethod,
-
-//     setMetal: onMetalChange,
-//     setKarat,
-//     setPlan,
-//     setAmount,
-//     setPayoutMethod,
-
-//     availableBalance,
-//     pricePerGram,
-//     grams,
-//     canWithdraw,
-//     resetWithdraw,
-//   };
-// };
-
-
-
-import { useMemo, useState } from "react";
-import { getMetalPricePerGram } from "../services/metalPrice";
-
+// ================= TYPES =================
 export type Metal = "gold" | "silver" | "platinum";
 export type Plan = "instant" | "daily" | "weekly" | "monthly";
 export type Karat = 24 | 22 | 18;
 export type PayoutMethod = "bank" | "upi";
 
 export const useWithdraw = () => {
-
-  // -----------------------
-  // STATES
-  // -----------------------
-  // const [metal, setMetal] = useState<Metal | null>(null);
-
-const [metal, setMetal] = useState<Metal>("silver");
-
-
+  // ================= STATES =================
+  const [metal, setMetal] = useState<Metal>("silver");
   const [karat, setKarat] = useState<Karat | null>(null);
   const [plan, setPlan] = useState<Plan>("instant");
-
   const [amount, setAmount] = useState<number>(0);
-  const [payoutMethod, setPayoutMethod] =
-    useState<PayoutMethod | null>(null);
+  const [payoutMethod, setPayoutMethod] = useState<PayoutMethod | null>(null);
 
-  // -----------------------
-  // 🔥 METAL + PLAN WALLET
-  // (dummy api data)
-  // -----------------------
-  const walletBalances = {
-    gold: {
-      instant: 0.45,
-      daily: 0.80,
-      weekly: 1.2,
-      monthly: 2.5,
-    },
-    silver: {
-      instant: 10,
-      daily: 25,
-      weekly: 40,
-      monthly: 60,
-    },
-    platinum: {
-      instant: 0,
-      daily: 0,
-      weekly: 0,
-      monthly: 0,
-    },
+  const [portfolio, setPortfolio] = useState<any>(null);
+  const [payout, setPayout] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+
+  // ================= INITIAL FETCH =================
+  useEffect(() => {
+    fetchPortfolio();
+    fetchPayout();
+  }, []);
+
+  // ================= PORTFOLIO =================
+  const fetchPortfolio = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/profile/portfolio/new`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      const data = await res.json();
+      console.log("🔥 PORTFOLIO 👉", data);
+      setPortfolio(data);
+    } catch (err) {
+      console.log("PORTFOLIO ERROR", err);
+    }
   };
 
-  // -----------------------
-  // PRICE
-  // -----------------------
-  const pricePerGram = useMemo(() => {
-    if (!metal) return 0;
-    if (metal === "gold" && !karat) return 0;
+  // ================= PAYOUT =================
+  const fetchPayout = async () => {
+    try {
+      const res = await getPayoutMethodApi();
+      setPayout(res?.data);
+    } catch (err) {
+      console.log("PAYOUT ERROR", err);
+    }
+  };
 
-    return getMetalPricePerGram(metal, karat ?? undefined);
-  }, [metal, karat]);
+  // ================= SELL PRICE (REAL) =================
+  const sellPrice = useMemo(() => {
+    if (!portfolio) return 0;
 
-  // -----------------------
-  // AVAILABLE BALANCE (MOST IMPORTANT)
-  // -----------------------
-  const availableBalance =
-    metal && plan
-      ? walletBalances[metal][plan]
-      : 0;
+    if (metal === "silver") {
+      return portfolio?.silver?.liveRate || 0;
+    }
 
+    if (metal === "platinum") {
+      return portfolio?.platinum?.liveRate || 0;
+    }
 
-      // 🔥 available metal ki ₹ value
-const availableAmountValue =
-  availableBalance && pricePerGram
-    ? availableBalance * pricePerGram
-    : 0;
+    if (metal === "gold" && karat) {
+      const key = `${karat}K`;
+      return portfolio?.gold?.[key]?.liveRate || 0;
+    }
 
-  // -----------------------
-  // GRAMS CALCULATION
-  // -----------------------
+    return 0;
+  }, [portfolio, metal, karat]);
+
+  // ================= ₹ VALUE PER TAB =================
+  const availableRupees = useMemo(() => {
+    if (!portfolio) return 0;
+
+    if (metal === "gold") {
+      if (!karat) return 0;
+      const key = `${karat}K`;
+      return portfolio?.gold?.[key]?.[`${key}_Rupee`]?.[plan] || 0;
+    }
+
+    if (metal === "silver") {
+      return portfolio?.silver?.silver_Rupee?.[plan] || 0;
+    }
+
+    if (metal === "platinum") {
+      return portfolio?.platinum?.platinum_Rupee?.[plan] || 0;
+    }
+
+    return 0;
+  }, [portfolio, metal, karat, plan]);
+
+  // ================= AVAILABLE GRAMS =================
+  const availableBalance = useMemo(() => {
+    if (!sellPrice) return 0;
+    return availableRupees / sellPrice;
+  }, [availableRupees, sellPrice]);
+
+  // ================= USER GRAMS =================
   const grams = useMemo(() => {
-    if (!amount || !pricePerGram) return 0;
-    return amount / pricePerGram;
-  }, [amount, pricePerGram]);
+    if (!amount || !sellPrice) return 0;
 
-  // -----------------------
-  // EXCEED CHECK
-  // -----------------------
+    const g = amount / sellPrice;
+
+    console.log("🔥 SELL PRICE 👉", sellPrice);
+    console.log("🔥 AMOUNT 👉", amount);
+    console.log("🔥 FINAL GRAMS 👉", g);
+
+    return g;
+  }, [amount, sellPrice]);
+
+  // ================= VALIDATION =================
   const exceedsBalance = grams > availableBalance;
 
-  // -----------------------
-  // VALIDATION
-  // -----------------------
   const canWithdraw =
+    !loading &&
     amount > 0 &&
     payoutMethod !== null &&
-    metal !== null &&
     !exceedsBalance &&
     (metal !== "gold" || karat !== null);
 
-  // -----------------------
-  // METAL CHANGE
-  // -----------------------
-  const onMetalChange = (newMetal: Metal) => {
-    setMetal(newMetal);
-    setAmount(0);
-    setPayoutMethod(null);
-    setKarat(null);
+  // ================= WITHDRAW =================
+  const handleWithdraw = async () => {
+    try {
+      setLoading(true);
+
+      if (metal === "gold" && karat !== null) {
+        const res = await withdrawGoldApi({
+          bucket: plan,
+          gold_grams: grams,
+          caret: `${karat}K`,
+        });
+
+        if (!res?.success) throw new Error(res?.message);
+      }
+
+      if (metal === "silver") {
+        const res = await withdrawSilverApi({
+          bucket: plan,
+          silver_grams: grams,
+        });
+
+        if (!res?.success) throw new Error(res?.message);
+      }
+
+      if (metal === "platinum") {
+        const res = await withdrawPlatinumApi({
+          bucket: plan,
+          platinum_grams: grams,
+        });
+
+        if (!res?.success) throw new Error(res?.message);
+      }
+
+      // success
+      setAmount(0);
+      fetchPortfolio();
+    } catch (err: any) {
+      console.log("WITHDRAW ERROR", err);
+      alert(err?.message || "Withdraw failed");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // -----------------------
-  // RESET FORM (same page stay)
-  // -----------------------
+  // ================= RESET =================
   const resetWithdraw = () => {
     setKarat(null);
     setPlan("instant");
@@ -251,15 +180,22 @@ const availableAmountValue =
     setPayoutMethod(null);
   };
 
-  // -----------------------
-  // RETURN
-  // -----------------------
+  const onMetalChange = (newMetal: Metal) => {
+    setMetal(newMetal);
+    setAmount(0);
+    setPayoutMethod(null);
+    setKarat(null);
+  };
+
+  // ================= RETURN =================
   return {
     metal,
     karat,
     plan,
     amount,
     payoutMethod,
+    payout,
+    loading,
 
     setMetal: onMetalChange,
     setKarat,
@@ -268,11 +204,12 @@ const availableAmountValue =
     setPayoutMethod,
 
     availableBalance,
-    availableAmountValue,
+    availableRupees,
     exceedsBalance,
-    pricePerGram,
     grams,
     canWithdraw,
+
+    handleWithdraw,
     resetWithdraw,
   };
 };

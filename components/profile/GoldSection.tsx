@@ -113,7 +113,7 @@ export const GoldSection = () => {
 //   heading: {
 //     fontSize: 10,
 //     fontWeight: "900",
-//     color: "#a855f7",
+//     color: "#",
 //      paddingVertical:40,
 //     letterSpacing: 2,
 //     marginBottom: 12,
